@@ -13,7 +13,12 @@ public class YOController {
 		return "/reservation/reservation_page";
 	}
 	
-	@RequestMapping(value="/reservation_list", method=RequestMethod.POST)
+	@RequestMapping(value="/reservation_pay", method=RequestMethod.GET)
+	public String reservationPay() throws Exception {
+		return "/reservation/reservation_pay_page";
+	}
+	
+	@RequestMapping(value="/reservation_list", method=RequestMethod.GET)
 	public String reservationList() throws Exception {
 		return "/reservation/reservation_list_page";
 	}
