@@ -32,15 +32,17 @@ $(function(){
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<label class="lblTitle1">숙소를 소개해주세요~</label><br>
-			<label>4단계: 등록할 숙소의 사진과 정보를 입력해주세요.</label>
-			<h4 class="my-4 h4 secondary-heading"></h4>
+			<label class="lblTitle1">숙소의 위치를 등록합니다!</label><br>
+			<div class="progress">
+				<div class="progress-bar w-100"></div>
+			</div><br>
+			<label>4단계: 등록할 숙소의 상세 주소를 입력해주세요.</label><br><br>
+
 			<form role="form">
 			
-				<!-- 사진 및 소개 등록 -->
+				<!-- 위치등록 -->
 				<div class="form-group">
-					<label class="lblTitle2">숙소 소개하기</label>
-					
+					<label class="lblTitle2">주소를 입력하세요.</label>
 				</div><br><br><br>
 					
 				<!-- Button -->
@@ -60,7 +62,7 @@ $(function(){
 		</div>
 		<div class="col-md-2"></div>
 	</div>
-</div>
+</div><br><br><br>
 <!-- host_register_page1 END -->
 
 <%@ include file = "../../views/end.jsp"%> <!-- </body> -->

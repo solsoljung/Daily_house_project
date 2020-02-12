@@ -13,8 +13,8 @@
 <!-- reservation page section -->
 <script>
 $(function() {
-	$("#reservationBtn").click(function() {
-		location.href = "/yo/reservation_pay";
+	$("#payBtn").click(function() {
+		location.href = "/yo/reservation_list";
 	});
 });
 
@@ -26,12 +26,12 @@ $(function() {
           <div class="col-md-10 text-center" data-aos="fade-up">
             <h1>
             	<span class="heading">
-            		Reservation
+            		Reservation Pay
             	</span>
             </h1>
             <h2>
             	<span style="font-size: 1em; color: white; font-family: 고딕;">
-            		숙박예약
+            		예약결제
             	</span>
             </h2>
           </div>
@@ -63,57 +63,27 @@ $(function() {
           
               <div class="row">
                 <div class="col-md-12 form-group">
-                  <label class="text-black font-weight-bold" for="email">Email</label>
-                  <input type="email" id="email" class="form-control ">
+                  <label class="text-black font-weight-bold" for="email">총 결제금액</label>
+                  <input type="text" id="pay" class="form-control ">
                 </div>
               </div>
-
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="checkin_date">입실날짜</label>
-                  <input type="text" id="checkin_date" class="form-control">
-                </div>
-                <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="checkout_date">퇴실날짜</label>
-                  <input type="text" id="checkout_date" class="form-control">
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-6 form-group">
-                  <label for="adults" class="font-weight-bold text-black">어른</label>
+                  <label for="adults" class="font-weight-bold text-black">결제방식</label>
                   <div class="field-icon-wrap">
                     <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                     <select name="" id="adults" class="form-control">
-                      <option value="">1</option>
-                      <option value="">2</option>
-                      <option value="">3</option>
-                      <option value="">4+</option>
+                      <option value="">신용카드</option>
+                      <option value="">무통장입금</option>
+                      <option value="">카카오페이</option>
+                      <option value="">휴대폰</option>
                     </select>
                   </div>
-                </div>
-                <div class="col-md-6 form-group">
-                  <label for="children" class="font-weight-bold text-black">어린이</label>
-                  <div class="field-icon-wrap">
-                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                    <select name="" id="children" class="form-control">
-                      <option value="">1</option>
-                      <option value="">2</option>
-                      <option value="">3</option>
-                      <option value="">4+</option>
-                    </select>
-                  </div>
-                </div>
-              </div>     
-              <div class="row mb-4">
-                <div class="col-md-12 form-group">
-                  <label class="text-black font-weight-bold" for="message">기타사항</label>
-                  <textarea name="message" id="message" class="form-control " cols="30" rows="8"></textarea>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <input id="reservationBtn" type="button" value="예약하기" class="btn btn-primary text-white py-3 px-5">
+                  <input id="payBtn" type="button" value="결제하기" class="btn btn-primary text-white py-3 px-5">
                 </div>
               </div>
             </form>
@@ -122,9 +92,9 @@ $(function() {
           <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
             <div class="row">
               <div class="col-md-10 ml-auto contact-info">
-                <p><span class="d-block">주소:</span> <span style="font-size: 1em; font-family: 고딕;">해당 숙소 주소</span></p>
-                <p><span class="d-block">연락처:</span> <span style="font-size: 1em; font-family: 고딕;">해당 숙소 번호</span></p>
-                <p><span class="d-block">Email:</span> <span style="font-size: 1em; font-family: 고딕;">해당 숙소 이메일</span></p>
+                <p><span class="d-block">숙소명:</span> <span style="font-size: 1em; font-family: 고딕;">숙소 이름</span></p>
+                <p><span class="d-block">최대인원:</span> <span style="font-size: 1em; font-family: 고딕;">인원</span></p>
+                <p><span class="d-block">옵션:</span> <span style="font-size: 1em; font-family: 고딕;">숙소 옵션</span></p>
               </div>
             </div>
           </div>
