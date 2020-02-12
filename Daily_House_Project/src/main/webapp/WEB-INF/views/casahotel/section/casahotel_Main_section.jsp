@@ -7,7 +7,7 @@
       <div class="container">
         <div class="row site-hero-inner justify-content-center align-items-center">
           <div class="col-md-10 text-center" data-aos="fade-up">
-            <h1 class="heading">Wellcome to 3team <br> hellow.</h1>
+            <h1 class="heading">Welcome to 3team <br> hello.</h1>
           </div>
         </div>
       </div>
