@@ -60,21 +60,18 @@ $(function(){
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-		
-			<div class="progress">
-				<div class="progress-bar w-75">
-				</div>
-			</div><br>
-		
 			<label class="lblTitle1">숙소 등록을 시작해 볼까요?</label><br>
-			<label>1단계: 기본 사항을 입력하세요</label>
-			<h4 class="my-4 h4 secondary-heading"></h4>
+			<div class="progress">
+				<div class="progress-bar w-25"></div>
+			</div><br>
+			<label>1단계: 기본 사항을 입력하세요</label><br><br>
+
 			<form role="form">
 			
 				<!-- 건물 유형 -->
 				<div class="form-group">
 					<label class="lblTitle2">건물 유형을 선택하세요</label>
-					<select class="browser-default custom-select">
+					<select class="browser-default custom-select" name="room_type_num">
 				        <option selected="">하나를 선택해주세요.</option>
 						<!-- 값은 DB에서 불러와서 하기 -->
 				        <option value="1">아파트</option>
@@ -94,7 +91,7 @@ $(function(){
 						</div>
 						<div class="col-md-3">
 							<button type="button" class="minus" style="border: none; background: none;">-</button>
-									<input type="number" class="numBox" min="1" max="20" value="4" readonly="readonly"/>
+									<input type="number" class="numBox" min="1" max="20" value="4" readonly="readonly" name="room_people"/>
 							<button type="button" class="plus" style="border: none; background: none;">+</button>
 						</div>
 						<div class="col-md-3"></div>
@@ -113,7 +110,7 @@ $(function(){
 						</div>
 						<div class="col-md-3">
 							<button type="button" class="minus" style="border: none; background: none;">-</button>
-									<input type="number" class="numBox" min="1" max="20" value="1" readonly="readonly"/>
+									<input type="number" class="numBox" min="1" max="20" value="1" readonly="readonly" name="room_bed"/>
 							<button type="button" class="plus" style="border: none; background: none;">+</button>
 						</div>
 						<div class="col-md-3"></div>
@@ -132,7 +129,7 @@ $(function(){
 						</div>
 						<div class="col-md-3">
 							<button type="button" class="minus" style="border: none; background: none;">-</button>
-									<input type="number" class="numBox" min="1" max="20" value="1" readonly="readonly"/>
+									<input type="number" class="numBox" min="1" max="20" value="1" readonly="readonly" name=""/>
 							<button type="button" class="plus" style="border: none; background: none;">+</button>
 						</div>
 						<div class="col-md-3"></div>
