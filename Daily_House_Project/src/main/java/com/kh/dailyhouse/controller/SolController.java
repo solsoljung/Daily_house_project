@@ -21,8 +21,8 @@ public class SolController {
 	
 	@RequestMapping(value="/room", method=RequestMethod.GET)
 	public String showRoom(Model model) throws Exception {
-		List<RoomVo> list = service.getRoomList();
-		model.addAttribute("list", list);
+//		List<RoomVo> list = service.getRoomList();
+//		model.addAttribute("list", list);
 		return "searchResult/searchResult";
 	}
 
