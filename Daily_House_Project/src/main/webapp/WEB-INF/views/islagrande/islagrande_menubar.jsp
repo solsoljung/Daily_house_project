@@ -19,7 +19,8 @@
 	        	<li class="nav-item"><a href="about.html" class="nav-link">...</a></li>
 	        	<li class="nav-item"><a href="services.html" class="nav-link">...</a></li>
 	        	<li class="nav-item"><a href="blog.html" class="nav-link">About</a></li>
-	        	<li class="nav-item"><a href="room.html" class="nav-link">호스팅하기</a></li>
+	        	<li class="nav-item"><a href="/yo/reservation" class="nav-link">예약하기</a></li>
+	        	<li class="nav-item"><a href="/cy/registerHost" class="nav-link">호스팅하기</a></li>
 	        	<li class="nav-item"><a href="restaurant.html" class="nav-link">회원가입</a></li>
 	          <li class="nav-item"><a href="contact.html" class="nav-link">로그인</a></li>
 	        </ul>
