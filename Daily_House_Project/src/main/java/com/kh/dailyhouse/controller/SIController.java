@@ -8,7 +8,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @RequestMapping("/login/*")
 public class SIController {
-
+	//회원 가입으로 가는 컨트롤러
+	
 	// 회원 가입 처리
 	@RequestMapping(value = "/join_run", method = RequestMethod.POST)
 	public String registerHost1(RedirectAttributes rttr) throws Exception{

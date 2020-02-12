@@ -8,8 +8,7 @@
 <%@ include file = "../../views/casahotel/casahotel_link.jsp" %>
 <%@ include file = "../../views/islagrande/islagrande_link.jsp" %>
 
-<%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %>
-<!-- </head> <body> -->
+<%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
 
 <script>
 	var message = "${message}";
@@ -17,19 +16,15 @@
 		alert(message);
 	}
 </script>
-
-<!-- reservation page section -->
-<section class="site-hero inner-page overlay" style="background-image: url(/casahotel/img/slider-3.jpg)" data-stellar-background-ratio="0.5">
-      <div class="container">
-        <div class="row site-hero-inner justify-content-center align-items-center text-center">
-    <section class="section contact-section" id="next">
+<!-- section -->
+<section class="section contact-section" id="next">
       <div class="container">
         <div class="row">
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
             
-            <form action="/login/join_run" method="post" class="bg-white p-md-5 p-4 mb-5 border">
+            <form action="login/join_run" method="post" class="bg-white p-md-5 p-4 mb-5 border">
                 <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold">회원가입 ${message}</label>
+                  <label class="text-black font-weight-bold">회원가입</label>
                 </div>
               <div class="row">
                 <div class="col-md-12 form-group">
@@ -74,6 +69,7 @@
         </div>
       </div>
     </section>
+
 <!-- end section -->
 
 <%@ include file = "../../views/casahotel/casahotel_footer.jsp" %>
