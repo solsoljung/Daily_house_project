@@ -18,9 +18,16 @@
 
 <script>
 $(function(){
+	// 현재 클릭된 메뉴를 활성화
+	$(".nav-item:eq(0)").attr("class", "nav-item");
+	$(".nav-item:eq(5)").attr("class", "nav-item active");
+	
+	// host_register_page3으로 이동
 	$("#btnPrev").click(function(){
 		location.href = "/cy/registerHost3";
 	});
+	
+	// host register하기
 });
 </script>
 
