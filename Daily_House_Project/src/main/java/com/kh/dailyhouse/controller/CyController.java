@@ -20,6 +20,7 @@ public class CyController {
 	// 호스트 등록하기 2page
 	@RequestMapping(value = "/registerHost2", method = RequestMethod.GET)
 	public String registerHost2(Model model, RegisterRoomDto1 roomDto1) throws Exception{
+		System.out.println("registerHost2의 roomDto1는? " + roomDto1);
 		model.addAttribute("list", roomDto1);
 		return "/host/host_register_page2";
 	}

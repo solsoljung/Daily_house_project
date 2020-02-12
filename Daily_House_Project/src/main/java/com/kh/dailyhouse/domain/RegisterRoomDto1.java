@@ -2,7 +2,8 @@ package com.kh.dailyhouse.domain;
 
 public class RegisterRoomDto1 {
 
-	private String user_email; //임시 사용자 등록하기
+	// RegisterRoomDto1
+	private String user_email; // 임시 사용자 등록하기
 	private String room_type_num;
 	private int room_people;
 	private int room_bed;

@@ -47,7 +47,7 @@ $(function(){
 
 
 <form id="save_form">
-	
+	list: ${list}
 </form>
 
 
