@@ -1,10 +1,22 @@
 package com.kh.dailyhouse.service;
 
-public class BooRoomDetailServiceImpl implements BooRoomDetailService {
+import javax.inject.Inject;
 
+import org.springframework.stereotype.Service;
+
+import com.kh.dailyhouse.domain.RoomDto;
+import com.kh.dailyhouse.persistence.BooRoomDetailDao;
+
+@Service
+public class BooRoomDetailServiceImpl implements BooRoomDetailService {
+	
+	@Inject
+	private BooRoomDetailDao booRoomDetailDao;
+	
 	@Override
-	public void detail() throws Exception {
-		
+	public RoomDto detail(int room_num) throws Exception {
+		RoomDto dto = booRoomDetailDao.getRoominfo(room_num);
+		return dto;
 	}
 
 }

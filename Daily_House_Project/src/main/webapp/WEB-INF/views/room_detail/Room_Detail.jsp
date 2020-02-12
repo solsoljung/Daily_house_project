@@ -33,14 +33,17 @@
         <div class="row">
 <!-- 내용 센터쪽 -->
           <div class="col-lg-8 ftco-animate">
-          	<h1>방에 대한 이름</h1>
-          	<h2>호스트 이름</h2>
-          	<h3>기본적인 방의 구성요소</h3>
+         	 ${roomDto}
+          	<h1>방에 대한 이름 : ${roomDto.room_title}</h1>
+          	<h2>호스트 이름 : ${roomDto.user_name}</h2>
+          	<h5>기본적인 방의 구성요소</h5>
+          	<h5>인원 수 : ${roomDto.room_people}</h5>
+          	<h5>침대 수 : ${roomDto.room_bed}</h5>
+          	<h5>화장실 수 : ${roomDto.room_bathroom}</h5>
           	<h4>방에 대한 설명문</h4>
+          	<h4>: ${roomDto.room_explain}</h4>
           	<hr>
-          	<h1>방에 대한 옵션</h1>
-          	<hr>
-          	<h1>달력 api 예약 가능 여부용</h1>
+          	<h1>방에 대한 옵션(아 좆댐..)</h1>
           	<hr>
           	<h1>후기 테이블 부분</h1>
           	<hr>
@@ -64,7 +67,7 @@
 			var geocoder = new kakao.maps.services.Geocoder();								
 								
 			// 주소로 좌표를 검색 -> 호스트 DB 참조								
-			geocoder.addressSearch('울산 남구 중앙로 39', function(result, status) {								
+			geocoder.addressSearch('"${roomDto.room_location}"', function(result, status) {								
 								
 			// 정상적으로 검색이 완료됐으면								
 			if (status === kakao.maps.services.Status.OK) {								
@@ -79,7 +82,7 @@
 								
 			// 인포윈도우로 장소에 대한 설명을 표시 -> 호스트 DB 참조								
 			var infowindow = new kakao.maps.InfoWindow({								
-			content: '<div style="width:150px;text-align:center;padding:6px 0;">일동미라주 아파트</div>'								
+			content: '<div style="width:150px;text-align:center;padding:6px 0;">여기</div>'								
 			});								
 			infowindow.open(map, marker);								
 								
@@ -92,6 +95,10 @@
 <!-- /내용 센터쪽 -->
 <!-- 메뉴 좌측쪽 -->
           <div class="col-lg-4 sidebar ftco-animate">
+         	<div>
+         	<!-- 달력 api -->
+			
+			</div>
             <div class="sidebar-box">
               <form action="#" class="search-form">
                 <div class="form-group">
@@ -110,7 +117,6 @@
                 <li><a href="#">Drug Control Law <span>(7)</span></a></li>
               </ul>
             </div>
-
             <div class="sidebar-box ftco-animate">
               <h3>Popular Articles</h3>
               <div class="block-21 mb-4 d-flex">

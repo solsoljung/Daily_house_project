@@ -1,8 +1,8 @@
 package com.kh.dailyhouse.persistence;
 
+import com.kh.dailyhouse.domain.RoomDto;
+
 public interface BooRoomDetailDao {
-	//유저 정보 얻기
-	public void getUserinfo() throws Exception;
-	//방 정보 얻기
-	public void getRoominfo() throws Exception;
+	//roomDetail 정보 얻기
+	public RoomDto getRoominfo(int room_num) throws Exception;
 }

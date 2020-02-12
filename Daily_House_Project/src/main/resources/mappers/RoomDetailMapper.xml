@@ -6,8 +6,10 @@
 <mapper namespace="com.kh.mappers.RoomDetailMapper">
 
 	<!-- 방 목록 보기 -->
-	<select id="getRoomList" resultType="RoomVo">
-		select * from tbl_room where room_location like '%울산%'
+	<select id="getRoomDetail" resultType="RoomDto">
+		select * from tbl_host h, tbl_user u, tbl_room r
+		 where h.user_email = u.user_email and h.room_num = r.room_num
+		 and h.room_num = #{room_num}
 	</select>
   
 </mapper>
