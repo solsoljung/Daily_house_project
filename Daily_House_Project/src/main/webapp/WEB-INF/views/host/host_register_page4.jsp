@@ -26,8 +26,13 @@ $(function(){
 	$("#btnPrev").click(function(){
 		location.href = "/cy/registerHost3";
 	});
+
+	var room_location = "";
 	
-	// host register하기
+	// test Button
+	$("#btnTest").click(function(){
+		
+	});
 });
 </script>
 
@@ -39,7 +44,7 @@ $(function(){
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<label class="lblTitle1">숙소의 위치를 등록합니다!</label><br>
+			<label class="lblTitle1">숙소의 위치를 알려주세요.</label><br>
 			<div class="progress">
 				<div class="progress-bar w-100"></div>
 			</div><br>
@@ -49,7 +54,26 @@ $(function(){
 			
 				<!-- 위치등록 -->
 				<div class="form-group">
-					<label class="lblTitle2">주소를 입력하세요.</label>
+					<div class="row">
+						<div class="col-md-6">
+							<label class="lblTitle2">시/도</label>
+							<input type="text" class="form-control" name="room_title" placeholder="예) 서울특별시"/>
+						</div>
+						<div class="col-md-6">
+							<label class="lblTitle2">시/군/구</label>
+							<input type="text" class="form-control" name="room_title" placeholder="예) 강남구"/>
+						</div>
+					</div><br><br>
+					
+					<label class="lblTitle2">도로명 주소</label>
+					<input type="text" class="form-control" name="room_title" placeholder="예) 언주로 406"/><br><br>
+					
+					<label class="lblTitle2">동호수(선택 사항)</label>
+					<input type="text" class="form-control" name="room_title" placeholder="예) 202동 201호"/><br><br>
+					
+					<label class="lblTitle2">우편번호</label>
+					<input type="text" class="form-control" name="room_title" placeholder="예) 135-919"/><br><br>
+					
 				</div><br><br><br>
 					
 				<!-- Button -->
@@ -59,7 +83,9 @@ $(function(){
 						<button type="button" class="btn btn-primary btn-block" id="btnPrev">Prev</button>
 					</div>
 					<div class="col-md-3"></div>
-					<div class="col-md-3"></div>
+					<div class="col-md-3">
+						<button type="button" class="btn btn-primary btn-block" id="btnTest" >TEST</button>
+					</div>
 					<div class="col-md-3" align="right">
 						<button type="button" class="btn btn-primary btn-block" id="btnNext" >Complete</button>
 					</div>

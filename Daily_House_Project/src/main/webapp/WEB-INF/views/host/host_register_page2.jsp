@@ -31,37 +31,15 @@ $(function(){
 		location.href = "/cy/registerHost3";
 	});
 	
-	// checkbox room_option
+	// checkbox에서 checked인 room_option을 저장할 배열
 	var data_option = [];
-	$(".chb").on("click", function(e){
-		var option = $(this).attr("data-option");
-		data_option.push(option);
-		
-		for(var i=0; i<data_option.length(); i++){
-			if(i == option){
-				data_option.pop(option);
-			}
-		}
-		
-// 		data_option.each(function(i){
-// 			if(i == option){
-// 				data_option.pop(option);
-// 			}else{
-// 				data_option.push(option);
-// 			}
-// 		});
-		
-// 		data_option.push(option);
-		console.log(data_option);
-	});
-// 	$(".chb:checked").each(function() { 
-// 		data_option.push($(this).attr("data-option"));
-// 		console.log(data_option);
-//     });
-
+	
 	// test Button
 	$("#btnTest").click(function(){
-		console.log(data_option);
+		$(".chb:checked").each(function() { 
+			data_option.push($(this).attr("data-option"));
+	    });
+		console.log("data_option: " + data_option);
 	});
 	
 });

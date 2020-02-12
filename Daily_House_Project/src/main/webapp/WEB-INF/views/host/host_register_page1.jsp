@@ -26,6 +26,10 @@ $(function(){
 	// host_register_page2로 이동
 	$("#btnNext").click(function(){
 		console.log("btnNext click");
+		if(room_type_num == null || room_type_num == ""){
+			alert("건물 유형을 선택해주세요.");
+			return;
+		}
 		location.href = "/cy/registerHost2";
 	});
 	
@@ -73,7 +77,7 @@ $(function(){
 		var room_bathroom = $("input[name=room_bathroom]").val();
 		
 		if(room_type_num == null || room_type_num == ""){
-			alert("CHECK room_type_num");
+			alert("건물 유형을 선택해주세요.");
 		}
 		
 		console.log("room_type_num: " + room_type_num);
