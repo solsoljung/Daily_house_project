@@ -12,6 +12,7 @@ public class RoomVo {
 	private int room_people;
 	private int room_bed;
 	private int room_bathroom;
+	
 	public int getRoom_num() {
 		return room_num;
 	}

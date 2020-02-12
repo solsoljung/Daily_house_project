@@ -25,8 +25,20 @@ $(function(){
 	$("#btnNext").click(function(){
 		location.href = "/cy/registerHost3";
 	});
+	
+	var data_option = "";
+	$(".chb").on("click", function(e){
+		data_option = $(this).attr("data-option");
+		console.log(data_option);
+	});
+	
 });
 </script>
+
+
+<form id="save_form">
+	
+</form>
 
 
 <!-- host_register_page1 START -->
@@ -37,8 +49,11 @@ $(function(){
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<label class="lblTitle1">숙소 등록이 거의 다 되어갑니다!</label><br>
-			<label>2단계: 상세한 사항을 입력하세요</label>
-			<h4 class="my-4 h4 secondary-heading"></h4>
+			<div class="progress">
+				<div class="progress-bar w-50"></div>
+			</div><br>
+			<label>2단계: 상세한 사항을 입력하세요</label><br><br>
+			
 			<form role="form">
 			
 				<!-- 편의시설 -->
@@ -46,15 +61,15 @@ $(function(){
 					<label class="lblTitle2">어떤 편의시설을 제공하시나요?</label>
 					
 					<div class="checkbox">
-						<label class="lblTitle2" ><input type="checkbox" />에어컨</label><br>
-						<label class="lblTitle2" ><input type="checkbox" />무선인터넷</label><br>
-						<label class="lblTitle2" ><input type="checkbox" />TV</label><br>
-						<label class="lblTitle2" ><input type="checkbox" />조식</label><br>
-						<label class="lblTitle2" ><input type="checkbox" />주차공간</label><br>
-						<label class="lblTitle2" ><input type="checkbox" />흡연가능</label><br>
-						<label class="lblTitle2" ><input type="checkbox" />반려동물</label><br>
-						<label class="lblTitle2" ><input type="checkbox" />옷장</label><br>
-						<label class="lblTitle2" ><input type="checkbox" />헤어드라이</label>
+						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="에어컨"/> 에어컨</label><br>
+						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="무선인터넷"/> 무선인터넷</label><br>
+						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="TV"/> TV</label><br>
+						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="조식"/> 조식</label><br>
+						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="주차공간"/> 주차공간</label><br>
+						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="흡연가능"/> 흡연가능</label><br>
+						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="반려동물"/> 반려동물</label><br>
+						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="옷장"/> 옷장</label><br>
+						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="헤어드라이"/> 헤어드라이</label>
 					</div> 
 					
 				</div><br><br><br>
@@ -76,7 +91,7 @@ $(function(){
 		</div>
 		<div class="col-md-2"></div>
 	</div>
-</div>
+</div><br><br><br>
 <!-- host_register_page1 END -->
 
 <%@ include file = "../../views/end.jsp"%> <!-- </body> -->
