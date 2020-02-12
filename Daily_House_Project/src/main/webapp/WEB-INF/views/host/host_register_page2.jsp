@@ -19,6 +19,10 @@
 
 <script>
 $(function(){
+	// 현재 클릭된 메뉴를 활성화
+	$(".nav-item:eq(0)").attr("class", "nav-item");
+	$(".nav-item:eq(5)").attr("class", "nav-item active");
+	
 	$("#btnPrev").click(function(){
 		location.href = "/cy/registerHost1";
 	});
