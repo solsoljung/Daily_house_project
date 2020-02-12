@@ -31,6 +31,36 @@ $(function(){
 	$("#btnNext").click(function(){
 		location.href = "/cy/registerHost4";
 	});
+	
+	// room_price는 숫자만 입력할 수 있도록 설정
+	$("input[name=room_price]").on("keyup", function() {
+	    $(this).val($(this).val().replace(/[^0-9]/g,""));
+	});
+	
+	// test Button
+	$("#btnTest").click(function(){
+		var room_title = $("input[name=room_title]").val();
+		var room_explain = $("textarea[name=room_explain]").val();
+		var room_price = $("input[name=room_price]").val();
+		
+		if(room_title == null || room_title == ""){
+			alert("숙소 이름을 입력해주세요.");
+			return;
+		}
+		if(room_explain == null || room_explain == ""){
+			alert("숙소 소개를 해주세요.");
+			return;
+		}
+		if(room_price == null || room_price == ""){
+			alert("숙소 가격을 정하세요.");
+			return;
+		}
+		
+		console.log("room_title: " + room_title);
+		console.log("room_explain: " + room_explain);
+		console.log("room_price: " + room_price);
+	});
+	
 });
 </script>
 
@@ -59,7 +89,15 @@ $(function(){
 					<textarea rows="10" cols="50" name="room_explain" style="width:100%;" maxlength="350" ></textarea><br><br>
 					
 					<label class="lblTitle2">가격을 정하세요.</label>
-					<input type="text" class="form-control" name="room_price"/><br><br>
+					<div class="row">
+						<div class="col-md-3">
+							<input type="text" class="form-control" name="room_price"/>
+						</div>
+						<div class="col-md-3"></div>
+						<div class="col-md-3"></div>
+						<div class="col-md-3"></div>
+						</div>
+					<br><br>
 				</div><br><br><br>
 					
 				<!-- Button -->
@@ -69,7 +107,9 @@ $(function(){
 						<button type="button" class="btn btn-primary btn-block" id="btnPrev">Prev</button>
 					</div>
 					<div class="col-md-3"></div>
-					<div class="col-md-3"></div>
+					<div class="col-md-3">
+						<button type="button" class="btn btn-primary btn-block" id="btnTest" >TEST</button>
+					</div>
 					<div class="col-md-3" align="right">
 						<button type="button" class="btn btn-primary btn-block" id="btnNext" >Next</button>
 					</div>
