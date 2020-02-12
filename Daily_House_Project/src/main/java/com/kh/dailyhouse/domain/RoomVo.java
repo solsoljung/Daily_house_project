@@ -12,6 +12,7 @@ public class RoomVo {
 	private int room_people;
 	private int room_bed;
 	private int room_bathroom;
+	private String room_title;
 	
 	public int getRoom_num() {
 		return room_num;
@@ -73,11 +74,18 @@ public class RoomVo {
 	public void setRoom_bathroom(int room_bathroom) {
 		this.room_bathroom = room_bathroom;
 	}
+	public String getRoom_title() {
+		return room_title;
+	}
+	public void setRoom_title(String room_title) {
+		this.room_title = room_title;
+	}
 	@Override
 	public String toString() {
 		return "RoomVo [room_num=" + room_num + ", room_type_num=" + room_type_num + ", user_email=" + user_email
 				+ ", room_location=" + room_location + ", room_score=" + room_score + ", room_price=" + room_price
 				+ ", room_explain=" + room_explain + ", room_people=" + room_people + ", room_bed=" + room_bed
-				+ ", room_bathroom=" + room_bathroom + "]";
+				+ ", room_bathroom=" + room_bathroom + ", room_title=" + room_title + "]";
 	}
+
 }
