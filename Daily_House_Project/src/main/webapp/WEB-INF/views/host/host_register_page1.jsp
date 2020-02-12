@@ -18,39 +18,72 @@
 
 <script>
 $(function(){
+	
+	// 현재 클릭된 메뉴를 활성화
+	$(".nav-item:eq(0)").attr("class", "nav-item");
+	$(".nav-item:eq(5)").attr("class", "nav-item active");
+	
+	// host_register_page2로 이동
 	$("#btnNext").click(function(){
 		console.log("btnNext click");
 		location.href = "/cy/registerHost2";
 	});
 	
-	//수량 버튼 SRATR
-	$(".plus").click(function(){
-		var num = $(".numBox").val();
+	// select room_type_num
+	var room_type_num = "";
+	$("#room_type_num").change(function() {
+		room_type_num = $(this).val();
+		console.log(room_type_num);
+	});
+	
+	
+	// 수량 버튼 SRATR
+	// .plus
+	$(".plus").on("click", function(e){
+		var num = $(this).parent().find(".numBox").val();
 		var plusNum = Number(num) + 1;
 		var max = 50;
 		
+		var target = $(this).parent().find(".numBox");
 		if(plusNum > max) {
-			$(".numBox").val(num);
+			target.val(num);
 		} else {
-		    $(".numBox").val(plusNum);          
+		    target.val(plusNum);          
 		}
 	});
-		  
-	$(".minus").click(function(){
-		var num = $(".numBox").val();
+	
+	// .minus
+	$(".minus").on("click", function(e){
+		var num = $(this).parent().find(".numBox").val();
 		var minusNum = Number(num) - 1;
 		   
+		var target = $(this).parent().find(".numBox");
 		if(minusNum <= 0) {
-		    $(".numBox").val(num);
+			target.val(num);
 		} else {
-		    $(".numBox").val(minusNum);          
+			target.val(minusNum);          
 		}
 	});
-	//수량 버튼 END
+	// 수량 버튼 END
+	
+	// test Button
+	$("#btnTest").click(function(){
+		var room_people = $("input[name=room_people]").val();
+		var room_bed = $("input[name=room_bed]").val();
+		var room_bathroom = $("input[name=room_bathroom]").val();
+		
+		if(room_type_num == null || room_type_num == ""){
+			alert("CHECK room_type_num");
+		}
+		
+		console.log("room_type_num: " + room_type_num);
+		console.log("room_people: " + room_people);
+		console.log("room_bed: " + room_bed);
+		console.log("room_bathroom: " + room_bathroom);
+	});
 	
 });
 </script>
-
 
 
 <!-- host_register_page1 START -->
@@ -71,7 +104,7 @@ $(function(){
 				<!-- 건물 유형 -->
 				<div class="form-group">
 					<label class="lblTitle2">건물 유형을 선택하세요</label>
-					<select class="browser-default custom-select" name="room_type_num">
+					<select class="browser-default custom-select" name="room_type_num" id="room_type_num">
 				        <option selected="">하나를 선택해주세요.</option>
 						<!-- 값은 DB에서 불러와서 하기 -->
 				        <option value="1">아파트</option>
@@ -129,7 +162,7 @@ $(function(){
 						</div>
 						<div class="col-md-3">
 							<button type="button" class="minus" style="border: none; background: none;">-</button>
-									<input type="number" class="numBox" min="1" max="20" value="1" readonly="readonly" name=""/>
+									<input type="number" class="numBox" min="1" max="20" value="1" readonly="readonly" name="room_bathroom"/>
 							<button type="button" class="plus" style="border: none; background: none;">+</button>
 						</div>
 						<div class="col-md-3"></div>
@@ -143,7 +176,9 @@ $(function(){
 				<div class="row">
 					<div class="col-md-3"></div>
 					<div class="col-md-3"></div>
-					<div class="col-md-3"></div>
+					<div class="col-md-3">
+						<button type="button" class="btn btn-primary btn-block" id="btnTest" >TEST</button>
+					</div>
 					<div class="col-md-3" align="right">
 						<button type="button" class="btn btn-primary btn-block" id="btnNext" >Next</button>
 					</div>
