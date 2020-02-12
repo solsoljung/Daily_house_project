@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kh.mappers.RoomDetailMapper">
+
+	<!-- 방 목록 보기 -->
+	<select id="getRoomDetail" resultType="RoomDto">
+		select * from tbl_host h, tbl_user u, tbl_room r
+		 where h.user_email = u.user_email and h.room_num = r.room_num
+		 and h.room_num = #{room_num}
+	</select>
+  
+</mapper>
