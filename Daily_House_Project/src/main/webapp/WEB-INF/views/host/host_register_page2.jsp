@@ -14,7 +14,6 @@
 	.lblTitle1{ font-size: 30px; font-weight: bold;}
 	.lblTitle2{ font-size: 20px;}
 	.lblTitle3{ font-size: 15px; font-weight: bold;}
-	
 </style>
 
 <script>
@@ -33,9 +32,35 @@ $(function(){
 	});
 	
 	// checkbox room_option
-	var data_option = "";
+	var data_option = [];
 	$(".chb").on("click", function(e){
-		data_option = $(this).attr("data-option");
+		var option = $(this).attr("data-option");
+		data_option.push(option);
+		
+		for(var i=0; i<data_option.length(); i++){
+			if(i == option){
+				data_option.pop(option);
+			}
+		}
+		
+// 		data_option.each(function(i){
+// 			if(i == option){
+// 				data_option.pop(option);
+// 			}else{
+// 				data_option.push(option);
+// 			}
+// 		});
+		
+// 		data_option.push(option);
+		console.log(data_option);
+	});
+// 	$(".chb:checked").each(function() { 
+// 		data_option.push($(this).attr("data-option"));
+// 		console.log(data_option);
+//     });
+
+	// test Button
+	$("#btnTest").click(function(){
 		console.log(data_option);
 	});
 	
@@ -88,7 +113,9 @@ $(function(){
 						<button type="button" class="btn btn-primary btn-block" id="btnPrev">Prev</button>
 					</div>
 					<div class="col-md-3"></div>
-					<div class="col-md-3"></div>
+					<div class="col-md-3">
+						<button type="button" class="btn btn-primary btn-block" id="btnTest" >TEST</button>
+					</div>
 					<div class="col-md-3" align="right">
 						<button type="button" class="btn btn-primary btn-block" id="btnNext" >Next</button>
 					</div>
