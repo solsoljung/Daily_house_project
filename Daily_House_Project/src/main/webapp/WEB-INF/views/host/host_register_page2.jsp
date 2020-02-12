@@ -23,13 +23,16 @@ $(function(){
 	$(".nav-item:eq(0)").attr("class", "nav-item");
 	$(".nav-item:eq(5)").attr("class", "nav-item active");
 	
+	// host_register_page1로 이동
 	$("#btnPrev").click(function(){
 		location.href = "/cy/registerHost1";
 	});
+	// host_register_page3로 이동
 	$("#btnNext").click(function(){
 		location.href = "/cy/registerHost3";
 	});
 	
+	// checkbox room_option
 	var data_option = "";
 	$(".chb").on("click", function(e){
 		data_option = $(this).attr("data-option");

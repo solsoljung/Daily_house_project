@@ -29,14 +29,16 @@ $(function(){
 		location.href = "/cy/registerHost2";
 	});
 	
-	
+	// select room_type_num
+	var room_type_num = "";
 	$("#room_type_num").change(function() {
-		var room_type_num = $(this).val();
+		room_type_num = $(this).val();
 		console.log(room_type_num);
 	});
 	
 	
-	//수량 버튼 SRATR
+	// 수량 버튼 SRATR
+	// .plus
 	$(".plus").on("click", function(e){
 		var num = $(this).parent().find(".numBox").val();
 		var plusNum = Number(num) + 1;
@@ -50,6 +52,7 @@ $(function(){
 		}
 	});
 	
+	// .minus
 	$(".minus").on("click", function(e){
 		var num = $(this).parent().find(".numBox").val();
 		var minusNum = Number(num) - 1;
@@ -61,11 +64,22 @@ $(function(){
 			target.val(minusNum);          
 		}
 	});
-	//수량 버튼 END
+	// 수량 버튼 END
 	
-	
+	// test Button
 	$("#btnTest").click(function(){
-		var room_type_num = $("input[name=room_type_num]")
+		var room_people = $("input[name=room_people]").val();
+		var room_bed = $("input[name=room_bed]").val();
+		var room_bathroom = $("input[name=room_bathroom]").val();
+		
+		if(room_type_num == null || room_type_num == ""){
+			alert("CHECK room_type_num");
+		}
+		
+		console.log("room_type_num: " + room_type_num);
+		console.log("room_people: " + room_people);
+		console.log("room_bed: " + room_bed);
+		console.log("room_bathroom: " + room_bathroom);
 	});
 	
 });
@@ -148,7 +162,7 @@ $(function(){
 						</div>
 						<div class="col-md-3">
 							<button type="button" class="minus" style="border: none; background: none;">-</button>
-									<input type="number" class="numBox" min="1" max="20" value="1" readonly="readonly" name=""/>
+									<input type="number" class="numBox" min="1" max="20" value="1" readonly="readonly" name="room_bathroom"/>
 							<button type="button" class="plus" style="border: none; background: none;">+</button>
 						</div>
 						<div class="col-md-3"></div>
