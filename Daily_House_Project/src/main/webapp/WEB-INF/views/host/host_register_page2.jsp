@@ -66,7 +66,7 @@ $(function(){
 			<input type="hidden" name="room_people" value="${roomDto1.room_people}"/>
 			<input type="hidden" name="room_bed" value="${roomDto1.room_bed}"/>
 			<input type="hidden" name="room_bathroom" value="${roomDto1.room_bathroom}"/>
-			<input type="hidden" name="room_options" value="${roomDto1.room_bathroom}"/>
+			<input type="hidden" name="room_options" value="${roomDto1.room_options}"/>
 			
 				<!-- 편의시설 -->
 				<div class="form-group">
