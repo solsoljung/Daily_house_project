@@ -18,6 +18,11 @@ public class SIController {
 	@Inject
 	private SiUserService siUserService;
 	
+	//홈으로 가는 컨트롤러
+	@RequestMapping(value = "/goHome", method = RequestMethod.GET)
+	public String goHome() throws Exception {
+		return "/";
+	}
 	//회원가입으로 가는 컨트롤러
 	@RequestMapping(value = "/registerHost", method = RequestMethod.GET)
 	public String registerHost() throws Exception {
@@ -49,16 +54,22 @@ public class SIController {
 	
 	// 로그인 처리
 	@RequestMapping(value = "/login_run", method = RequestMethod.POST)
-	public String login_run(RedirectAttributes rttr, UserVo userVo) throws Exception{
+	public String login_run(HttpSession session, RedirectAttributes rttr, UserVo userVo) throws Exception{
 		// 요청정보 얻어서
 		UserVo userVo1 = siUserService.login_run(userVo);
 		System.out.println("userVo1 : "+userVo1);
 		// DB 에 넣기 - Service - Dao - Mybatis - Oracle
+
+		
 		if(userVo1 == null) {
-			System.out.println("작동되겠지");
 			rttr.addFlashAttribute("msg", "fail");
 			return "redirect:/si/loginHost";
 		}
+		
+		session.setAttribute("signedUser", userVo1.getUser_name());
+		
+		System.out.println(session.getAttribute("signedUser"));
+		
 		rttr.addFlashAttribute("msg", "success");
 		return "redirect:/";
 	}
