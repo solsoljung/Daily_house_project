@@ -103,3 +103,6 @@ $RECYCLE.BIN/
 # End of https://www.gitignore.io/api/windows,eclipse,java-web
 
 target/
+
+Daily_House_Project/target/m2e-wtp/web-resources/META-INF/maven/com.kh/dailyhouse/pom.xml
+Daily_House_Project/target/m2e-wtp/web-resources/META-INF/maven/com.kh/dailyhouse/pom.properties
