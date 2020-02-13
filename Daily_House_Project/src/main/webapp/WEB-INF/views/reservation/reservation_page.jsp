@@ -88,7 +88,10 @@ $(function() {
                       <option value="">1</option>
                       <option value="">2</option>
                       <option value="">3</option>
-                      <option value="">4+</option>
+                      <option value="">4</option>
+                      <option value="">5</option>
+                      <option value="">6</option>
+                      <option value="">7+</option>
                     </select>
                   </div>
                 </div>
@@ -100,7 +103,10 @@ $(function() {
                       <option value="">1</option>
                       <option value="">2</option>
                       <option value="">3</option>
-                      <option value="">4+</option>
+                      <option value="">4</option>
+                      <option value="">5</option>
+                      <option value="">6</option>
+                      <option value="">7+</option>
                     </select>
                   </div>
                 </div>
@@ -125,6 +131,7 @@ $(function() {
                 <p><span class="d-block">주소:</span> <span style="font-size: 1em; font-family: 고딕;">해당 숙소 주소</span></p>
                 <p><span class="d-block">연락처:</span> <span style="font-size: 1em; font-family: 고딕;">해당 숙소 번호</span></p>
                 <p><span class="d-block">Email:</span> <span style="font-size: 1em; font-family: 고딕;">해당 숙소 이메일</span></p>
+                <p><span class="d-block">금액/1박:</span> <span style="font-size: 1em; font-family: 고딕;">해당 숙소 금액</span></p>
               </div>
             </div>
           </div>
