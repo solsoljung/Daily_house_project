@@ -22,31 +22,45 @@ $(function(){
 	$(".nav-item:eq(0)").attr("class", "nav-item");
 	$(".nav-item:eq(5)").attr("class", "nav-item active");
 	
+	// room_location을 저장할 공간
+	var room_location = "";
+	var room_location_detail = "";
+	
 	// host_register_page3으로 이동
 	$("#btnPrev").click(function(e){
 		e.preventDefault();
 		$("#form").attr("action", "/cy/registerHost3Post");
 		$("#form").submit();
-// 		location.href = "/cy/registerHost3Post";
 	});
-
-	// room_location을 저장할 공간
-	var room_location = "";
-	var room_location_detail = "";
 	
-	// test Button
-	$("#btnTest").click(function(){
+	// conplete
+	$("#btnNext").click(function(e){
+		e.preventDefault();
 		room_location = $("#roadAddrPart1").val();
 		room_location_detail = $("#addrDetail").val();
-		
 		if(room_location == null || room_location == ""){
 			alert("주소를 입력해주세요.");
 			return;
 		}
 		
-		console.log("room_location: " + room_location);
-		console.log("room_location_detail: " + room_location_detail);
+		$("input[name=room_location").val(room_location);
+		$("input[name=room_location_detail]").val(room_location_detail);
+		
+		console.log($("input[name=room_type_num]").val());
+		console.log($("input[name=room_people]").val());
+		console.log($("input[name=room_bed]").val());
+		console.log($("input[name=room_bathroom]").val());
+		console.log($("input[name=room_options]").val());
+		console.log($("input[name=room_title]").val());
+		console.log($("input[name=room_explain]").val());
+		console.log($("input[name=room_price]").val());
+		console.log($("input[name=room_location]").val());
+		console.log($("input[name=room_location_detail]").val());
+		
+		$("#form").attr("action", "@@경로 적어주기@@");
+// 		$("#form").submit();
 	});
+
 });
 </script>
 
@@ -104,6 +118,8 @@ $(function(){
 				<input type="hidden" name="room_title" value="${roomVo.room_title}"/>
 				<input type="hidden" name="room_explain" value="${roomVo.room_explain}"/>
 				<input type="hidden" name="room_price" value="${roomVo.room_price}"/>
+				<input type="hidden" name="room_location" />
+				<input type="hidden" name="room_location_detail" />
 				
 				<div class="row">
 					<div class="col-md-3">
@@ -158,9 +174,7 @@ $(function(){
 						<button type="button" class="btn btn-primary btn-block" id="btnPrev">Prev</button>
 					</div>
 					<div class="col-md-3"></div>
-					<div class="col-md-3">
-						<button type="button" class="btn btn-primary btn-block" id="btnTest" >TEST</button>
-					</div>
+					<div class="col-md-3"></div>
 					<div class="col-md-3" align="right">
 						<button type="button" class="btn btn-primary btn-block" id="btnNext" >Complete</button>
 					</div>

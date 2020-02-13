@@ -93,15 +93,20 @@ $(function(){
 				<!-- 사진 및 소개 등록 -->
 				<div class="form-group">
 					<label class="lblTitle2">숙소 이름을 입력해주세요.</label>
-					<input type="text" class="form-control" name="room_title"/><br><br>
+					<input type="text" class="form-control" name="room_title"
+						<c:if test="${not empty roomVo.room_title}">value="${roomVo.room_title}"</c:if>					
+					/><br><br>
 					
 					<label class="lblTitle2">숙소 소개를 해주세요.</label>
-					<textarea rows="10" cols="50" name="room_explain" style="width:100%;" maxlength="350" ></textarea><br><br>
+					<textarea rows="10" cols="50" name="room_explain" style="width:100%;" maxlength="350"><c:if test="${not empty roomVo.room_explain}">
+${roomVo.room_explain}</c:if></textarea><br><br>
 					
 					<label class="lblTitle2">가격을 정하세요.</label>
 					<div class="row">
 						<div class="col-md-3">
-							<input type="text" class="form-control" name="room_price"/>
+							<input type="text" class="form-control" name="room_price"
+								<c:if test="${roomVo.room_price != 0}">value="${roomVo.room_price}"</c:if>						
+							/>
 						</div>
 						<div class="col-md-3"></div>
 						<div class="col-md-3"></div>
