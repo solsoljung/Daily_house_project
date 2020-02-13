@@ -37,36 +37,40 @@ $(function() {
           </div>
         </div>
       </div>
-
       <a class="mouse smoothscroll" href="#next">
         <div class="mouse-icon">
           <span class="mouse-wheel"></span>
         </div>
       </a>
 </section>
-   <section class="section contact-section" id="next">
+
+  <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
             
             <form action="#" method="post" class="bg-white p-md-5 p-4 mb-5 border">
               <div class="row">
-                <div class="col-md-6 form-group">
+                <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="name">예약자</label>
                   <input type="text" id="name" class="form-control ">
                 </div>
-                <div class="col-md-6 form-group">
+              </div>
+              
+              <div class="row">
+                <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="phone">연락처</label>
-                  <input type="text" id="phone" class="form-control ">
+                  <input type="text" id="name" class="form-control ">
                 </div>
               </div>
           
               <div class="row">
                 <div class="col-md-12 form-group">
-                  <label class="text-black font-weight-bold" for="email">총 결제금액</label>
+                  <label class="text-black font-weight-bold" for="name">총 결제금액</label>
                   <input type="text" id="pay" class="form-control ">
                 </div>
               </div>
+              
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label for="adults" class="font-weight-bold text-black">결제방식</label>
@@ -81,6 +85,7 @@ $(function() {
                   </div>
                 </div>
               </div>
+              
               <div class="row">
                 <div class="col-md-6 form-group">
                   <input id="payBtn" type="button" value="결제하기" class="btn btn-primary text-white py-3 px-5">
