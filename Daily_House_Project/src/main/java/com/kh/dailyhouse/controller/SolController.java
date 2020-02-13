@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.kh.dailyhouse.domain.PagingDto;
 import com.kh.dailyhouse.domain.RoomVo;
 import com.kh.dailyhouse.service.SolRoomService;
 
@@ -20,9 +21,14 @@ public class SolController {
 	private SolRoomService service;
 	
 	@RequestMapping(value="/room", method=RequestMethod.GET)
-	public String showRoom(Model model) throws Exception {
-//		List<RoomVo> list = service.getRoomList();
-//		model.addAttribute("list", list);
+	public String showRoom(Model model, PagingDto pagingDto) throws Exception {
+		System.out.println("room get 실행됨");
+		System.out.println("pagingDto:" + pagingDto);
+		List<RoomVo> list = service.getRoomList(pagingDto);
+		int totalCount = service.getRoomCount();
+		pagingDto.setTotalCount(totalCount);
+		model.addAttribute("list", list);
+		model.addAttribute("pagingDto", pagingDto);
 		return "searchResult/searchResult";
 	}
 
