@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.kh.dailyhouse.domain.PagingDto;
 import com.kh.dailyhouse.domain.RoomVo;
 import com.kh.dailyhouse.persistence.SolRoomDao;
 
@@ -16,9 +17,15 @@ public class SolRoomServiceImpl implements SolRoomService {
 	private SolRoomDao dao;
 
 	@Override
-	public List<RoomVo> getRoomList() throws Exception {
+	public List<RoomVo> getRoomList(PagingDto pagingDto) throws Exception {
 
-		return dao.getRoomList();
+		return dao.getRoomList(pagingDto);
+	}
+
+	@Override
+	public int getRoomCount() throws Exception {
+		
+		return dao.getRoomCount();
 	}
 
 }
