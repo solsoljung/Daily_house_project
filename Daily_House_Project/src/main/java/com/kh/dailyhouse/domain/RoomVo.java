@@ -1,5 +1,7 @@
 package com.kh.dailyhouse.domain;
 
+import java.util.Arrays;
+
 public class RoomVo {
 
 	private int room_num;
@@ -21,7 +23,8 @@ public class RoomVo {
 	  BoardVo에 private String[] files를 적어줬잖아 
 	  그니깐 우리도 RoomVo에 private String[] pics 이거 추가하면 안되나요?,,,,,,
 	 */
-	//private String[] pics; // <- 추가
+	
+	private String[] pics; // <- 추가
 	
 	public int getRoom_num() {
 		return room_num;
@@ -89,12 +92,19 @@ public class RoomVo {
 	public void setRoom_title(String room_title) {
 		this.room_title = room_title;
 	}
+	public String[] getPics() {
+		return pics;
+	}
+	public void setPics(String[] pics) {
+		this.pics = pics;
+	}
 	@Override
 	public String toString() {
 		return "RoomVo [room_num=" + room_num + ", room_type_num=" + room_type_num + ", user_email=" + user_email
 				+ ", room_location=" + room_location + ", room_score=" + room_score + ", room_price=" + room_price
 				+ ", room_explain=" + room_explain + ", room_people=" + room_people + ", room_bed=" + room_bed
-				+ ", room_bathroom=" + room_bathroom + ", room_title=" + room_title + "]";
+				+ ", room_bathroom=" + room_bathroom + ", room_title=" + room_title + ", pics=" + Arrays.toString(pics)
+				+ "]";
 	}
 
 }
