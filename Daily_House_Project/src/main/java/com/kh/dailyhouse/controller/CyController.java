@@ -4,9 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.kh.dailyhouse.domain.RegisterRoomDto1;
-import com.kh.dailyhouse.domain.RegisterRoomDto2;
 import com.kh.dailyhouse.domain.RoomVo;
 
 @Controller
