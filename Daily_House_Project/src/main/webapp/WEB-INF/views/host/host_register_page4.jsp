@@ -23,54 +23,49 @@ $(function(){
 	$(".nav-item:eq(5)").attr("class", "nav-item active");
 	
 	// host_register_page3으로 이동
-	$("#btnPrev").click(function(){
-		location.href = "/cy/registerHost3";
+	$("#btnPrev").click(function(e){
+		e.preventDefault();
+		$("#form").attr("action", "/cy/registerHost3Post");
+		$("#form").submit();
+// 		location.href = "/cy/registerHost3Post";
 	});
 
 	// room_location을 저장할 공간
 	var room_location = "";
+	var room_location_detail = "";
 	
 	// test Button
 	$("#btnTest").click(function(){
+		room_location = $("#roadAddrPart1").val();
+		room_location_detail = $("#addrDetail").val();
 		
-	});
-	
-	// 주소 api
-	
-	function goPopup() {							
-	var pop = window.open("/popup/jusoPopup.jsp","pop","width=570, height=420, scrollbars=yes, resizable=yes");						
-	}							
-	function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr,jibunAddr,zipNo,admCd,							
-			rnMgtSn,bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,					
-			buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo) {					
-								
-		document.form.roadFullAddr.value = roadFullAddr;						
-		document.form.roadAddrPart1.value = roadAddrPart1;						
-		document.form.roadAddrPart2.value = roadAddrPart2;						
-		document.form.addrDetail.value = addrDetail;						
-		document.form.zipNo.value = zipNo;						
-	}							
-	
-	
-	
-// 	function goPopup(){
-// 		// 주소검색을 수행할 팝업 페이지를 호출합니다.
-// 		// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
-// 		var pop = window.open("/popup/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+		if(room_location == null || room_location == ""){
+			alert("주소를 입력해주세요.");
+			return;
+		}
 		
-// 		// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
-// 	    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
-// 	}
-
-// 	function jusoCallBack(roadFullAddr){
-// 			// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.	
-// 			document.form.userAddr.value = roadFullAddr;		
-// 	}
-	
-	$("#btnSearchJuso").click(function(){
-		goPopup();
+		console.log("room_location: " + room_location);
+		console.log("room_location_detail: " + room_location_detail);
 	});
 });
+</script>
+
+
+<!-- 주소 api -->
+<script language="javascript">
+	function goPopup() {
+		var pop = window.open("/popup/jusoPopup.jsp","pop","width=570, height=420, scrollbars=yes, resizable=yes");
+	}
+	function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr,jibunAddr,zipNo,admCd,
+			rnMgtSn,bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,
+			buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo) {
+		
+		document.form.roadFullAddr.value = roadFullAddr;
+		document.form.roadAddrPart1.value = roadAddrPart1;
+		document.form.roadAddrPart2.value = roadAddrPart2;
+		document.form.addrDetail.value = addrDetail;
+		document.form.zipNo.value = zipNo;
+	}
 </script>
 
 <% 
@@ -98,31 +93,63 @@ $(function(){
 				<input type="hidden" id="returnUrl" name="returnUrl" value=""/>
 				<input type="hidden" id="resultType" name="resultType" value=""/>
 				<!-- 해당시스템의 인코딩타입이 EUC-KR일경우에만 추가 START-->
-				<!-- 
-				<input type="hidden" id="encodingType" name="encodingType" value="EUC-KR"/>	 -->
+				<!-- <input type="hidden" id="encodingType" name="encodingType" value="EUC-KR"/> -->
+				
+				roomVo: ${roomVo}
+				<input type="hidden" name="room_type_num" value="${roomVo.room_type_num}"/>
+				<input type="hidden" name="room_people" value="${roomVo.room_people}"/>
+				<input type="hidden" name="room_bed" value="${roomVo.room_bed}"/>
+				<input type="hidden" name="room_bathroom" value="${roomVo.room_bathroom}"/>
+				<input type="hidden" name="room_options" value="${roomVo.room_options}"/>
+				<input type="hidden" name="room_title" value="${roomVo.room_title}"/>
+				<input type="hidden" name="room_explain" value="${roomVo.room_explain}"/>
+				<input type="hidden" name="room_price" value="${roomVo.room_price}"/>
+				
 				<div class="row">
 					<div class="col-md-3">
-						<button type="button" class="btn btn-primary btn-block" id="btnSearchJuso">주소검색</button> 
+						<button type="button" class="btn btn-primary btn-block" onClick="goPopup();">주소검색</button> 
 					</div>
 					<div class="col-md-3"></div>
 					<div class="col-md-3"></div>
 					<div class="col-md-3"></div>
-				</div>
+				</div><br>
 				
-				<input type="text" id="userAddr" name="userAddr" class="form-control" placeholder="Enter Addr" required readonly/>
-				<form name="form" id="form" method="post">					
-					<input type="button" onClick="goPopup();" value="팝업"/>				
-					도로명 주소 전체 (포멧) :				
-					<input type = "text" id = "roadFullAddr" name = "roadFullAddr" /><br>				
-					도로명 주소 :				
-					<input type = "text" id = "roadAddrPart1" name = "roadAddrPart1"/><br>				
-					고객입력 상세주소 :				
-					<input type = "text" id = "addrDetail" name = "addrDetail"/><br>				
-					참고 주소 :				
-					<input type = "text" id = "roadAddrPart2" name = "roadAddrPart2"/><br>				
-					우편 번호 :				
-					<input type = "text" id = "zipNo" name = "zipNo" />				
-				</form>					
+				<div class="row">
+					<div class="col-md-2">
+						<label class="lblTitle3">도로명 주소 전체</label>
+					</div>
+					<div class="col-md-10">
+						<input type="text" id="roadFullAddr" name="roadFullAddr" style="width:100%;" placeholder="Enter Addr" required readonly/><br>
+					</div></div>	
+				<div class="row">
+					<div class="col-md-2">
+						<label class="lblTitle3">도로명 주소</label>
+					</div>
+					<div class="col-md-10">
+						<input type="text" id="roadAddrPart1" name="roadAddrPart1" style="width:100%;" placeholder="Enter Addr" required readonly/><br>
+					</div></div>
+				<div class="row">
+					<div class="col-md-2">
+						<label class="lblTitle3">상세주소</label>
+					</div>
+					<div class="col-md-10">
+						<input type="text" id="addrDetail" name="addrDetail" style="width:100%;" placeholder="Enter Addr" required readonly/><br>
+					</div></div>
+				<div class="row">
+					<div class="col-md-2">
+						<label class="lblTitle3">참고 주소</label>
+					</div>
+					<div class="col-md-10">
+						<input type="text" id="roadAddrPart2" name="roadAddrPart2" style="width:100%;" placeholder="Enter Addr" required readonly/><br>
+					</div></div>
+				<div class="row">
+					<div class="col-md-2">
+						<label class="lblTitle3">우편 번호</label>
+					</div>
+					<div class="col-md-10">
+						<input type="text" id="zipNo" name="zipNo" style="width:100%;" placeholder="Enter Addr" required readonly/>
+					</div>
+				</div><br>
 
 				<!-- Button -->
 				<br>

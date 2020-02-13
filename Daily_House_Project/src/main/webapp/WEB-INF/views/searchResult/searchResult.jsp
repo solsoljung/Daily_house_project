@@ -11,29 +11,55 @@
 
 <%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
 <style>
-
+.sol-font{
+	font-family: '맑은 고딕';
+	color: #fb929e;
+}
 </style>
 <script>
 $(document).ready(function(){
-	$("#btnTest").click(function(e){
+	//페이징
+	$(".solge").click(function(e) {
+		e.preventDefault(); 
+		var page = $(this).attr("data-page");
+		$("input[name=page]").val(page);
+		$("#frmPage").submit();
+	});
+
+	//상세 페이지로 이동
+	$(".room-title").click(function(e) {
 		e.preventDefault();
-		//var noX = parseInt((window.screen.width/2) - (noWidth/2));
-		//var noY = parseInt((window.screen.height/2) - (noHeight/2));
-		//console.log(noX);
-		$("#myModal").addClass("sol");
-		console.log("안녕");
+		var room_num = $(this).attr("data-num");
+		$("input[name=room_num]").val(room_num);
+		$("#frmPage").attr("action", "/boo/detail");
+		$("#frmPage").submit();
+	});
+	
+	//검색
+	$("#searchTarget").keyup(function(e){
+		if(e.keyCode == 13){
+			var keyword = $(this).val();
+			console.log(keyword);
+			$("input[name=keyword]").val(keyword);
+			$("#frmPage").submit();
+		}
 	});
 });
 </script>
 
 <!-- section -->   
-<br>
-<br>
-<br>
-<br>
 
 <section class="ftco-section ftco-room">
 <div class="container">
+
+<!-- 히든 폼 -->
+<form id="frmPage" action="/sol/room" method="get">
+	<input type="hidden" name="room_num" />
+	<input type="hidden" name="page" value="${pagingDto.page}"/>
+	<input type="hidden" name="keyword" value="${pagingDto.keyword}"/>
+</form>
+<!-- 히든 폼 끝 -->
+
 <!-- 검색바 -->
     <div class="row">
     	<div class="col-md-12">
@@ -41,8 +67,8 @@ $(document).ready(function(){
 	              <form action="#" class="search-form">
 	                <div class="form-group">
 	                  <span class="icon icon-search"></span>
-	                  <input type="text" class="form-control" placeholder="Type a keyword and hit enter" 
-	                  style="font-size:30px;">
+	                  <input type="text" id="searchTarget" class="form-control" value="${pagingDto.keyword}" 
+	                  placeholder="모든 위치" style="font-size:30px;">
 	                </div>
 	              </form>
 	        </div>
@@ -80,7 +106,11 @@ $(document).ready(function(){
         </div>
     </div>
 <!-- 모달창 끝 -->
-    
+<br>
+<c:if test="${not empty pagingDto.keyword}">
+	<h6 class="sol-font">${pagingDto.totalCount}개의 방이 검색 되었습니다.</h6>
+</c:if>
+<br>
 <!-- 방 리스트 -->
 <div class="row">
         <c:forEach var="vo" items="${list}">
@@ -88,7 +118,7 @@ $(document).ready(function(){
         		<div class="room-wrap ftco-animate">
         			<a href="room.html" class="img" style="background-image: url(/islagrande/images/room-1.jpg);"></a>
         			<div class="text pt-4 pl-lg-5">
-        				<h2><a href="room.html">${vo.room_explain}</a></h2>
+        				<h2><a data-num="${vo.room_num}" class="room-title">${vo.room_title}</a></h2>
         				<p class="rate">
         					<span class="icon-star"></span>
         					<span class="icon-star"></span>
@@ -100,7 +130,7 @@ $(document).ready(function(){
         					<!-- <span>Starting From</span> -->
         			 		<span class="price">￦${vo.room_price}<small>&nbsp;/&nbsp;&nbsp;&nbsp;1박</small></span>
         				</p>
-        				<p><a href="#" class="btn-customize">지금 예약하기</a></p>
+        				<p><a data-num="${vo.room_num}" class="room-title btn-customize">지금 예약하기</a></p>
         			</div>
         		</div>
         	</div>
@@ -108,8 +138,44 @@ $(document).ready(function(){
         </div>
 
 <!-- 방 리스트 끝 -->
-			</div>
-		</section>
+<br>
+<!-- 페이징 -->
+<div class="row mt-5">
+	<div class="col text-center">
+		 <div class="block-27">
+			<ul>
+			<c:if test="${pagingDto.hasPrev == true}">
+						<li>
+							<a class="solge" data-page="${pagingDto.startPage - 1}">&lt;</a>
+						</li>
+					</c:if>
+					<c:forEach begin="${pagingDto.startPage}" end="${pagingDto.endPage}" var="v">
+						<li 
+							<c:choose>
+								<c:when test="${pagingDto.page == v}">
+									class="active"
+								</c:when>
+								<c:otherwise>
+									class=""
+								</c:otherwise>
+							</c:choose>
+						>
+							<a class="solge" data-page="${v}">${v}</a>
+						</li>
+					</c:forEach>
+					<c:if test="${pagingDto.hasNext == true}">
+						<li>
+							<a class="solge" data-page="${pagingDto.endPage + 1}">&gt;</a>
+						</li>
+					</c:if>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- 페이징 끝 -->
+
+</div>
+</section>
 
 
 <!-- end section -->
