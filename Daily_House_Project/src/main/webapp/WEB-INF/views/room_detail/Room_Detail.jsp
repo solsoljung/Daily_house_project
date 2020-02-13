@@ -95,6 +95,8 @@ $(function(){
 });
 </script>
 
+
+
 <%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
 
 <!-- section -->
