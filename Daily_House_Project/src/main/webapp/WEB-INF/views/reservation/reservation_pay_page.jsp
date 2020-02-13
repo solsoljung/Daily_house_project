@@ -51,20 +51,22 @@ $(function() {
             
             <form action="#" method="post" class="bg-white p-md-5 p-4 mb-5 border">
               <div class="row">
-                <div class="col-md-6 form-group">
+                <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="name">예약자</label>
                   <input type="text" id="name" class="form-control ">
                 </div>
-                
-                <div class="col-md-6 form-group">
+              </div>
+              
+              <div class="row">
+                <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="phone">연락처</label>
-                  <input type="text" id="phone" class="form-control ">
+                  <input type="text" id="name" class="form-control ">
                 </div>
               </div>
           
               <div class="row">
                 <div class="col-md-12 form-group">
-                  <label class="text-black font-weight-bold" for="email">총 결제금액</label>
+                  <label class="text-black font-weight-bold" for="name">총 결제금액</label>
                   <input type="text" id="pay" class="form-control ">
                 </div>
               </div>
