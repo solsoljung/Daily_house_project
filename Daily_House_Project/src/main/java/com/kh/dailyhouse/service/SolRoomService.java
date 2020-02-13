@@ -9,5 +9,5 @@ public interface SolRoomService {
 	
 
 	public List<RoomVo> getRoomList(PagingDto pagingDto) throws Exception;
-	public int getRoomCount() throws Exception;
+	public int getRoomCount(PagingDto pagingDto) throws Exception;
 }

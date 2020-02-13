@@ -25,9 +25,9 @@ public class SolRoomDaoImpl implements SolRoomDao {
 	}
 
 	@Override
-	public int getRoomCount() throws Exception {
+	public int getRoomCount(PagingDto pagingDto) throws Exception {
 		
-		return sqlSession.selectOne(NAMESPACE + ".getRoomCount");
+		return sqlSession.selectOne(NAMESPACE + ".getRoomCount", pagingDto);
 	}
 
 }
