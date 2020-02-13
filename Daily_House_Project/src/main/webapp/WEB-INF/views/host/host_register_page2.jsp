@@ -47,7 +47,7 @@ $(function(){
 
 
 <form id="save_form">
-	list: ${list}
+	roomDto1: ${roomDto1}
 </form>
 
 
