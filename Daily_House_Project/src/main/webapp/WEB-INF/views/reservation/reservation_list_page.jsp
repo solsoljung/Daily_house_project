@@ -35,6 +35,50 @@
         </div>
       </a>
 </section>
+<section>
+	<div class="container">
+		<div class="row">
+          <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
+          	<div class="row">
+                <div class="col-md-6 form-group">
+                </div>
+            </div>
+          </div>
+        </div>
+	</div>
+</section>
+<section>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>예약 번호</th>
+						<th>방 번호</th>
+						<th>예약 이메일</th>
+						<th>입실 날짜</th>
+						<th>퇴실 날짜</th>
+						<th>결제 금액</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${list}" var="reservationVo">
+						<tr>
+							<td>${reservationVo.reserv_num}</td>
+							<td>${reservationVo.room_num}</td>
+							<td>${reservationVo.user_email}</td>
+							<td>${reservationVo.room_reserv_start_date}</td>
+							<td>${reservationVo.room_reserv_end_date}</td>
+							<td>200,000</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+</section>
 
 
 <!-- end section -->
