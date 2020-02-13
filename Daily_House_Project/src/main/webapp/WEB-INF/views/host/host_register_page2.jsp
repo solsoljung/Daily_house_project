@@ -23,8 +23,11 @@ $(function(){
 	$(".nav-item:eq(5)").attr("class", "nav-item active");
 	
 	// host_register_page1로 이동
-	$("#btnPrev").click(function(){
-		location.href = "/cy/registerHost1";
+	$("#btnPrev").click(function(e){
+		e.preventDefault();
+		$("#registerForm2").attr("action", "/cy/registerHost1");
+		$("#registerForm2").submit();
+// 		location.href = "/cy/registerHost1";
 	});
 	// host_register_page3로 이동
 	$("#btnNext").click(function(){
@@ -66,7 +69,12 @@ $(function(){
 			</div><br>
 			<label>2단계: 상세한 사항을 입력하세요</label><br><br>
 			
-			<form role="form">
+			<form role="form" id="registerForm2">
+			roomDto1: ${roomDto1}
+			<input type="hidden" name="room_type_num" value="${roomDto1.room_type_num}"/>
+			<input type="hidden" name="room_people" value="${roomDto1.room_people}"/>
+			<input type="hidden" name="room_bed" value="${roomDto1.room_bed}"/>
+			<input type="hidden" name="room_bathroom" value="${roomDto1.room_bathroom}"/>
 			
 				<!-- 편의시설 -->
 				<div class="form-group">
