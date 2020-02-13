@@ -21,7 +21,6 @@ public class BooController {
 	public String registerHost(Model model) throws Exception{
 		//방을 선택시 user_email,room_num을 받아야됨
 		RoomDto roomDto = booRoomDetailService.detail(51);
-		System.out.println(roomDto);
 		model.addAttribute(roomDto);
 		return "/room_detail/Room_Detail";
 	}

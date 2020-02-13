@@ -10,7 +10,7 @@
 
 <%@ include file = "../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
 
-<!-- section -->   
+<!-- section -->
 <%@ include file = "../views/casahotel/section/casahotel_Main_section.jsp" %>
 <%@ include file = "../views/casahotel/section/casahotel_CheckAvailabilty_section.jsp" %>
 <%@ include file = "../views/casahotel/section/casahotel_GreatOffers_section.jsp"%>

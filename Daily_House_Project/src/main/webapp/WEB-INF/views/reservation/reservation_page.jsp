@@ -88,10 +88,14 @@ $(function() {
                       <option value="">1</option>
                       <option value="">2</option>
                       <option value="">3</option>
-                      <option value="">4+</option>
+                      <option value="">4</option>
+                      <option value="">5</option>
+                      <option value="">6</option>
+                      <option value="">7+</option>
                     </select>
                   </div>
                 </div>
+                
                 <div class="col-md-6 form-group">
                   <label for="children" class="font-weight-bold text-black">어린이</label>
                   <div class="field-icon-wrap">
@@ -100,11 +104,15 @@ $(function() {
                       <option value="">1</option>
                       <option value="">2</option>
                       <option value="">3</option>
-                      <option value="">4+</option>
+                      <option value="">4</option>
+                      <option value="">5</option>
+                      <option value="">6</option>
+                      <option value="">7+</option>
                     </select>
                   </div>
                 </div>
-              </div>     
+              </div>  
+                 
               <div class="row mb-4">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="message">기타사항</label>
@@ -125,17 +133,13 @@ $(function() {
                 <p><span class="d-block">주소:</span> <span style="font-size: 1em; font-family: 고딕;">해당 숙소 주소</span></p>
                 <p><span class="d-block">연락처:</span> <span style="font-size: 1em; font-family: 고딕;">해당 숙소 번호</span></p>
                 <p><span class="d-block">Email:</span> <span style="font-size: 1em; font-family: 고딕;">해당 숙소 이메일</span></p>
+                <p><span class="d-block">금액/1박:</span> <span style="font-size: 1em; font-family: 고딕;">해당 숙소 금액</span></p>
               </div>
             </div>
           </div>
         </div>
       </div>
 </section>
- 
-
-
-
-
 <!-- end section -->
 
 <%@ include file = "../../views/casahotel/casahotel_footer.jsp" %>

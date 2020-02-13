@@ -29,46 +29,57 @@ $(function(){
 
 	// room_location을 저장할 공간
 	var room_location = "";
+	var room_location_detail = "";
 	
 	// test Button
 	$("#btnTest").click(function(){
-		var location1 = $("input[name=location1]").val();
-		var location2 = $("input[name=location2]").val();
-		var location3 = $("input[name=location3]").val();
-		var location4 = $("input[name=location4]").val(); // 선택사항
-		var location5 = $("input[name=location5]").val();
+		room_location = $("#roadAddrPart1").val();
+		room_location_detail = $("#addrDetail").val();
 		
-		if(location1 == null || location1 == ""){
-			alert("시/도를 입력하세요.");
+		if(room_location == null || room_location == ""){
+			alert("주소를 입력해주세요.");
 			return;
 		}
-		if(location2 == null || location2 == ""){
-			alert("시/군/구를 입력하세요.");
-			return;
-		}
-		if(location3 == null || location3 == ""){
-			alert("도로명 주소를 입력하세요.");
-			return;
-		}
-		if(location5 == null || location5 == ""){
-			alert("우편번호를 입력하세요.");
-			return;
-		}
-		
-		room_location += location1 + " " + location2 + " " + location3; 
-		if(!location4 == null && !location4 == ""){
-			room_location += " " + location4 
-		}
-		room_location += " " + location5;
 		
 		console.log("room_location: " + room_location);
+		console.log("room_location_detail: " + room_location_detail);
 	});
 });
 </script>
 
 
+<!-- 주소 api -->
+<script language="javascript">
+	function goPopup() {
+		var pop = window.open("/popup/jusoPopup.jsp","pop","width=570, height=420, scrollbars=yes, resizable=yes");
+	}
+	function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr,jibunAddr,zipNo,admCd,
+			rnMgtSn,bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,
+			buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo) {
+		
+		document.form.roadFullAddr.value = roadFullAddr;
+		document.form.roadAddrPart1.value = roadAddrPart1;
+		document.form.roadAddrPart2.value = roadAddrPart2;
+		document.form.addrDetail.value = addrDetail;
+		document.form.zipNo.value = zipNo;
+	}
+</script>
+
+<% 
+	request.setCharacterEncoding("UTF-8");  //한글깨지면 주석제거
+	//request.setCharacterEncoding("EUC-KR");  //해당시스템의 인코딩타입이 EUC-KR일경우에
+	String inputYn = request.getParameter("inputYn"); 
+	String roadFullAddr = request.getParameter("roadFullAddr"); 
+%>
 <!-- host_register_page1 START -->
 <br><br><br><br>
+
+<form>
+	<input type="hidden" name="room_location"/>
+	<input type="hidden" name="room_location_detail"/>
+
+</form>
+
 
 <div class="container-fluid">
 	<div class="row">
@@ -80,32 +91,60 @@ $(function(){
 			</div><br>
 			<label>4단계: 등록할 숙소의 상세 주소를 입력해주세요.</label><br><br>
 
-			<form role="form">
-			
 				<!-- 위치등록 -->
-				<div class="form-group">
-					<div class="row">
-						<div class="col-md-6">
-							<label class="lblTitle2">시/도</label>
-							<input type="text" class="form-control" name="location1" placeholder="예) 서울특별시"/>
-						</div>
-						<div class="col-md-6">
-							<label class="lblTitle2">시/군/구</label>
-							<input type="text" class="form-control" name="location2" placeholder="예) 강남구"/>
-						</div>
-					</div><br><br>
-					
-					<label class="lblTitle2">도로명 주소</label>
-					<input type="text" class="form-control" name="location3" placeholder="예) 언주로 406"/><br><br>
-					
-					<label class="lblTitle2">동호수(선택 사항)</label>
-					<input type="text" class="form-control" name="location4" placeholder="예) 202동 201호"/><br><br>
-					
-					<label class="lblTitle2">우편번호</label>
-					<input type="text" class="form-control" name="location5" placeholder="예) 135-919"/><br><br>
-					
-				</div><br><br><br>
-					
+				<form id="form" name="form" method="post">
+				<input type="hidden" id="confmKey" name="confmKey" value=""/>
+				<input type="hidden" id="returnUrl" name="returnUrl" value=""/>
+				<input type="hidden" id="resultType" name="resultType" value=""/>
+				<!-- 해당시스템의 인코딩타입이 EUC-KR일경우에만 추가 START-->
+				<!-- <input type="hidden" id="encodingType" name="encodingType" value="EUC-KR"/> -->
+				
+				<div class="row">
+					<div class="col-md-3">
+						<button type="button" class="btn btn-primary btn-block" onClick="goPopup();">주소검색</button> 
+					</div>
+					<div class="col-md-3"></div>
+					<div class="col-md-3"></div>
+					<div class="col-md-3"></div>
+				</div><br>
+				
+				<div class="row">
+					<div class="col-md-2">
+						<label class="lblTitle3">도로명 주소 전체</label>
+					</div>
+					<div class="col-md-10">
+						<input type="text" id="roadFullAddr" name="roadFullAddr" style="width:100%;" placeholder="Enter Addr" required readonly/><br>
+					</div></div>	
+				<div class="row">
+					<div class="col-md-2">
+						<label class="lblTitle3">도로명 주소</label>
+					</div>
+					<div class="col-md-10">
+						<input type="text" id="roadAddrPart1" name="roadAddrPart1" style="width:100%;" placeholder="Enter Addr" required readonly/><br>
+					</div></div>
+				<div class="row">
+					<div class="col-md-2">
+						<label class="lblTitle3">상세주소</label>
+					</div>
+					<div class="col-md-10">
+						<input type="text" id="addrDetail" name="addrDetail" style="width:100%;" placeholder="Enter Addr" required readonly/><br>
+					</div></div>
+				<div class="row">
+					<div class="col-md-2">
+						<label class="lblTitle3">참고 주소</label>
+					</div>
+					<div class="col-md-10">
+						<input type="text" id="roadAddrPart2" name="roadAddrPart2" style="width:100%;" placeholder="Enter Addr" required readonly/><br>
+					</div></div>
+				<div class="row">
+					<div class="col-md-2">
+						<label class="lblTitle3">우편 번호</label>
+					</div>
+					<div class="col-md-10">
+						<input type="text" id="zipNo" name="zipNo" style="width:100%;" placeholder="Enter Addr" required readonly/>
+					</div>
+				</div><br>
+
 				<!-- Button -->
 				<br>
 				<div class="row">

@@ -13,15 +13,16 @@ public class CyController {
 
 	// 호스트 등록하기 1page
 	@RequestMapping(value = "/registerHost1", method = RequestMethod.GET)
-	public String registerHost1() throws Exception{
+	public String registerHost1(Model model, RegisterRoomDto1 roomDto1) throws Exception{
+		model.addAttribute("roomDto1", roomDto1);
 		return "/host/host_register_page1";
 	}
 	
 	// 호스트 등록하기 2page
 	@RequestMapping(value = "/registerHost2", method = RequestMethod.GET)
 	public String registerHost2(Model model, RegisterRoomDto1 roomDto1) throws Exception{
-		System.out.println("registerHost2의 roomDto1는? " + roomDto1);
-		model.addAttribute("list", roomDto1);
+		System.out.println(">>>> registerHost2의 roomDto1: " + roomDto1);
+		model.addAttribute("roomDto1", roomDto1);
 		return "/host/host_register_page2";
 	}
 	

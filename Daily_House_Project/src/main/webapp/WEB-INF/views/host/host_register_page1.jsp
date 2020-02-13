@@ -28,7 +28,6 @@ $(function(){
 	// host_register_page2로 이동
 	$("#btnNext").click(function(e){
 		e.preventDefault();
-		console.log("prevent event");
 		
 		if(room_type_num == null || room_type_num == ""){
 			alert("건물 유형을 선택해주세요.");
@@ -98,6 +97,7 @@ $(function(){
 			<label>1단계: 기본 사항을 입력하세요</label><br><br>
 
 			<form role="form" id="registerForm1" action="/cy/registerHost2" method="get">
+			roomDto1: ${roomDto1}
 			<input type="hidden" name="room_type_num"/>
 			<input type="hidden" name="room_people"/>
 			<input type="hidden" name="room_bed"/>
