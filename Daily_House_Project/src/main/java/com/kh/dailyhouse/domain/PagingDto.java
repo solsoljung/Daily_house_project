@@ -14,8 +14,8 @@ public class PagingDto {
 	private boolean hasNext = true;
 	private int perPage = 12;
 	private int totalPage;
-	private String searchType;
-	private String keyword;
+	private String searchType = "";
+	private String keyword = "";
 
 	public int getPage() {
 		return page;

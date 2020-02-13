@@ -25,7 +25,7 @@ public class SolController {
 		System.out.println("room get 실행됨");
 		System.out.println("pagingDto:" + pagingDto);
 		List<RoomVo> list = service.getRoomList(pagingDto);
-		int totalCount = service.getRoomCount();
+		int totalCount = service.getRoomCount(pagingDto);
 		pagingDto.setTotalCount(totalCount);
 		model.addAttribute("list", list);
 		model.addAttribute("pagingDto", pagingDto);

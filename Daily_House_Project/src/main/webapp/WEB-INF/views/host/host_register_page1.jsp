@@ -23,7 +23,7 @@ $(function(){
 	$(".nav-item:eq(0)").attr("class", "nav-item");
 	$(".nav-item:eq(5)").attr("class", "nav-item active");
 	
-	var room_type_num = "";
+	var room_type_num = "${roomDto1.room_type_num}";
 	
 	// host_register_page2로 이동
 	$("#btnNext").click(function(e){
@@ -33,13 +33,11 @@ $(function(){
 			alert("건물 유형을 선택해주세요.");
 			return;
 		}
-		
 		$("input[name=room_people]").val($("#room_people").val());
 		$("input[name=room_bed]").val($("#room_bed").val());
 		$("input[name=room_bathroom]").val($("#room_bathroom").val());
 		
-		$("#registerForm1").submit();
-// 		location.href = "/cy/registerHost2";
+		$("#registerForm").submit(); //location.href = "/cy/registerHost2";
 	});
 	
 	// select room_type_num
@@ -96,12 +94,12 @@ $(function(){
 			</div><br>
 			<label>1단계: 기본 사항을 입력하세요</label><br><br>
 
-			<form role="form" id="registerForm1" action="/cy/registerHost2" method="get">
+			<form role="form" id="registerForm" action="/cy/registerHost2Post" method="post">
 			roomDto1: ${roomDto1}
-			<input type="hidden" name="room_type_num"/>
-			<input type="hidden" name="room_people"/>
-			<input type="hidden" name="room_bed"/>
-			<input type="hidden" name="room_bathroom"/>
+			<input type="hidden" name="room_type_num" value="${roomDto1.room_type_num}"/>
+			<input type="hidden" name="room_people" value="${roomDto1.room_people}"/>
+			<input type="hidden" name="room_bed" value="${roomDto1.room_bed}"/>
+			<input type="hidden" name="room_bathroom" value="${roomDto1.room_bathroom}"/>
 			
 				<!-- 건물 유형 -->
 				<div class="form-group">
@@ -109,9 +107,15 @@ $(function(){
 					<select class="browser-default custom-select" id="room_type_num">
 				        <option selected="">하나를 선택해주세요.</option>
 						<!-- 값은 DB에서 불러와서 하기 -->
-				        <option value="1">아파트</option>
-				        <option value="2">주택</option>
-				        <option value="3">게스트하우스</option>
+				        <option value="1"
+				        	<c:if test="${roomDto1.room_type_num eq 1}">selected</c:if>
+				        >아파트</option>
+				        <option value="2"
+				        	<c:if test="${roomDto1.room_type_num eq 2}">selected</c:if>
+				        >주택</option>
+				        <option value="3"
+				        	<c:if test="${roomDto1.room_type_num eq 3}">selected</c:if>
+				        >게스트하우스</option>
 				     </select>
 				</div><br><br><br>
 				
@@ -126,7 +130,18 @@ $(function(){
 						</div>
 						<div class="col-md-3">
 							<button type="button" class="minus" style="border: none; background: none;">-</button>
-									<input type="number" class="numBox" min="1" max="20" value="4" readonly="readonly" id="room_people"/>
+							
+							<input type="number" class="numBox" min="1" max="20" 
+								<c:choose>
+									<c:when test="${not empty roomDto1}">
+										value="${roomDto1.room_people}" 
+									</c:when>
+									<c:otherwise>
+										value="4" 
+									</c:otherwise>
+								</c:choose>
+							readonly="readonly" id="room_people"/>
+									
 							<button type="button" class="plus" style="border: none; background: none;">+</button>
 						</div>
 						<div class="col-md-3"></div>
@@ -145,7 +160,18 @@ $(function(){
 						</div>
 						<div class="col-md-3">
 							<button type="button" class="minus" style="border: none; background: none;">-</button>
-									<input type="number" class="numBox" min="1" max="20" value="1" readonly="readonly" id="room_bed"/>
+							
+							<input type="number" class="numBox" min="1" max="20" 
+								<c:choose>
+									<c:when test="${not empty roomDto1}">
+										value="${roomDto1.room_bed}" 
+									</c:when>
+									<c:otherwise>
+										value="1" 
+									</c:otherwise>
+								</c:choose>
+							readonly="readonly" id="room_bed"/>
+									
 							<button type="button" class="plus" style="border: none; background: none;">+</button>
 						</div>
 						<div class="col-md-3"></div>
@@ -164,7 +190,18 @@ $(function(){
 						</div>
 						<div class="col-md-3">
 							<button type="button" class="minus" style="border: none; background: none;">-</button>
-									<input type="number" class="numBox" min="1" max="20" value="1" readonly="readonly" id="room_bathroom"/>
+								
+							<input type="number" class="numBox" min="1" max="20" 
+							<c:choose>
+									<c:when test="${not empty roomDto1}">
+										value="${roomDto1.room_bathroom}" 
+									</c:when>
+									<c:otherwise>
+										value="1" 
+									</c:otherwise>
+							</c:choose>
+							readonly="readonly" id="room_bathroom"/>
+							
 							<button type="button" class="plus" style="border: none; background: none;">+</button>
 						</div>
 						<div class="col-md-3"></div>

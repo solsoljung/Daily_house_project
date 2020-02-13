@@ -23,9 +23,9 @@ public class SolRoomServiceImpl implements SolRoomService {
 	}
 
 	@Override
-	public int getRoomCount() throws Exception {
+	public int getRoomCount(PagingDto pagingDto) throws Exception {
 		
-		return dao.getRoomCount();
+		return dao.getRoomCount(pagingDto);
 	}
 
 }
