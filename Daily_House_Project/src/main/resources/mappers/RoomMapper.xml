@@ -7,7 +7,16 @@
 
 	<!-- 방 목록 보기 -->
 	<select id="getRoomList" resultType="RoomVo">
-		select * from tbl_room where room_location like '%울산%'
+		select * 
+        from (select rownum rnum, a.* 
+        	  from (select * from tbl_room order by room_num asc
+                   ) a
+             )
+		where rnum &gt;= #{startRow} and rnum &lt;= #{endRow}
+	</select>
+	
+	<select id="getRoomCount" resultType="int">
+		select count(*) from tbl_room
 	</select>
   
 </mapper>
