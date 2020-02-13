@@ -5,6 +5,11 @@
   
 <mapper namespace="com.kh.mappers.RoomMapper">
 
+	<!-- 숙소 등록하기 -->
+	<!-- 숙소 수정하기 -->
+	<!-- 숙소 삭제하기 -->
+
+
 	<!-- 방 목록 보기 -->
 	<select id="getRoomList" resultType="RoomVo">
 		select * from (select rownum rnum, a.* 

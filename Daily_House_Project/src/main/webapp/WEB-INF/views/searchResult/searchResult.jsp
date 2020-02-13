@@ -141,8 +141,8 @@ $(document).ready(function(){
 <br>
 <!-- 페이징 -->
 <div class="row mt-5">
-		          <div class="col text-center">
-		            <div class="block-27">
+	<div class="col text-center">
+		 <div class="block-27">
 			<ul>
 			<c:if test="${pagingDto.hasPrev == true}">
 						<li>

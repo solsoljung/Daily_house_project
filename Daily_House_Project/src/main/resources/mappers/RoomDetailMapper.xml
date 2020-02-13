@@ -5,11 +5,24 @@
   
 <mapper namespace="com.kh.mappers.RoomDetailMapper">
 
-	<!-- 방 목록 보기 -->
+	<!-- 방 상세 보기 -->
 	<select id="getRoomDetail" resultType="RoomDto">
 		select * from tbl_host h, tbl_user u, tbl_room r
 		 where h.user_email = u.user_email and h.room_num = r.room_num
 		 and h.room_num = #{room_num}
 	</select>
-  
+  	
+  	<!-- 후기 보기(all) -->
+  	<select id="getRoomDetailReview" resultType="RoomReviewVo">
+  		select * from tbl_room_review
+  		where room_num = #{room_num}
+  	</select>
+  	
+  	<!-- 후기 보기(one 점수용) -->
+  	<select id="getOneReview" resultType="RoomReviewVo">
+  		select * from tbl_room_review
+  		where room_review_num = #{room_review_num}
+  	</select>
+  	
+  	
 </mapper>
