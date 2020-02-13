@@ -95,7 +95,23 @@ $(function(){
 });
 </script>
 
+<script language="javascript">
 
+function goPopup() {
+	var pop = window.open("/popup/jusoPopup.jsp","pop","width=570, height=420, scrollbars=yes, resizable=yes");
+}
+function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr,jibunAddr,zipNo,admCd,
+		rnMgtSn,bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,
+		buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo) {
+	
+	document.form.roadFullAddr.value = roadFullAddr;
+	document.form.roadAddrPart1.value = roadAddrPart1;
+	document.form.roadAddrPart2.value = roadAddrPart2;
+	document.form.addrDetail.value = addrDetail;
+	document.form.zipNo.value = zipNo;
+}
+
+</script>
 
 <%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
 
@@ -185,8 +201,8 @@ $(function(){
 <!-- /내용 센터쪽 -->
 <!-- 메뉴 좌측쪽 -->
           <div class="col-lg-4 sidebar ftco-animate">
-         	<div>
          	<!-- 달력 api -->
+         	<div>
 			<h1>reservationForm</h1>
 	오늘 날짜 : <span id="today"></span>
 	<form>
@@ -195,6 +211,21 @@ $(function(){
 	<input type="button" value="예약" id="btn_reservation"/>
 	
 	</form>
+			</div>
+			<div>
+			<form name="form" id="form" method="post">
+	<input type="button" onClick="goPopup();" value="팝업"/>
+	도로명 주소 전체 (포멧) : 
+	<input type = "text" id = "roadFullAddr" name = "roadFullAddr" /><br>
+	도로명 주소 : 
+	<input type = "text" id = "roadAddrPart1" name = "roadAddrPart1"/><br>
+	고객입력 상세주소 : 
+	<input type = "text" id = "addrDetail" name = "addrDetail"/><br>
+	참고 주소 : 
+	<input type = "text" id = "roadAddrPart2" name = "roadAddrPart2"/><br>
+	우편 번호 : 
+	<input type = "text" id = "zipNo" name = "zipNo" />
+</form>
 			</div>
             <div class="sidebar-box">
               <form action="#" class="search-form">
