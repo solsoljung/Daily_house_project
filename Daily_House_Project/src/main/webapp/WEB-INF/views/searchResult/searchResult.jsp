@@ -10,6 +10,21 @@
 <%@ include file = "../../views/islagrande/islagrande_link.jsp" %>
 
 <%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
+<style>
+
+</style>
+<script>
+$(document).ready(function(){
+	$("#btnTest").click(function(e){
+		e.preventDefault();
+		//var noX = parseInt((window.screen.width/2) - (noWidth/2));
+		//var noY = parseInt((window.screen.height/2) - (noHeight/2));
+		//console.log(noX);
+		$("#myModal").addClass("sol");
+		console.log("안녕");
+	});
+});
+</script>
 
 <!-- section -->   
 <br>
@@ -35,28 +50,17 @@
     </div>
 <!-- 검색바 끝 -->
 
-<!-- 선택 버튼 -->
-<div class="row">
-    <div class="col-md-12">
-		<input type="button" value="날짜" class="btn btn-primary py-3 px-5" style="font-size:20px;">
-		<input type="button" value="인원" class="btn btn-primary py-3 px-5" style="font-size:20px;">
-		<input type="button" value="숙소 유형" class="btn btn-primary py-3 px-5" style="font-size:20px;">
-		<input type="button" value="요금" class="btn btn-primary py-3 px-5" style="font-size:20px;">
-		<input type="button" value="필터" class="btn btn-primary py-3 px-5" style="font-size:20px;">
-	</div>
-</div>
-<br>
-<!-- 선택 버튼 끝 -->
-
 <!-- 모달창 -->
 <div class="row">
         <div class="col-md-12">
             <div class="modal-box">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary btn-lg show-modal" data-toggle="modal" data-target="#myModal">
-                  view modal
-                </button>
- 
+<!-- 선택버튼 -->
+                <input type="button" value="날짜" class="btn btn-primary py-3 px-5" style="font-size:20px;" id= "btnTest" data-toggle="modal" data-target="#myModal">
+				<input type="button" value="인원" class="btn btn-primary py-3 px-5" style="font-size:20px;">
+				<input type="button" value="숙소 유형" class="btn btn-primary py-3 px-5" style="font-size:20px;">
+				<input type="button" value="요금" class="btn btn-primary py-3 px-5" style="font-size:20px;">
+				<input type="button" value="필터" class="btn btn-primary py-3 px-5" style="font-size:20px;">
+<!-- 선택버튼 끝 -->
                 <!-- Modal -->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
@@ -71,13 +75,14 @@
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>
 <!-- 모달창 끝 -->
     
 <!-- 방 리스트 -->
-        <div class="row">
+<div class="row">
         <c:forEach var="vo" items="${list}">
         	<div class="col-md-3">
         		<div class="room-wrap ftco-animate">
@@ -93,7 +98,7 @@
         				</p>
         				<p class="d-flex price-details align-items-center pt-3">
         					<!-- <span>Starting From</span> -->
-        					<span class="price">￦${vo.room_price}<small>&nbsp;/&nbsp;&nbsp;&nbsp;1박</small></span>
+        			 		<span class="price">￦${vo.room_price}<small>&nbsp;/&nbsp;&nbsp;&nbsp;1박</small></span>
         				</p>
         				<p><a href="#" class="btn-customize">지금 예약하기</a></p>
         			</div>
@@ -101,6 +106,7 @@
         	</div>
         	</c:forEach>
         </div>
+
 <!-- 방 리스트 끝 -->
 			</div>
 		</section>

@@ -23,17 +23,31 @@ $(function(){
 	$(".nav-item:eq(0)").attr("class", "nav-item");
 	$(".nav-item:eq(5)").attr("class", "nav-item active");
 	
+	var room_type_num = "";
+	
 	// host_register_page2로 이동
-	$("#btnNext").click(function(){
-		console.log("btnNext click");
-		location.href = "/cy/registerHost2";
+	$("#btnNext").click(function(e){
+		e.preventDefault();
+		console.log("prevent event");
+		
+		if(room_type_num == null || room_type_num == ""){
+			alert("건물 유형을 선택해주세요.");
+			return;
+		}
+		
+		$("input[name=room_people]").val($("#room_people").val());
+		$("input[name=room_bed]").val($("#room_bed").val());
+		$("input[name=room_bathroom]").val($("#room_bathroom").val());
+		
+		$("#registerForm1").submit();
+// 		location.href = "/cy/registerHost2";
 	});
 	
 	// select room_type_num
-	var room_type_num = "";
 	$("#room_type_num").change(function() {
 		room_type_num = $(this).val();
-		console.log(room_type_num);
+		$("input[name=room_type_num]").val(room_type_num);
+		console.log($("#room_type_num").val());
 	});
 	
 	
@@ -66,22 +80,6 @@ $(function(){
 	});
 	// 수량 버튼 END
 	
-	// test Button
-	$("#btnTest").click(function(){
-		var room_people = $("input[name=room_people]").val();
-		var room_bed = $("input[name=room_bed]").val();
-		var room_bathroom = $("input[name=room_bathroom]").val();
-		
-		if(room_type_num == null || room_type_num == ""){
-			alert("CHECK room_type_num");
-		}
-		
-		console.log("room_type_num: " + room_type_num);
-		console.log("room_people: " + room_people);
-		console.log("room_bed: " + room_bed);
-		console.log("room_bathroom: " + room_bathroom);
-	});
-	
 });
 </script>
 
@@ -99,12 +97,16 @@ $(function(){
 			</div><br>
 			<label>1단계: 기본 사항을 입력하세요</label><br><br>
 
-			<form role="form">
+			<form role="form" id="registerForm1" action="/cy/registerHost2" method="get">
+			<input type="hidden" name="room_type_num"/>
+			<input type="hidden" name="room_people"/>
+			<input type="hidden" name="room_bed"/>
+			<input type="hidden" name="room_bathroom"/>
 			
 				<!-- 건물 유형 -->
 				<div class="form-group">
 					<label class="lblTitle2">건물 유형을 선택하세요</label>
-					<select class="browser-default custom-select" name="room_type_num" id="room_type_num">
+					<select class="browser-default custom-select" id="room_type_num">
 				        <option selected="">하나를 선택해주세요.</option>
 						<!-- 값은 DB에서 불러와서 하기 -->
 				        <option value="1">아파트</option>
@@ -124,7 +126,7 @@ $(function(){
 						</div>
 						<div class="col-md-3">
 							<button type="button" class="minus" style="border: none; background: none;">-</button>
-									<input type="number" class="numBox" min="1" max="20" value="4" readonly="readonly" name="room_people"/>
+									<input type="number" class="numBox" min="1" max="20" value="4" readonly="readonly" id="room_people"/>
 							<button type="button" class="plus" style="border: none; background: none;">+</button>
 						</div>
 						<div class="col-md-3"></div>
@@ -143,7 +145,7 @@ $(function(){
 						</div>
 						<div class="col-md-3">
 							<button type="button" class="minus" style="border: none; background: none;">-</button>
-									<input type="number" class="numBox" min="1" max="20" value="1" readonly="readonly" name="room_bed"/>
+									<input type="number" class="numBox" min="1" max="20" value="1" readonly="readonly" id="room_bed"/>
 							<button type="button" class="plus" style="border: none; background: none;">+</button>
 						</div>
 						<div class="col-md-3"></div>
@@ -162,7 +164,7 @@ $(function(){
 						</div>
 						<div class="col-md-3">
 							<button type="button" class="minus" style="border: none; background: none;">-</button>
-									<input type="number" class="numBox" min="1" max="20" value="1" readonly="readonly" name="room_bathroom"/>
+									<input type="number" class="numBox" min="1" max="20" value="1" readonly="readonly" id="room_bathroom"/>
 							<button type="button" class="plus" style="border: none; background: none;">+</button>
 						</div>
 						<div class="col-md-3"></div>
@@ -176,9 +178,7 @@ $(function(){
 				<div class="row">
 					<div class="col-md-3"></div>
 					<div class="col-md-3"></div>
-					<div class="col-md-3">
-						<button type="button" class="btn btn-primary btn-block" id="btnTest" >TEST</button>
-					</div>
+					<div class="col-md-3"></div>
 					<div class="col-md-3" align="right">
 						<button type="button" class="btn btn-primary btn-block" id="btnNext" >Next</button>
 					</div>

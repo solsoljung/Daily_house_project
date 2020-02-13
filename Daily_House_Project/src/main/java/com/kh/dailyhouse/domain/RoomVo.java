@@ -14,6 +14,15 @@ public class RoomVo {
 	private int room_bathroom;
 	private String room_title;
 	
+	/*
+	  room등록할 때 사진도 등록해야함
+	  우리 Sample01에 할 때도 tbl_board에 pic행은 없지만 
+	  board 한 개(bno)를 조회할 때 그 bno의 사진파일도 같이 조회되게 하려고 
+	  BoardVo에 private String[] files를 적어줬잖아 
+	  그니깐 우리도 RoomVo에 private String[] pics 이거 추가하면 안되나요?,,,,,,
+	 */
+	//private String[] pics; // <- 추가
+	
 	public int getRoom_num() {
 		return room_num;
 	}
