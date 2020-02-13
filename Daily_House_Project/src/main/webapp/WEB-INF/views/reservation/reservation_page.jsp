@@ -95,6 +95,7 @@ $(function() {
                     </select>
                   </div>
                 </div>
+                
                 <div class="col-md-6 form-group">
                   <label for="children" class="font-weight-bold text-black">어린이</label>
                   <div class="field-icon-wrap">
@@ -110,7 +111,8 @@ $(function() {
                     </select>
                   </div>
                 </div>
-              </div>     
+              </div>  
+                 
               <div class="row mb-4">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="message">기타사항</label>
@@ -138,11 +140,6 @@ $(function() {
         </div>
       </div>
 </section>
- 
-
-
-
-
 <!-- end section -->
 
 <%@ include file = "../../views/casahotel/casahotel_footer.jsp" %>

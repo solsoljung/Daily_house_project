@@ -37,5 +37,10 @@ public class YOController {
 		model.addAttribute("list", list);
 		return "/reservation/reservation_list_page";
 	}
+	
+	@RequestMapping(value="/like_list", method=RequestMethod.GET)
+	public String likeList() throws Exception {
+		return "/like/like_list_page";
+	}
 
 }
