@@ -14,6 +14,7 @@
 <script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
 <!-- datepicker -->
 
+<!-- 달력 api script -->
 <script>
 //datepicker START 
 $.datepicker.setDefaults({  
@@ -95,22 +96,99 @@ $(function(){
 });
 </script>
 
-<script language="javascript">
 
-function goPopup() {
-	var pop = window.open("/popup/jusoPopup.jsp","pop","width=570, height=420, scrollbars=yes, resizable=yes");
-}
-function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr,jibunAddr,zipNo,admCd,
-		rnMgtSn,bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,
-		buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo) {
-	
-	document.form.roadFullAddr.value = roadFullAddr;
-	document.form.roadAddrPart1.value = roadAddrPart1;
-	document.form.roadAddrPart2.value = roadAddrPart2;
-	document.form.addrDetail.value = addrDetail;
-	document.form.zipNo.value = zipNo;
-}
+<script>
+$(function() {
+	$("#btnReview").click(function() {
+		var room_num = "${roomDto.room_num}"; //댓글시 해당 방 번호
+		var review_text = $("#review_text").val();
+		var user_email = "${user_email}";
+		var loc_score = $("#loc").val();
+		var cle_score = $("#cle").val();
+		var che_score = $("#che").val();
+		var com_score = $("#com").val();
+		console.log("room_num : " + room_num);
+		console.log("review_text : " + review_text);
+		console.log("user_email : " + user_email);
+		console.log("loc_score : " + loc_score);
+		console.log("cle_score : " + cle_score);
+		console.log("che_score : " + che_score);
+		console.log("com_score : " + com_score);
+		
+	});
+});
+</script>
 
+<style>
+.mousePointer {
+	cursor : pointer
+}
+</style>
+ 
+<script>
+ 	function locDown() {
+ 		var expense = $("#loc").val();
+ 		expense = (Number(expense)-1);
+ 		if ($("#loc").val() > 0) {
+ 			$("#loc").val(expense);
+ 		}
+ 	};
+ 	
+ 	function locUp() {
+ 		var expense = $("#loc").val();
+ 		expense = (Number(expense)+1);
+ 		if($("#loc").val() < 5) {
+ 			$("#loc").val(expense);
+ 		}
+ 	};
+ 	
+ 	function cleDown() {
+ 		var expense = $("#cle").val();
+ 		expense = (Number(expense)-1);
+ 		if ($("#cle").val() > 0) {
+ 			$("#cle").val(expense);
+ 		}
+ 	};
+ 	
+ 	function cleUp() {
+ 		var expense = $("#cle").val();
+ 		expense = (Number(expense)+1);
+ 		if($("#cle").val() < 5) {
+ 			$("#cle").val(expense);
+ 		}
+ 	};
+ 	
+ 	function cheDown() {
+ 		var expense = $("#che").val();
+ 		expense = (Number(expense)-1);
+ 		if ($("#che").val() > 0) {
+ 			$("#che").val(expense);
+ 		}
+ 	};
+ 	
+ 	function cheUp() {
+ 		var expense = $("#che").val();
+ 		expense = (Number(expense)+1);
+ 		if($("#che").val() < 5) {
+ 			$("#che").val(expense);
+ 		}
+ 	};
+ 	
+ 	function comDown() {
+ 		var expense = $("#com").val();
+ 		expense = (Number(expense)-1);
+ 		if ($("#com").val() > 0) {
+ 			$("#com").val(expense);
+ 		}
+ 	};
+ 	
+ 	function comUp() {
+ 		var expense = $("#com").val();
+ 		expense = (Number(expense)+1);
+ 		if($("#com").val() < 5) {
+ 			$("#com").val(expense);
+ 		}
+ 	};
 </script>
 
 <%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
@@ -140,6 +218,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 <!-- 내용 센터쪽 -->
           <div class="col-lg-8 ftco-animate">
          	 ${roomDto}
+         	 
           	<h1>방에 대한 이름 : ${roomDto.room_title}</h1>
           	<h2>호스트 이름 : ${roomDto.user_name}</h2>
           	<h5>기본적인 방의 구성요소</h5>
@@ -151,53 +230,143 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
           	<hr>
           	<h1>방에 대한 옵션</h1>
           	<hr>
+          	<div>
           	<h1>후기 테이블 부분</h1>
+          	
+          	<table>
+          		<tr>
+          			<th>리뷰 번호</th>
+          			<th>사용자 이메일</th>
+          			<th>방 번호</th>
+          			<th>지역 점수</th>
+          			<th>청결 점수</th>
+          			<th>체크인 점수</th>
+          			<th>의사소통 점수</th>
+          			<th>총 점수</th>
+          			<th>글 내용</th>
+          		</tr>
+          		<c:forEach items="${reviewList}" var="RoomReviewVo">
+          		<tr>
+          			<td>${RoomReviewVo.room_review_num}</td>
+          			<td>${RoomReviewVo.user_email}</td>
+          			<td>${RoomReviewVo.room_num}</td>
+          			<td id="location" data-score="${RoomReviewVo.review_score_location}">${RoomReviewVo.review_score_location}</td>
+          			<td id="clean" data-score="${RoomReviewVo.review_score_cleanliness}">${RoomReviewVo.review_score_cleanliness}</td>
+          			<td id="checkin" data-score="${RoomReviewVo.review_score_checkin}">${RoomReviewVo.review_score_checkin}</td>
+          			<td id="communication" data-score="${RoomReviewVo.review_score_communication}">${RoomReviewVo.review_score_communication}</td>
+          			<td></td>
+          			<td>${RoomReviewVo.room_review_text}</td>
+          		</tr>
+          		</c:forEach>
+          	</table>
+          	</div>
+          	<hr>
+<!-- 후기 작성란 구역 -->
+          	<div>
+				  <table>
+				   <tr>
+				    <td>지역</td>
+				    <td>
+				     <table>
+				      <tr>
+				       <td><input type="text" value="0" id="loc"  size='1' readonly><td>
+				       <td>
+				        <a class="mousePointer" onclick="locUp()">▲</a><br>
+				       	<a class="mousePointer" onclick="locDown()">▼</a>
+				       </td>
+				      </tr>
+				     </table>
+				    </td>
+				    <td>청결</td>
+				    <td>
+				     <table>
+				      <tr>
+				       <td><input type="text" value="0" id="cle"  size='1' readonly><td>
+				       <td>
+				        <a class="mousePointer" onclick="cleUp()">▲</a><br>
+				       	<a class="mousePointer" onclick="cleDown()">▼</a>
+				       </td>
+				      </tr>
+				     </table>
+				    </td>
+				    <td>체크인</td>
+				    <td>
+				     <table>
+				      <tr>
+				       <td><input type="text" value="0" id="che"  size='1' readonly><td>
+				       <td>
+				        <a class="mousePointer" onclick="cheUp()">▲</a><br>
+				       	<a class="mousePointer" onclick="cheDown()">▼</a>
+				       </td>
+				      </tr>
+				     </table>
+				    </td>
+				    <td>친절함</td>
+				    <td>
+				     <table>
+				      <tr>
+				       <td><input type="text" value="0" id="com"  size='1' readonly><td>
+				       <td>
+				        <a class="mousePointer" onclick="comUp()">▲</a><br>
+				       	<a class="mousePointer" onclick="comDown()">▼</a>
+				       </td>
+				      </tr>
+				     </table>
+				    </td>
+				   </tr>
+				  </table>
+				
+          		<label for="review_text">댓글내용</label>
+          		<input type="text" id="review_text" />
+          		<button type="button" id="btnReview">작성완료</button>
+          	</div>
+          	
           	<hr>
           	<h1>간단한 room의 호스트에 대한 정보</h1>
           	<hr>
           	<!-- 지도 api -->
           	<div id="map1" style="width:100%;height:350px;"></div>								
-			<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cb28eeac595843b6872c9756479d8624&libraries=services,clusterer65"></script>								
-			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services"></script>								
-			<script>								
-			var mapContainer = document.getElementById('map1'), // 지도를 표시할 div								
-			mapOption = {								
-			center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표								
-			level: 3 // 지도의 확대 레벨								
-			};								
-								
-			// 지도를 생성								
-			var map = new kakao.maps.Map(mapContainer, mapOption);								
-								
-			// 주소-좌표 변환 객체를 생성								
-			var geocoder = new kakao.maps.services.Geocoder();								
-								
-			// 주소로 좌표를 검색 -> 호스트 DB 참조								
-			geocoder.addressSearch('"${roomDto.room_location}"', function(result, status) {								
-								
-			// 정상적으로 검색이 완료됐으면								
-			if (status === kakao.maps.services.Status.OK) {								
-								
-			var coords = new kakao.maps.LatLng(result[0].y, result[0].x);								
-								
-			// 결과값으로 받은 위치를 마커로 표시
-			var marker = new kakao.maps.Marker({
-			map: map,								
-			position: coords								
-			});								
-								
-			// 인포윈도우로 장소에 대한 설명을 표시 -> 호스트 DB 참조								
-			var infowindow = new kakao.maps.InfoWindow({								
-			content: '<div style="width:150px;text-align:center;padding:6px 0;">여기</div>'								
-			});								
-			infowindow.open(map, marker);
-			
-			// 지도의 중심을 결과값으로 받은 위치로 이동
-			map.setCenter(coords);
-			}
-			});								
-			</script>
-          </div> 
+				<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cb28eeac595843b6872c9756479d8624&libraries=services,clusterer65"></script>								
+				<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services"></script>								
+				<script>								
+					var mapContainer = document.getElementById('map1'), // 지도를 표시할 div								
+					mapOption = {								
+					center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표								
+					level: 3 // 지도의 확대 레벨								
+					};								
+									
+					// 지도를 생성								
+					var map = new kakao.maps.Map(mapContainer, mapOption);								
+										
+					// 주소-좌표 변환 객체를 생성								
+					var geocoder = new kakao.maps.services.Geocoder();								
+										
+					// 주소로 좌표를 검색 -> 호스트 DB 참조								
+					geocoder.addressSearch('"${roomDto.room_location}"', function(result, status) {								
+										
+					// 정상적으로 검색이 완료됐으면								
+					if (status === kakao.maps.services.Status.OK) {								
+										
+					var coords = new kakao.maps.LatLng(result[0].y, result[0].x);								
+										
+					// 결과값으로 받은 위치를 마커로 표시
+					var marker = new kakao.maps.Marker({
+					map: map,								
+					position: coords								
+					});								
+										
+					// 인포윈도우로 장소에 대한 설명을 표시 -> 호스트 DB 참조								
+					var infowindow = new kakao.maps.InfoWindow({								
+					content: '<div style="width:150px;text-align:center;padding:6px 0;">여기</div>'								
+					});								
+					infowindow.open(map, marker);
+					
+					// 지도의 중심을 결과값으로 받은 위치로 이동
+					map.setCenter(coords);
+					}
+					});
+				</script>
+          	</div>
 <!-- /내용 센터쪽 -->
 <!-- 메뉴 좌측쪽 -->
           <div class="col-lg-4 sidebar ftco-animate">
@@ -211,21 +380,6 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 	<input type="button" value="예약" id="btn_reservation"/>
 	
 	</form>
-			</div>
-			<div>
-			<form name="form" id="form" method="post">
-	<input type="button" onClick="goPopup();" value="팝업"/>
-	도로명 주소 전체 (포멧) : 
-	<input type = "text" id = "roadFullAddr" name = "roadFullAddr" /><br>
-	도로명 주소 : 
-	<input type = "text" id = "roadAddrPart1" name = "roadAddrPart1"/><br>
-	고객입력 상세주소 : 
-	<input type = "text" id = "addrDetail" name = "addrDetail"/><br>
-	참고 주소 : 
-	<input type = "text" id = "roadAddrPart2" name = "roadAddrPart2"/><br>
-	우편 번호 : 
-	<input type = "text" id = "zipNo" name = "zipNo" />
-</form>
 			</div>
             <div class="sidebar-box">
               <form action="#" class="search-form">
