@@ -11,7 +11,10 @@
 
 <%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
 <style>
-
+.sol-font{
+	font-family: '맑은 고딕';
+	color: #fb929e;
+}
 </style>
 <script>
 $(document).ready(function(){
@@ -23,6 +26,7 @@ $(document).ready(function(){
 		$("#frmPage").submit();
 	});
 
+	//상세 페이지로 이동
 	$(".room-title").click(function(e) {
 		e.preventDefault();
 		var room_num = $(this).attr("data-num");
@@ -30,12 +34,20 @@ $(document).ready(function(){
 		$("#frmPage").attr("action", "/boo/detail");
 		$("#frmPage").submit();
 	});
+	
+	//검색
+	$("#searchTarget").keyup(function(e){
+		if(e.keyCode == 13){
+			var keyword = $(this).val();
+			console.log(keyword);
+			$("input[name=keyword]").val(keyword);
+			$("#frmPage").submit();
+		}
+	});
 });
 </script>
 
 <!-- section -->   
-<br>
-<br>
 
 <section class="ftco-section ftco-room">
 <div class="container">
@@ -44,6 +56,7 @@ $(document).ready(function(){
 <form id="frmPage" action="/sol/room" method="get">
 	<input type="hidden" name="room_num" />
 	<input type="hidden" name="page" value="${pagingDto.page}"/>
+	<input type="hidden" name="keyword" value="${pagingDto.keyword}"/>
 </form>
 <!-- 히든 폼 끝 -->
 
@@ -54,8 +67,8 @@ $(document).ready(function(){
 	              <form action="#" class="search-form">
 	                <div class="form-group">
 	                  <span class="icon icon-search"></span>
-	                  <input type="text" class="form-control" placeholder="모든 위치" 
-	                  style="font-size:30px;">
+	                  <input type="text" id="searchTarget" class="form-control" value="${pagingDto.keyword}" 
+	                  placeholder="모든 위치" style="font-size:30px;">
 	                </div>
 	              </form>
 	        </div>
@@ -94,6 +107,9 @@ $(document).ready(function(){
     </div>
 <!-- 모달창 끝 -->
 <br>
+<c:if test="${not empty pagingDto.keyword}">
+	<h6 class="sol-font">${pagingDto.totalCount}개의 방이 검색 되었습니다.</h6>
+</c:if>
 <br>
 <!-- 방 리스트 -->
 <div class="row">
@@ -114,7 +130,7 @@ $(document).ready(function(){
         					<!-- <span>Starting From</span> -->
         			 		<span class="price">￦${vo.room_price}<small>&nbsp;/&nbsp;&nbsp;&nbsp;1박</small></span>
         				</p>
-        				<p><a href="#" class="btn-customize">지금 예약하기</a></p>
+        				<p><a data-num="${vo.room_num}" class="room-title btn-customize">지금 예약하기</a></p>
         			</div>
         		</div>
         	</div>
@@ -123,7 +139,6 @@ $(document).ready(function(){
 
 <!-- 방 리스트 끝 -->
 <br>
-${pagingDto}
 <!-- 페이징 -->
 <div class="row mt-5">
 		          <div class="col text-center">

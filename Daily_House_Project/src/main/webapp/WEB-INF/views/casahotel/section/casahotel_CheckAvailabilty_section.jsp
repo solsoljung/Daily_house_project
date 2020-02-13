@@ -17,20 +17,28 @@
               <div class="row">
               	<div class="col-md-6 mb-3 mb-lg-0 col-lg-3"><!-- 111111111111111111111111111111111111111111111111111111111111 -->
                   <label for="checkin_date" class="font-weight-bold text-black">지역 찾기</label>
+                  
                   <div class="field-icon-wrap">
                     <div class="icon">
 <!--                     <span class="icon-calendar"></span> -->
+						<!-- 여기 -->
                     </div>
 <!--                     <input type="text" id="checkin_date" class="form-control"> -->
 						
                   </div>
                 </div>
+                <!-- 체크인 -->
                 <div class="col-md-6 mb-3 mb-lg-0 col-lg-3"><!-- 2222222222222222222222222222222222222222222222222222222222222222 -->
                   <label for="checkin_date" class="font-weight-bold text-black">Check In</label>
+                  <!-- 달력 -->
                   <div class="field-icon-wrap">
-                    <div class="icon"><span class="icon-calendar"></span></div>
+                    <div class="icon">
+                    <span class="icon-calendar"></span>
+                    </div>
+                    
                     <input type="text" id="checkin_date" class="form-control">
                   </div>
+                  <!-- 달력 끝 -->
                 </div>
                 <div class="col-md-6 mb-3 mb-lg-0 col-lg-3"><!-- 3333333333333333333333333333333333333333333333333333333333333333333 -->
                   <label for="checkout_date" class="font-weight-bold text-black">Check Out</label>
