@@ -26,11 +26,12 @@ $(function(){
 	var data_options = [];
 	
 	// host_register_page1로 이동
-	$("#btnPrev").click(function(e){
+/*	$("#btnPrev").click(function(e){
 		e.preventDefault();
 		$("#registerForm").attr("action", "/cy/registerHost1Post");
 		$("#registerForm").submit();
-	});
+	}); */ // 이전으로 이동 금지!!!!!!!!!!!!
+	
 	// host_register_page3로 이동
 	$("#btnNext").click(function(e){
 		e.preventDefault();
@@ -90,7 +91,7 @@ $(function(){
 				<br>
 				<div class="row">
 					<div class="col-md-3">
-						<button type="button" class="btn btn-primary btn-block" id="btnPrev">Prev</button>
+<!-- 						<button type="button" class="btn btn-primary btn-block" id="btnPrev">Prev</button> -->
 					</div>
 					<div class="col-md-3"></div>
 					<div class="col-md-3"></div>

@@ -23,17 +23,23 @@ $(function(){
 	$(".nav-item:eq(5)").attr("class", "nav-item active");
 	
 	// host_register_page2로 이동
-	$("#btnPrev").click(function(e){
+/*	$("#btnPrev").click(function(e){
 		e.preventDefault();
+		console.log("===============================roomVo===============================");
 		console.log("${roomVo}");
+		console.log("=============================input[name]=============================");
 		console.log($("input[name=room_type_num]").val());
 		console.log($("input[name=room_people]").val());
 		console.log($("input[name=room_bed]").val());
 		console.log($("input[name=room_bathroom]").val());
 		console.log($("input[name=room_options]").val());
 		$("#registerForm").attr("action", "/cy/registerHost2Post");
-// 		$("#registerForm").submit();
-	});
+		
+		// 2page로 가면 400에러남 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		// 400 Bad Request
+		// 클라이언트는 요청을 수정하지 않고 동일한 형태로 다시 보내서는 안됩니다.
+		// $("#registerForm").submit();
+	}); */ // 이전으로 이동 금지!!!!!!!!!!!!
 	
 	// host_register_page3으로 이동
 	$("#btnNext").click(function(e){
@@ -119,7 +125,7 @@ ${roomVo.room_explain}</c:if></textarea><br><br>
 				<br>
 				<div class="row">
 					<div class="col-md-3">
-						<button type="button" class="btn btn-primary btn-block" id="btnPrev">Prev</button>
+<!-- 						<button type="button" class="btn btn-primary btn-block" id="btnPrev">Prev</button> -->
 					</div>
 					<div class="col-md-3"></div>
 					<div class="col-md-3"></div>

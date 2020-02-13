@@ -27,11 +27,11 @@ $(function(){
 	var room_location_detail = "";
 	
 	// host_register_page3으로 이동
-	$("#btnPrev").click(function(e){
+/*	$("#btnPrev").click(function(e){
 		e.preventDefault();
 		$("#form").attr("action", "/cy/registerHost3Post");
 		$("#form").submit();
-	});
+	}); */ // 이전으로 이동 금지!!!!!!!!!!!!
 	
 	// conplete
 	$("#btnNext").click(function(e){
@@ -171,7 +171,7 @@ $(function(){
 				<br>
 				<div class="row">
 					<div class="col-md-3">
-						<button type="button" class="btn btn-primary btn-block" id="btnPrev">Prev</button>
+<!-- 						<button type="button" class="btn btn-primary btn-block" id="btnPrev">Prev</button> -->
 					</div>
 					<div class="col-md-3"></div>
 					<div class="col-md-3"></div>
