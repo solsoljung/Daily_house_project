@@ -24,24 +24,15 @@ $(function(){
 	
 	// host_register_page2로 이동
 	$("#btnPrev").click(function(e){
-// 		e.preventDefault();
+		e.preventDefault();
 		$("#registerForm").attr("action", "/cy/registerHost2Post");
 		$("#registerForm").submit();
 	});
 	
 	// host_register_page3으로 이동
 	$("#btnNext").click(function(e){
-// 		e.preventDefault();
-		location.href = "/cy/registerHost4Post";
-	});
-	
-	// room_price는 숫자만 입력할 수 있도록 설정
-	$("input[name=room_price]").on("keyup", function() {
-	    $(this).val($(this).val().replace(/[^0-9]/g,""));
-	});
-	
-	// test Button
-	$("#btnTest").click(function(){
+		e.preventDefault();
+		
 		var room_title = $("input[name=room_title]").val();
 		var room_explain = $("textarea[name=room_explain]").val();
 		var room_price = $("input[name=room_price]").val();
@@ -58,10 +49,14 @@ $(function(){
 			alert("숙소 가격을 정하세요.");
 			return;
 		}
-		
-		console.log("room_title: " + room_title);
-		console.log("room_explain: " + room_explain);
-		console.log("room_price: " + room_price);
+
+		$("#registerForm").attr("action", "/cy/registerHost4Post");
+		$("#registerForm").submit();
+	});
+	
+	// room_price는 숫자만 입력할 수 있도록 설정
+	$("input[name=room_price]").on("keyup", function() {
+	    $(this).val($(this).val().replace(/[^0-9]/g,""));
 	});
 	
 });
@@ -82,12 +77,12 @@ $(function(){
 			<label>3단계: 등록할 숙소의 사진과 정보를 입력해주세요.</label><br><br>
 			
 			<form role="form" method="post" id="registerForm" >
-			roomDto2: ${roomDto2}
-			<input type="hidden" name="room_type_num" value="${roomDto2.room_type_num}"/>
-			<input type="hidden" name="room_people" value="${roomDto2.room_people}"/>
-			<input type="hidden" name="room_bed" value="${roomDto2.room_bed}"/>
-			<input type="hidden" name="room_bathroom" value="${roomDto2.room_bathroom}"/>
-			<input type="hidden" name="room_options" value="${roomDto2.room_options}"/>
+			roomVo: ${roomVo}
+			<input type="hidden" name="room_type_num" value="${roomVo.room_type_num}"/>
+			<input type="hidden" name="room_people" value="${roomVo.room_people}"/>
+			<input type="hidden" name="room_bed" value="${roomVo.room_bed}"/>
+			<input type="hidden" name="room_bathroom" value="${roomVo.room_bathroom}"/>
+			<input type="hidden" name="room_options" value="${roomVo.room_options}"/>
 			
 				<!-- 사진 및 소개 등록 -->
 				<div class="form-group">
@@ -116,9 +111,7 @@ $(function(){
 						<button type="button" class="btn btn-primary btn-block" id="btnPrev">Prev</button>
 					</div>
 					<div class="col-md-3"></div>
-					<div class="col-md-3">
-						<button type="button" class="btn btn-primary btn-block" id="btnTest" >TEST</button>
-					</div>
+					<div class="col-md-3"></div>
 					<div class="col-md-3" align="right">
 						<button type="button" class="btn btn-primary btn-block" id="btnNext" >Next</button>
 					</div>

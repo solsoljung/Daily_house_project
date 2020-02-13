@@ -23,7 +23,7 @@ $(function(){
 	$(".nav-item:eq(0)").attr("class", "nav-item");
 	$(".nav-item:eq(5)").attr("class", "nav-item active");
 	
-	var room_type_num = "${roomDto1.room_type_num}";
+	var room_type_num = "${roomVo.room_type_num}";
 	
 	// host_register_page2로 이동
 	$("#btnNext").click(function(e){
@@ -44,7 +44,7 @@ $(function(){
 	$("#room_type_num").change(function() {
 		room_type_num = $(this).val();
 		$("input[name=room_type_num]").val(room_type_num);
-		console.log($("#room_type_num").val());
+		//console.log($("#room_type_num").val());
 	});
 	
 	
@@ -95,11 +95,11 @@ $(function(){
 			<label>1단계: 기본 사항을 입력하세요</label><br><br>
 
 			<form role="form" id="registerForm" action="/cy/registerHost2Post" method="post">
-			roomDto1: ${roomDto1}
-			<input type="hidden" name="room_type_num" value="${roomDto1.room_type_num}"/>
-			<input type="hidden" name="room_people" value="${roomDto1.room_people}"/>
-			<input type="hidden" name="room_bed" value="${roomDto1.room_bed}"/>
-			<input type="hidden" name="room_bathroom" value="${roomDto1.room_bathroom}"/>
+			roomVo: ${roomVo}
+			<input type="hidden" name="room_type_num" value="${roomVo.room_type_num}"/>
+			<input type="hidden" name="room_people" value="${roomVo.room_people}"/>
+			<input type="hidden" name="room_bed" value="${roomVo.room_bed}"/>
+			<input type="hidden" name="room_bathroom" value="${roomVo.room_bathroom}"/>
 			
 				<!-- 건물 유형 -->
 				<div class="form-group">
@@ -108,13 +108,13 @@ $(function(){
 				        <option selected="">하나를 선택해주세요.</option>
 						<!-- 값은 DB에서 불러와서 하기 -->
 				        <option value="1"
-				        	<c:if test="${roomDto1.room_type_num eq 1}">selected</c:if>
+				        	<c:if test="${roomVo.room_type_num eq 1}">selected</c:if>
 				        >아파트</option>
 				        <option value="2"
-				        	<c:if test="${roomDto1.room_type_num eq 2}">selected</c:if>
+				        	<c:if test="${roomVo.room_type_num eq 2}">selected</c:if>
 				        >주택</option>
 				        <option value="3"
-				        	<c:if test="${roomDto1.room_type_num eq 3}">selected</c:if>
+				        	<c:if test="${roomVo.room_type_num eq 3}">selected</c:if>
 				        >게스트하우스</option>
 				     </select>
 				</div><br><br><br>
@@ -133,8 +133,8 @@ $(function(){
 							
 							<input type="number" class="numBox" min="1" max="20" 
 								<c:choose>
-									<c:when test="${not empty roomDto1}">
-										value="${roomDto1.room_people}" 
+									<c:when test="${not empty roomVo}">
+										value="${roomVo.room_people}" 
 									</c:when>
 									<c:otherwise>
 										value="4" 
@@ -163,8 +163,8 @@ $(function(){
 							
 							<input type="number" class="numBox" min="1" max="20" 
 								<c:choose>
-									<c:when test="${not empty roomDto1}">
-										value="${roomDto1.room_bed}" 
+									<c:when test="${not empty roomVo}">
+										value="${roomVo.room_bed}" 
 									</c:when>
 									<c:otherwise>
 										value="1" 
@@ -193,8 +193,8 @@ $(function(){
 								
 							<input type="number" class="numBox" min="1" max="20" 
 							<c:choose>
-									<c:when test="${not empty roomDto1}">
-										value="${roomDto1.room_bathroom}" 
+									<c:when test="${not empty roomVo}">
+										value="${roomVo.room_bathroom}" 
 									</c:when>
 									<c:otherwise>
 										value="1" 

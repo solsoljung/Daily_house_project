@@ -23,8 +23,11 @@ $(function(){
 	$(".nav-item:eq(5)").attr("class", "nav-item active");
 	
 	// host_register_page3으로 이동
-	$("#btnPrev").click(function(){
-		location.href = "/cy/registerHost3Post";
+	$("#btnPrev").click(function(e){
+		e.preventDefault();
+		$("#form").attr("action", "/cy/registerHost3Post");
+		$("#form").submit();
+// 		location.href = "/cy/registerHost3Post";
 	});
 
 	// room_location을 저장할 공간
@@ -74,13 +77,6 @@ $(function(){
 <!-- host_register_page1 START -->
 <br><br><br><br>
 
-<form>
-	<input type="hidden" name="room_location"/>
-	<input type="hidden" name="room_location_detail"/>
-
-</form>
-
-
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
@@ -98,6 +94,16 @@ $(function(){
 				<input type="hidden" id="resultType" name="resultType" value=""/>
 				<!-- 해당시스템의 인코딩타입이 EUC-KR일경우에만 추가 START-->
 				<!-- <input type="hidden" id="encodingType" name="encodingType" value="EUC-KR"/> -->
+				
+				roomVo: ${roomVo}
+				<input type="hidden" name="room_type_num" value="${roomVo.room_type_num}"/>
+				<input type="hidden" name="room_people" value="${roomVo.room_people}"/>
+				<input type="hidden" name="room_bed" value="${roomVo.room_bed}"/>
+				<input type="hidden" name="room_bathroom" value="${roomVo.room_bathroom}"/>
+				<input type="hidden" name="room_options" value="${roomVo.room_options}"/>
+				<input type="hidden" name="room_title" value="${roomVo.room_title}"/>
+				<input type="hidden" name="room_explain" value="${roomVo.room_explain}"/>
+				<input type="hidden" name="room_price" value="${roomVo.room_price}"/>
 				
 				<div class="row">
 					<div class="col-md-3">

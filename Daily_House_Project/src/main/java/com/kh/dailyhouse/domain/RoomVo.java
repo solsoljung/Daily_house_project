@@ -16,6 +16,8 @@ public class RoomVo {
 	private int room_bathroom;
 	private String room_title;
 	
+	private String[] room_options; //<-- 추가
+	
 	/*
 	  room등록할 때 사진도 등록해야함
 	  우리 Sample01에 할 때도 tbl_board에 pic행은 없지만 
@@ -98,13 +100,20 @@ public class RoomVo {
 	public void setPics(String[] pics) {
 		this.pics = pics;
 	}
+	public String[] getRoom_options() {
+		return room_options;
+	}
+	public void setRoom_options(String[] room_options) {
+		this.room_options = room_options;
+	}
+
 	@Override
 	public String toString() {
 		return "RoomVo [room_num=" + room_num + ", room_type_num=" + room_type_num + ", user_email=" + user_email
 				+ ", room_location=" + room_location + ", room_score=" + room_score + ", room_price=" + room_price
 				+ ", room_explain=" + room_explain + ", room_people=" + room_people + ", room_bed=" + room_bed
-				+ ", room_bathroom=" + room_bathroom + ", room_title=" + room_title + ", pics=" + Arrays.toString(pics)
-				+ "]";
+				+ ", room_bathroom=" + room_bathroom + ", room_title=" + room_title + ", room_options="
+				+ Arrays.toString(room_options) + ", pics=" + Arrays.toString(pics) + "]";
 	}
 
 }
