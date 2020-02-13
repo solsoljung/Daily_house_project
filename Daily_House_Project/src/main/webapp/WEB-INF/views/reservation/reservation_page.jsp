@@ -77,6 +77,9 @@ $(function() {
                   <label class="text-black font-weight-bold" for="checkout_date">퇴실날짜</label>
                   <input type="text" id="checkout_date" class="form-control">
                 </div>
+                <div>
+                	<input type="text" id="checkout_date">
+                </div>
               </div>
 
               <div class="row">

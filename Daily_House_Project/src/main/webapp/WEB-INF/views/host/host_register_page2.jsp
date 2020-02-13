@@ -61,12 +61,12 @@ $(function(){
 			<label>2단계: 상세한 사항을 입력하세요</label><br><br>
 			
 			<form role="form" id="registerForm" method="post">
-			roomDto1: ${roomDto1}
-			<input type="hidden" name="room_type_num" value="${roomDto1.room_type_num}"/>
-			<input type="hidden" name="room_people" value="${roomDto1.room_people}"/>
-			<input type="hidden" name="room_bed" value="${roomDto1.room_bed}"/>
-			<input type="hidden" name="room_bathroom" value="${roomDto1.room_bathroom}"/>
-			<input type="hidden" name="room_options" value="${roomDto1.room_options}"/>
+			roomVo: ${roomVo}
+			<input type="hidden" name="room_type_num" value="${roomVo.room_type_num}"/>
+			<input type="hidden" name="room_people" value="${roomVo.room_people}"/>
+			<input type="hidden" name="room_bed" value="${roomVo.room_bed}"/>
+			<input type="hidden" name="room_bathroom" value="${roomVo.room_bathroom}"/>
+			<input type="hidden" name="room_options" value="${roomVo.room_options}"/>
 			
 				<!-- 편의시설 -->
 				<div class="form-group">
