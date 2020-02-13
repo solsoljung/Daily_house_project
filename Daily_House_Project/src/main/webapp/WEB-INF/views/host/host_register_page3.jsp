@@ -23,13 +23,16 @@ $(function(){
 	$(".nav-item:eq(5)").attr("class", "nav-item active");
 	
 	// host_register_page2로 이동
-	$("#btnPrev").click(function(){
-		location.href = "/cy/registerHost2";
+	$("#btnPrev").click(function(e){
+// 		e.preventDefault();
+		$("#registerForm").attr("action", "/cy/registerHost2Post");
+		$("#registerForm").submit();
 	});
 	
 	// host_register_page3으로 이동
-	$("#btnNext").click(function(){
-		location.href = "/cy/registerHost4";
+	$("#btnNext").click(function(e){
+// 		e.preventDefault();
+		location.href = "/cy/registerHost4Post";
 	});
 	
 	// room_price는 숫자만 입력할 수 있도록 설정
@@ -78,7 +81,13 @@ $(function(){
 			</div><br>
 			<label>3단계: 등록할 숙소의 사진과 정보를 입력해주세요.</label><br><br>
 			
-			<form role="form">
+			<form role="form" method="post" id="registerForm" >
+			roomDto2: ${roomDto2}
+			<input type="hidden" name="room_type_num" value="${roomDto2.room_type_num}"/>
+			<input type="hidden" name="room_people" value="${roomDto2.room_people}"/>
+			<input type="hidden" name="room_bed" value="${roomDto2.room_bed}"/>
+			<input type="hidden" name="room_bathroom" value="${roomDto2.room_bathroom}"/>
+			<input type="hidden" name="room_options" value="${roomDto2.room_options}"/>
 			
 				<!-- 사진 및 소개 등록 -->
 				<div class="form-group">

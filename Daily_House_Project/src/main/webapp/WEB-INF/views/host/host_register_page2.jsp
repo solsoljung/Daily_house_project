@@ -22,39 +22,30 @@ $(function(){
 	$(".nav-item:eq(0)").attr("class", "nav-item");
 	$(".nav-item:eq(5)").attr("class", "nav-item active");
 	
+	// checkbox에서 checked인 room_option을 저장할 배열
+	var data_options = [];
+	
 	// host_register_page1로 이동
 	$("#btnPrev").click(function(e){
 		e.preventDefault();
-		$("#registerForm2").attr("action", "/cy/registerHost1");
-		$("#registerForm2").submit();
-// 		location.href = "/cy/registerHost1";
+		$("#registerForm").attr("action", "/cy/registerHost1Post");
+		$("#registerForm").submit();
 	});
 	// host_register_page3로 이동
-	$("#btnNext").click(function(){
-		
-		
-		location.href = "/cy/registerHost3";
-	});
-	
-	// checkbox에서 checked인 room_option을 저장할 배열
-	var data_option = [];
-	
-	// test Button
-	$("#btnTest").click(function(){
+	$("#btnNext").click(function(e){
+		e.preventDefault();
 		$(".chb:checked").each(function() { 
-			data_option.push($(this).attr("data-option"));
+			data_options.push($(this).attr("data-option"));
 	    });
-		console.log("data_option: " + data_option);
+// 		console.log("data_options: " + data_options);
+		$("input[name=room_options]").val(data_options);
+// 		console.log("input data_options" + $("input[name=room_options]").val());
+		
+		$("#registerForm").attr("action", "/cy/registerHost3Post");
+		$("#registerForm").submit();
 	});
-	
 });
 </script>
-
-
-<form id="save_form">
-	roomDto1: ${roomDto1}
-</form>
-
 
 <!-- host_register_page1 START -->
 <br><br><br><br>
@@ -69,12 +60,13 @@ $(function(){
 			</div><br>
 			<label>2단계: 상세한 사항을 입력하세요</label><br><br>
 			
-			<form role="form" id="registerForm2">
+			<form role="form" id="registerForm" method="post">
 			roomDto1: ${roomDto1}
 			<input type="hidden" name="room_type_num" value="${roomDto1.room_type_num}"/>
 			<input type="hidden" name="room_people" value="${roomDto1.room_people}"/>
 			<input type="hidden" name="room_bed" value="${roomDto1.room_bed}"/>
 			<input type="hidden" name="room_bathroom" value="${roomDto1.room_bathroom}"/>
+			<input type="hidden" name="room_options" value="${roomDto1.room_bathroom}"/>
 			
 				<!-- 편의시설 -->
 				<div class="form-group">
@@ -101,9 +93,7 @@ $(function(){
 						<button type="button" class="btn btn-primary btn-block" id="btnPrev">Prev</button>
 					</div>
 					<div class="col-md-3"></div>
-					<div class="col-md-3">
-						<button type="button" class="btn btn-primary btn-block" id="btnTest" >TEST</button>
-					</div>
+					<div class="col-md-3"></div>
 					<div class="col-md-3" align="right">
 						<button type="button" class="btn btn-primary btn-block" id="btnNext" >Next</button>
 					</div>
