@@ -10,16 +10,15 @@ import com.kh.dailyhouse.domain.RoomVo;
 @RequestMapping("/cy/*")
 public class CyController {
 
-	// 호스트 등록하기 1page
+	// 호스트 등록하기 1page readonly
 	@RequestMapping(value = "/registerHost1", method = RequestMethod.GET)
 	public String registerHost1() throws Exception{
 		return "/host/host_register_page1";
 	}
+	
+	// 호스트 등록하기 1page
 	@RequestMapping(value = "/registerHost1Post", method = RequestMethod.POST)
-//	public String registerHost1Post(Model model, RegisterRoomDto1 roomDto1) throws Exception{
 	public String registerHost1Post(Model model, RoomVo roomVo) throws Exception{
-//		System.out.println(">>>> controller111 roomDto1: " + roomDto1);
-//		model.addAttribute("roomDto1", roomDto1);
 		System.out.println(">>>> controller111 roomVo: " + roomVo);
 		model.addAttribute("roomVo", roomVo);
 		return "/host/host_register_page1";

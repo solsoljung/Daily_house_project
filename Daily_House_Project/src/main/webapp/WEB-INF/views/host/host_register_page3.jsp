@@ -25,8 +25,14 @@ $(function(){
 	// host_register_page2로 이동
 	$("#btnPrev").click(function(e){
 		e.preventDefault();
+		console.log("${roomVo}");
+		console.log($("input[name=room_type_num]").val());
+		console.log($("input[name=room_people]").val());
+		console.log($("input[name=room_bed]").val());
+		console.log($("input[name=room_bathroom]").val());
+		console.log($("input[name=room_options]").val());
 		$("#registerForm").attr("action", "/cy/registerHost2Post");
-		$("#registerForm").submit();
+// 		$("#registerForm").submit();
 	});
 	
 	// host_register_page3으로 이동
