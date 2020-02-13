@@ -28,6 +28,8 @@ $(function(){
 	});
 	// host_register_page3로 이동
 	$("#btnNext").click(function(){
+		
+		
 		location.href = "/cy/registerHost3";
 	});
 	
