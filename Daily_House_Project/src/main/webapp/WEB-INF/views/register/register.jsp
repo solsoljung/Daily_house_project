@@ -13,6 +13,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script>
+
 $(function(){
 	$("#btn_list").click(function(){
 		location.href = "/test/board/listAll";
@@ -26,7 +27,7 @@ $(function(){
 	
 	//이메일 인증번호 발급받기
 	$("#btn_certification").click(function(){
-		var user_id = $("input[name=user_id]").val();
+		var user_id = $("input[name=user_email]").val();
 		$.ajax({
 			"type" : "post",
 			"url" : "/certification/registerCertification",
@@ -76,27 +77,7 @@ $(function(){
 });
 
 </script>
-
-<!-- 	<form method="post" action=""> -->
-<!-- 	<table border="1"> -->
-<!-- 		<tr> -->
-<!-- 			<th>이메일</th> -->
-<!-- 			<td><input type="text" name="user_id" required="required" style="width:100%;" placeholder="이메일"/></td> -->
-<!-- 			<td><input type="button" value="인증번호 받기" id="btn_certification"/>	</td>	 -->
-<!-- 		</tr> -->
-<!-- 		<tr> -->
-<!-- 			<th>이메일 인증</th> -->
-<!-- 			<td><input type="text" name="certification" required="required"  -->
-<!-- 				style="width:100%;" placeholder="인증번호를 입력하세요"/></td> -->
-<!-- 			<td><input type="button" value="인증번호 확인" id="btn_certification2"/>	</td>	 -->
-<!-- 		</tr> -->
 	
-<!-- 	<br/> -->
-<!-- 	<input type="submit" value="완료" id="btn_submit"/> -->
-<!-- 	<input type="button" value="목록으로" id="btn_list"/> -->
-
-<!-- 	</form> -->
-<!-- </body> -->
 
 <section class="section contact-section" id="next">
       <div class="container">
@@ -112,13 +93,13 @@ $(function(){
                   <label class="text-black font-weight-bold" for="email">Email</label>
                   <input type="email" id="email" name="user_email" placeholder="Email" required="required" class="form-control">
                   <br>
-                  <button type="button" id="btn_certification" value="인증번호 받기" class="btn btn-primary text-white">이메일 인증</button>
+                  <button type="button" id="btn_certification" value="인증번호 받기" class="btn btn-primary text-white">인증번호 받기</button>
                   <br>
                   <br>
                   <label class="text-black font-weight-bold" for="email">Email Check</label>
                   <input type="email" id="email" name="user_email" placeholder="인증번호" required="required" class="form-control">
                   <br>
-                  <button type="button" id="btn_certification" value="인증번호 받기" class="btn btn-primary text-white">인증 확인</button>
+                  <button type="button" id="btn_certification2" value="인증번호 확인" class="btn btn-primary text-white">인증번호 확인</button>
                 </div>
               </div>
               <div class="row">
@@ -142,7 +123,7 @@ $(function(){
               <br>
               <div class="col-md-10 text-right" data-aos="fade-up" data-aos-delay="200">
 	            <button type="submit" class="btn btn-primary text-white py-3 px-5">회원가입</button>
-	            <a><button type="button" class="btn btn-primary text-white py-3 px-5">홈으로</button></a>
+	            <a href="/si/goHome"><button type="button" class="btn btn-primary text-white py-3 px-5">홈으로</button></a>
 	          </div>
             </form>
           </div>

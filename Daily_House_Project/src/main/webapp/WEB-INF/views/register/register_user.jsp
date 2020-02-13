@@ -15,6 +15,7 @@
 	if (message != "") {
 		alert(message);
 	}
+	
 </script>
 <!-- section -->
 <section class="section contact-section" id="next">
