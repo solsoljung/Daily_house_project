@@ -24,7 +24,7 @@ $(function(){
 	
 	// host_register_page3으로 이동
 	$("#btnPrev").click(function(){
-		location.href = "/cy/registerHost3";
+		location.href = "/cy/registerHost3Post";
 	});
 
 	// room_location을 저장할 공간
