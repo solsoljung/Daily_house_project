@@ -92,7 +92,7 @@ $(function() {
         </div>
       </a>
 </section>
-${signedUser}
+${userVo}
    <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">
