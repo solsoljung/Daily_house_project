@@ -9,7 +9,7 @@
   <!-- <script src="/islagrande/js/jquery.min.js"></script> -->
   <script src="/islagrande/js/jquery-migrate-3.0.1.min.js"></script>
   <script src="/islagrande/js/popper.min.js"></script>
-  <!-- <script src="/islagrande/js/bootstrap.min.js"></script> -->
+<!--   <script src="/islagrande/js/bootstrap.min.js"></script> -->
   <script src="/islagrande/js/jquery.easing.1.3.js"></script>
   <script src="/islagrande/js/jquery.waypoints.min.js"></script>
   <script src="/islagrande/js/jquery.stellar.min.js"></script>
