@@ -122,7 +122,7 @@ $(function(){
               </div>
               <br>
               <div class="col-md-10 text-right" data-aos="fade-up" data-aos-delay="200">
-	            <button type="submit" class="btn btn-primary text-white py-3 px-5">회원가입</button>
+	            <button type="submit" class="btn btn-primary text-white py-3 px-5">회원가입</button>&nbsp;&nbsp;&nbsp;&nbsp;
 	            <a href="/si/goHome"><button type="button" class="btn btn-primary text-white py-3 px-5">홈으로</button></a>
 	          </div>
             </form>

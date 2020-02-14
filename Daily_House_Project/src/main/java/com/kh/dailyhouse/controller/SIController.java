@@ -21,7 +21,7 @@ public class SIController {
 	//홈으로 가는 컨트롤러
 	@RequestMapping(value = "/goHome", method = RequestMethod.GET)
 	public String goHome() throws Exception {
-		return "/";
+		return "redirect:/";
 	}
 	//회원가입으로 가는 컨트롤러
 	@RequestMapping(value = "/registerHost", method = RequestMethod.GET)
