@@ -7,4 +7,5 @@ public interface SiUserService {
 	public void setUserData(UserVo userVo) throws Exception;
 	// 유저 정보 얻기
 	public UserVo login_run(UserVo userVo) throws Exception;
+	
 }
