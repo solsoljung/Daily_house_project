@@ -31,7 +31,9 @@ public class YOController {
 	}
 	
 	@RequestMapping(value="/reservation_pay", method=RequestMethod.GET)
-	public String reservationPay() throws Exception {
+	public String reservationPay(HttpSession session, Model model) throws Exception {
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		model.addAttribute("userVo" + userVo);
 		return "/reservation/reservation_pay_page";
 	}
 	
