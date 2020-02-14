@@ -22,72 +22,25 @@ $(function(){
 	$(".nav-item:eq(0)").attr("class", "nav-item");
 	$(".nav-item:eq(5)").attr("class", "nav-item active");
 	
-	// room_location을 저장할 공간
-	var room_location = "";
-	var room_location_detail = "";
+	// checkbox에서 checked인 room_option을 저장할 배열
+	var data_options = [];
 	
-	// host_register_page3으로 이동
-/*	$("#btnPrev").click(function(e){
-		e.preventDefault();
-		$("#form").attr("action", "/cy/registerHost3Post");
-		$("#form").submit();
-	}); */ // 이전으로 이동 금지!!!!!!!!!!!!
-	
-	// conplete
+	// 전송페이지로 이동
 	$("#btnNext").click(function(e){
 		e.preventDefault();
-		room_location = $("#roadAddrPart1").val();
-		room_location_detail = $("#addrDetail").val();
-		if(room_location == null || room_location == ""){
-			alert("주소를 입력해주세요.");
-			return;
-		}
+		$(".chb:checked").each(function() { 
+			data_options.push($(this).attr("data-option"));
+	    });
+// 		console.log("data_options: " + data_options);
+		$("input[name=room_options]").val(data_options);
+// 		console.log("input data_options" + $("input[name=room_options]").val());
 		
-		$("input[name=room_location").val(room_location);
-		$("input[name=room_location_detail]").val(room_location_detail);
-		
-		console.log($("input[name=room_type_num]").val());
-		console.log($("input[name=room_people]").val());
-		console.log($("input[name=room_bed]").val());
-		console.log($("input[name=room_bathroom]").val());
-		console.log($("input[name=room_options]").val());
-		console.log($("input[name=room_title]").val());
-		console.log($("input[name=room_explain]").val());
-		console.log($("input[name=room_price]").val());
-		console.log($("input[name=room_location]").val());
-		console.log($("input[name=room_location_detail]").val());
-		
-		$("#form").attr("action", "@@경로 적어주기@@");
-// 		$("#form").submit();
+// 		$("#registerForm").attr("action", "/cy/@전송페이지@");
+// 		$("#registerForm").submit();
 	});
-
 });
 </script>
 
-
-<!-- 주소 api -->
-<script language="javascript">
-	function goPopup() {
-		var pop = window.open("/popup/jusoPopup.jsp","pop","width=570, height=420, scrollbars=yes, resizable=yes");
-	}
-	function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr,jibunAddr,zipNo,admCd,
-			rnMgtSn,bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,
-			buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo) {
-		
-		document.form.roadFullAddr.value = roadFullAddr;
-		document.form.roadAddrPart1.value = roadAddrPart1;
-		document.form.roadAddrPart2.value = roadAddrPart2;
-		document.form.addrDetail.value = addrDetail;
-		document.form.zipNo.value = zipNo;
-	}
-</script>
-
-<% 
-	request.setCharacterEncoding("UTF-8");  //한글깨지면 주석제거
-	//request.setCharacterEncoding("EUC-KR");  //해당시스템의 인코딩타입이 EUC-KR일경우에
-	String inputYn = request.getParameter("inputYn"); 
-	String roadFullAddr = request.getParameter("roadFullAddr"); 
-%>
 <!-- host_register_page1 START -->
 <br><br><br><br>
 
@@ -95,78 +48,44 @@ $(function(){
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<label class="lblTitle1">숙소의 위치를 알려주세요.</label><br>
+			<label class="lblTitle1">숙소 등록이 거의 다 되어갑니다!</label><br>
 			<div class="progress">
 				<div class="progress-bar w-100"></div>
 			</div><br>
-			<label>4단계: 등록할 숙소의 상세 주소를 입력해주세요.</label><br><br>
-
-				<!-- 위치등록 -->
-				<form id="form" name="form" method="post">
-				<input type="hidden" id="confmKey" name="confmKey" value=""/>
-				<input type="hidden" id="returnUrl" name="returnUrl" value=""/>
-				<input type="hidden" id="resultType" name="resultType" value=""/>
-				<!-- 해당시스템의 인코딩타입이 EUC-KR일경우에만 추가 START-->
-				<!-- <input type="hidden" id="encodingType" name="encodingType" value="EUC-KR"/> -->
+			<label>4단계: 상세한 사항을 입력하세요</label><br><br>
+			
+			<form role="form" id="registerForm" method="post">
+			
+			roomVo: ${roomVo}
+			<input type="hidden" name="room_type_num" value="${roomVo.room_type_num}"/>
+			<input type="hidden" name="room_people" value="${roomVo.room_people}"/>
+			<input type="hidden" name="room_bed" value="${roomVo.room_bed}"/>
+			<input type="hidden" name="room_bathroom" value="${roomVo.room_bathroom}"/>
+			<input type="hidden" name="room_location" value="${roomVo.room_location}"/>
+			<input type="hidden" name="room_location_detail"  value="${roomVo.room_location_detail}"/>
+			<input type="hidden" name="room_title" value="${roomVo.room_title}"/>
+			<input type="hidden" name="room_explain" value="${roomVo.room_explain}"/>
+			<input type="hidden" name="room_price" value="${roomVo.room_price}"/>
+			<input type="hidden" name="room_options" value="${roomVo.room_options}"/>
+			
+				<!-- 편의시설 -->
+				<div class="form-group">
+					<label class="lblTitle2">어떤 편의시설을 제공하시나요?</label>
+					
+					<div class="checkbox">
+						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="에어컨"/> 에어컨</label><br>
+						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="무선인터넷"/> 무선인터넷</label><br>
+						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="TV"/> TV</label><br>
+						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="조식"/> 조식</label><br>
+						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="주차공간"/> 주차공간</label><br>
+						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="흡연가능"/> 흡연가능</label><br>
+						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="반려동물"/> 반려동물</label><br>
+						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="옷장"/> 옷장</label><br>
+						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="헤어드라이"/> 헤어드라이</label>
+					</div> 
+					
+				</div><br><br><br>
 				
-				roomVo: ${roomVo}
-				<input type="hidden" name="room_type_num" value="${roomVo.room_type_num}"/>
-				<input type="hidden" name="room_people" value="${roomVo.room_people}"/>
-				<input type="hidden" name="room_bed" value="${roomVo.room_bed}"/>
-				<input type="hidden" name="room_bathroom" value="${roomVo.room_bathroom}"/>
-				<input type="hidden" name="room_options" value="${roomVo.room_options}"/>
-				<input type="hidden" name="room_title" value="${roomVo.room_title}"/>
-				<input type="hidden" name="room_explain" value="${roomVo.room_explain}"/>
-				<input type="hidden" name="room_price" value="${roomVo.room_price}"/>
-				<input type="hidden" name="room_location" />
-				<input type="hidden" name="room_location_detail" />
-				
-				<div class="row">
-					<div class="col-md-3">
-						<button type="button" class="btn btn-primary btn-block" onClick="goPopup();">주소검색</button> 
-					</div>
-					<div class="col-md-3"></div>
-					<div class="col-md-3"></div>
-					<div class="col-md-3"></div>
-				</div><br>
-				
-				<div class="row">
-					<div class="col-md-2">
-						<label class="lblTitle3">도로명 주소 전체</label>
-					</div>
-					<div class="col-md-10">
-						<input type="text" id="roadFullAddr" name="roadFullAddr" style="width:100%;" placeholder="Enter Addr" required readonly/><br>
-					</div></div>	
-				<div class="row">
-					<div class="col-md-2">
-						<label class="lblTitle3">도로명 주소</label>
-					</div>
-					<div class="col-md-10">
-						<input type="text" id="roadAddrPart1" name="roadAddrPart1" style="width:100%;" placeholder="Enter Addr" required readonly/><br>
-					</div></div>
-				<div class="row">
-					<div class="col-md-2">
-						<label class="lblTitle3">상세주소</label>
-					</div>
-					<div class="col-md-10">
-						<input type="text" id="addrDetail" name="addrDetail" style="width:100%;" placeholder="Enter Addr" required readonly/><br>
-					</div></div>
-				<div class="row">
-					<div class="col-md-2">
-						<label class="lblTitle3">참고 주소</label>
-					</div>
-					<div class="col-md-10">
-						<input type="text" id="roadAddrPart2" name="roadAddrPart2" style="width:100%;" placeholder="Enter Addr" required readonly/><br>
-					</div></div>
-				<div class="row">
-					<div class="col-md-2">
-						<label class="lblTitle3">우편 번호</label>
-					</div>
-					<div class="col-md-10">
-						<input type="text" id="zipNo" name="zipNo" style="width:100%;" placeholder="Enter Addr" required readonly/>
-					</div>
-				</div><br>
-
 				<!-- Button -->
 				<br>
 				<div class="row">
