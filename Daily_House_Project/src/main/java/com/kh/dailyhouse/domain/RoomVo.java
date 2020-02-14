@@ -16,6 +16,7 @@ public class RoomVo {
 	private int room_bed;
 	private int room_bathroom;
 	private String room_title;
+	private String room_option_code;
 	
 	private String[] room_options; //<-- 추가
 	
@@ -113,14 +114,20 @@ public class RoomVo {
 	public void setRoom_location_detail(String room_location_detail) {
 		this.room_location_detail = room_location_detail;
 	}
+	public String getRoom_option_code() {
+		return room_option_code;
+	}
+	public void setRoom_option_code(String room_option_code) {
+		this.room_option_code = room_option_code;
+	}
 	@Override
 	public String toString() {
 		return "RoomVo [room_num=" + room_num + ", room_type_num=" + room_type_num + ", user_email=" + user_email
 				+ ", room_location=" + room_location + ", room_location_detail=" + room_location_detail
 				+ ", room_score=" + room_score + ", room_price=" + room_price + ", room_explain=" + room_explain
 				+ ", room_people=" + room_people + ", room_bed=" + room_bed + ", room_bathroom=" + room_bathroom
-				+ ", room_title=" + room_title + ", room_options=" + Arrays.toString(room_options) + ", pics="
-				+ Arrays.toString(pics) + "]";
+				+ ", room_title=" + room_title + ", room_option_code=" + room_option_code + ", room_options="
+				+ Arrays.toString(room_options) + ", pics=" + Arrays.toString(pics) + "]";
 	}
 
 }
