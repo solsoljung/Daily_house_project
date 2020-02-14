@@ -87,7 +87,7 @@ ${userVo}
               
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <input id="payBtn" type="button" value="결제하기" class="btn btn-primary text-white py-3 px-5">
+                  <input id="payBtn" type="button" value="결제하기" class="btn btn-primary py-3 px-5" style="font-size:20px;">
                 </div>
               </div>
             </form>
