@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 
 <%@ include file = "../../views/title.jsp"%> <!-- <head> -->
 
@@ -44,9 +43,9 @@ $(document).ready(function() {
               </div>
               
               <br>
-              <div class="col-md-8 text-right" data-aos="fade-up" data-aos-delay="200">
-	            <button type="submit" class="btn btn-primary text-white py-3 px-5">로그인</button>
-	            <a><button type="button" class="btn btn-primary text-white py-3 px-5">홈으로</button></a>
+              <div class="col-md-10 text-right" data-aos="fade-up" data-aos-delay="200">
+	            <button type="submit" class="btn btn-primary text-white py-3 px-5">로그인</button>&nbsp;&nbsp;&nbsp;&nbsp;
+	            <a href="/si/goHome"><button type="button" class="btn btn-primary text-white py-3 px-5">홈으로</button></a>
 	          </div>
             </form>
           </div>

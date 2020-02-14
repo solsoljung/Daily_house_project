@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 
 <%@ include file = "../../views/title.jsp"%> <!-- <head> -->
 
@@ -136,15 +135,7 @@ $(function(){
 						<div class="col-md-3">
 							<button type="button" class="minus" style="border: none; background: none;">-</button>
 							
-							<input type="number" class="numBox" min="1" max="20" 
-								<c:choose>
-									<c:when test="${not empty roomVo}">
-										value="${roomVo.room_people}" 
-									</c:when>
-									<c:otherwise>
-										value="4" 
-									</c:otherwise>
-								</c:choose>
+							<input type="number" class="numBox" min="1" max="20" value="4" 
 							readonly="readonly" id="room_people"/>
 									
 							<button type="button" class="plus" style="border: none; background: none;">+</button>
@@ -166,15 +157,7 @@ $(function(){
 						<div class="col-md-3">
 							<button type="button" class="minus" style="border: none; background: none;">-</button>
 							
-							<input type="number" class="numBox" min="1" max="20" 
-								<c:choose>
-									<c:when test="${not empty roomVo}">
-										value="${roomVo.room_bed}" 
-									</c:when>
-									<c:otherwise>
-										value="1" 
-									</c:otherwise>
-								</c:choose>
+							<input type="number" class="numBox" min="1" max="20" value="1"
 							readonly="readonly" id="room_bed"/>
 									
 							<button type="button" class="plus" style="border: none; background: none;">+</button>
@@ -196,15 +179,7 @@ $(function(){
 						<div class="col-md-3">
 							<button type="button" class="minus" style="border: none; background: none;">-</button>
 								
-							<input type="number" class="numBox" min="1" max="20" 
-							<c:choose>
-									<c:when test="${not empty roomVo}">
-										value="${roomVo.room_bathroom}" 
-									</c:when>
-									<c:otherwise>
-										value="1" 
-									</c:otherwise>
-							</c:choose>
+							<input type="number" class="numBox" min="1" max="20" value="1"
 							readonly="readonly" id="room_bathroom"/>
 							
 							<button type="button" class="plus" style="border: none; background: none;">+</button>

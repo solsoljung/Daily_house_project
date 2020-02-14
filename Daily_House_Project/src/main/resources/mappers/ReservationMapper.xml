@@ -5,7 +5,7 @@
   
 <mapper namespace="com.kh.mappers.ReservationMapper">
 
-	<!-- 방 목록 보기 테스트-->
+	<!-- 예약 목록 보기 테스트-->
 	<select id="getReservationList" resultType="ReservationVo">
 		select * from tbl_reservation
 	</select>

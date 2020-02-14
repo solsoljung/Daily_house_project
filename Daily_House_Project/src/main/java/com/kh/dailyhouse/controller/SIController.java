@@ -21,7 +21,7 @@ public class SIController {
 	//홈으로 가는 컨트롤러
 	@RequestMapping(value = "/goHome", method = RequestMethod.GET)
 	public String goHome() throws Exception {
-		return "/";
+		return "redirect:/";
 	}
 	//회원가입으로 가는 컨트롤러
 	@RequestMapping(value = "/registerHost", method = RequestMethod.GET)
@@ -60,16 +60,13 @@ public class SIController {
 		System.out.println("userVo1 : "+userVo1);
 		// DB 에 넣기 - Service - Dao - Mybatis - Oracle
 
-		
 		if(userVo1 == null) {
 			rttr.addFlashAttribute("msg", "fail");
 			return "redirect:/si/loginHost";
 		}
+		session.setAttribute("userVo", userVo1);
 		
-		session.setAttribute("signedUser", userVo1.getUser_name());
-		
-		System.out.println(session.getAttribute("signedUser"));
-		
+		System.out.println(session.getAttribute("userVo"));
 		rttr.addFlashAttribute("msg", "success");
 		return "redirect:/";
 	}
