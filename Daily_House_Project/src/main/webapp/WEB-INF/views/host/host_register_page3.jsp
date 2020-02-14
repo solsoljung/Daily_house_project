@@ -2,12 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%@ include file = "../../views/title.jsp"%> <!-- <head> -->
-
-<%@ include file = "../../views/casahotel/casahotel_link.jsp" %>
-<%@ include file = "../../views/islagrande/islagrande_link.jsp" %>
-
-<%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
+<!-- 데이터피커X -->					
+<%@ include file = "../../views/title2.jsp"%> <!-- <head> -->					
+					
+<%@ include file = "../../views/casahotel/casahotel_link2.jsp" %>					
+<%@ include file = "../../views/islagrande/islagrande_link.jsp" %>					
+					
+<%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->					
+<!-- 데이터피커X -->	
 
 <style>
 	.lblTitle1{ font-size: 30px; font-weight: bold;}
