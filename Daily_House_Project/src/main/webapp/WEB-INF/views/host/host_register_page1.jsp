@@ -95,12 +95,10 @@ $(function(){
 				<input type="hidden" name="room_location_detail"  value="${roomVo.room_location_detail}"/>
 				
 				<div class="row">
-					<div class="col-md-3">
-						<button type="button" class="btn btn-primary btn-block" onClick="goPopup();">주소검색</button> 
+					<div class="col-md-2">
+						<button type="button" class="btn btn-primary btn-block py-3 px-5" onClick="goPopup();" style="font-size:15px;" >주소검색</button>
 					</div>
-					<div class="col-md-3"></div>
-					<div class="col-md-3"></div>
-					<div class="col-md-3"></div>
+					<div class="col-md-10"></div>
 				</div><br>
 				
 				<div class="row">
@@ -147,7 +145,7 @@ $(function(){
 					<div class="col-md-3"></div>
 					<div class="col-md-3"></div>
 					<div class="col-md-3" align="right">
-						<button type="button" class="btn btn-primary btn-block" id="btnNext" >Next</button>
+						<button type="button" class="btn btn-primary btn-block py-3 px-5" id="btnNext" style="font-size:15px;" >Next</button>
 					</div>
 				</div>
 				
