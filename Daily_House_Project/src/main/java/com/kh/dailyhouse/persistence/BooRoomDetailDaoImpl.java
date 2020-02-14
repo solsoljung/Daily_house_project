@@ -24,17 +24,19 @@ public class BooRoomDetailDaoImpl implements BooRoomDetailDao {
 		RoomDto dto = sqlSession.selectOne(NAMESPACE+".getRoomDetail", room_num);
 		return dto;
 	}
-
+	
+	//roomDetail review 목록 정보 얻기
 	@Override
 	public List<RoomReviewVo> getReviewinfo(int room_num) throws Exception {
 		List<RoomReviewVo> ReviewList = sqlSession.selectList(NAMESPACE+".getRoomDetailReview", room_num);
 		return ReviewList;
 	}
-
+	
+	//후기 작성
 	@Override
-	public RoomReviewVo getReviewScore(int room_num) throws Exception {
-		RoomReviewVo roomReviewVo = sqlSession.selectOne(NAMESPACE+".getOneReview", room_num);
-		return roomReviewVo;
+	public void setReview(RoomReviewVo roomReviewVo) throws Exception {
+		sqlSession.insert(NAMESPACE+".setReview", roomReviewVo);
 	}
 
+	
 }
