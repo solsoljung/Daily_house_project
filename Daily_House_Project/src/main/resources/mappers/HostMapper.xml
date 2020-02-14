@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kh.mappers.HostMapper">
+
+	<!-- 방금 업로드한 tbl_room의 room_num 받아오기 -->
+	<select id="getNowRoomNum" resultType="int" >
+		select seq_room_num.currval from dual
+	</select>
+
+	<!-- 호스트 등록하기 -->
+	<insert id="registerHost">
+		insert into tbl_host (user_email, room_num)
+		values (#{user_email}, #{room_num})
+	</insert>
+
+</mapper>

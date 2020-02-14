@@ -12,10 +12,89 @@
 <!-- reservation page section -->
 <script>
 $(function() {
+	
+	$("#btnTest").click(function() {
+		var date1_val = $("#date1").val();
+		var date2_val = $("#date2").val();
+		
+		var arrDate1 = date1_val.split("-");
+		var arrDate2 = date2_val.split("-");
+		console.log(arrDate1);
+		console.log(arrDate2);
+		
+		var date1_year = arrDate1[0];
+		var date1_month = arrDate1[1];
+		var date1_date = arrDate1[2];
+		
+		var date2_year = arrDate2[0];
+		var date2_month = arrDate2[1];
+		var date2_date = arrDate2[2];
+		
+		var v = 0;
+		
+		if (date1_month == date2_month && date1_date < date2_date) {
+			v = parseInt(date2_date) - parseInt(date1_date);
+			console.log(v);
+		} else if ((date1_month < date2_month && date1_date < date2_date) 
+				|| (date1_month < date2_month && date1_date > date2_date)) {
+			if (date1_month == "01" || date1_month == "03" || date1_month == "05" 
+									|| date1_month == "07" || date1_month == "08" 
+									|| date1_month == "10" || date1_month == "12") {
+				v = parseInt(date2_date) + (31 - parseInt(date1_date));
+				console.log(v);
+			} else if (date1_month == "04" || date1_month == "06" 
+					|| date1_month == "09" || date1_month == "11") {
+				v = parseInt(date2_date) + (30 - parseInt(date1_date));
+				console.log(v);
+			} else if (date1_month == "02") {
+				if (date1_year % 4 == 0) {
+					v = parseInt(date2_date) + (29 - parseInt(date1_date));
+					console.log(v);
+				} else if (date1_year % 100 == 0) {
+					v = parseInt(date2_date) + (28 - parseInt(date1_date));
+					console.log(v);
+				} else if (date1_year % 400 == 0) {
+					v = parseInt(date2_date) + (29 - parseInt(date1_date));
+					console.log(v);
+				} else {
+					v = parseInt(date2_date) + (28 - parseInt(date1_date));
+					console.log(v);
+				}
+			}
+		}
+		
+		
+// 		var isYunYear = false;
+// 		// 윤년이면 29일, 윤년이 아니면 28일
+// 		if (date1_month == "02") {
+// 			if (date1_year % 4 == 0) {
+// 				isYunYear = true;
+// 			}
+			
+// 			if (date1_year % 100 == 0) {
+// 				isYunYear = false;
+// 			}
+			
+// 			if (date1_year % 400 == 0) {
+// 				isYunYear = true;
+// 			}
+// 		}
+		
+// 		console.log(date1_date);
+// 		var date2_date = date2_val.split("-")[2];
+// 		console.log(date2_date);
+// 		var v = parseInt(date2_date) - parseInt(date1_date);
+// 		console.log(v);
+		
+ 	});
+	
+	
 	$("#reservationBtn").click(function() {
 		location.href = "/yo/reservation_pay";
 	});
+
 	
+	// 인원수 빼고 더하기
 	$(".plus").click(function(){					
 		var num = $(this).prev().val();			
 		var plusNum = parseInt(num) + 1;			
@@ -92,7 +171,7 @@ $(function() {
         </div>
       </a>
 </section>
-${signedUser}
+${userVo}
    <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">
@@ -124,6 +203,10 @@ ${signedUser}
                   <label class="text-black font-weight-bold" for="checkout_date">퇴실날짜</label>
                   <input type="text" id="checkout_date" class="form-control">
                 </div>
+              </div>
+              <div>
+              	<input type="date" id="date1"/>
+              	<input type="date" id="date2"/><button type="button" id="btnTest">클릭</button>
               </div>
 
               <div class="row">
@@ -160,8 +243,7 @@ ${signedUser}
                  
               <div class="row mb-4">
                 <div class="col-md-12 form-group">
-                  <label class="text-black font-weight-bold" for="message">기타사항</label>
-                  <textarea name="message" id="message" class="form-control " cols="30" rows="8"></textarea>
+                  
                 </div>
               </div>
               <div class="row">
