@@ -24,9 +24,7 @@ public class BooController {
 	private BooRoomDetailService booRoomDetailService;
 	
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
-	public String getRoomDetail(HttpSession session, Model model) throws Exception{
-		UserVo vo = (UserVo)session.getAttribute("userVo");
-		String user_email = vo.getUser_email();
+	public String getRoomDetail(Model model) throws Exception{
 		
 		//방을 선택시 room_num을 받아야됨
 		Map<String, Object> paramMap = booRoomDetailService.detail(51);
@@ -35,7 +33,6 @@ public class BooController {
 		
 		model.addAttribute("roomDto", roomDto);
 		model.addAttribute("reviewList", reviewList);
-		model.addAttribute("user_email", user_email); // 로그인시 입력될 아이디 부분
 		
 		return "/room_detail/Room_Detail";
 	}

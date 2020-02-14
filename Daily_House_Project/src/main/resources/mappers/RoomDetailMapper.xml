@@ -20,8 +20,8 @@
   	
   	<!-- 후기 작성 -->
   	<insert id="setReview">
-  		insert into tbl_room_review (room_review_num, user_email, room_num, review_score_location, review_score_cleanliness, review_score_checkin, review_score_communication, total_score, room_review_text)
-  		values (seq_room_review_num.nextval, #{user_email}, #{room_num}, #{review_score_location}, #{review_score_cleanliness}, #{review_score_checkin}, #{review_score_communication}, #{total_score}, #{room_review_text})
+  		insert into tbl_room_review (room_review_num, user_email, user_pic, room_num, review_score_location, review_score_cleanliness, review_score_checkin, review_score_communication, total_score, room_review_text)
+  		values (seq_room_review_num.nextval, #{user_email}, #{user_pic}, #{room_num}, #{review_score_location}, #{review_score_cleanliness}, #{review_score_checkin}, #{review_score_communication}, #{total_score}, #{room_review_text})
   	</insert>
   		
   	<!-- 방 평점 수정 -->

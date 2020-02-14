@@ -106,6 +106,11 @@ $(function() {
 .mousePointer {
 	cursor : pointer
 }
+
+table {
+	
+}
+
 </style>
  
 <script>
@@ -201,7 +206,6 @@ $(function() {
 <!-- 내용 센터쪽 -->
           <div class="col-lg-8 ftco-animate">
          	 ${roomDto}
-         	 
           	<h1>방에 대한 이름 : ${roomDto.room_title}</h1>
           	<h2>호스트 이름 : ${roomDto.user_name}</h2>
           	<h2>방 평점 : ${roomDto.room_score}</h2>
@@ -217,39 +221,35 @@ $(function() {
           	<div>
           	<h1>후기 테이블 부분</h1>
           	
-          	<table>
-          		<tr>
-          			<th>리뷰 번호</th>
-          			<th>사용자 이메일</th>
-          			<th>방 번호</th>
-          			<th>지역 점수</th>
-          			<th>청결 점수</th>
-          			<th>체크인 점수</th>
-          			<th>의사소통 점수</th>
-          			<th>총 점수</th>
-          			<th>글 내용</th>
-          		</tr>
-          		<c:forEach items="${reviewList}" var="RoomReviewVo">
-          		<tr>
-          			<td>${RoomReviewVo.room_review_num}</td>
-          			<td>${RoomReviewVo.user_email}</td>
-          			<td>${RoomReviewVo.room_num}</td>
-          			<td id="location" data-score="${RoomReviewVo.review_score_location}">${RoomReviewVo.review_score_location}</td>
-          			<td id="clean" data-score="${RoomReviewVo.review_score_cleanliness}">${RoomReviewVo.review_score_cleanliness}</td>
-          			<td id="checkin" data-score="${RoomReviewVo.review_score_checkin}">${RoomReviewVo.review_score_checkin}</td>
-          			<td id="communication" data-score="${RoomReviewVo.review_score_communication}">${RoomReviewVo.review_score_communication}</td>
-          			<td>${RoomReviewVo.total_score}</td>
-          			<td>${RoomReviewVo.room_review_text}</td>
-          		</tr>
-          		</c:forEach>
-          	</table>
+       		<c:forEach items="${reviewList}" var="RoomReviewVo">
+       			
+   			<div class="block-21 mb-4 d-flex">
+               <a class="blog-img mr-4" style="background-image: url(/islagrande/images/image_1.jpg);">${RommReviewVo.user_pic}사용자 사진</a>  
+                <div class="text">
+                 <table border="1">
+                  <tr>
+                   <td width=500 style="word-break:break-all">
+                    <h3 class="heading">${RoomReviewVo.room_review_text}</h3>
+                   </td>
+                  </tr>
+                 </table>
+                  <div class="meta">
+                    <div><span class="icon-person"></span>${RoomReviewVo.user_email}</div>
+                    <div><span class="icon-calendar"></span>${RoomReviewVo.room_review_write_date}</div>
+                    <hr>
+                  </div>
+                </div>
+             </div>
+             
+       		</c:forEach>
           	</div>
-          	<hr>
 <!-- 후기 작성란 구역 -->
-          	<div>
+			<c:if test="${not empty userVo}">
+          	<div >
           		<form action="/boo/review" method="post">
           		<input type="hidden" name="room_num" value="${roomDto.room_num}">
-          		<input type="hidden" name="user_email" value="${user_email}">
+          		<input type="hidden" name="user_email" value="${userVo.user_email}">
+          		<input type="hidden" name="user_pic" value="${userVo.user_pic}">
 				  <table>
 				   <tr>
 				    <td>지역</td>
@@ -309,7 +309,7 @@ $(function() {
           		
           		</form>
           	</div>
-          	
+          	</c:if>
           	<hr>
           	<h1>간단한 room의 호스트에 대한 정보</h1>
           	<hr>
@@ -390,8 +390,9 @@ $(function() {
             </div>
             <div class="sidebar-box ftco-animate">
               <h3>Popular Articles</h3>
+              
               <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+                <a class="blog-img mr-4" style="background-image: url(/islagrande/images/image_1.jpg);"></a>
                 <div class="text">
                   <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
                   <div class="meta">
@@ -401,8 +402,9 @@ $(function() {
                   </div>
                 </div>
               </div>
+              
               <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
+                <a class="blog-img mr-4" style="background-image: url(/islagrande/images/image_2.jpg);"></a>
                 <div class="text">
                   <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
                   <div class="meta">
@@ -412,8 +414,9 @@ $(function() {
                   </div>
                 </div>
               </div>
+              
               <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
+                <a class="blog-img mr-4" style="background-image: url(/islagrande/images/image_3.jpg);"></a>
                 <div class="text">
                   <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
                   <div class="meta">
@@ -423,6 +426,7 @@ $(function() {
                   </div>
                 </div>
               </div>
+              
             </div>
 
             <div class="sidebar-box ftco-animate">
