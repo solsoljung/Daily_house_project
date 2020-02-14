@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dailyhouse.domain.ReviewPagingDto;
 import com.kh.dailyhouse.domain.RoomDto;
 import com.kh.dailyhouse.domain.RoomReviewVo;
 
@@ -29,8 +30,12 @@ public class BooRoomDetailDaoImpl implements BooRoomDetailDao {
 	
 	//roomDetail review 목록 정보 얻기
 	@Override
-	public List<RoomReviewVo> getReviewinfo(int room_num) throws Exception {
-		List<RoomReviewVo> ReviewList = sqlSession.selectList(NAMESPACE+".getRoomDetailReview", room_num);
+	public List<RoomReviewVo> getReviewinfo(int room_num, ReviewPagingDto reviewPagingDto) throws Exception {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("room_num", room_num);
+		paramMap.put("reviewPagingDto", reviewPagingDto);
+		
+		List<RoomReviewVo> ReviewList = sqlSession.selectList(NAMESPACE+".getRoomDetailReview", paramMap);
 		return ReviewList;
 	}
 	
@@ -48,6 +53,13 @@ public class BooRoomDetailDaoImpl implements BooRoomDetailDao {
 		paramMap.put("room_score", room_score);
 		sqlSession.update(NAMESPACE+".updateRoomScore", paramMap);
 		
+	}
+	
+	//후기 목록에 사용할 총개수
+	@Override
+	public int getReviewCount() throws Exception {
+		int count = sqlSession.selectOne(NAMESPACE+".getReviewCount");
+		return count;
 	}
 
 	

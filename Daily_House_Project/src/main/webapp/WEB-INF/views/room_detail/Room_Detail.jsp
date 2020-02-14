@@ -181,9 +181,8 @@ $(function() {
 
 <%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
 <form id="frmPage" action="/boo/detail" method="get">
-	<input type="hidden" name="">
-	<input type="hidden" name="page" value="">
-	<input type="hidden" name="perPage" value="">
+	<input type="hidden" name="page" value="${reviewPagingDto.page}">
+	<input type="hidden" name="perPage" value="${reviewPagingDto.perPage}">
 </form>
 <!-- section -->
 <!-- 이미지 뷰 -->

@@ -12,6 +12,11 @@
 		 and h.room_num = #{room_num}
 	</select>
   	
+	<!-- 후기 목록에 사용할 총개수 -->
+	<select id="getReviewCount" resultType="int">
+		select count(*) from tbl_room_review
+	</select>
+  	
   	<!-- 후기 보기(목록/room_num) -->
   	<select id="getRoomDetailReview" resultType="RoomReviewVo">
    		select * from
