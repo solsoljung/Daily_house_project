@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.dailyhouse.domain.ReservationVo;
+import com.kh.dailyhouse.domain.UserVo;
+import com.kh.dailyhouse.service.SiUserService;
 import com.kh.dailyhouse.service.YOReservationListService;
 
 @Controller
@@ -19,8 +21,11 @@ public class YOController {
 	@Inject
 	private YOReservationListService service;
 	
+	@Inject
+	private SiUserService siService;
+	
 	@RequestMapping(value="/reservation", method=RequestMethod.GET)
-	public String reservation() throws Exception {
+	public String reservation(UserVo userVo) throws Exception {
 		return "/reservation/reservation_page";
 	}
 	
