@@ -25,17 +25,17 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 		List<RoomReviewVo> reviewList = booRoomDetailDao.getReviewinfo(room_num);
 		System.out.println("ReviewList : " + reviewList);
 		
-		//후기 리스트의 total_score를 기반으로 방의 점수 계산
-		int room_score_sum = 0;
-		for (RoomReviewVo vo : reviewList) {
-			room_score_sum += vo.getTotal_score();
-			System.out.println("room_score_sum : " + room_score_sum);
+		if (reviewList.size() != 0 ) {
+			//후기 리스트의 total_score를 기반으로 방의 점수 계산
+			int room_score_sum = 0;
+			for (RoomReviewVo vo : reviewList) {
+				room_score_sum += vo.getTotal_score();
+			}
+			int room_score = room_score_sum/reviewList.size();
+			
+			//계산을 기반으로 방 스코어 적용 시키기
+			booRoomDetailDao.setRoomScore(room_num, room_score);
 		}
-		int room_score = room_score_sum/4;
-		System.out.println("room_score : " + room_score);
-		
-		//계산을 기반으로 방 스코어 적용 시키기
-		
 		
 		//방 상세보기 정보 받기
 		RoomDto dto = booRoomDetailDao.getRoominfo(room_num);

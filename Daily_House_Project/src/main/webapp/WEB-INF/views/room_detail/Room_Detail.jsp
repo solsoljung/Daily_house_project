@@ -204,6 +204,7 @@ $(function() {
          	 
           	<h1>방에 대한 이름 : ${roomDto.room_title}</h1>
           	<h2>호스트 이름 : ${roomDto.user_name}</h2>
+          	<h2>방 평점 : ${roomDto.room_score}</h2>
           	<h5>기본적인 방의 구성요소</h5>
           	<h5>인원 수 : ${roomDto.room_people}</h5>
           	<h5>침대 수 : ${roomDto.room_bed}</h5>

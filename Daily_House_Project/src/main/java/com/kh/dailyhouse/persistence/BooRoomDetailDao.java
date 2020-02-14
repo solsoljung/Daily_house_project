@@ -15,4 +15,7 @@ public interface BooRoomDetailDao {
 	//후기 작성
 	public void setReview(RoomReviewVo roomReviewVo) throws Exception;
 	
+	//방 평점 수정
+	public void setRoomScore(int room_num, int room_score) throws Exception;
+	
 }
