@@ -6,6 +6,7 @@
 
 <%@ include file = "../../views/casahotel/casahotel_link.jsp" %>
 <%@ include file = "../../views/islagrande/islagrande_link.jsp" %>
+<link rel="stylesheet" href="/modal/modal.css">
 
 <script>
 $(document).ready(function() {
