@@ -23,6 +23,6 @@
   		insert into tbl_room_review (room_review_num, user_email, room_num, review_score_location, review_score_cleanliness, review_score_checkin, review_score_communication, total_score, room_review_text)
   		values (seq_room_review_num.nextval, #{user_email}, #{room_num}, #{review_score_location}, #{review_score_cleanliness}, #{review_score_checkin}, #{review_score_communication}, #{total_score}, #{room_review_text})
   	</insert>
-  	
+  		
   	
 </mapper>
