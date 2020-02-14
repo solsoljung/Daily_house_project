@@ -68,6 +68,7 @@ $(function(){
 				if(rData == "success"){
 					alert("인증성공");
 				}else if(rData == "fail"){
+					/////////////////실패시 할것!!!
 					alert("인증실패");
 				}
 			}
@@ -95,8 +96,8 @@ $(function(){
                   <button type="button" id="btn_certification" value="인증번호 받기" class="btn btn-primary text-white">인증번호 받기</button>
                   <br>
                   <br>
-                  <label class="text-black font-weight-bold" for="email">Email Check</label>
-                  <input type="email" id="email" name="user_email" placeholder="인증번호" required="required" class="form-control">
+                  <label class="text-black font-weight-bold" for="email">Email Certification</label>
+                  <input type="text" id="email" name="certification" placeholder="인증번호" required="required" class="form-control">
                   <br>
                   <button type="button" id="btn_certification2" value="인증번호 확인" class="btn btn-primary text-white">인증번호 확인</button>
                 </div>
