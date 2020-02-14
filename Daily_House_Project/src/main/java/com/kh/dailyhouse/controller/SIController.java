@@ -60,16 +60,12 @@ public class SIController {
 		System.out.println("userVo1 : "+userVo1);
 		// DB 에 넣기 - Service - Dao - Mybatis - Oracle
 
-		
 		if(userVo1 == null) {
 			rttr.addFlashAttribute("msg", "fail");
 			return "redirect:/si/loginHost";
 		}
-		
 		session.setAttribute("signedUser", userVo1.getUser_name());
-		
 		System.out.println(session.getAttribute("signedUser"));
-		
 		rttr.addFlashAttribute("msg", "success");
 		return "redirect:/";
 	}
