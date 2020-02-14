@@ -16,8 +16,7 @@
 
     <link rel="stylesheet" href="/islagrande/css/ionicons.min.css">
 
-    <link rel="stylesheet" href="/islagrande/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="/islagrande/css/jquery.timepicker.css">
+    <!-- <link rel="stylesheet" href="/islagrande/css/jquery.timepicker.css"> -->
 
     
     <link rel="stylesheet" href="/islagrande/css/flaticon.css">
