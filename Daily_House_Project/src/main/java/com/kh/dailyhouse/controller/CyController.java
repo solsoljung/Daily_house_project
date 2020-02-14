@@ -1,15 +1,23 @@
 package com.kh.dailyhouse.controller;
 
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.kh.dailyhouse.domain.RoomVo;
+import com.kh.dailyhouse.service.CyRoomOptionService;
+import com.kh.dailyhouse.service.CyRoomTypeService;
 
 @Controller
 @RequestMapping("/cy/*")
 public class CyController {
 
+	@Inject
+	private CyRoomTypeService roomTypeService;
+	private CyRoomOptionService roomOptionService;
+	
 	// 호스트 등록하기 1page readonly
 	@RequestMapping(value = "/registerHost1", method = RequestMethod.GET)
 	public String registerHost1() throws Exception{
@@ -37,6 +45,7 @@ public class CyController {
 	public String registerHost3(Model model, RoomVo roomVo) throws Exception{
 		System.out.println(">>>> controller333 roomVo: " + roomVo);
 		model.addAttribute("roomVo", roomVo);
+		model.addAttribute("roomTypeList", roomTypeService.getRoomTypeList());
 		return "/host/host_register_page3";
 	}
 	
@@ -45,6 +54,7 @@ public class CyController {
 	public String registerHost4(Model model, RoomVo roomVo) throws Exception{
 		System.out.println(">>>> controller444 roomVo: " + roomVo);
 		model.addAttribute("roomVo", roomVo);
+//		model.addAttribute("roomOptionList", roomOptionService.getRoomOptionList());
 		return "/host/host_register_page4";
 	}
 	

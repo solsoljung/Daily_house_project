@@ -6,9 +6,10 @@
 <mapper namespace="com.kh.mappers.RoomOptionMapper">
 
 	<!-- select RoomOption -->
-<!-- 테이블 구조 변경하기?@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2 -->
 	<select id="getRoomOptionList" resultType="RoomOptionVo">
-		select * from tbl_room_option
+		SELECT column_name
+		FROM user_tab_columns
+		WHERE table_name = 'TBL_ROOM_OPTION' and column_name != 'ROOM_NUM'
 	</select>
   
 </mapper>

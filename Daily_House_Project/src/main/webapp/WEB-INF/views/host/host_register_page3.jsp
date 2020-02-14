@@ -94,6 +94,8 @@ $(function(){
 			<label>3단계: 모든 게스트가 편안하게 숙박할 수 있도록 침대가 충분히 구비되어있는지 확인하세요.</label><br><br>
 
 			<form role="form" id="registerForm" action="/cy/registerHost4Post" method="post">
+			roomTypeList: ${roomTypeList}
+			
 			roomVo: ${roomVo}
 			<input type="hidden" name="room_type_num" value="${roomVo.room_type_num}"/>
 			<input type="hidden" name="room_people" value="${roomVo.room_people}"/>
@@ -110,16 +112,12 @@ $(function(){
 					<label class="lblTitle2">건물 유형을 선택하세요</label>
 					<select class="browser-default custom-select" id="room_type_num">
 				        <option selected="">하나를 선택해주세요.</option>
-						<!-- 값은 DB에서 불러와서 하기 -->
-				        <option value="1"
-				        	<c:if test="${roomVo.room_type_num eq 1}">selected</c:if>
-				        >아파트</option>
-				        <option value="2"
-				        	<c:if test="${roomVo.room_type_num eq 2}">selected</c:if>
-				        >주택</option>
-				        <option value="3"
-				        	<c:if test="${roomVo.room_type_num eq 3}">selected</c:if>
-				        >게스트하우스</option>
+				        <c:forEach items="${roomTypeList}" var="roomTypeVo">
+					        <option value="${roomTypeVo.room_type_num}"
+					        	<c:if test="${roomVo.room_type_num eq roomTypeVo.room_type_num}">selected</c:if>
+					        >${roomTypeVo.room_type_explain}</option>
+				        </c:forEach>
+				       
 				     </select>
 				</div><br><br><br>
 				
