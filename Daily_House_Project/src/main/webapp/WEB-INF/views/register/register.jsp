@@ -14,9 +14,28 @@
 <script>
 
 $(function(){
+	
+	//이메일 인증여부
+	var isCerficate = false;
 
-	$(".btn btn-primary text-white py-3 px-5").click(function(e) {
-		e.preventDefault(); // 브라우저의 기본 기능 막기
+	$("#btnSubmit").click(function(e) {
+		var pw1 = $("#pw").val().trim();
+		var pw2 = $("#pw2").val().trim();
+// 		var phone = $("#phone").val().trim();
+		
+// 		if (phone < 0) {
+// 			alert("phone");
+// 			return false;
+// 		}
+		if (pw1 != pw2) {
+			alert("비밀번호 불일치");
+			return false;
+		}
+		if (isCerficate == false) {
+			alert("이메일 인증을 해주세요");
+			return false;
+		}
+		$("#joinForm").submit();
 	});
 	$("#btn_list").click(function(){
 		location.href = "/test/board/listAll";
@@ -31,6 +50,9 @@ $(function(){
 	//이메일 인증번호 발급받기
 	$("#btn_certification").click(function(){
 		var user_id = $("input[name=user_email]").val();
+		
+		$('#email').prop('readonly', true);
+		
 		$.ajax({
 			"type" : "post",
 			"url" : "/certification/registerCertification",
@@ -46,6 +68,7 @@ $(function(){
 				dice = rData;
 				console.log("dice: " + dice);
 			}
+
 		}); // $.ajax()
 	}); //$("#btn_certification1").click
 	
@@ -70,10 +93,13 @@ $(function(){
 			"success" : function(rData) {
 				console.log(rData);
 				if(rData == "success"){
+					$('#emailCertification').prop('readonly', true);
+					isCerficate = true;
 					alert("인증성공");
+					
 				}else if(rData == "fail"){
-					/////////////////실패시 할것!!!
-					alert("인증실패");
+					$('#email').prop('readonly', false);
+					alert("재인증을 해주세요");
 				}
 			}
 		}); // $.ajax()
@@ -87,50 +113,46 @@ $(function(){
       <div class="container">
         <div class="row">
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
-            <form action="/si/register_run" method="post" role="form" class="bg-white p-md-5 p-4 mb-5 border">
+            <form action="/si/register_run" method="post" role="form" class="bg-white p-md-5 p-4 mb-5 border" id="joinForm">
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold">회원가입</label>
                 </div>
-                
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="email">Email</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-5 form-group">
-                  <input type="email" id="email" name="user_email" placeholder="Email" required="required" class="form-control">
+                  <input type="email" id="email" name="user_email" placeholder="Email" class="form-control">
                   <button type="button" id="btn_certification" value="인증번호 받기" class="btn btn-primary text-white">인증번호 받기</button>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12 form-group"><br>
                   <label class="text-black font-weight-bold" for="email">Email Certification</label>
-                  <input type="text" id="email" name="certification" placeholder="인증번호" required="required" class="form-control">
+                  <input type="text" id="emailCertification" name="certification" placeholder="인증번호" class="form-control">
                   <button type="button" id="btn_certification2" value="인증번호 확인" class="btn btn-primary text-white">인증번호 확인</button>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="password">Password</label>
-                  <input type="password" id="pw" name="user_pw" class="form-control" placeholder="Password" required="required">
+                  <input type="password" id="pw" name="user_pw" class="form-control" placeholder="Password">
                   <label class="text-black font-weight-bold" for="password">Password Check</label>
-                  <input type="password" id="pw2" class="form-control" placeholder="Password Check" required="required">
+                  <input type="password" id="pw2" class="form-control" placeholder="Password Check">
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="name">Name</label>
-                  <input type="text" id="name" name="user_name" class="form-control" placeholder="Name" required="required">
+                  <input type="text" id="name" name="user_name" class="form-control" placeholder="Name">
                 </div>
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="phone">Phone</label>
-                  <input type="text" id="phone" name="user_phone" placeholder="-없이 숫자만 입력해주세요." class="form-control" required="required">
+                  <!--  required꼭 적게 만듬  readonly꼭 읽게 만듬-->
+                  <input type="text" id="phone" name="user_phone" placeholder="-없이 숫자만 입력해주세요." class="form-control">
                 </div>
               </div>
               <br>
               <div class="col-md-10 text-right" data-aos="fade-up" data-aos-delay="200">
-	            <button type="submit" class="btn btn-primary text-white py-3 px-5" >회원가입</button>&nbsp;&nbsp;&nbsp;&nbsp;
+	            <button type="button" class="btn btn-primary text-white py-3 px-5" id="btnSubmit">회원가입</button>&nbsp;&nbsp;&nbsp;&nbsp;
 	            <a href="/si/goHome"><button type="button" class="btn btn-primary text-white py-3 px-5">홈으로</button></a>
 	          </div>
             </form>
