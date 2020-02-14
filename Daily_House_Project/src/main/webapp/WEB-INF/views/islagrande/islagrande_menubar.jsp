@@ -14,7 +14,7 @@
 	        <ul class="navbar-nav ml-auto">
 	        	<li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
 				  <c:choose>
-				   	<c:when test="${empty signedUser}">
+				   	<c:when test="${empty userVo}">
 	        			<li class="nav-item"><a href="/si/loginHost" class="nav-link">찜목록</a></li>
 				   	</c:when>
 				   	<c:otherwise> 
@@ -26,7 +26,7 @@
 	        	<li class="nav-item"><a href="/yo/reservation" class="nav-link">예약하기</a></li>
 	        	<li class="nav-item"><a href="/cy/registerHost1" class="nav-link">호스팅하기</a></li>
 				  <c:choose>
-				   	<c:when test="${empty signedUser}">
+				   	<c:when test="${empty userVo}">
 					    <li class="nav-item"><a href="/si/registerHost" class="nav-link">회원가입</a></li>
 					    <li class="nav-item"><a href="/si/loginHost" class="nav-link">로그인</a></li>
 				   	</c:when>
