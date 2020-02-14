@@ -16,7 +16,7 @@ public class CyController {
 
 	@Inject
 	private CyRoomTypeService roomTypeService;
-//	private CyRoomOptionService roomOptionService;
+	private CyRoomOptionService roomOptionService;
 	
 	// 호스트 등록하기 1page readonly
 	@RequestMapping(value = "/registerHost1", method = RequestMethod.GET)
