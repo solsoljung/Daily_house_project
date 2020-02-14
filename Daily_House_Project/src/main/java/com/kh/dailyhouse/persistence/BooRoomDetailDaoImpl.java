@@ -1,6 +1,8 @@
 package com.kh.dailyhouse.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -36,6 +38,16 @@ public class BooRoomDetailDaoImpl implements BooRoomDetailDao {
 	@Override
 	public void setReview(RoomReviewVo roomReviewVo) throws Exception {
 		sqlSession.insert(NAMESPACE+".setReview", roomReviewVo);
+	}
+	
+	//방 평점 수정
+	@Override
+	public void setRoomScore(int room_num, int room_score) throws Exception {
+		Map<String, Integer> paramMap = new HashMap<>();
+		paramMap.put("room_num", room_num);
+		paramMap.put("room_score", room_score);
+		sqlSession.update(NAMESPACE+".updateRoomScore", paramMap);
+		
 	}
 
 	

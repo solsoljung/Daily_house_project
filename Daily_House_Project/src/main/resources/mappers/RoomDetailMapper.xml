@@ -24,5 +24,11 @@
   		values (seq_room_review_num.nextval, #{user_email}, #{room_num}, #{review_score_location}, #{review_score_cleanliness}, #{review_score_checkin}, #{review_score_communication}, #{total_score}, #{room_review_text})
   	</insert>
   		
+  	<!-- 방 평점 수정 -->
+  	<update id="updateRoomScore">
+  		update tbl_room set
+  			room_score = #{room_score}
+  		where room_num = #{room_num}
+  	</update>
   	
 </mapper>
