@@ -8,55 +8,49 @@
 <%@ include file = "../../views/casahotel/casahotel_link.jsp" %>
 <%@ include file = "../../views/islagrande/islagrande_link.jsp" %>
 
-<%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
-
 <script>
-	var message = "${message}";
-	if (message != "") {
-		alert(message);
+$(document).ready(function() {
+	var msg = "${msg}";
+	if (msg == "fail") {
+		alert("회원 정보가 없습니다.");
 	}
 	
+});
 </script>
+
+<%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
+
+
 <!-- section -->
 <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
-            
-            <form action="/login/join_run" method="post" class="bg-white p-md-5 p-4 mb-5 border">
+            <form action="/si/login_run" method="post" role="form" class="bg-white p-md-5 p-4 mb-5 border">
                 <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold">회원가입</label>
+                  <label class="text-black font-weight-bold">로그인</label>
                 </div>
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="email">Email</label>
-                  <input type="email" id="email" class="form-control ">
+                  <input type="email" id="email" name="user_email" class="form-control" placeholder="Email" required="required">
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="password">Password</label>
-                  <input type="password" id="pw" class="form-control ">
+                  <input type="password" id="pw" name="user_pw" class="form-control" placeholder="Password" required="required">
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="name">Name</label>
-                  <input type="text" id="name" class="form-control ">
-                </div>
-                <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="phone">Phone</label>
-                  <input type="text" id="phone" class="form-control ">
-                </div>
-              </div>
+              
               <br>
-              <div class="col-md-6 text-right" data-aos="fade-up" data-aos-delay="200">
-	            <button type="submit" class="btn">회원가입</button>
+              <div class="col-md-8 text-right" data-aos="fade-up" data-aos-delay="200">
+	            <button type="submit" class="btn btn-primary text-white py-3 px-5">로그인</button>
+	            <a><button type="button" class="btn btn-primary text-white py-3 px-5">홈으로</button></a>
 	          </div>
-          
             </form>
-
           </div>
+          
           <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
             <div class="row">
               <div class="col-md-10 ml-auto contact-info">
@@ -65,7 +59,6 @@
                 <p><span class="d-block">Email:</span> <span> ooooo@oooo.ooo</span></p>
               </div>
             </div>
-            
           </div>
         </div>
       </div>

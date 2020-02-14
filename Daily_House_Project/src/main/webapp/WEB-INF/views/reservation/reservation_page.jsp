@@ -16,7 +16,56 @@ $(function() {
 	$("#reservationBtn").click(function() {
 		location.href = "/yo/reservation_pay";
 	});
+	
+	$(".plus").click(function(){					
+		var num = $(this).prev().val();			
+		var plusNum = parseInt(num) + 1;			
+					
+		if(plusNum >= 20) {			
+			$(this).prev().val(num);		
+		} else {			
+			$(this).prev().val(plusNum);		
+		}			
+					
+		var url = "change_book_num.ajax";			
+		var v = $(this).prev().data("num");			
+		var sData = {			
+				book_num : v,	
+				book_amount : plusNum	
+		};			
+		$.post(url, sData, function(rData){			
+			//$(this).prev().val(plusNum);		
+		});			
+					
+		//값 바뀔 때마다 체크박스 데이터의 개수도 바꿔주는 것			
+		var myAmount = $(this).parent().parent().next().next().children();			
+		$(myAmount).data("num",plusNum);			
+		});			
+	$(".minus").click(function(){				
+		var num = $(this).next().val();			
+		var minusNum = parseInt(num) - 1;			
+					
+		if(minusNum < 0) {			
+			$(this).next().val(num);		
+		} else {			
+			$(this).next().val(minusNum);		
+		}			
+					
+		var url = "change_book_num.ajax";			
+		var v = $(this).next().data("num");			
+		var sData = {			
+				book_num : v,	
+				book_amount : minusNum	
+		};			
+		$.post(url, sData, function(rData){			
+		});			
+					
+		//값 바뀔 때마다 체크박스 데이터의 개수도 바꿔주는 것			
+		var myAmount = $(this).parent().parent().next().next().children();			
+		$(myAmount).data("num",minusNum);			
+	});				
 });
+
 
 </script>
 
@@ -77,44 +126,39 @@ $(function() {
                   <label class="text-black font-weight-bold" for="checkout_date">퇴실날짜</label>
                   <input type="text" id="checkout_date" class="form-control">
                 </div>
-                <div>
-                	<input type="text" id="checkout_date">
-                </div>
               </div>
 
               <div class="row">
-                <div class="col-md-6 form-group">
+                <div class="col-md-6 form-group block-27">
                   <label for="adults" class="font-weight-bold text-black">어른</label>
-                  <div class="field-icon-wrap">
-                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                    <select name="" id="adults" class="form-control">
-                      <option value="">1</option>
-                      <option value="">2</option>
-                      <option value="">3</option>
-                      <option value="">4</option>
-                      <option value="">5</option>
-                      <option value="">6</option>
-                      <option value="">7+</option>
-                    </select>
-                  </div>
+                  <div class="field-icon-wrap">																				
+				  </div>  
+					<ul>					
+						<li>				
+							<a class="minus">-</a>
+							<input type="number" data-num="1" class="numBox" min="1" max="20" value="1" readonly="readonly"/>
+							<a class="plus">+</a>			
+						</li>				
+					</ul>	          
+					 
                 </div>
-                
-                <div class="col-md-6 form-group">
-                  <label for="children" class="font-weight-bold text-black">어린이</label>
-                  <div class="field-icon-wrap">
-                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                    <select name="" id="children" class="form-control">
-                      <option value="">1</option>
-                      <option value="">2</option>
-                      <option value="">3</option>
-                      <option value="">4</option>
-                      <option value="">5</option>
-                      <option value="">6</option>
-                      <option value="">7+</option>
-                    </select>
+                <div class="col-md-6 form-group block-27">
+                  <label for="adults" class="font-weight-bold text-black">아동</label>
+                  <div class="field-icon-wrap">																					
                   </div>
+					<ul>					
+						<li>				
+							<a class="minus">-</a>
+							<input type="number" data-num="1" class="numBox" min="1" max="20" value="1" readonly="readonly"/>
+							<a class="plus">+</a>	
+						</li>				
+					</ul> 
                 </div>
-              </div>  
+			</div>
+  
+              <div class="col-md-6 form-group">
+              	
+			  </div>						
                  
               <div class="row mb-4">
                 <div class="col-md-12 form-group">
