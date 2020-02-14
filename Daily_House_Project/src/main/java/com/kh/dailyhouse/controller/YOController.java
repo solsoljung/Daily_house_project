@@ -3,6 +3,7 @@ package com.kh.dailyhouse.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +26,10 @@ public class YOController {
 	private SiUserService siService;
 	
 	@RequestMapping(value="/reservation", method=RequestMethod.GET)
-	public String reservation(UserVo userVo) throws Exception {
+//	public String reservation(HttpSession session, UserVo userVo) throws Exception {
+	public String reservation(HttpSession session, Model model) throws Exception {
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		model.addAttribute("userVo" + userVo);
 		return "/reservation/reservation_page";
 	}
 	
