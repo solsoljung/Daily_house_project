@@ -12,17 +12,17 @@
 		 and h.room_num = #{room_num}
 	</select>
   	
-  	<!-- 후기 보기(all) -->
+  	<!-- 후기 보기(목록/room_num) -->
   	<select id="getRoomDetailReview" resultType="RoomReviewVo">
   		select * from tbl_room_review
   		where room_num = #{room_num}
   	</select>
   	
-  	<!-- 후기 보기(one 점수용) -->
-  	<select id="getOneReview" resultType="RoomReviewVo">
-  		select * from tbl_room_review
-  		where room_review_num = #{room_review_num}
-  	</select>
-  	
+  	<!-- 후기 작성 -->
+  	<insert id="setReview">
+  		insert into tbl_room_review (room_review_num, user_email, room_num, review_score_location, review_score_cleanliness, review_score_checkin, review_score_communication, total_score, room_review_text)
+  		values (seq_room_review_num.nextval, #{user_email}, #{room_num}, #{review_score_location}, #{review_score_cleanliness}, #{review_score_checkin}, #{review_score_communication}, #{total_score}, #{room_review_text})
+  	</insert>
+  		
   	
 </mapper>
