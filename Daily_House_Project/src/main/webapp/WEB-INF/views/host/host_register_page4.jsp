@@ -30,12 +30,13 @@ $(function(){
 		$(".chb:checked").each(function() { 
 			data_options.push($(this).attr("data-option"));
 	    });
-// 		console.log("data_options: " + data_options);
+		console.log("data_options: " + data_options);
 		$("input[name=room_options]").val(data_options);
-// 		console.log("input data_options" + $("input[name=room_options]").val());
+		console.log("input data_options" + $("input[name=room_options]").val());
+		console.log("${roomVo}");
 		
-// 		$("#registerForm").attr("action", "/cy/@전송페이지@");
-// 		$("#registerForm").submit();
+		$("#registerForm").attr("action", "/cy/registerHost");
+		$("#registerForm").submit();
 	});
 });
 </script>
@@ -65,7 +66,7 @@ $(function(){
 			<input type="hidden" name="room_title" value="${roomVo.room_title}"/>
 			<input type="hidden" name="room_explain" value="${roomVo.room_explain}"/>
 			<input type="hidden" name="room_price" value="${roomVo.room_price}"/>
-			<input type="hidden" name="room_options" value="${roomVo.room_options}"/>
+			<input type="hidden" name="room_options" />
 			
 				<!-- 편의시설 -->
 				<div class="form-group">

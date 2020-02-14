@@ -97,7 +97,7 @@ $(function() {
         <div class="row">
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
             
-            <form action="#" method="post" class="bg-white p-md-5 p-4 mb-5 border">
+            <form action="/yo/reservation_pay" method="post" id="reservationUser" class="bg-white p-md-5 p-4 mb-5 border">
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="name">예약자</label>
@@ -108,7 +108,6 @@ $(function() {
                   <input type="text" id="phone" class="form-control ">
                 </div>
               </div>
-          
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="email">Email</label>
