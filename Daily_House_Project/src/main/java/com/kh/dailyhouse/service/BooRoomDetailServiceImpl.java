@@ -18,6 +18,7 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 	@Inject
 	private BooRoomDetailDao booRoomDetailDao;
 	
+	//Room 상세 보기
 	@Override
 	public Map<String, Object> detail(int room_num) throws Exception {
 		RoomDto dto = booRoomDetailDao.getRoominfo(room_num);
@@ -29,6 +30,12 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 		paramMap.put("ReviewList", ReviewList);
 		
 		return paramMap;
+	}
+	
+	//후기 작성 Insert
+	@Override
+	public void insertReview(RoomReviewVo roomReviewVo) throws Exception {
+		booRoomDetailDao.setReview(roomReviewVo);
 	}
 
 }

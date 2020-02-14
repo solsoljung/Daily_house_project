@@ -41,12 +41,11 @@ public class BooController {
 		int Review_score_cleanliness = roomReviewVo.getReview_score_cleanliness();
 		int Review_score_checkin = roomReviewVo.getReview_score_checkin();
 		int Review_score_communication = roomReviewVo.getReview_score_communication();
-		
 		int total_score = (Review_score_location+Review_score_cleanliness+Review_score_checkin+Review_score_communication)/4;
 		roomReviewVo.setTotal_score(total_score);
-		
 		System.out.println("RoomReviewVo : " + roomReviewVo);
 		
+		booRoomDetailService.insertReview(roomReviewVo);
 		return "redirect:/boo/detail";
 	}
 	

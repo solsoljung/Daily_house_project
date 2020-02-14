@@ -237,7 +237,7 @@ $(function() {
           			<td id="clean" data-score="${RoomReviewVo.review_score_cleanliness}">${RoomReviewVo.review_score_cleanliness}</td>
           			<td id="checkin" data-score="${RoomReviewVo.review_score_checkin}">${RoomReviewVo.review_score_checkin}</td>
           			<td id="communication" data-score="${RoomReviewVo.review_score_communication}">${RoomReviewVo.review_score_communication}</td>
-          			<td></td>
+          			<td>${RoomReviewVo.total_score}</td>
           			<td>${RoomReviewVo.room_review_text}</td>
           		</tr>
           		</c:forEach>
