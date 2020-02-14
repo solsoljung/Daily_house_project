@@ -2,10 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%@ include file = "../../views/title.jsp"%> <!-- <head> -->
-
-<%@ include file = "../../views/casahotel/casahotel_link.jsp" %>
-<%@ include file = "../../views/islagrande/islagrande_link.jsp" %>
+<!-- 데이터피커X -->					
+<%@ include file = "../../views/title2.jsp"%> <!-- <head> -->					
+					
+<%@ include file = "../../views/casahotel/casahotel_link2.jsp" %>					
+<%@ include file = "../../views/islagrande/islagrande_link.jsp" %>					
+					
+<%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->					
+<!-- 데이터피커X -->					
 
 <script>
 $(document).ready(function() {
@@ -13,11 +17,9 @@ $(document).ready(function() {
 	if (msg == "fail") {
 		alert("회원 정보가 없습니다.");
 	}
-	
 });
 </script>
 
-<%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
 
 
 <!-- section -->
@@ -44,7 +46,7 @@ $(document).ready(function() {
               
               <br>
               <div class="col-md-10 text-right" data-aos="fade-up" data-aos-delay="200">
-	            <button type="submit" class="btn btn-primary text-white py-3 px-5">로그인</button>&nbsp;&nbsp;&nbsp;&nbsp;
+	            <button type="submit" class="btn btn-primary text-white py-3 px-5" style="font-size:20px;">로그인</button>&nbsp;&nbsp;&nbsp;&nbsp;
 	            <a href="/si/goHome"><button type="button" class="btn btn-primary text-white py-3 px-5">홈으로</button></a>
 	          </div>
             </form>
@@ -65,9 +67,13 @@ $(document).ready(function() {
 
 <!-- end section -->
 
-<%@ include file = "../../views/casahotel/casahotel_footer.jsp" %>
-
-<%@ include file = "../../views/casahotel/casahotel_script.jsp" %>
-<%@ include file = "../../views/islagrande/islagrande_script.jsp" %>
-
-<%@ include file = "../../views/end.jsp"%> <!-- </body> -->
+<!-- 데이터피커X -->			
+			
+<%@ include file = "../../views/casahotel/casahotel_footer.jsp" %>			
+			
+<%@ include file = "../../views/casahotel/casahotel_script2.jsp" %>			
+<%@ include file = "../../views/islagrande/islagrande_script2.jsp" %>			
+			
+<%@ include file = "../../views/end.jsp"%> <!-- </body> -->			
+			
+<!-- 데이터피커X -->			

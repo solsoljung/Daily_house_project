@@ -58,7 +58,7 @@ public class SIController {
 	public String login_run(HttpSession session, RedirectAttributes rttr, UserVo userVo) throws Exception{
 		// 요청정보 얻어서
 		UserVo userVo1 = siUserService.login_run(userVo);
-		System.out.println("userVo1 : "+userVo1);
+//		System.out.println("userVo1 : "+userVo1);
 		// DB 에 넣기 - Service - Dao - Mybatis - Oracle
 
 		if(userVo1 == null) {
@@ -67,7 +67,7 @@ public class SIController {
 		}
 		session.setAttribute("userVo", userVo1);
 		
-		System.out.println(session.getAttribute("userVo"));
+//		System.out.println(session.getAttribute("userVo"));
 		rttr.addFlashAttribute("msg", "success");
 		return "redirect:/";
 	}
@@ -77,6 +77,12 @@ public class SIController {
 	public String logout(HttpSession session) throws Exception {
 		session.invalidate();
 		return "redirect:/";
+	}
+	
+	// 내정보 가는 컨트롤러
+	@RequestMapping(value = "/userInformation", method = RequestMethod.GET)
+	public String userInformation(HttpSession session) throws Exception {
+		return "/user/user";
 	}
 }
 	

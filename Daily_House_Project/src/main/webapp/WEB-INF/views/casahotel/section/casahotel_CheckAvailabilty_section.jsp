@@ -75,7 +75,7 @@
                   </div>
                 </div>
                 <div class="col-md-6 col-lg-3 align-self-end"> <!-- 55555555555555555555555555555555555555555555555555555555555555555 -->
-                  <button class="btn btn-primary btn-block text-white">Check Availabilty</button>
+                  <button class="btn btn-primary py-3 px-5">Check Availabilty</button>
                 </div>
               </div>
             </form>

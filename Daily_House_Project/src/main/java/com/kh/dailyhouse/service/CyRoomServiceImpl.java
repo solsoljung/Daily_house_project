@@ -24,10 +24,9 @@ public class CyRoomServiceImpl implements CyRoomService {
 	@Transactional
 	@Override
 	public void registerRoom(RoomVo roomVo) throws Exception {
+		int room_num = roomDao.getNextRoomNum();
+		roomVo.setRoom_num(room_num);
 		roomDao.registerRoom(roomVo);
-		int room_num = hostDao.getNowRoomNum();
-		
-		System.out.println("service nowRoomNum: " + room_num);
 		
 		HostVo hostVo = new HostVo();
 		hostVo.setUser_email(roomVo.getUser_email());

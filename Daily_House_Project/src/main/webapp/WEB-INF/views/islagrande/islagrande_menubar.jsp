@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    
  </head>
   <body>
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -31,7 +30,13 @@
 					    <li class="nav-item"><a href="/si/loginHost" class="nav-link">로그인</a></li>
 				   	</c:when>
 				   	<c:otherwise> 
-				   		<li class="nav-item"><a href="/si/logout" class="nav-link">로그아웃</a></li>
+						<div class="dropdown" style="left: 15px">
+				   	<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:15px;">내정보</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						   		<li class="nav-item"><a href="/si/userInformation">${userVo.user_name}&nbsp;&nbsp;&nbsp;<img src="images/user.jpg" width="30" height="30"></a></li>
+						   		<li class="nav-item"><a href="/si/logout">로그아웃</a></li>
+				   		</div>
+				   		</div>
 				   	</c:otherwise>
 				  </c:choose>
 	        </ul>
