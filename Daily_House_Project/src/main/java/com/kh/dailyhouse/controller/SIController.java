@@ -66,9 +66,9 @@ public class SIController {
 			return "redirect:/si/loginHost";
 		}
 		
-		session.setAttribute("signedUser", userVo1.getUser_name());
+		session.setAttribute("userVo", userVo1);
 		
-		System.out.println(session.getAttribute("signedUser"));
+		System.out.println(session.getAttribute("userVo"));
 		
 		rttr.addFlashAttribute("msg", "success");
 		return "redirect:/";

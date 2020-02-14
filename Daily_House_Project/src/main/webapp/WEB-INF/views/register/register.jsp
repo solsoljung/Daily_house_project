@@ -14,6 +14,10 @@
 <script>
 
 $(function(){
+
+	$(".btn btn-primary text-white py-3 px-5").click(function(e) {
+		e.preventDefault(); // 브라우저의 기본 기능 막기
+	});
 	$("#btn_list").click(function(){
 		location.href = "/test/board/listAll";
 	});
@@ -91,14 +95,18 @@ $(function(){
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="email">Email</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-5 form-group">
                   <input type="email" id="email" name="user_email" placeholder="Email" required="required" class="form-control">
-                  <br>
                   <button type="button" id="btn_certification" value="인증번호 받기" class="btn btn-primary text-white">인증번호 받기</button>
-                  <br>
-                  <br>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 form-group"><br>
                   <label class="text-black font-weight-bold" for="email">Email Certification</label>
                   <input type="text" id="email" name="certification" placeholder="인증번호" required="required" class="form-control">
-                  <br>
                   <button type="button" id="btn_certification2" value="인증번호 확인" class="btn btn-primary text-white">인증번호 확인</button>
                 </div>
               </div>
@@ -122,7 +130,7 @@ $(function(){
               </div>
               <br>
               <div class="col-md-10 text-right" data-aos="fade-up" data-aos-delay="200">
-	            <button type="submit" class="btn btn-primary text-white py-3 px-5">회원가입</button>&nbsp;&nbsp;&nbsp;&nbsp;
+	            <button type="submit" class="btn btn-primary text-white py-3 px-5" >회원가입</button>&nbsp;&nbsp;&nbsp;&nbsp;
 	            <a href="/si/goHome"><button type="button" class="btn btn-primary text-white py-3 px-5">홈으로</button></a>
 	          </div>
             </form>
