@@ -98,7 +98,12 @@ $(function(){
 
 <script>
 $(function() {
-	
+	$(".page_link").click(function(e) {
+		e.preventDefault();
+		var page = $(this).attr("data-page");
+		$("input[name=page]").val(page);
+		$("#frmPage").submit();
+	});
 });
 </script>
 
@@ -106,11 +111,6 @@ $(function() {
 .mousePointer {
 	cursor : pointer
 }
-
-table {
-	
-}
-
 </style>
  
 <script>
@@ -180,7 +180,11 @@ table {
 </script>
 
 <%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
-
+<form id="frmPage" action="/boo/detail" method="get">
+	<input type="hidden" name="">
+	<input type="hidden" name="page" value="">
+	<input type="hidden" name="perPage" value="">
+</form>
 <!-- section -->
 <!-- 이미지 뷰 -->
 <section class="home-slider js-fullheight owl-carousel">
@@ -221,12 +225,11 @@ table {
           	<div>
           	<h1>후기 테이블 부분</h1>
           	
-       		<c:forEach items="${reviewList}" var="RoomReviewVo">
-       			
+       		<c:forEach items="${reviewList}" var="RoomReviewVo">  			
    			<div class="block-21 mb-4 d-flex">
                <a class="blog-img mr-4" style="background-image: url(/islagrande/images/image_1.jpg);">${RommReviewVo.user_pic}사용자 사진</a>  
                 <div class="text">
-                 <table border="1">
+                 <table>
                   <tr>
                    <td width=500 style="word-break:break-all">
                     <h3 class="heading">${RoomReviewVo.room_review_text}</h3>
@@ -240,8 +243,37 @@ table {
                   </div>
                 </div>
              </div>
-             
        		</c:forEach>
+       		
+       		<div class="col text-center">
+				<div class="block-27">
+					<ul>
+					<c:if test="${pagingDto.hasPrev == true}">
+								<li>
+									<a class="page_link" data-page="${pagingDto.startPage - 1}">&lt;</a>
+								</li>
+							</c:if>
+							<c:forEach begin="${pagingDto.startPage}" end="${pagingDto.endPage}" var="v">
+								<li 
+									<c:choose>
+										<c:when test="${pagingDto.page == v}">
+											class="active"
+										</c:when>
+										<c:otherwise>
+											class=""
+										</c:otherwise>
+									</c:choose>
+								>
+									<a class="page_link" data-page="${v}">${v}</a>
+								</li>
+							</c:forEach>
+							<c:if test="${pagingDto.hasNext == true}">
+								<li>
+									<a class="page_link" data-page="${pagingDto.endPage + 1}">&gt;</a>
+								</li>
+							</c:if>
+					</ul>
+				</div>
           	</div>
 <!-- 후기 작성란 구역 -->
 			<c:if test="${not empty userVo}">
@@ -388,46 +420,7 @@ table {
                 <li><a href="#">Drug Control Law <span>(7)</span></a></li>
               </ul>
             </div>
-            <div class="sidebar-box ftco-animate">
-              <h3>Popular Articles</h3>
-              
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(/islagrande/images/image_1.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(/islagrande/images/image_2.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(/islagrande/images/image_3.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-              
-            </div>
+            
 
             <div class="sidebar-box ftco-animate">
               <h3>Tag Cloud</h3>

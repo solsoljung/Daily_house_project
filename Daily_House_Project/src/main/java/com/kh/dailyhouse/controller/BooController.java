@@ -26,6 +26,7 @@ public class BooController {
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public String getRoomDetail(Model model) throws Exception{
 		
+		
 		//방을 선택시 room_num을 받아야됨
 		Map<String, Object> paramMap = booRoomDetailService.detail(51);
 		RoomDto roomDto = (RoomDto)paramMap.get("dto");
