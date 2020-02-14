@@ -16,11 +16,15 @@ $(function() {
 	$("#btnTest").click(function() {
 		var date1_val = $("#date1").val();
 		var date2_val = $("#date2").val();
+		var checkin = $("#checkin_date").val();
+		var checkout = $("#checkout_date").val();
 		
 		var arrDate1 = date1_val.split("-");
 		var arrDate2 = date2_val.split("-");
 		console.log(arrDate1);
 		console.log(arrDate2);
+		console.log(checkin);
+		console.log(checkout);
 		
 		var date1_year = arrDate1[0];
 		var date1_month = arrDate1[1];
@@ -62,30 +66,6 @@ $(function() {
 				}
 			}
 		}
-		
-		
-// 		var isYunYear = false;
-// 		// 윤년이면 29일, 윤년이 아니면 28일
-// 		if (date1_month == "02") {
-// 			if (date1_year % 4 == 0) {
-// 				isYunYear = true;
-// 			}
-			
-// 			if (date1_year % 100 == 0) {
-// 				isYunYear = false;
-// 			}
-			
-// 			if (date1_year % 400 == 0) {
-// 				isYunYear = true;
-// 			}
-// 		}
-		
-// 		console.log(date1_date);
-// 		var date2_date = date2_val.split("-")[2];
-// 		console.log(date2_date);
-// 		var v = parseInt(date2_date) - parseInt(date1_date);
-// 		console.log(v);
-		
  	});
 	
 	
