@@ -8,6 +8,7 @@ public class RoomVo {
 	private String room_type_num;
 	private String user_email;
 	private String room_location;
+	private String room_location_detail;
 	private int room_score;
 	private int room_price;
 	private String room_explain;
@@ -106,14 +107,20 @@ public class RoomVo {
 	public void setRoom_options(String[] room_options) {
 		this.room_options = room_options;
 	}
-
+	public String getRoom_location_detail() {
+		return room_location_detail;
+	}
+	public void setRoom_location_detail(String room_location_detail) {
+		this.room_location_detail = room_location_detail;
+	}
 	@Override
 	public String toString() {
 		return "RoomVo [room_num=" + room_num + ", room_type_num=" + room_type_num + ", user_email=" + user_email
-				+ ", room_location=" + room_location + ", room_score=" + room_score + ", room_price=" + room_price
-				+ ", room_explain=" + room_explain + ", room_people=" + room_people + ", room_bed=" + room_bed
-				+ ", room_bathroom=" + room_bathroom + ", room_title=" + room_title + ", room_options="
-				+ Arrays.toString(room_options) + ", pics=" + Arrays.toString(pics) + "]";
+				+ ", room_location=" + room_location + ", room_location_detail=" + room_location_detail
+				+ ", room_score=" + room_score + ", room_price=" + room_price + ", room_explain=" + room_explain
+				+ ", room_people=" + room_people + ", room_bed=" + room_bed + ", room_bathroom=" + room_bathroom
+				+ ", room_title=" + room_title + ", room_options=" + Arrays.toString(room_options) + ", pics="
+				+ Arrays.toString(pics) + "]";
 	}
 
 }
