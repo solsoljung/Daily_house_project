@@ -23,6 +23,7 @@ public class SIController {
 	public String goHome() throws Exception {
 		return "redirect:/";
 	}
+	
 	//회원가입으로 가는 컨트롤러
 	@RequestMapping(value = "/registerHost", method = RequestMethod.GET)
 	public String registerHost() throws Exception {
@@ -73,7 +74,7 @@ public class SIController {
 		rttr.addFlashAttribute("msg", "success");
 		return "redirect:/";
 	}
-
+	
 	// 로그아웃 처리
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) throws Exception {
