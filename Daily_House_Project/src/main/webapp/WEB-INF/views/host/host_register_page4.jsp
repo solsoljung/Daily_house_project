@@ -72,6 +72,7 @@ $(function(){
 				<div class="form-group">
 					<label class="lblTitle2">어떤 편의시설을 제공하시나요?</label>
 					
+					<!-- roomOptionList -->
 					<div class="checkbox">
 						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="에어컨"/> 에어컨</label><br>
 						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="무선인터넷"/> 무선인터넷</label><br>
@@ -85,7 +86,7 @@ $(function(){
 					</div> 
 					
 				</div><br><br><br>
-				
+
 				<!-- Button -->
 				<br>
 				<div class="row">
