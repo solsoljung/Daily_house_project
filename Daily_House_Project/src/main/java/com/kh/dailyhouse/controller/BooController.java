@@ -22,7 +22,7 @@ public class BooController {
 	private BooRoomDetailService booRoomDetailService;
 	
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
-	public String registerHost(Model model) throws Exception{
+	public String getRoomDetail(Model model) throws Exception{
 		//방을 선택시 room_num을 받아야됨
 		Map<String, Object> paramMap = booRoomDetailService.detail(51);
 		RoomDto roomDto = (RoomDto)paramMap.get("dto");
@@ -34,4 +34,20 @@ public class BooController {
 		model.addAttribute("user_email", "test@naver.com"); // 로그인시 입력될 아이디 부분
 		return "/room_detail/Room_Detail";
 	}
+	
+	@RequestMapping(value="/review", method = RequestMethod.POST)
+	public String postInputReview(RoomReviewVo roomReviewVo) throws Exception{		
+		int Review_score_location = roomReviewVo.getReview_score_location();
+		int Review_score_cleanliness = roomReviewVo.getReview_score_cleanliness();
+		int Review_score_checkin = roomReviewVo.getReview_score_checkin();
+		int Review_score_communication = roomReviewVo.getReview_score_communication();
+		
+		int total_score = (Review_score_location+Review_score_cleanliness+Review_score_checkin+Review_score_communication)/4;
+		roomReviewVo.setTotal_score(total_score);
+		
+		System.out.println("RoomReviewVo : " + roomReviewVo);
+		
+		return "redirect:/boo/detail";
+	}
+	
 }
