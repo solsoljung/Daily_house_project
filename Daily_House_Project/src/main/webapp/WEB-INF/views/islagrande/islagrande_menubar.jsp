@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    
  </head>
   <body>
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -31,6 +30,7 @@
 					    <li class="nav-item"><a href="/si/loginHost" class="nav-link">로그인</a></li>
 				   	</c:when>
 				   	<c:otherwise> 
+				   		<li class="nav-item"><a href="/si/logout" class="nav-link">${userVo.user_name}&nbsp;&nbsp;&nbsp;<img src="images/user.jpg" width="30" height="30"></a></li>
 				   		<li class="nav-item"><a href="/si/logout" class="nav-link">로그아웃</a></li>
 				   	</c:otherwise>
 				  </c:choose>
