@@ -24,7 +24,7 @@ $(document).ready(function() {
       <div class="container">
         <div class="row">
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
-            <form action="/si/login_run" method="post" role="form" >
+            <form action="/si/login_run" method="post" role="form" class="bg-white p-md-5 p-4 mb-5 border">
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold">로그인</label>
                 </div>
