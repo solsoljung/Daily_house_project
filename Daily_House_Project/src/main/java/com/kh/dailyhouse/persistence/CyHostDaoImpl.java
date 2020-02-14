@@ -20,11 +20,4 @@ private static final String NAMESPACE = "com.kh.mappers.HostMapper";
 	public void registerHost(HostVo hostVo) throws Exception {
 		sqlSession.insert(NAMESPACE + ".registerHost", hostVo);
 	}
-	
-	// 방금 등록한 숙소 시퀸스 값 얻어내기
-	@Override
-	public int getNowRoomNum() throws Exception {
-		return sqlSession.selectOne(NAMESPACE + ".getNowRoomNum");
-	}
-
 }

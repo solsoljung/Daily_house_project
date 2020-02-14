@@ -83,13 +83,11 @@ $(function(){
 				<!-- Button -->
 				<br>
 				<div class="row">
-					<div class="col-md-3">
-<!-- 						<button type="button" class="btn btn-primary btn-block" id="btnPrev">Prev</button> -->
-					</div>
+					<div class="col-md-3"></div>
 					<div class="col-md-3"></div>
 					<div class="col-md-3"></div>
 					<div class="col-md-3" align="right">
-						<button type="button" class="btn btn-primary btn-block" id="btnNext" >Complete</button>
+						<button type="button" class="btn btn-primary btn-block py-3 px-5" id="btnNext" style="font-size:15px;" >Next</button>
 					</div>
 				</div>
 				
