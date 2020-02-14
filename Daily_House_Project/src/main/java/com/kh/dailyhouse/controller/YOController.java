@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.dailyhouse.domain.ReservationVo;
 import com.kh.dailyhouse.domain.UserVo;
-import com.kh.dailyhouse.service.SiUserService;
 import com.kh.dailyhouse.service.YOReservationListService;
 
 @Controller
@@ -21,9 +20,7 @@ public class YOController {
 	
 	@Inject
 	private YOReservationListService service;
-	
-	@Inject
-	private SiUserService siService;
+
 	
 	@RequestMapping(value="/reservation", method=RequestMethod.GET)
 //	public String reservation(HttpSession session, UserVo userVo) throws Exception {
@@ -34,7 +31,9 @@ public class YOController {
 	}
 	
 	@RequestMapping(value="/reservation_pay", method=RequestMethod.GET)
-	public String reservationPay() throws Exception {
+	public String reservationPay(HttpSession session, Model model) throws Exception {
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		model.addAttribute("userVo" + userVo);
 		return "/reservation/reservation_pay_page";
 	}
 	
@@ -51,6 +50,4 @@ public class YOController {
 	public String likeList() throws Exception {
 		return "/like/like_list_page";
 	}
-
-
 }

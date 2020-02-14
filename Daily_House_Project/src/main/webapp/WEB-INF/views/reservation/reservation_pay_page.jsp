@@ -42,7 +42,7 @@ $(function() {
         </div>
       </a>
 </section>
-
+${userVo}
   <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">
@@ -52,21 +52,21 @@ $(function() {
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="name">예약자</label>
-                  <input type="text" id="name" class="form-control ">
+                  <input type="text" id="name" class="form-control" value="${userVo.user_name}">
                 </div>
               </div>
               
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="phone">연락처</label>
-                  <input type="text" id="name" class="form-control ">
+                  <input type="text" id="name" class="form-control" value="${userVo.user_phone}">
                 </div>
               </div>
           
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="name">총 결제금액</label>
-                  <input type="text" id="pay" class="form-control ">
+                  <input type="text" id="pay" class="form-control" value="${roomVo.room_price}">
                 </div>
               </div>
               

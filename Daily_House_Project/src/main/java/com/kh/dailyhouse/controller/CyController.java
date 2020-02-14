@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.kh.dailyhouse.domain.RoomVo;
 import com.kh.dailyhouse.service.CyRoomOptionService;
+import com.kh.dailyhouse.service.CyRoomService;
 import com.kh.dailyhouse.service.CyRoomTypeService;
 
 @Controller
@@ -18,6 +19,8 @@ public class CyController {
 	private CyRoomTypeService roomTypeService;
 	@Inject
 	private CyRoomOptionService roomOptionService;
+	@Inject
+	private CyRoomService roomService;
 	
 	// 호스트 등록하기 1page readonly
 	@RequestMapping(value = "/registerHost1", method = RequestMethod.GET)
@@ -70,6 +73,7 @@ public class CyController {
 		roomVo.setUser_email("test@naver.com"); //나중에 로그인했는지 안했는지 검사하기@@@@@@@@@@@@@@@@@@@@@@@
 		System.out.println(">>>> registerHost roomVo: " + roomVo);
 		model.addAttribute("roomVo", roomVo);
+		roomService.registerRoom(roomVo);
 		return "redirect:/";
 	}
 }
