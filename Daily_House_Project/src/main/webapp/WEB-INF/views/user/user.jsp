@@ -13,67 +13,75 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script>
+$(function(){
+	$("#btnUpdate").click(function(e) {
+		console.log("눌러찌롱~");
+		$("#user_name").css("color", "#ff0000");
+		$("#user_pw").css("color", "#ff0000");
+		$("#user_pw2").css("color", "#ff0000");
+	});
+// 		$("btnSubmit")
+});
+
+</script>
 
 	
 
 <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">
-          <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
-            <form action="/si/register_run" method="post" role="form" class="bg-white p-md-5 p-4 mb-5 border" id="joinForm">
+          <div class="col-md-12" data-aos="fade-up" data-aos-delay="100">
+            <form action="/si/userUpdate" method="post" role="form" class="bg-white p-md-5 p-4 mb-5 border" id="joinForm">
             <input hidden="">
                 <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold">회원가입</label>
+                  <label class="text-black font-weight-bold">개인 정보</label>
                 </div>
+                <hr>
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="email">Email</label>
-                  <input type="email" id="email" name="user_email" placeholder="Email" class="form-control">
-                  <button type="button" id="btn_certification" value="인증번호 받기" class="btn btn-primary text-white">인증번호 받기</button>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12 form-group"><br>
-                  <label class="text-black font-weight-bold" for="email">Email Certification</label>
-                  <input type="text" id="emailCertification" name="certification" placeholder="인증번호" class="form-control" required>
-                  <button type="button" id="btn_certification2" value="인증번호 확인" class="btn btn-primary text-white">인증번호 확인</button>
+                  <input type="email" value="${userVo.user_email}"class="form-control" required readonly>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12 form-group">
-                  <label class="text-black font-weight-bold" for="password">Password</label>
-                  <input type="password" id="pw" name="user_pw" class="form-control" placeholder="Password" required>
-                  <label class="text-black font-weight-bold" for="password">Password Check</label>
-                  <input type="password" id="pw2" class="form-control" placeholder="Password Check" required>
+                  <label class="text-black font-weight-bold" for="name">Name</label>
+                  <input type="text" value="${userVo.user_name}" id="user_name" name="user_name" placeholder="이름을 입력해주세요" class="form-control" required readonly>
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="name">Name</label>
-                  <input type="text" id="name" name="user_name" class="form-control" placeholder="Name" required>
-                </div>
-                <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="phone">Phone</label>
-                  <!--  required꼭 적게 만듬  readonly꼭 읽게 만듬-->
-                  <input type="text" id="phone" name="user_phone" placeholder="-없이 숫자만 입력해주세요." class="form-control" required>
+                <div class="col-md-12 form-group">
+                  <label class="text-black font-weight-bold" for="pw">Password</label>
+                  <input type="password" id="user_pw" name="user_pw" class="form-control" required readonly>
+                  <label class="text-black font-weight-bold" for="pw2">Password Check</label>
+                  <input type="password"id="user_pw2" class="form-control" required readonly>
                 </div>
               </div>
-              <br>
+              <div class="row">
+                <div class="col-md-12 form-group">
+                  <label class="text-black font-weight-bold" for="phone">Phone</label>
+                  <input type="text" value="${userVo.user_phone}" id="user_phone" name="user_phone" placeholder="-없이 숫자만 입력해주세요." class="form-control" required readonly >
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 form-group">
+                  <label class="text-black font-weight-bold" for="point">Point</label>
+                  <input type="text" value="${userVo.user_point}" id="user_point" name="user_point" class="form-control" required readonly >
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 form-group">
+                  <label class="text-black font-weight-bold" for="picture">Picture</label>
+                  <input type="text" value="${userVo.user_pic}" id="user_pic" name="user_pic" class="form-control" required readonly >
+                </div>
+              </div>
+                <hr>
               <div class="col-md-10 text-right" data-aos="fade-up" data-aos-delay="200">
-	            <button type="button" class="btn btn-primary text-white py-3 px-5" id="btnSubmit">회원가입</button>&nbsp;&nbsp;&nbsp;&nbsp;
-	            <a href="/si/goHome"><button type="button" class="btn btn-primary text-white py-3 px-5">홈으로</button></a>
+	            <button type="button" class="btn btn-primary text-white py-3 px-5" id="btnUpdate">수정하기</button>
+	            <button type="button" class="btn btn-primary text-white py-3 px-5" id="btnSubmit" style="display: none;">저장하기</button>
 	          </div>
             </form>
-          </div>
-          
-          <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
-            <div class="row">
-              <div class="col-md-10 ml-auto contact-info">
-                <p><span class="d-block">Address:</span> <span> 446-77 울산광역시 남구 삼산로35번길 19 (신정동)</span></p>
-                <p><span class="d-block">Phone:</span> <span> (+02) 052 - 000 - 0000</span></p>
-                <p><span class="d-block">Email:</span> <span> ooooo@oooo.ooo</span></p>
-              </div>
-            </div>
           </div>
         </div>
       </div>

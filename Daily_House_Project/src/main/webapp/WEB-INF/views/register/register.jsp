@@ -149,7 +149,7 @@ $(function(){
                 </div>
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="phone">Phone</label>
-                  <!--  required꼭 적게 만듬  readonly꼭 읽게 만듬-->
+                  <!--  required꼭 적게 만듬  readonly꼭 수정 못하게함-->
                   <input type="text" id="phone" name="user_phone" placeholder="-없이 숫자만 입력해주세요." class="form-control" required>
                 </div>
               </div>
