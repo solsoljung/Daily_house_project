@@ -18,69 +18,58 @@
 
 <script>
 $(function(){
-	
 	// 현재 클릭된 메뉴를 활성화
 	$(".nav-item:eq(0)").attr("class", "nav-item");
 	$(".nav-item:eq(5)").attr("class", "nav-item active");
 	
-	var room_type_num = "${roomVo.room_type_num}";
+	// room_location을 저장할 공간
+	var room_location = "";
+	var room_location_detail = "";
 	
-	// host_register_page2로 이동
+	// host_register_page2으로 이동
 	$("#btnNext").click(function(e){
 		e.preventDefault();
-		
-		if(room_type_num == null || room_type_num == ""){
-			alert("건물 유형을 선택해주세요.");
+		room_location = $("#roadAddrPart1").val();
+		room_location_detail = $("#addrDetail").val();
+		if(room_location == null || room_location == ""){
+			alert("주소를 입력해주세요.");
 			return;
 		}
-		$("input[name=room_people]").val($("#room_people").val());
-		$("input[name=room_bed]").val($("#room_bed").val());
-		$("input[name=room_bathroom]").val($("#room_bathroom").val());
 		
-		$("#registerForm").submit(); //location.href = "/cy/registerHost2";
-	});
-	
-	// select room_type_num
-	$("#room_type_num").change(function() {
-		room_type_num = $(this).val();
-		$("input[name=room_type_num]").val(room_type_num);
-		//console.log($("#room_type_num").val());
-	});
-	
-	
-	// 수량 버튼 SRATR
-	// .plus
-	$(".plus").on("click", function(e){
-		var num = $(this).parent().find(".numBox").val();
-		var plusNum = Number(num) + 1;
-		var max = 50;
+		$("input[name=room_location").val(room_location);
+		$("input[name=room_location_detail]").val(room_location_detail);
 		
-		var target = $(this).parent().find(".numBox");
-		if(plusNum > max) {
-			target.val(num);
-		} else {
-		    target.val(plusNum);          
-		}
+		$("#form").attr("action", "/cy/registerHost2Post");
+		$("#form").submit();
 	});
-	
-	// .minus
-	$(".minus").on("click", function(e){
-		var num = $(this).parent().find(".numBox").val();
-		var minusNum = Number(num) - 1;
-		   
-		var target = $(this).parent().find(".numBox");
-		if(minusNum <= 0) {
-			target.val(num);
-		} else {
-			target.val(minusNum);          
-		}
-	});
-	// 수량 버튼 END
-	
+
 });
 </script>
 
 
+<!-- 주소 api -->
+<script language="javascript">
+	function goPopup() {
+		var pop = window.open("/popup/jusoPopup.jsp","pop","width=570, height=420, scrollbars=yes, resizable=yes");
+	}
+	function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr,jibunAddr,zipNo,admCd,
+			rnMgtSn,bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,
+			buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo) {
+		
+		document.form.roadFullAddr.value = roadFullAddr;
+		document.form.roadAddrPart1.value = roadAddrPart1;
+		document.form.roadAddrPart2.value = roadAddrPart2;
+		document.form.addrDetail.value = addrDetail;
+		document.form.zipNo.value = zipNo;
+	}
+</script>
+
+<% 
+	request.setCharacterEncoding("UTF-8");  //한글깨지면 주석제거
+	//request.setCharacterEncoding("EUC-KR");  //해당시스템의 인코딩타입이 EUC-KR일경우에
+	String inputYn = request.getParameter("inputYn"); 
+	String roadFullAddr = request.getParameter("roadFullAddr"); 
+%>
 <!-- host_register_page1 START -->
 <br><br><br><br>
 
@@ -88,128 +77,70 @@ $(function(){
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<label class="lblTitle1">숙소 등록을 시작해 볼까요?</label><br>
+			<label class="lblTitle1">숙소의 위치를 알려주세요.</label><br>
 			<div class="progress">
 				<div class="progress-bar w-25"></div>
 			</div><br>
-			<label>1단계: 기본 사항을 입력하세요</label><br><br>
+			<label>1단계: 등록할 숙소의 주소를 입력해주세요.</label><br><br>
 
-			<form role="form" id="registerForm" action="/cy/registerHost2Post" method="post">
-			roomVo: ${roomVo}
-			<input type="hidden" name="room_type_num" value="${roomVo.room_type_num}"/>
-			<input type="hidden" name="room_people" value="${roomVo.room_people}"/>
-			<input type="hidden" name="room_bed" value="${roomVo.room_bed}"/>
-			<input type="hidden" name="room_bathroom" value="${roomVo.room_bathroom}"/>
-			
-				<!-- 건물 유형 -->
-				<div class="form-group">
-					<label class="lblTitle2">건물 유형을 선택하세요</label>
-					<select class="browser-default custom-select" id="room_type_num">
-				        <option selected="">하나를 선택해주세요.</option>
-						<!-- 값은 DB에서 불러와서 하기 -->
-				        <option value="1"
-				        	<c:if test="${roomVo.room_type_num eq 1}">selected</c:if>
-				        >아파트</option>
-				        <option value="2"
-				        	<c:if test="${roomVo.room_type_num eq 2}">selected</c:if>
-				        >주택</option>
-				        <option value="3"
-				        	<c:if test="${roomVo.room_type_num eq 3}">selected</c:if>
-				        >게스트하우스</option>
-				     </select>
-				</div><br><br><br>
+				<!-- 위치등록 -->
+				<form id="form" name="form" method="post">
+				<input type="hidden" id="confmKey" name="confmKey" value=""/>
+				<input type="hidden" id="returnUrl" name="returnUrl" value=""/>
+				<input type="hidden" id="resultType" name="resultType" value=""/>
+				<!-- 해당시스템의 인코딩타입이 EUC-KR일경우에만 추가 START-->
+				<!-- <input type="hidden" id="encodingType" name="encodingType" value="EUC-KR"/> -->
 				
-				<!-- 인원수 -->
-				<div class="form-group">
-					<label class="lblTitle2">숙소에 얼마나 많은 인원이 숙박할 수 있나요?</label>
-					<br>
-					
-					<div class="row">
-						<div class="col-md-3">
-							<label class="lblTitle3">최대 숙박 인원</label>
-						</div>
-						<div class="col-md-3">
-							<button type="button" class="minus" style="border: none; background: none;">-</button>
-							
-							<input type="number" class="numBox" min="1" max="20" 
-								<c:choose>
-									<c:when test="${not empty roomVo}">
-										value="${roomVo.room_people}" 
-									</c:when>
-									<c:otherwise>
-										value="4" 
-									</c:otherwise>
-								</c:choose>
-							readonly="readonly" id="room_people"/>
-									
-							<button type="button" class="plus" style="border: none; background: none;">+</button>
-						</div>
-						<div class="col-md-3"></div>
-						<div class="col-md-3"></div>
-					</div>
-				</div><br><br><br>
+				roomVo: ${roomVo}
+				<input type="hidden" name="room_location" value="${roomVo.room_location}"/>
+				<input type="hidden" name="room_location_detail"  value="${roomVo.room_location_detail}"/>
 				
-				<!-- 침대수 -->
-				<div class="form-group">
-					<label class="lblTitle2">게스트가 사용할 수 있는 침대는 몇 개인가요?</label>
-					<br>
-					
-					<div class="row">
-						<div class="col-md-3">
-							<label class="lblTitle3">침대</label>
-						</div>
-						<div class="col-md-3">
-							<button type="button" class="minus" style="border: none; background: none;">-</button>
-							
-							<input type="number" class="numBox" min="1" max="20" 
-								<c:choose>
-									<c:when test="${not empty roomVo}">
-										value="${roomVo.room_bed}" 
-									</c:when>
-									<c:otherwise>
-										value="1" 
-									</c:otherwise>
-								</c:choose>
-							readonly="readonly" id="room_bed"/>
-									
-							<button type="button" class="plus" style="border: none; background: none;">+</button>
-						</div>
-						<div class="col-md-3"></div>
-						<div class="col-md-3"></div>
+				<div class="row">
+					<div class="col-md-3">
+						<button type="button" class="btn btn-primary btn-block" onClick="goPopup();">주소검색</button> 
 					</div>
-				</div><br><br><br>
-				
-				<!-- 욕실수 -->
-				<div class="form-group">
-					<label class="lblTitle2">욕실 수를 선택해주세요.</label>
-					<br>
-					
-					<div class="row">
-						<div class="col-md-3">
-							<label class="lblTitle3">욕실</label>
-						</div>
-						<div class="col-md-3">
-							<button type="button" class="minus" style="border: none; background: none;">-</button>
-								
-							<input type="number" class="numBox" min="1" max="20" 
-							<c:choose>
-									<c:when test="${not empty roomVo}">
-										value="${roomVo.room_bathroom}" 
-									</c:when>
-									<c:otherwise>
-										value="1" 
-									</c:otherwise>
-							</c:choose>
-							readonly="readonly" id="room_bathroom"/>
-							
-							<button type="button" class="plus" style="border: none; background: none;">+</button>
-						</div>
-						<div class="col-md-3"></div>
-						<div class="col-md-3"></div>
-					</div>
+					<div class="col-md-3"></div>
+					<div class="col-md-3"></div>
+					<div class="col-md-3"></div>
 				</div><br>
 				
-				
+				<div class="row">
+					<div class="col-md-2">
+						<label class="lblTitle3">도로명 주소 전체</label>
+					</div>
+					<div class="col-md-10">
+						<input type="text" id="roadFullAddr" name="roadFullAddr" style="width:100%;" placeholder="Enter Addr" required readonly/><br>
+					</div></div>	
+				<div class="row">
+					<div class="col-md-2">
+						<label class="lblTitle3">도로명 주소</label>
+					</div>
+					<div class="col-md-10">
+						<input type="text" id="roadAddrPart1" name="roadAddrPart1" style="width:100%;" placeholder="Enter Addr" required readonly/><br>
+					</div></div>
+				<div class="row">
+					<div class="col-md-2">
+						<label class="lblTitle3">상세주소</label>
+					</div>
+					<div class="col-md-10">
+						<input type="text" id="addrDetail" name="addrDetail" style="width:100%;" placeholder="Enter Addr" required readonly/><br>
+					</div></div>
+				<div class="row">
+					<div class="col-md-2">
+						<label class="lblTitle3">참고 주소</label>
+					</div>
+					<div class="col-md-10">
+						<input type="text" id="roadAddrPart2" name="roadAddrPart2" style="width:100%;" placeholder="Enter Addr" required readonly/><br>
+					</div></div>
+				<div class="row">
+					<div class="col-md-2">
+						<label class="lblTitle3">우편 번호</label>
+					</div>
+					<div class="col-md-10">
+						<input type="text" id="zipNo" name="zipNo" style="width:100%;" placeholder="Enter Addr" required readonly/>
+					</div>
+				</div><br>
+
 				<!-- Button -->
 				<br>
 				<div class="row">
