@@ -47,4 +47,12 @@ public class CyController {
 		model.addAttribute("roomVo", roomVo);
 		return "/host/host_register_page4";
 	}
+	
+	// 호스트 등록하기 최종
+	@RequestMapping(value = "/registerHost", method = RequestMethod.POST)
+	public String registerHost(Model model, RoomVo roomVo) throws Exception{
+		System.out.println(">>>> registerHost roomVo: " + roomVo);
+		model.addAttribute("roomVo", roomVo);
+		return "redirect:/";
+	}
 }

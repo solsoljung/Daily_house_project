@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
     
 	<script src="/casahotel/js/jquery-3.3.1.min.js"></script>
     <script src="/casahotel/js/jquery-migrate-3.0.1.min.js"></script>
