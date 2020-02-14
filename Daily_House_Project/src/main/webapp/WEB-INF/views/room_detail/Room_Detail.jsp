@@ -98,24 +98,7 @@ $(function(){
 
 <script>
 $(function() {
-	$("#btnReview").click(function() {
-		var room_num = "${roomDto.room_num}"; //댓글시 해당 방 번호
-		var review_text = $("#review_text").val();
-		var user_email = "${user_email}";
-		var loc_score = $("#loc").val();
-		var cle_score = $("#cle").val();
-		var che_score = $("#che").val();
-		var com_score = $("#com").val();
-		
-		console.log("room_num : " + room_num);
-		console.log("review_text : " + review_text);
-		console.log("user_email : " + user_email);
-		console.log("loc_score : " + loc_score);
-		console.log("cle_score : " + cle_score);
-		console.log("che_score : " + che_score);
-		console.log("com_score : " + com_score);
-		
-	});
+	
 });
 </script>
 
@@ -254,7 +237,7 @@ $(function() {
           			<td id="clean" data-score="${RoomReviewVo.review_score_cleanliness}">${RoomReviewVo.review_score_cleanliness}</td>
           			<td id="checkin" data-score="${RoomReviewVo.review_score_checkin}">${RoomReviewVo.review_score_checkin}</td>
           			<td id="communication" data-score="${RoomReviewVo.review_score_communication}">${RoomReviewVo.review_score_communication}</td>
-          			<td></td>
+          			<td>${RoomReviewVo.total_score}</td>
           			<td>${RoomReviewVo.room_review_text}</td>
           		</tr>
           		</c:forEach>
@@ -263,13 +246,16 @@ $(function() {
           	<hr>
 <!-- 후기 작성란 구역 -->
           	<div>
+          		<form action="/boo/review" method="post">
+          		<input type="hidden" name="room_num" value="${roomDto.room_num}">
+          		<input type="hidden" name="user_email" value="${user_email}">
 				  <table>
 				   <tr>
 				    <td>지역</td>
 				    <td>
 				     <table>
 				      <tr>
-				       <td><input type="text" value="0" id="loc"  size='1' readonly><td>
+				       <td><input type="text" name="review_score_location" value="0" id="loc"  size='1' readonly><td>
 				       <td>
 				        <a class="mousePointer" onclick="locUp()">▲</a><br>
 				       	<a class="mousePointer" onclick="locDown()">▼</a>
@@ -281,7 +267,7 @@ $(function() {
 				    <td>
 				     <table>
 				      <tr>
-				       <td><input type="text" value="0" id="cle"  size='1' readonly><td>
+				       <td><input type="text" name="review_score_cleanliness" value="0" id="cle"  size='1' readonly><td>
 				       <td>
 				        <a class="mousePointer" onclick="cleUp()">▲</a><br>
 				       	<a class="mousePointer" onclick="cleDown()">▼</a>
@@ -293,7 +279,7 @@ $(function() {
 				    <td>
 				     <table>
 				      <tr>
-				       <td><input type="text" value="0" id="che"  size='1' readonly><td>
+				       <td><input type="text" name="review_score_checkin" value="0" id="che"  size='1' readonly><td>
 				       <td>
 				        <a class="mousePointer" onclick="cheUp()">▲</a><br>
 				       	<a class="mousePointer" onclick="cheDown()">▼</a>
@@ -305,7 +291,7 @@ $(function() {
 				    <td>
 				     <table>
 				      <tr>
-				       <td><input type="text" value="0" id="com"  size='1' readonly><td>
+				       <td><input type="text" name="review_score_communication" value="0" id="com"  size='1' readonly><td>
 				       <td>
 				        <a class="mousePointer" onclick="comUp()">▲</a><br>
 				       	<a class="mousePointer" onclick="comDown()">▼</a>
@@ -317,8 +303,10 @@ $(function() {
 				  </table>
 				
           		<label for="review_text">댓글내용</label>
-          		<input type="text" id="review_text" />
-          		<button type="button" id="btnReview">작성완료</button>
+          		<input type="text" id="review_text" name="room_review_text"/>
+          		<button type="submit" id="btnReview">작성완료</button>
+          		
+          		</form>
           	</div>
           	
           	<hr>

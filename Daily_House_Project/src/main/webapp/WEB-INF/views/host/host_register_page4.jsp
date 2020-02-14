@@ -31,9 +31,8 @@ $(function(){
 			data_options.push($(this).attr("data-option"));
 	    });
 		console.log("data_options: " + data_options);
-		$("input[name=room_options]").val(data_options);
-		console.log("input data_options" + $("input[name=room_options]").val());
-		console.log("${roomVo}");
+		$("input[name=room_option_code]").val(data_options);
+		console.log("input room_option_code: " + $("input[name=room_option_code]").val());
 		
 		$("#registerForm").attr("action", "/cy/registerHost");
 		$("#registerForm").submit();
@@ -66,26 +65,21 @@ $(function(){
 			<input type="hidden" name="room_title" value="${roomVo.room_title}"/>
 			<input type="hidden" name="room_explain" value="${roomVo.room_explain}"/>
 			<input type="hidden" name="room_price" value="${roomVo.room_price}"/>
-			<input type="hidden" name="room_options" />
+			<input type="hidden" name="room_option_code" />
 			
 				<!-- 편의시설 -->
 				<div class="form-group">
 					<label class="lblTitle2">어떤 편의시설을 제공하시나요?</label>
 					
+					<!-- roomOptionList -->
 					<div class="checkbox">
-						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="에어컨"/> 에어컨</label><br>
-						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="무선인터넷"/> 무선인터넷</label><br>
-						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="TV"/> TV</label><br>
-						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="조식"/> 조식</label><br>
-						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="주차공간"/> 주차공간</label><br>
-						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="흡연가능"/> 흡연가능</label><br>
-						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="반려동물"/> 반려동물</label><br>
-						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="옷장"/> 옷장</label><br>
-						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="헤어드라이"/> 헤어드라이</label>
+					<c:forEach items="${roomOptionList}" var="roomOptionVo">
+						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="${roomOptionVo.room_option_code}"/> ${roomOptionVo.room_option_explain}</label><br>
+					</c:forEach>
 					</div> 
 					
 				</div><br><br><br>
-				
+
 				<!-- Button -->
 				<br>
 				<div class="row">
