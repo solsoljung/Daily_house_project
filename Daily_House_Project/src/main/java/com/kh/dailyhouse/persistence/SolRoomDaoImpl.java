@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.dailyhouse.domain.PagingDto;
+import com.kh.dailyhouse.domain.ReservationVo;
 import com.kh.dailyhouse.domain.RoomVo;
 
 @Repository
