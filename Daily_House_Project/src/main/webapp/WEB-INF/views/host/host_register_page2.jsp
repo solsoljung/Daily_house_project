@@ -23,14 +23,6 @@ $(function(){
 	$(".nav-item:eq(0)").attr("class", "nav-item");
 	$(".nav-item:eq(5)").attr("class", "nav-item active");
 	
-	// host_register_page1로 이동
-/*	$("#btnPrev").click(function(e){
-		e.preventDefault();
-		// 400 Bad Request 
-		// 클라이언트는 요청을 수정하지 않고 동일한 형태로 다시 보내서는 안됩니다.
-		// $("#registerForm").submit();
-	}); */ // 이전으로 이동 금지!!!!!!!!!!!!
-	
 	// host_register_page3으로 이동
 	$("#btnNext").click(function(e){
 		e.preventDefault();

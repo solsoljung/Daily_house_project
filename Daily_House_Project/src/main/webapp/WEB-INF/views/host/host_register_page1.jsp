@@ -98,7 +98,7 @@ $(function(){
 				
 				<div class="row">
 					<div class="col-md-2">
-						<button type="button" class="btn btn-primary btn-block px-5" onClick="goPopup();" style="font-size:15px;">주소검색</button>
+						<button type="button" class="btn btn-primary btn-block" onClick="goPopup();" style="font-size:15px;">주소검색</button>
 					</div>
 					<div class="col-md-10"></div>
 				</div><br>
