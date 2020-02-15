@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 
 	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
@@ -17,8 +16,7 @@
 
     <link rel="stylesheet" href="/islagrande/css/ionicons.min.css">
 
-    <link rel="stylesheet" href="/islagrande/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="/islagrande/css/jquery.timepicker.css">
+    <!-- <link rel="stylesheet" href="/islagrande/css/jquery.timepicker.css"> -->
 
     
     <link rel="stylesheet" href="/islagrande/css/flaticon.css">

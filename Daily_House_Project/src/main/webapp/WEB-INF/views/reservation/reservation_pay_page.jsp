@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 
 <%@ include file = "../../views/title.jsp"%> <!-- <head> -->
 
@@ -43,7 +42,7 @@ $(function() {
         </div>
       </a>
 </section>
-
+${userVo}
   <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">
@@ -53,21 +52,21 @@ $(function() {
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="name">예약자</label>
-                  <input type="text" id="name" class="form-control ">
+                  <input type="text" id="name" class="form-control" value="${userVo.user_name}">
                 </div>
               </div>
               
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="phone">연락처</label>
-                  <input type="text" id="name" class="form-control ">
+                  <input type="text" id="name" class="form-control" value="${userVo.user_phone}">
                 </div>
               </div>
           
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="name">총 결제금액</label>
-                  <input type="text" id="pay" class="form-control ">
+                  <input type="text" id="pay" class="form-control" value="${roomVo.room_price}">
                 </div>
               </div>
               
@@ -88,7 +87,7 @@ $(function() {
               
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <input id="payBtn" type="button" value="결제하기" class="btn btn-primary text-white py-3 px-5">
+                  <input id="payBtn" type="button" value="결제하기" class="btn btn-primary py-3 px-5" style="font-size:20px;">
                 </div>
               </div>
             </form>

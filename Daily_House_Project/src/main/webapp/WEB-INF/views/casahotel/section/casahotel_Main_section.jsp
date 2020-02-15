@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 
 <section class="site-hero overlay" style="background-image: url(/casahotel/img/hero_1.jpg)" data-stellar-background-ratio="0.5">
       <div class="container">

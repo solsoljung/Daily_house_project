@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-    
  </head>
   <body>
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -14,18 +12,31 @@
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
 	        	<li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
-	        	<li class="nav-item"><a href="/yo/like_list" class="nav-link">찜목록</a></li>
+				  <c:choose>
+				   	<c:when test="${empty userVo}">
+	        			<li class="nav-item"><a href="/si/loginHost" class="nav-link">찜목록</a></li>
+				   	</c:when>
+				   	<c:otherwise> 
+	        			<li class="nav-item"><a href="/yo/like_list" class="nav-link">찜목록</a></li>
+				   	</c:otherwise>
+				  </c:choose>
 	        	<li class="nav-item"><a href="/sol/room" class="nav-link">Rooms</a></li>
 	        	<li class="nav-item"><a href="blog.html" class="nav-link">About</a></li>
 	        	<li class="nav-item"><a href="/yo/reservation" class="nav-link">예약하기</a></li>
 	        	<li class="nav-item"><a href="/cy/registerHost1" class="nav-link">호스팅하기</a></li>
 				  <c:choose>
-				   	<c:when test="${empty session.signedUser}">
+				   	<c:when test="${empty userVo}">
 					    <li class="nav-item"><a href="/si/registerHost" class="nav-link">회원가입</a></li>
 					    <li class="nav-item"><a href="/si/loginHost" class="nav-link">로그인</a></li>
 				   	</c:when>
 				   	<c:otherwise> 
-				   		<li class="nav-item"><a href="/내 정보 링크" class="nav-link">내 정보</a></li>
+						<div class="dropdown" style="left: 15px">
+				   	<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:15px;">내정보</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						   		<li class="nav-item"><a href="/si/userInformation">${userVo.user_name}&nbsp;&nbsp;&nbsp;<img src="images/user.jpg" width="30" height="30"></a></li>
+						   		<li class="nav-item"><a href="/si/logout">로그아웃</a></li>
+				   		</div>
+				   		</div>
 				   	</c:otherwise>
 				  </c:choose>
 	        </ul>

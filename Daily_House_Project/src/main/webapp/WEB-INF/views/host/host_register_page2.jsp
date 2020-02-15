@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 
-<%@ include file = "../../views/title.jsp"%> <!-- <head> -->
-
-<%@ include file = "../../views/casahotel/casahotel_link.jsp" %>
-<%@ include file = "../../views/islagrande/islagrande_link.jsp" %>
-
-<%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
+<!-- 데이터피커X -->					
+<%@ include file = "../../views/title2.jsp"%> <!-- <head> -->					
+					
+<%@ include file = "../../views/casahotel/casahotel_link2.jsp" %>					
+<%@ include file = "../../views/islagrande/islagrande_link.jsp" %>					
+					
+<%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->					
+<!-- 데이터피커X -->	
 
 <style>
 	.lblTitle1{ font-size: 30px; font-weight: bold;}
@@ -22,31 +23,47 @@ $(function(){
 	$(".nav-item:eq(0)").attr("class", "nav-item");
 	$(".nav-item:eq(5)").attr("class", "nav-item active");
 	
-	// checkbox에서 checked인 room_option을 저장할 배열
-	var data_options = [];
-	
 	// host_register_page1로 이동
 /*	$("#btnPrev").click(function(e){
 		e.preventDefault();
-		$("#registerForm").attr("action", "/cy/registerHost1Post");
-		$("#registerForm").submit();
+		// 400 Bad Request 
+		// 클라이언트는 요청을 수정하지 않고 동일한 형태로 다시 보내서는 안됩니다.
+		// $("#registerForm").submit();
 	}); */ // 이전으로 이동 금지!!!!!!!!!!!!
 	
-	// host_register_page3로 이동
+	// host_register_page3으로 이동
 	$("#btnNext").click(function(e){
 		e.preventDefault();
-		$(".chb:checked").each(function() { 
-			data_options.push($(this).attr("data-option"));
-	    });
-// 		console.log("data_options: " + data_options);
-		$("input[name=room_options]").val(data_options);
-// 		console.log("input data_options" + $("input[name=room_options]").val());
 		
+		var room_title = $("input[name=room_title]").val();
+		var room_explain = $("textarea[name=room_explain]").val();
+		var room_price = $("input[name=room_price]").val();
+		
+		if(room_title == null || room_title == ""){
+			alert("숙소 이름을 입력해주세요.");
+			return;
+		}
+		if(room_explain == null || room_explain == ""){
+			alert("숙소 소개를 해주세요.");
+			return;
+		}
+		if(room_price == null || room_price == ""){
+			alert("숙소 가격을 정하세요.");
+			return;
+		}
+
 		$("#registerForm").attr("action", "/cy/registerHost3Post");
 		$("#registerForm").submit();
 	});
+	
+	// room_price는 숫자만 입력할 수 있도록 설정
+	$("input[name=room_price]").on("keyup", function() {
+	    $(this).val($(this).val().replace(/[^0-9]/g,""));
+	});
+	
 });
 </script>
+
 
 <!-- host_register_page1 START -->
 <br><br><br><br>
@@ -55,48 +72,51 @@ $(function(){
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<label class="lblTitle1">숙소 등록이 거의 다 되어갑니다!</label><br>
+			<label class="lblTitle1">숙소를 소개해주세요~</label><br>
 			<div class="progress">
 				<div class="progress-bar w-50"></div>
 			</div><br>
-			<label>2단계: 상세한 사항을 입력하세요</label><br><br>
+			<label>2단계: 등록할 숙소의 사진과 정보를 입력해주세요.</label><br><br>
 			
-			<form role="form" id="registerForm" method="post">
+			<form role="form" method="post" id="registerForm" >
 			roomVo: ${roomVo}
-			<input type="hidden" name="room_type_num" value="${roomVo.room_type_num}"/>
-			<input type="hidden" name="room_people" value="${roomVo.room_people}"/>
-			<input type="hidden" name="room_bed" value="${roomVo.room_bed}"/>
-			<input type="hidden" name="room_bathroom" value="${roomVo.room_bathroom}"/>
-			<input type="hidden" name="room_options" value="${roomVo.room_options}"/>
+			<input type="hidden" name="room_location" value="${roomVo.room_location}"/>
+			<input type="hidden" name="room_location_detail"  value="${roomVo.room_location_detail}"/>
 			
-				<!-- 편의시설 -->
+				<!-- 사진 및 소개 등록 -->
 				<div class="form-group">
-					<label class="lblTitle2">어떤 편의시설을 제공하시나요?</label>
+					<label class="lblTitle2">숙소 이름을 입력해주세요.</label>
+					<input type="text" class="form-control" name="room_title"
+						<c:if test="${not empty roomVo.room_title}">value="${roomVo.room_title}"</c:if>					
+					/><br><br>
 					
-					<div class="checkbox">
-						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="에어컨"/> 에어컨</label><br>
-						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="무선인터넷"/> 무선인터넷</label><br>
-						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="TV"/> TV</label><br>
-						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="조식"/> 조식</label><br>
-						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="주차공간"/> 주차공간</label><br>
-						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="흡연가능"/> 흡연가능</label><br>
-						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="반려동물"/> 반려동물</label><br>
-						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="옷장"/> 옷장</label><br>
-						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="헤어드라이"/> 헤어드라이</label>
-					</div> 
+					<label class="lblTitle2">숙소 소개를 해주세요.</label>
+					<textarea rows="10" cols="50" name="room_explain" style="width:100%;" maxlength="350"><c:if test="${not empty roomVo.room_explain}">
+${roomVo.room_explain}</c:if></textarea><br><br>
 					
+					<label class="lblTitle2">가격을 정하세요.</label>
+					<div class="row">
+						<div class="col-md-3">
+							<input type="text" class="form-control" name="room_price"
+								<c:if test="${roomVo.room_price != 0}">value="${roomVo.room_price}"</c:if>				
+							/>
+						</div>
+						<div class="col-md-3"></div>
+						<div class="col-md-3"></div>
+						<div class="col-md-3"></div>
+						</div>
+					<br><br>
 				</div><br><br><br>
-				
+					
 				<!-- Button -->
 				<br>
 				<div class="row">
 					<div class="col-md-3">
-<!-- 						<button type="button" class="btn btn-primary btn-block" id="btnPrev">Prev</button> -->
 					</div>
 					<div class="col-md-3"></div>
 					<div class="col-md-3"></div>
 					<div class="col-md-3" align="right">
-						<button type="button" class="btn btn-primary btn-block" id="btnNext" >Next</button>
+						<button type="button" class="btn btn-primary btn-block py-3 px-5" id="btnNext" style="font-size:15px;" >Next</button>
 					</div>
 				</div>
 				

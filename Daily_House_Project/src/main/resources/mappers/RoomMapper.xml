@@ -5,7 +5,25 @@
   
 <mapper namespace="com.kh.mappers.RoomMapper">
 
+	<!-- 숙소 업로드를위한 tbl_room의 room_num.nextval 받아오기 -->
+	<!-- SELECT LAST_NUMBER FROM USER_SEQUENCES WHERE SEQUENCE_NAME = 'SEQ_ROOM_NUM' -->
+	<select id="getNextRoomNum" resultType="int" >
+		select seq_room_num.nextval from dual
+	</select>
+
 	<!-- 숙소 등록하기 -->
+	<insert id="registerRoom">
+		insert into tbl_room (room_num, room_type_num, user_email, 
+                      room_location, room_location_detail, 
+                      room_title, room_price, room_explain, 
+                      room_people, room_bed, room_bathroom, room_option_code)		
+                      			
+		values (#{room_num},#{room_type_num},#{user_email},		
+                    #{room_location}, #{room_location_detail},
+                    #{room_title}, #{room_price}, #{room_explain},
+                     #{room_people}, #{room_bed}, #{room_bathroom}, #{room_option_code})
+	</insert>
+	
 	<!-- 숙소 수정하기 -->
 	<!-- 숙소 삭제하기 -->
 

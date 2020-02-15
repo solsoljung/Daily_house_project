@@ -21,8 +21,9 @@ public class SIController {
 	//홈으로 가는 컨트롤러
 	@RequestMapping(value = "/goHome", method = RequestMethod.GET)
 	public String goHome() throws Exception {
-		return "/";
+		return "redirect:/";
 	}
+	
 	//회원가입으로 가는 컨트롤러
 	@RequestMapping(value = "/registerHost", method = RequestMethod.GET)
 	public String registerHost() throws Exception {
@@ -57,28 +58,31 @@ public class SIController {
 	public String login_run(HttpSession session, RedirectAttributes rttr, UserVo userVo) throws Exception{
 		// 요청정보 얻어서
 		UserVo userVo1 = siUserService.login_run(userVo);
-		System.out.println("userVo1 : "+userVo1);
+//		System.out.println("userVo1 : "+userVo1);
 		// DB 에 넣기 - Service - Dao - Mybatis - Oracle
 
-		
 		if(userVo1 == null) {
 			rttr.addFlashAttribute("msg", "fail");
 			return "redirect:/si/loginHost";
 		}
+		session.setAttribute("userVo", userVo1);
 		
-		session.setAttribute("signedUser", userVo1.getUser_name());
-		
-		System.out.println(session.getAttribute("signedUser"));
-		
+//		System.out.println(session.getAttribute("userVo"));
 		rttr.addFlashAttribute("msg", "success");
 		return "redirect:/";
 	}
-
+	
 	// 로그아웃 처리
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) throws Exception {
 		session.invalidate();
 		return "redirect:/";
+	}
+	
+	// 내정보 가는 컨트롤러
+	@RequestMapping(value = "/userInformation", method = RequestMethod.GET)
+	public String userInformation(HttpSession session) throws Exception {
+		return "/user/user";
 	}
 }
 	

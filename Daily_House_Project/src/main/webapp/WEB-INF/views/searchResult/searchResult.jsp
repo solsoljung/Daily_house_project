@@ -2,20 +2,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 
+<!-- 데이터 피커 O -->
 <%@ include file = "../../views/title.jsp"%> <!-- <head> -->
 
 <%@ include file = "../../views/casahotel/casahotel_link.jsp" %>
 <%@ include file = "../../views/islagrande/islagrande_link.jsp" %>
 
 <%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
+<!-- 데이터 피커 O -->
+
 <style>
 .sol-font{
 	font-family: '맑은 고딕';
 	color: #fb929e;
 }
 </style>
+
 <script>
 $(document).ready(function(){
 	//페이징
@@ -44,6 +47,76 @@ $(document).ready(function(){
 			$("#frmPage").submit();
 		}
 	});
+	
+	//체크인
+	$('#startDate').datepicker({
+		format: "yyyy-mm-dd",
+	    startDate: 'd',
+	    autoclose : true,
+	    datesDisabled : [],	//'2020-02-18','2020-02-20'이런 형식
+	    multidateSeparator :",",
+	    templates : {
+	        leftArrow: '&laquo;',
+	        rightArrow: '&raquo;'
+	    },
+	    showWeekDays : true ,
+	    title: "체크인 날짜 선택",
+	    todayHighlight : true ,
+	    toggleActive : true,
+	    weekStart : 0 ,
+	    language : "ko"
+		    
+	}).on("changeDate", function(e) {
+		
+		var date = formatDate(e.date);
+		var arrDate = date.split("-");
+		var intNewDay = parseInt(arrDate[2]) + 1;
+		arrDate[2] = intNewDay.toString();
+		var newDate = arrDate.join('-');
+        $("#endDate").datepicker("setStartDate", newDate);
+        console.log(date);
+        $('#endDate').datepicker("show");
+	});
+	 
+	//체크아웃
+	$('#endDate').datepicker({
+		format: "yyyy-mm-dd",
+	    startDate: '1d',
+	    autoclose : true,
+	    datesDisabled : [],
+	    multidateSeparator :",",
+	    templates : {
+	        leftArrow: '&laquo;',
+	        rightArrow: '&raquo;'
+	    },
+	    showWeekDays : true ,
+	    title: "체크아웃 날짜 선택",
+	    todayHighlight : true ,
+	    toggleActive : true,
+	    weekStart : 0 ,
+	    language : "ko"
+		    
+	}).on("changeDate", function(e) {
+		
+		var date = formatDate(e.date);
+		console.log(date);
+		
+	});
+	
+	
+	//날짜 포멧 함수
+	function formatDate(date) { 
+		var d = new Date(date),
+	 	month = '' + (d.getMonth() + 1),
+		day = '' + d.getDate(), 
+		year = d.getFullYear(); 
+
+		if (month.length < 2) month = '0' + month; 
+		if (day.length < 2) day = '0' + day; 
+
+		return [year, month, day].join('-'); 
+	}
+
 });
 </script>
 
@@ -51,6 +124,17 @@ $(document).ready(function(){
 
 <section class="ftco-section ftco-room">
 <div class="container">
+
+<!-- 달력테스트 -->
+<div class="row">
+    	<div class="col-md-6">
+    		<input type="text" id="startDate" class="form-control">
+    	</div>
+    	<div class="col-md-6">
+			<input type="text" id="endDate" class="form-control">
+    	</div>
+</div>
+<!-- 달력테스트 끝 -->
 
 <!-- 히든 폼 -->
 <form id="frmPage" action="/sol/room" method="get">
@@ -180,9 +264,14 @@ $(document).ready(function(){
 
 <!-- end section -->
 
+<!-- 데이터피커O -->
+
 <%@ include file = "../../views/casahotel/casahotel_footer.jsp" %>
 
 <%@ include file = "../../views/casahotel/casahotel_script.jsp" %>
 <%@ include file = "../../views/islagrande/islagrande_script.jsp" %>
 
 <%@ include file = "../../views/end.jsp"%> <!-- </body> -->
+
+<!-- 데이터피커O -->
+
