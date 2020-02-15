@@ -51,9 +51,9 @@ $(document).ready(function(){
 	//체크인
 	$('#startDate').datepicker({
 		format: "yyyy-mm-dd",
-	    startDate: '-1d',
+	    startDate: 'd',
 	    autoclose : true,
-	    datesDisabled : ['2020-02-18','2020-02-20'],
+	    datesDisabled : [],	//'2020-02-18','2020-02-20'이런 형식
 	    multidateSeparator :",",
 	    templates : {
 	        leftArrow: '&laquo;',
@@ -66,41 +66,44 @@ $(document).ready(function(){
 	    weekStart : 0 ,
 	    language : "ko"
 		    
-	}).on("change", function(e) {
+	}).on("changeDate", function(e) {
 		
 		var date = formatDate(e.date);
-		console.log(e);
-		//여기하고 있었음
-		$("#endDate").val(date);
-		showCheckout();
+		var arrDate = date.split("-");
+		var intNewDay = parseInt(arrDate[2]) + 1;
+		arrDate[2] = intNewDay.toString();
+		var newDate = arrDate.join('-');
+        $("#endDate").datepicker("setStartDate", newDate);
+        console.log(date);
+        $('#endDate').datepicker("show");
+	});
+	 
+	//체크아웃
+	$('#endDate').datepicker({
+		format: "yyyy-mm-dd",
+	    startDate: '1d',
+	    autoclose : true,
+	    datesDisabled : [],
+	    multidateSeparator :",",
+	    templates : {
+	        leftArrow: '&laquo;',
+	        rightArrow: '&raquo;'
+	    },
+	    showWeekDays : true ,
+	    title: "체크아웃 날짜 선택",
+	    todayHighlight : true ,
+	    toggleActive : true,
+	    weekStart : 0 ,
+	    language : "ko"
+		    
+	}).on("changeDate", function(e) {
+		
+		var date = formatDate(e.date);
+		console.log(date);
+		
 	});
 	
-	function showCheckout() {
-		//체크아웃
-		var checkin_year = '2020';
-		var checkin_month = '02';
-		var checkin_date = '27';
-		$("#endDate").attr("disabled", false);
-		
-		$('#endDate').datepicker({
-			format: "yyyy-mm-dd",
-		    startDate: '-1d',
-		    autoclose : true,
-		    datesDisabled : ['2020-02-18','2020-02-20'],
-		    multidateSeparator :",",
-		    templates : {
-		        leftArrow: '&laquo;',
-		        rightArrow: '&raquo;'
-		    },
-		    showWeekDays : true ,
-		    title: "체크아웃 날짜 선택",
-		    todayHighlight : true ,
-		    toggleActive : true,
-		    weekStart : 0 ,
-		    language : "ko"
-			    
-		});
-	}
+	
 	//날짜 포멧 함수
 	function formatDate(date) { 
 		var d = new Date(date),
@@ -128,7 +131,7 @@ $(document).ready(function(){
     		<input type="text" id="startDate" class="form-control">
     	</div>
     	<div class="col-md-6">
-			<input type="text" id="endDate" class="form-control" disabled>
+			<input type="text" id="endDate" class="form-control">
     	</div>
 </div>
 <!-- 달력테스트 끝 -->
