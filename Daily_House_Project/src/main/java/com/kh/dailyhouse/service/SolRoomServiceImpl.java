@@ -26,15 +26,15 @@ public class SolRoomServiceImpl implements SolRoomService {
 	 */
 	
 	@Override
-	public List<RoomVo> getRoomList(SearchVo vo) throws Exception {
+	public List<RoomVo> getRoomList(SearchVo searchVo) throws Exception {
 		
-		return dao.getRoomList(vo);
+		return dao.getRoomList(searchVo);
 	}
 
 	@Override
-	public int getRoomCount(PagingDto pagingDto) throws Exception {
+	public int getRoomCount(SearchVo searchVo) throws Exception {
 		
-		return dao.getRoomCount(pagingDto);
+		return dao.getRoomCount(searchVo);
 	}
 
 }

@@ -98,9 +98,14 @@ $(document).ready(function(){
 		    
 	}).on("changeDate", function(e) {
 		
-		var date = formatDate(e.date);
-		console.log(date);
-		
+		var checkin = $('#startDate').val();
+		var checkout = formatDate(e.date);
+		console.log(checkin);
+		console.log(checkout);
+
+		$("input[name=str_start_date]").val(checkin);
+		$("input[name=str_end_date]").val(checkout);
+		$("#frmPage").submit();
 	});
 	
 	
@@ -139,8 +144,10 @@ $(document).ready(function(){
 <!-- 히든 폼 -->
 <form id="frmPage" action="/sol/room" method="get">
 	<input type="hidden" name="room_num" />
-	<input type="hidden" name="page" value="${pagingDto.page}"/>
-	<input type="hidden" name="keyword" value="${pagingDto.keyword}"/>
+	<input type="hidden" name="page" value="${searchVo.page}"/>
+	<input type="hidden" name="keyword" value="${searchVo.keyword}"/>
+	<input type="hidden" name="str_start_date" value="${searchVo.str_start_date}"/>
+	<input type="hidden" name="str_end_date" value="${searchVo.str_end_date}"/>
 </form>
 <!-- 히든 폼 끝 -->
 
@@ -151,7 +158,7 @@ $(document).ready(function(){
 	              <form action="#" class="search-form">
 	                <div class="form-group">
 	                  <span class="icon icon-search"></span>
-	                  <input type="text" id="searchTarget" class="form-control" value="${pagingDto.keyword}" 
+	                  <input type="text" id="searchTarget" class="form-control" value="${searchVo.keyword}" 
 	                  placeholder="모든 위치" style="font-size:30px;">
 	                </div>
 	              </form>
@@ -191,8 +198,8 @@ $(document).ready(function(){
     </div>
 <!-- 모달창 끝 -->
 <br>
-<c:if test="${not empty pagingDto.keyword}">
-	<h6 class="sol-font">${pagingDto.totalCount}개의 방이 검색 되었습니다.</h6>
+<c:if test="${not empty searchVo.keyword}">
+	<h6 class="sol-font">${searchVo.totalCount}개의 방이 검색 되었습니다.</h6>
 </c:if>
 <br>
 <!-- 방 리스트 -->
@@ -228,15 +235,15 @@ $(document).ready(function(){
 	<div class="col text-center">
 		 <div class="block-27">
 			<ul>
-			<c:if test="${pagingDto.hasPrev == true}">
+			<c:if test="${searchVo.hasPrev == true}">
 						<li>
-							<a class="solge" data-page="${pagingDto.startPage - 1}">&lt;</a>
+							<a class="solge" data-page="${searchVo.startPage - 1}">&lt;</a>
 						</li>
 					</c:if>
-					<c:forEach begin="${pagingDto.startPage}" end="${pagingDto.endPage}" var="v">
+					<c:forEach begin="${searchVo.startPage}" end="${searchVo.endPage}" var="v">
 						<li 
 							<c:choose>
-								<c:when test="${pagingDto.page == v}">
+								<c:when test="${searchVo.page == v}">
 									class="active"
 								</c:when>
 								<c:otherwise>
@@ -247,9 +254,9 @@ $(document).ready(function(){
 							<a class="solge" data-page="${v}">${v}</a>
 						</li>
 					</c:forEach>
-					<c:if test="${pagingDto.hasNext == true}">
+					<c:if test="${searchVo.hasNext == true}">
 						<li>
-							<a class="solge" data-page="${pagingDto.endPage + 1}">&gt;</a>
+							<a class="solge" data-page="${searchVo.endPage + 1}">&gt;</a>
 						</li>
 					</c:if>
 			</ul>
