@@ -97,7 +97,6 @@ $(function(){
 
 			<form role="form" id="registerForm" action="/cy/registerHost4Post" method="post">
 			roomTypeList: ${roomTypeList}
-			
 			roomVo: ${roomVo}
 			<input type="hidden" name="room_type_num" value="${roomVo.room_type_num}"/>
 			<input type="hidden" name="room_people" value="${roomVo.room_people}"/>
