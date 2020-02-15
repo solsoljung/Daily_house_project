@@ -35,13 +35,10 @@ public class SolController {
 		Timestamp end_date;
 
 		if (str_start_date != null) {
-
 			str_start_date += " 00:00:00.0";
 			str_end_date += " 00:00:00.0";
-
 			start_date = java.sql.Timestamp.valueOf(str_start_date);
 			searchVo.setRoom_reserv_start_date(start_date);
-
 			end_date = java.sql.Timestamp.valueOf(str_end_date);
 			searchVo.setRoom_reserv_end_date(end_date);
 

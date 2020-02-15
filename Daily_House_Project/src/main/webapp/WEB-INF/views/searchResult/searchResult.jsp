@@ -11,7 +11,6 @@
 
 <%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
 <!-- 데이터 피커 O -->
-
 <style>
 .sol-font{
 	font-family: '맑은 고딕';
@@ -121,6 +120,9 @@ $(document).ready(function(){
 
 		return [year, month, day].join('-'); 
 	}
+	
+	//test
+	//$('[data-toggle="tooltip"]').tooltip();
 
 });
 </script>
@@ -128,6 +130,15 @@ $(document).ready(function(){
 <!-- section -->   
 
 <section class="ftco-section ftco-room">
+<!-- 테스트 <div class="container">
+  <h3>Popover Example</h3>
+  <ul class="list-inline">
+    <li><a href="#" title="Header" data-toggle="popover" data-placement="top" data-content="Content">Top</a></li>
+    <li><a href="#" title="Header" data-toggle="popover" data-placement="bottom" data-content="Content">Bottom</a></li>
+    <li><a href="#" title="Header" data-toggle="popover" data-placement="left" data-content="Content">Left</a></li>
+    <li><a href="#" title="Header" data-toggle="popover" data-placement="right" data-content="Content">Right</a></li>
+  </ul>
+</div> -->
 <div class="container">
 
 <!-- 달력테스트 -->
@@ -140,6 +151,7 @@ $(document).ready(function(){
     	</div>
 </div>
 <!-- 달력테스트 끝 -->
+
 
 <!-- 히든 폼 -->
 <form id="frmPage" action="/sol/room" method="get">
@@ -167,10 +179,6 @@ $(document).ready(function(){
     </div>
 <!-- 검색바 끝 -->
 
-<!-- 모달창 -->
-<div class="row">
-        <div class="col-md-12">
-            <div class="modal-box">
 <!-- 선택버튼 -->
                 <input type="button" value="날짜" class="btn btn-primary py-3 px-5" style="font-size:20px;" id= "btnTest" data-toggle="modal" data-target="#myModal">
 				<input type="button" value="인원" class="btn btn-primary py-3 px-5" style="font-size:20px;">
@@ -178,25 +186,6 @@ $(document).ready(function(){
 				<input type="button" value="요금" class="btn btn-primary py-3 px-5" style="font-size:20px;">
 				<input type="button" value="필터" class="btn btn-primary py-3 px-5" style="font-size:20px;">
 <!-- 선택버튼 끝 -->
-                <!-- Modal -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                            <div class="modal-body">
-                                <div class="icon"><i class="fa fa-check"></i></div>
-                                <h3 class="title">Woohoo! <br> Lorem ipsum dolor sit amet</h3>
-                                <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid commodi consequatur cumque </p>
-                                <button class="subscribe">Subscribe</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-<!-- 모달창 끝 -->
 <br>
 <c:if test="${not empty searchVo.keyword}">
 	<h6 class="sol-font">${searchVo.totalCount}개의 방이 검색 되었습니다.</h6>
