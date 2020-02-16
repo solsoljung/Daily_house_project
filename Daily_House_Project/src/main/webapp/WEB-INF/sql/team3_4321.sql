@@ -52,7 +52,8 @@ create table tbl_room(
 	room_explain VARCHAR2(1000) not null,	
 	room_people number not null,	
 	room_bed number not null,	
-	room_bathroom number not null	
+	room_bathroom number not null,
+	room_option_code VARCHAR2(200) 
 );	      
 create sequence seq_room_num;	
 
@@ -86,7 +87,7 @@ begin
 	for i in 1..50 loop				
 		insert into tbl_room (room_num, room_type_num, user_email, 
         room_location, room_location_detail, room_title, room_explain, room_price,
-        room_score, room_people, room_bed, room_bathroom)					
+        room_score, room_people, room_bed, room_bathroom, room_option_code)					
 		values (			
 			seq_room_num.nextval,		
 			'R1',		
@@ -99,7 +100,8 @@ begin
 			5,		
 			2,		
 			2,		
-			1);		
+			1,
+			'P1,P2');		
 	end loop;				
 end;					
 /	

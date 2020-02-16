@@ -1,11 +1,17 @@
 package com.kh.dailyhouse.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.kh.dailyhouse.domain.HostVo;
+import com.kh.dailyhouse.domain.RoomDetailDto;
 import com.kh.dailyhouse.domain.RoomVo;
 import com.kh.dailyhouse.service.CyRoomOptionService;
 import com.kh.dailyhouse.service.CyRoomService;
@@ -21,6 +27,24 @@ public class CyController {
 	private CyRoomOptionService roomOptionService;
 	@Inject
 	private CyRoomService roomService;
+	
+	// 호스트의 방 리스트 보기
+	@RequestMapping(value = "/HostRoomList", method = RequestMethod.GET)
+	public String HostRoomList(Model model) throws Exception{
+		HostVo hostVo = roomService.getHostInfo("test@naver.com");
+		model.addAttribute("hostVo", hostVo);
+		List<RoomDetailDto> list = roomService.getHostRoomList("test@naver.com");
+		model.addAttribute("list", list);
+		return "/host/host_room_list";
+	}
+	
+	// 호스트가 등록한 방 1개 상세보기
+	@RequestMapping(value = "/HostRoomDetail", method = RequestMethod.GET)
+	public String HostRoomDetail(Model model, @RequestParam("room_num") int room_num) throws Exception{
+		RoomDetailDto roomDetailDto = roomService.getHostRoomDetail(room_num);
+		model.addAttribute("roomDetailDto", roomDetailDto);
+		return "/host/host_room_detail";
+	}
 	
 	// 호스트 등록하기 1page readonly
 	@RequestMapping(value = "/registerHost1", method = RequestMethod.GET)

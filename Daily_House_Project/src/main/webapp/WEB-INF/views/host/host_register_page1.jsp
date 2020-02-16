@@ -132,17 +132,17 @@ $(function(){
 					</div></div>
 				<div class="row">
 					<div class="col-md-2">
-						<label class="lblTitle3">참고 주소</label>
+<!-- 						<label class="lblTitle3">참고 주소</label> -->
 					</div>
 					<div class="col-md-10">
-						<input type="text" id="roadAddrPart2" name="roadAddrPart2" style="width:100%;" placeholder="Enter Addr" required readonly/><br>
+						<input type="hidden" id="roadAddrPart2" name="roadAddrPart2" style="width:100%;" placeholder="Enter Addr" required readonly/><br>
 					</div></div>
 				<div class="row">
 					<div class="col-md-2">
-						<label class="lblTitle3">우편 번호</label>
+<!-- 						<label class="lblTitle3">우편 번호</label> -->
 					</div>
 					<div class="col-md-10">
-						<input type="text" id="zipNo" name="zipNo" style="width:100%;" placeholder="Enter Addr" required readonly/>
+						<input type="hidden" id="zipNo" name="zipNo" style="width:100%;" placeholder="Enter Addr" required readonly/>
 					</div>
 				</div><br>
 

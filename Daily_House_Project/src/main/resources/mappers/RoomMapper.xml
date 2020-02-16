@@ -5,6 +5,22 @@
   
 <mapper namespace="com.kh.mappers.RoomMapper">
 
+	<!-- 호스트가 등록한 숙소 목록 보기 -->
+	<select id="getHostRoomList" resultType="RoomDetailDto">
+		select * from tbl_room r, tbl_room_type t 
+		where  user_email = #{user_email}
+		and r.room_type_num = t.room_type_num
+		order by room_location
+	</select>
+	
+	<!-- 숙소 1개 상세보기 -->
+	<select id="getHostRoomDetail" resultType="RoomDetailDto">
+		select *
+		from tbl_room r, tbl_room_type t
+		where  r.room_num = #{room_num}
+		and r.room_type_num = t.room_type_num
+	</select>
+
 	<!-- 숙소 업로드를위한 tbl_room의 room_num.nextval 받아오기 -->
 	<!-- SELECT LAST_NUMBER FROM USER_SEQUENCES WHERE SEQUENCE_NAME = 'SEQ_ROOM_NUM' -->
 	<select id="getNextRoomNum" resultType="int" >
