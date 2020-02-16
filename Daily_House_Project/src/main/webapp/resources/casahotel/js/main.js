@@ -162,7 +162,7 @@
       'format': 'd MM, yyyy',
       'autoclose': true
     });
-    $('#m_time').timepicker();
+    /*$('#m_time').timepicker();*/
   };
   dateAndTime();
 

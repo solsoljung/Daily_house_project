@@ -2,12 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%@ include file = "../../views/title.jsp"%> <!-- <head> -->
-
-<%@ include file = "../../views/casahotel/casahotel_link.jsp" %>
-<%@ include file = "../../views/islagrande/islagrande_link.jsp" %>
-
-<%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
+<!-- 데이터피커X -->					
+<%@ include file = "../../views/title2.jsp"%> <!-- <head> -->					
+					
+<%@ include file = "../../views/casahotel/casahotel_link2.jsp" %>					
+<%@ include file = "../../views/islagrande/islagrande_link.jsp" %>					
+					
+<%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->					
+<!-- 데이터피커X -->					
 
 <style>
 	.lblTitle1{ font-size: 30px; font-weight: bold;}
@@ -96,7 +98,7 @@ $(function(){
 				
 				<div class="row">
 					<div class="col-md-2">
-						<button type="button" class="btn btn-primary btn-block py-3 px-5" onClick="goPopup();" style="font-size:15px;" >주소검색</button>
+						<button type="button" class="btn btn-primary btn-block" onClick="goPopup();" style="font-size:15px;">주소검색</button>
 					</div>
 					<div class="col-md-10"></div>
 				</div><br>
@@ -106,35 +108,41 @@ $(function(){
 						<label class="lblTitle3">도로명 주소 전체</label>
 					</div>
 					<div class="col-md-10">
-						<input type="text" id="roadFullAddr" name="roadFullAddr" style="width:100%;" placeholder="Enter Addr" required readonly/><br>
+						<input type="text" id="roadFullAddr" name="roadFullAddr" style="width:100%;" placeholder="Enter Addr" required readonly
+						value="울산광역시 남구 삼산로 143번길 35, 1(달동)"
+						/><br>
 					</div></div>	
 				<div class="row">
 					<div class="col-md-2">
 						<label class="lblTitle3">도로명 주소</label>
 					</div>
 					<div class="col-md-10">
-						<input type="text" id="roadAddrPart1" name="roadAddrPart1" style="width:100%;" placeholder="Enter Addr" required readonly/><br>
+						<input type="text" id="roadAddrPart1" name="roadAddrPart1" style="width:100%;" placeholder="Enter Addr" required readonly
+						value="울산광역시 남구 삼산로 143번길 35"
+						/><br>
 					</div></div>
 				<div class="row">
 					<div class="col-md-2">
 						<label class="lblTitle3">상세주소</label>
 					</div>
 					<div class="col-md-10">
-						<input type="text" id="addrDetail" name="addrDetail" style="width:100%;" placeholder="Enter Addr" required readonly/><br>
+						<input type="text" id="addrDetail" name="addrDetail" style="width:100%;" placeholder="Enter Addr" required readonly
+						value="1"
+						/><br>
 					</div></div>
 				<div class="row">
 					<div class="col-md-2">
-						<label class="lblTitle3">참고 주소</label>
+<!-- 						<label class="lblTitle3">참고 주소</label> -->
 					</div>
 					<div class="col-md-10">
-						<input type="text" id="roadAddrPart2" name="roadAddrPart2" style="width:100%;" placeholder="Enter Addr" required readonly/><br>
+						<input type="hidden" id="roadAddrPart2" name="roadAddrPart2" style="width:100%;" placeholder="Enter Addr" required readonly/><br>
 					</div></div>
 				<div class="row">
 					<div class="col-md-2">
-						<label class="lblTitle3">우편 번호</label>
+<!-- 						<label class="lblTitle3">우편 번호</label> -->
 					</div>
 					<div class="col-md-10">
-						<input type="text" id="zipNo" name="zipNo" style="width:100%;" placeholder="Enter Addr" required readonly/>
+						<input type="hidden" id="zipNo" name="zipNo" style="width:100%;" placeholder="Enter Addr" required readonly/>
 					</div>
 				</div><br>
 
