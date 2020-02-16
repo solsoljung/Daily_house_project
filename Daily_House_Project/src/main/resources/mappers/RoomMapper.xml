@@ -42,7 +42,7 @@
 	select * from (select rownum rnum, a.* 
 		from (select r.* from tbl_room r 
 			where r.room_location like '%' || #{keyword} || '%'
-			<if test="room_reserv_start_date != null"> 
+			<if test="room_reserv_start_date != null">
 			and r.room_num not in (
 				select v.room_num from tbl_reservation v where
 				(room_reserv_start_date &gt; #{room_reserv_start_date} and room_reserv_end_date &lt;= #{room_reserv_end_date}) or
@@ -55,8 +55,16 @@
 	</select>
 	
 	<select id="getRoomCount" resultType="int">
-		select count(*) from tbl_room
-		where room_location like '%' || #{keyword} || '%'
+		select count(*) from tbl_room r 
+			where r.room_location like '%' || #{keyword} || '%'
+		<if test="room_reserv_start_date != null">
+			and r.room_num not in (
+				select v.room_num from tbl_reservation v where
+				(room_reserv_start_date &gt; #{room_reserv_start_date} and room_reserv_end_date &lt;= #{room_reserv_end_date}) or
+				(room_reserv_start_date &gt; #{room_reserv_start_date} and room_reserv_start_date &lt;= #{room_reserv_end_date}) or
+				(room_reserv_end_date &gt; #{room_reserv_start_date} and room_reserv_end_date &lt;= #{room_reserv_end_date})
+			)
+		</if>
 	</select>
   
 </mapper>

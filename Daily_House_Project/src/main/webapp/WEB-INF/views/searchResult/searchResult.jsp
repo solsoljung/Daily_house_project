@@ -2,7 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <!-- 데이터 피커 O -->
 <%@ include file = "../../views/title.jsp"%> <!-- <head> -->
 
@@ -11,12 +10,24 @@
 
 <%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
 <!-- 데이터 피커 O -->
-
 <style>
 .sol-font{
 	font-family: '맑은 고딕';
 	color: #fb929e;
 }
+
+.dropdown-menu{
+	color: #222;
+    background-color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 50px 50px;
+    border: none;
+    outline: none;
+    box-shadow: 0 0 10px #555;
+    line-height: 3;
+}
+
 </style>
 
 <script>
@@ -51,7 +62,7 @@ $(document).ready(function(){
 	//체크인
 	$('#startDate').datepicker({
 		format: "yyyy-mm-dd",
-	    startDate: 'd',
+	    startDate: '1d',
 	    autoclose : true,
 	    datesDisabled : [],	//'2020-02-18','2020-02-20'이런 형식
 	    multidateSeparator :",",
@@ -69,13 +80,26 @@ $(document).ready(function(){
 	}).on("changeDate", function(e) {
 		
 		var date = formatDate(e.date);
+		
+		if(date == "NaN-NaN-NaN"){
+			var now = new Date();
+			var year= now.getFullYear();
+			var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
+			var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
+			date = year + '-' + mon + '-' + day;
+		}
+		
 		var arrDate = date.split("-");
 		var intNewDay = parseInt(arrDate[2]) + 1;
 		arrDate[2] = intNewDay.toString();
 		var newDate = arrDate.join('-');
-        $("#endDate").datepicker("setStartDate", newDate);
         console.log(date);
-        $('#endDate').datepicker("show");
+        
+        $("input[name=str_start_date]").val(date);
+
+        $("#endDate").datepicker("setStartDate", newDate);
+        $(this).hide();
+        $('#endDate').show().datepicker("show");
 	});
 	 
 	//체크아웃
@@ -98,9 +122,17 @@ $(document).ready(function(){
 		    
 	}).on("changeDate", function(e) {
 		
-		var date = formatDate(e.date);
-		console.log(date);
+		var checkout = formatDate(e.date);
+		console.log(checkout);
 		
+		$("input[name=str_end_date]").val(checkout);
+		$('#startDate').show()
+		$("#frmPage").submit();
+	});
+	
+	$("#btnTest").click(function(){
+		console.log("click");
+		$("#myModal").modal();
 	});
 	
 	
@@ -116,6 +148,7 @@ $(document).ready(function(){
 
 		return [year, month, day].join('-'); 
 	}
+	
 
 });
 </script>
@@ -125,22 +158,14 @@ $(document).ready(function(){
 <section class="ftco-section ftco-room">
 <div class="container">
 
-<!-- 달력테스트 -->
-<div class="row">
-    	<div class="col-md-6">
-    		<input type="text" id="startDate" class="form-control">
-    	</div>
-    	<div class="col-md-6">
-			<input type="text" id="endDate" class="form-control">
-    	</div>
-</div>
-<!-- 달력테스트 끝 -->
 
 <!-- 히든 폼 -->
 <form id="frmPage" action="/sol/room" method="get">
 	<input type="hidden" name="room_num" />
-	<input type="hidden" name="page" value="${pagingDto.page}"/>
-	<input type="hidden" name="keyword" value="${pagingDto.keyword}"/>
+	<input type="hidden" name="page" value="${searchVo.page}"/>
+	<input type="hidden" name="keyword" value="${searchVo.keyword}"/>
+	<input type="hidden" name="str_start_date" value="${searchVo.str_start_date}"/>
+	<input type="hidden" name="str_end_date" value="${searchVo.str_end_date}"/>
 </form>
 <!-- 히든 폼 끝 -->
 
@@ -151,7 +176,7 @@ $(document).ready(function(){
 	              <form action="#" class="search-form">
 	                <div class="form-group">
 	                  <span class="icon icon-search"></span>
-	                  <input type="text" id="searchTarget" class="form-control" value="${pagingDto.keyword}" 
+	                  <input type="text" id="searchTarget" class="form-control" value="${searchVo.keyword}" 
 	                  placeholder="모든 위치" style="font-size:30px;">
 	                </div>
 	              </form>
@@ -162,16 +187,25 @@ $(document).ready(function(){
 
 <!-- 모달창 -->
 <div class="row">
-        <div class="col-md-12">
+<c:choose>
+	<c:when test="${empty searchVo.str_start_date}">
+	<input type="button" value="체크인" class="btn btn-primary py-3 px-5" style="font-size:20px;" id= "startDate">
+	<input type="button" value="체크아웃" class="btn btn-primary py-3 px-5" style="font-size:20px;display:none;" id= "endDate">
+	</c:when>
+	<c:otherwise>
+	<input type="button" value="${searchVo.str_start_date}" class="btn btn-primary py-3 px-5" style="font-size:20px;" id= "startDate">
+	<input type="button" value="${searchVo.str_end_date}" class="btn btn-primary py-3 px-5" style="font-size:20px;" id= "endDate">
+	</c:otherwise>
+</c:choose>
             <div class="modal-box">
 <!-- 선택버튼 -->
-                <input type="button" value="날짜" class="btn btn-primary py-3 px-5" style="font-size:20px;" id= "btnTest" data-toggle="modal" data-target="#myModal">
-				<input type="button" value="인원" class="btn btn-primary py-3 px-5" style="font-size:20px;">
-				<input type="button" value="숙소 유형" class="btn btn-primary py-3 px-5" style="font-size:20px;">
-				<input type="button" value="요금" class="btn btn-primary py-3 px-5" style="font-size:20px;">
-				<input type="button" value="필터" class="btn btn-primary py-3 px-5" style="font-size:20px;">
+	<input type="button" value="인원" class="btn btn-primary py-3 px-5" style="font-size:20px;">
+	<input type="button" value="숙소 유형" class="btn btn-primary py-3 px-5" style="font-size:20px;">
+	<input type="button" value="요금" class="btn btn-primary py-3 px-5" style="font-size:20px;">
+	<!-- <input type="button" value="필터" class="btn btn-primary py-3 px-5" style="font-size:20px;" id= "btnTest" data-toggle="modal" data-target="#myModal"> -->
+	<input type="button" value="필터" class="btn btn-primary py-3 px-5" style="font-size:20px;" id= "btnTest">
 <!-- 선택버튼 끝 -->
-                <!-- Modal -->
+<!-- Modal -->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -185,14 +219,15 @@ $(document).ready(function(){
                         </div>
                     </div>
                 </div>
+<!-- Modal 끝 -->
                 
-            </div>
-        </div>
-    </div>
+	</div>
+</div>
 <!-- 모달창 끝 -->
+
 <br>
-<c:if test="${not empty pagingDto.keyword}">
-	<h6 class="sol-font">${pagingDto.totalCount}개의 방이 검색 되었습니다.</h6>
+<c:if test="${not empty searchVo.keyword}">
+	<h6 class="sol-font">${searchVo.totalCount}개의 방이 검색 되었습니다.</h6>
 </c:if>
 <br>
 <!-- 방 리스트 -->
@@ -228,15 +263,15 @@ $(document).ready(function(){
 	<div class="col text-center">
 		 <div class="block-27">
 			<ul>
-			<c:if test="${pagingDto.hasPrev == true}">
+			<c:if test="${searchVo.hasPrev == true}">
 						<li>
-							<a class="solge" data-page="${pagingDto.startPage - 1}">&lt;</a>
+							<a class="solge" data-page="${searchVo.startPage - 1}">&lt;</a>
 						</li>
 					</c:if>
-					<c:forEach begin="${pagingDto.startPage}" end="${pagingDto.endPage}" var="v">
+					<c:forEach begin="${searchVo.startPage}" end="${searchVo.endPage}" var="v">
 						<li 
 							<c:choose>
-								<c:when test="${pagingDto.page == v}">
+								<c:when test="${searchVo.page == v}">
 									class="active"
 								</c:when>
 								<c:otherwise>
@@ -247,9 +282,9 @@ $(document).ready(function(){
 							<a class="solge" data-page="${v}">${v}</a>
 						</li>
 					</c:forEach>
-					<c:if test="${pagingDto.hasNext == true}">
+					<c:if test="${searchVo.hasNext == true}">
 						<li>
-							<a class="solge" data-page="${pagingDto.endPage + 1}">&gt;</a>
+							<a class="solge" data-page="${searchVo.endPage + 1}">&gt;</a>
 						</li>
 					</c:if>
 			</ul>
@@ -273,5 +308,5 @@ $(document).ready(function(){
 
 <%@ include file = "../../views/end.jsp"%> <!-- </body> -->
 
-<!-- 데이터피커O -->
+<!-- 데이터피커O -->		
 

@@ -21,25 +21,17 @@ public class SolRoomDaoImpl implements SolRoomDao {
 	
 	@Inject
 	public SqlSession sqlSession;
-
-	/*
-	 * @Override public List<RoomVo> getRoomList(PagingDto pagingDto, ReservationVo
-	 * reservVo) throws Exception { Map<String, Object> map = new HashMap<String,
-	 * Object>(); map.put("pagingDto", pagingDto); map.put("reservVo", reservVo);
-	 * 
-	 * return sqlSession.selectList(NAMESPACE + ".getRoomList", map); }
-	 */
 	
 	@Override
-	public List<RoomVo> getRoomList(SearchVo vo) throws Exception {
+	public List<RoomVo> getRoomList(SearchVo searchVo) throws Exception {
 		
-		return sqlSession.selectList(NAMESPACE + ".getRoomList", vo);
+		return sqlSession.selectList(NAMESPACE + ".getRoomList", searchVo);
 	}
 
 	@Override
-	public int getRoomCount(PagingDto pagingDto) throws Exception {
+	public int getRoomCount(SearchVo searchVo) throws Exception {
 		
-		return sqlSession.selectOne(NAMESPACE + ".getRoomCount", pagingDto);
+		return sqlSession.selectOne(NAMESPACE + ".getRoomCount", searchVo);
 	}
 
 }

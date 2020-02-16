@@ -10,7 +10,8 @@ import com.kh.dailyhouse.domain.SearchVo;
 public interface SolRoomService {
 	
 
-	//public List<RoomVo> getRoomList(PagingDto pagingDto, ReservationVo reservVo) throws Exception;
-	public List<RoomVo> getRoomList(SearchVo vo) throws Exception;
-	public int getRoomCount(PagingDto pagingDto) throws Exception;
+	//룸 리스트
+	public List<RoomVo> getRoomList(SearchVo searchVo) throws Exception;
+	//룸 카운트
+	public int getRoomCount(SearchVo searchVo) throws Exception;
 }

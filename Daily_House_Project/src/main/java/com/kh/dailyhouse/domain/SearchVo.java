@@ -1,12 +1,14 @@
 package com.kh.dailyhouse.domain;
 
 import java.sql.Timestamp;
-import java.util.Arrays;
 
 public class SearchVo {
 
-	private Timestamp room_reserv_start_date;
-	private Timestamp room_reserv_end_date;
+	private String str_start_date = null;
+	private String str_end_date = null;
+	
+	private Timestamp room_reserv_start_date = null;
+	private Timestamp room_reserv_end_date = null;
 	
 	public static final int PAGE_BLOCK = 10;
 
@@ -133,14 +135,60 @@ public class SearchVo {
 		this.keyword = keyword;
 	}
 
+	public int getTotalPage() {
+		return totalPage;
+	}
+
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+
+	public static int getPageBlock() {
+		return PAGE_BLOCK;
+	}
+	
+
+	public Timestamp getRoom_reserv_start_date() {
+		return room_reserv_start_date;
+	}
+
+	public void setRoom_reserv_start_date(Timestamp room_reserv_start_date) {
+		this.room_reserv_start_date = room_reserv_start_date;
+	}
+
+	public Timestamp getRoom_reserv_end_date() {
+		return room_reserv_end_date;
+	}
+
+	public void setRoom_reserv_end_date(Timestamp room_reserv_end_date) {
+		this.room_reserv_end_date = room_reserv_end_date;
+	}
+
+	public String getStr_start_date() {
+		return str_start_date;
+	}
+
+	public void setStr_start_date(String str_start_date) {
+		this.str_start_date = str_start_date;
+	}
+
+	public String getStr_end_date() {
+		return str_end_date;
+	}
+
+	public void setStr_end_date(String str_end_date) {
+		this.str_end_date = str_end_date;
+	}
+
 	@Override
 	public String toString() {
-		return "SolVo [room_reserv_start_date=" + room_reserv_start_date + ", room_reserv_end_date="
+		return "SearchVo [str_start_date=" + str_start_date + ", str_end_date=" + str_end_date
+				+ ", room_reserv_start_date=" + room_reserv_start_date + ", room_reserv_end_date="
 				+ room_reserv_end_date + ", page=" + page + ", startRow=" + startRow + ", endRow=" + endRow
 				+ ", startPage=" + startPage + ", endPage=" + endPage + ", totalCount=" + totalCount + ", hasPrev="
 				+ hasPrev + ", hasNext=" + hasNext + ", perPage=" + perPage + ", totalPage=" + totalPage
 				+ ", searchType=" + searchType + ", keyword=" + keyword + "]";
 	}
-
+	
 	
 }
