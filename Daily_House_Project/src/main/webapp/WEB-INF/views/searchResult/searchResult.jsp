@@ -1,9 +1,7 @@
-
 <link rel="stylesheet" href="/modal/modal.css">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <!-- 데이터 피커 O -->
 <%@ include file = "../../views/title.jsp"%> <!-- <head> -->
 
@@ -23,12 +21,13 @@
     background-color: #fff;
     font-size: 18px;
     font-weight: 600;
-    padding: 10px 15px;
-    margin: auto;
+    padding: 50px 50px;
     border: none;
     outline: none;
     box-shadow: 0 0 10px #555;
+    line-height: 3;
 }
+
 </style>
 
 <script>
@@ -131,6 +130,11 @@ $(document).ready(function(){
 		$("#frmPage").submit();
 	});
 	
+	$("#btnTest").click(function(){
+		console.log("click");
+		$("#myModal").modal();
+	});
+	
 	
 	//날짜 포멧 함수
 	function formatDate(date) { 
@@ -153,19 +157,6 @@ $(document).ready(function(){
 
 <section class="ftco-section ftco-room">
 <div class="container">
-
-
-
-<!-- 달력테스트 -->
-<div class="row">
-    	<!-- <div class="col-md-6">
-    		<input type="text" id="startDate" class="form-control">
-    	</div> -->
-    	<!-- <div class="col-md-6">
-			<input type="text" id="endDate" class="form-control">
-    	</div> -->
-</div>
-<!-- 달력테스트 끝 -->
 
 
 <!-- 히든 폼 -->
@@ -194,55 +185,46 @@ $(document).ready(function(){
     </div>
 <!-- 검색바 끝 -->
 
-<!-- 선택버튼 -->
-
-<!-- 드롭다운 -->	
+<!-- 모달창 -->
 <div class="row">
-<div class="dropdown">
 <c:choose>
 	<c:when test="${empty searchVo.str_start_date}">
-	<input type="button" value="체크인" data-toggle="dropdown" class="btn btn-primary py-3 px-5" style="font-size:20px;" id= "startDate">
-	<input type="button" value="체크아웃" data-toggle="dropdown" class="btn btn-primary py-3 px-5" style="font-size:20px;display:none;" id= "endDate">
+	<input type="button" value="체크인" class="btn btn-primary py-3 px-5" style="font-size:20px;" id= "startDate">
+	<input type="button" value="체크아웃" class="btn btn-primary py-3 px-5" style="font-size:20px;display:none;" id= "endDate">
 	</c:when>
 	<c:otherwise>
-	<input type="button" value="${searchVo.str_start_date}" data-toggle="dropdown" class="btn btn-primary py-3 px-5" style="font-size:20px;" id= "startDate">
-	<input type="button" value="${searchVo.str_end_date}" data-toggle="dropdown" class="btn btn-primary py-3 px-5" style="font-size:20px;" id= "endDate">
+	<input type="button" value="${searchVo.str_start_date}" class="btn btn-primary py-3 px-5" style="font-size:20px;" id= "startDate">
+	<input type="button" value="${searchVo.str_end_date}" class="btn btn-primary py-3 px-5" style="font-size:20px;" id= "endDate">
 	</c:otherwise>
 </c:choose>
-	
-</div>
-<div class="dropdown">				
-	<input type="button" value="인원" data-toggle="dropdown" class="btn btn-primary py-3 px-5" style="font-size:20px;">
-	<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-	    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">성인</a></li>
-	    <li role="presentation"><a class="minus">-</a><input type="number" data-num="1" class="numBox" min="1" max="20" value="1" readonly="readonly"/><a class="plus">+</a></li>
-	  </ul>
-</div>
-<div class="dropdown">				
-	<input type="button" value="숙소 유형" data-toggle="dropdown" class="btn btn-primary py-3 px-5" style="font-size:20px;">
-	<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-	    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">성인</a></li>
-	    <li role="presentation"><a class="minus">-</a><input type="number" data-num="1" class="numBox" min="1" max="20" value="1" readonly="readonly"/><a class="plus">+</a></li>
-	  </ul>
-</div>
-<div class="dropdown">				
-	<input type="button" value="요금" data-toggle="dropdown" class="btn btn-primary py-3 px-5" style="font-size:20px;">
-	<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-	    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">성인</a></li>
-	    <li role="presentation"><a class="minus">-</a><input type="number" data-num="1" class="numBox" min="1" max="20" value="1" readonly="readonly"/><a class="plus">+</a></li>
-	  </ul>
-</div>
-<div class="dropdown">				
-	<input type="button" value="필터" data-toggle="dropdown" class="btn btn-primary py-3 px-5" style="font-size:20px;">
-	<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-	    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">성인</a></li>
-	    <li role="presentation"><a class="minus">-</a><input type="number" data-num="1" class="numBox" min="1" max="20" value="1" readonly="readonly"/><a class="plus">+</a></li>
-	  </ul>
-</div>
-</div>
-<!-- 드롭다운 끝 -->
-
+            <div class="modal-box">
+<!-- 선택버튼 -->
+	<input type="button" value="인원" class="btn btn-primary py-3 px-5" style="font-size:20px;">
+	<input type="button" value="숙소 유형" class="btn btn-primary py-3 px-5" style="font-size:20px;">
+	<input type="button" value="요금" class="btn btn-primary py-3 px-5" style="font-size:20px;">
+	<!-- <input type="button" value="필터" class="btn btn-primary py-3 px-5" style="font-size:20px;" id= "btnTest" data-toggle="modal" data-target="#myModal"> -->
+	<input type="button" value="필터" class="btn btn-primary py-3 px-5" style="font-size:20px;" id= "btnTest">
 <!-- 선택버튼 끝 -->
+<!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            <div class="modal-body">
+                                <div class="icon"><i class="fa fa-check"></i></div>
+                                <h3 class="title">Woohoo! <br> Lorem ipsum dolor sit amet</h3>
+                                <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid commodi consequatur cumque </p>
+                                <button class="subscribe">Subscribe</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!-- Modal 끝 -->
+                
+	</div>
+</div>
+<!-- 모달창 끝 -->
+
 <br>
 <c:if test="${not empty searchVo.keyword}">
 	<h6 class="sol-font">${searchVo.totalCount}개의 방이 검색 되었습니다.</h6>
@@ -326,5 +308,5 @@ $(document).ready(function(){
 
 <%@ include file = "../../views/end.jsp"%> <!-- </body> -->
 
-<!-- 데이터피커O -->
+<!-- 데이터피커O -->		
 
