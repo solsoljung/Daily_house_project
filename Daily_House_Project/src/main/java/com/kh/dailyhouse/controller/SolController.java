@@ -1,6 +1,8 @@
 package com.kh.dailyhouse.controller;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -33,8 +35,22 @@ public class SolController {
 		
 		Timestamp start_date;
 		Timestamp end_date;
+		
+		if(str_start_date == "") {
+			str_start_date = null;
+			str_end_date = null;
+		}
 
 		if (str_start_date != null) {
+			if(str_start_date.equals("NaN-NaN-NaN")) {
+				System.out.println("nan이 나타났다!!!!!!!!!!!!!!!!!!!");
+				SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+				Calendar time = Calendar.getInstance();
+				String format_time1 = format1.format(time.getTime());
+				String[] arr = format_time1.split(" ");
+				System.out.println(arr[0]);
+				return null;
+			}
 			str_start_date += " 00:00:00.0";
 			str_end_date += " 00:00:00.0";
 			start_date = java.sql.Timestamp.valueOf(str_start_date);
