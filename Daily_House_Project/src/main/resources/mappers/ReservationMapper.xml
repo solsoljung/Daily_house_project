@@ -8,6 +8,12 @@
 	<!-- 예약 목록 보기 테스트-->
 	<select id="getReservationList" resultType="ReservationVo">
 		select * from tbl_reservation
+		where user_email = #{user_email}
 	</select>
+	
+	<!-- 예약 등록하기 테스트 -->
+	<insert id="">
+	
+	</insert>
   
 </mapper>
