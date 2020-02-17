@@ -23,5 +23,11 @@ public class SiUserServiceImpl implements SiUserService {
 		return siUserDao.login_run(userVo);
 	}
 
+	@Override
+	public void userUpdate(UserVo userVo) throws Exception {
+		System.out.println("서비스!!!!!!"+userVo);
+		siUserDao.userUpdate(userVo);
+	}
+
 
 }
