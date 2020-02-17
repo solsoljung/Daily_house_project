@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.kh.dailyhouse.domain.RoomTypeVo;
 import com.kh.dailyhouse.domain.RoomVo;
 import com.kh.dailyhouse.domain.SearchVo;
 import com.kh.dailyhouse.service.SolRoomService;
@@ -64,9 +65,11 @@ public class SolController {
 		
 		List<RoomVo> list = service.getRoomList(searchVo);
 		int totalCount = service.getRoomCount(searchVo);
+		List<RoomTypeVo> typeList = service.getRoomType();
 		searchVo.setTotalCount(totalCount);
 		model.addAttribute("list", list);
 		model.addAttribute("searchVo", searchVo);
+		model.addAttribute("typeList", typeList);
 		
 		return "searchResult/searchResult";
 	}

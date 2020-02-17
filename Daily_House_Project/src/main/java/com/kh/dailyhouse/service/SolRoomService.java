@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.dailyhouse.domain.PagingDto;
 import com.kh.dailyhouse.domain.ReservationVo;
+import com.kh.dailyhouse.domain.RoomTypeVo;
 import com.kh.dailyhouse.domain.RoomVo;
 import com.kh.dailyhouse.domain.SearchVo;
 
@@ -14,4 +15,6 @@ public interface SolRoomService {
 	public List<RoomVo> getRoomList(SearchVo searchVo) throws Exception;
 	//룸 카운트
 	public int getRoomCount(SearchVo searchVo) throws Exception;
+	//방 유형
+	public List<RoomTypeVo> getRoomType() throws Exception;
 }
