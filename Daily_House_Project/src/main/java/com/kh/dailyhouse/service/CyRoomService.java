@@ -20,4 +20,7 @@ public interface CyRoomService {
 	
 	// 숙소 등록하기
 	public void registerRoom(RoomVo roomVo) throws Exception;
+	
+	// 숙소 정보 수정하기
+	public void updateHostRoom(RoomVo roomVo) throws Exception;
 }

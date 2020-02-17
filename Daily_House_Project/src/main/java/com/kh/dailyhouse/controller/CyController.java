@@ -39,13 +39,21 @@ public class CyController {
 	}
 	
 	// 호스트가 등록한 방 1개 상세보기
-	@RequestMapping(value = "/HostRoomDetail", method = RequestMethod.GET)
+	@RequestMapping(value = "/HostRoomDetail",  method = {RequestMethod.GET, RequestMethod.POST})
 	public String HostRoomDetail(Model model, @RequestParam("room_num") int room_num) throws Exception{
 		RoomDetailDto roomDetailDto = roomService.getHostRoomDetail(room_num);
 		model.addAttribute("roomDetailDto", roomDetailDto);
 		model.addAttribute("roomTypeList", roomTypeService.getRoomTypeList());
 		model.addAttribute("roomOptionList", roomOptionService.getRoomOptionList());
 		return "/host/host_room_detail";
+	}
+	
+	// 호스트 방 정보 수정하기
+	@RequestMapping(value = "/HostModifyRoom", method = RequestMethod.POST)
+	public String HostModifyRoom(Model model, RoomVo roomVo) throws Exception{
+		System.out.println("HostModifyRoom roomVo: " + roomVo);
+		roomService.updateHostRoom(roomVo);
+		return "redirect:/cy/HostRoomDetail?room_num=" + roomVo.getRoom_num();
 	}
 	
 	// 호스트 등록하기 1page readonly

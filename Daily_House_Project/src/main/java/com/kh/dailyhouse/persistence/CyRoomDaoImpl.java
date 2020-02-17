@@ -42,6 +42,12 @@ public class CyRoomDaoImpl implements CyRoomDao {
 		sqlSession.insert(NAMESPACE + ".registerRoom", roomVo);
 	}
 
+	// 숙소 수정
+	@Override
+	public void updateHostRoom(RoomVo roomVo) throws Exception {
+		sqlSession.update(NAMESPACE + ".updateHostRoom", roomVo);
+	}
+
 
 	
 

@@ -56,6 +56,12 @@ public class CyRoomServiceImpl implements CyRoomService {
 		hostDao.registerHost(hostVo);
 	}
 
+	// 숙소 정보 수정하기
+	@Override
+	public void updateHostRoom(RoomVo roomVo) throws Exception {
+		roomDao.updateHostRoom(roomVo);
+	}
+
 
 
 	
