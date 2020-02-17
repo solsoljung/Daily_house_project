@@ -12,17 +12,32 @@
 		 and h.room_num = #{room_num}
 	</select>
   	
+	<!-- 후기 목록에 사용할 총개수 -->
+	<select id="getReviewCount" resultType="int">
+		select count(*) from tbl_room_review
+	</select>
+  	
   	<!-- 후기 보기(목록/room_num) -->
   	<select id="getRoomDetailReview" resultType="RoomReviewVo">
-  		select * from tbl_room_review
-  		where room_num = #{room_num}
+   		select * from
+		(select rownum rnum, a.*from
+		(select * from tbl_room_review
+		where room_num = #{room_num}
+		order by room_review_num desc) a)
+		where rnum &gt;= #{startRow} and rnum &lt;= #{endRow}
   	</select>
   	
   	<!-- 후기 작성 -->
   	<insert id="setReview">
-  		insert into tbl_room_review (room_review_num, user_email, room_num, review_score_location, review_score_cleanliness, review_score_checkin, review_score_communication, total_score, room_review_text)
-  		values (seq_room_review_num.nextval, #{user_email}, #{room_num}, #{review_score_location}, #{review_score_cleanliness}, #{review_score_checkin}, #{review_score_communication}, #{total_score}, #{room_review_text})
+  		insert into tbl_room_review (room_review_num, user_email, user_pic, room_num, review_score_location, review_score_cleanliness, review_score_checkin, review_score_communication, total_score, room_review_text)
+  		values (seq_room_review_num.nextval, #{user_email}, #{user_pic}, #{room_num}, #{review_score_location}, #{review_score_cleanliness}, #{review_score_checkin}, #{review_score_communication}, #{total_score}, #{room_review_text})
   	</insert>
   		
+  	<!-- 방 평점 수정 -->
+  	<update id="updateRoomScore">
+  		update tbl_room set
+  			room_score = #{room_score}
+  		where room_num = #{room_num}
+  	</update>
   	
 </mapper>

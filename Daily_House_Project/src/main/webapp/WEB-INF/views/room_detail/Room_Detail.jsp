@@ -98,7 +98,12 @@ $(function(){
 
 <script>
 $(function() {
-	
+	$(".page_link").click(function(e) {
+		e.preventDefault();
+		var page = $(this).attr("data-page");
+		$("input[name=page]").val(page);
+		$("#frmPage").submit();
+	});
 });
 </script>
 
@@ -175,7 +180,10 @@ $(function() {
 </script>
 
 <%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
-
+<form id="frmPage" action="/boo/detail" method="get">
+	<input type="hidden" name="page" value="${reviewPagingDto.page}">
+	<input type="hidden" name="perPage" value="${reviewPagingDto.perPage}">
+</form>
 <!-- section -->
 <!-- 이미지 뷰 -->
 <section class="home-slider js-fullheight owl-carousel">
@@ -201,9 +209,9 @@ $(function() {
 <!-- 내용 센터쪽 -->
           <div class="col-lg-8 ftco-animate">
          	 ${roomDto}
-         	 
           	<h1>방에 대한 이름 : ${roomDto.room_title}</h1>
           	<h2>호스트 이름 : ${roomDto.user_name}</h2>
+          	<h2>방 평점 : ${roomDto.room_score}</h2>
           	<h5>기본적인 방의 구성요소</h5>
           	<h5>인원 수 : ${roomDto.room_people}</h5>
           	<h5>침대 수 : ${roomDto.room_bed}</h5>
@@ -216,39 +224,63 @@ $(function() {
           	<div>
           	<h1>후기 테이블 부분</h1>
           	
-          	<table>
-          		<tr>
-          			<th>리뷰 번호</th>
-          			<th>사용자 이메일</th>
-          			<th>방 번호</th>
-          			<th>지역 점수</th>
-          			<th>청결 점수</th>
-          			<th>체크인 점수</th>
-          			<th>의사소통 점수</th>
-          			<th>총 점수</th>
-          			<th>글 내용</th>
-          		</tr>
-          		<c:forEach items="${reviewList}" var="RoomReviewVo">
-          		<tr>
-          			<td>${RoomReviewVo.room_review_num}</td>
-          			<td>${RoomReviewVo.user_email}</td>
-          			<td>${RoomReviewVo.room_num}</td>
-          			<td id="location" data-score="${RoomReviewVo.review_score_location}">${RoomReviewVo.review_score_location}</td>
-          			<td id="clean" data-score="${RoomReviewVo.review_score_cleanliness}">${RoomReviewVo.review_score_cleanliness}</td>
-          			<td id="checkin" data-score="${RoomReviewVo.review_score_checkin}">${RoomReviewVo.review_score_checkin}</td>
-          			<td id="communication" data-score="${RoomReviewVo.review_score_communication}">${RoomReviewVo.review_score_communication}</td>
-          			<td>${RoomReviewVo.total_score}</td>
-          			<td>${RoomReviewVo.room_review_text}</td>
-          		</tr>
-          		</c:forEach>
-          	</table>
+       		<c:forEach items="${reviewList}" var="RoomReviewVo">  			
+   			<div class="block-21 mb-4 d-flex">
+               <a class="blog-img mr-4" style="background-image: url(/islagrande/images/image_1.jpg);">${RommReviewVo.user_pic}사용자 사진</a>  
+                <div class="text">
+                 <table>
+                  <tr>
+                   <td width=500 style="word-break:break-all">
+                    <h3 class="heading">${RoomReviewVo.room_review_text}</h3>
+                   </td>
+                  </tr>
+                 </table>
+                  <div class="meta">
+                    <div><span class="icon-person"></span>${RoomReviewVo.user_email}</div>
+                    <div><span class="icon-calendar"></span>${RoomReviewVo.room_review_write_date}</div>
+                    <hr>
+                  </div>
+                </div>
+             </div>
+       		</c:forEach>
+       		
+       		<div class="col text-center">
+				<div class="block-27">
+					<ul>
+					<c:if test="${pagingDto.hasPrev == true}">
+								<li>
+									<a class="page_link" data-page="${pagingDto.startPage - 1}">&lt;</a>
+								</li>
+							</c:if>
+							<c:forEach begin="${pagingDto.startPage}" end="${pagingDto.endPage}" var="v">
+								<li 
+									<c:choose>
+										<c:when test="${pagingDto.page == v}">
+											class="active"
+										</c:when>
+										<c:otherwise>
+											class=""
+										</c:otherwise>
+									</c:choose>
+								>
+									<a class="page_link" data-page="${v}">${v}</a>
+								</li>
+							</c:forEach>
+							<c:if test="${pagingDto.hasNext == true}">
+								<li>
+									<a class="page_link" data-page="${pagingDto.endPage + 1}">&gt;</a>
+								</li>
+							</c:if>
+					</ul>
+				</div>
           	</div>
-          	<hr>
 <!-- 후기 작성란 구역 -->
-          	<div>
+			<c:if test="${not empty userVo}">
+          	<div >
           		<form action="/boo/review" method="post">
           		<input type="hidden" name="room_num" value="${roomDto.room_num}">
-          		<input type="hidden" name="user_email" value="${user_email}">
+          		<input type="hidden" name="user_email" value="${userVo.user_email}">
+          		<input type="hidden" name="user_pic" value="${userVo.user_pic}">
 				  <table>
 				   <tr>
 				    <td>지역</td>
@@ -308,7 +340,7 @@ $(function() {
           		
           		</form>
           	</div>
-          	
+          	</c:if>
           	<hr>
           	<h1>간단한 room의 호스트에 대한 정보</h1>
           	<hr>
@@ -387,42 +419,7 @@ $(function() {
                 <li><a href="#">Drug Control Law <span>(7)</span></a></li>
               </ul>
             </div>
-            <div class="sidebar-box ftco-animate">
-              <h3>Popular Articles</h3>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
 
             <div class="sidebar-box ftco-animate">
               <h3>Tag Cloud</h3>

@@ -78,5 +78,11 @@ public class SIController {
 		session.invalidate();
 		return "redirect:/";
 	}
+	
+	// 내정보 가는 컨트롤러
+	@RequestMapping(value = "/userInformation", method = RequestMethod.GET)
+	public String userInformation(HttpSession session) throws Exception {
+		return "/user/user";
+	}
 }
 	

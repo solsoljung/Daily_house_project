@@ -2,12 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%@ include file = "../../views/title.jsp"%> <!-- <head> -->
-
-<%@ include file = "../../views/casahotel/casahotel_link.jsp" %>
-<%@ include file = "../../views/islagrande/islagrande_link.jsp" %>
-
-<%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
+<!-- 데이터피커X -->					
+<%@ include file = "../../views/title2.jsp"%> <!-- <head> -->					
+					
+<%@ include file = "../../views/casahotel/casahotel_link2.jsp" %>					
+<%@ include file = "../../views/islagrande/islagrande_link.jsp" %>					
+					
+<%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->					
+<!-- 데이터피커X -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -126,7 +128,7 @@ $(function(){
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-12 form-group"><br>
+                <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="email">Email Certification</label>
                   <input type="text" id="emailCertification" name="certification" placeholder="인증번호" class="form-control" required>
                   <button type="button" id="btn_certification2" value="인증번호 확인" class="btn btn-primary text-white">인증번호 확인</button>
@@ -147,11 +149,10 @@ $(function(){
                 </div>
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="phone">Phone</label>
-                  <!--  required꼭 적게 만듬  readonly꼭 읽게 만듬-->
+                  <!--  required꼭 적게 만듬  readonly꼭 수정 못하게함-->
                   <input type="text" id="phone" name="user_phone" placeholder="-없이 숫자만 입력해주세요." class="form-control" required>
                 </div>
               </div>
-              <br>
               <div class="col-md-10 text-right" data-aos="fade-up" data-aos-delay="200">
 	            <button type="button" class="btn btn-primary text-white py-3 px-5" id="btnSubmit">회원가입</button>&nbsp;&nbsp;&nbsp;&nbsp;
 	            <a href="/si/goHome"><button type="button" class="btn btn-primary text-white py-3 px-5">홈으로</button></a>
@@ -173,10 +174,13 @@ $(function(){
     </section>
 
 <!-- end section -->
-
-<%@ include file = "../../views/casahotel/casahotel_footer.jsp" %>
-
-<%@ include file = "../../views/casahotel/casahotel_script.jsp" %>
-<%@ include file = "../../views/islagrande/islagrande_script.jsp" %>
-
-<%@ include file = "../../views/end.jsp"%> <!-- </body> -->
+<!-- 데이터피커X -->			
+			
+<%@ include file = "../../views/casahotel/casahotel_footer.jsp" %>			
+			
+<%@ include file = "../../views/casahotel/casahotel_script2.jsp" %>			
+<%@ include file = "../../views/islagrande/islagrande_script2.jsp" %>			
+			
+<%@ include file = "../../views/end.jsp"%> <!-- </body> -->			
+			
+<!-- 데이터피커X -->	
