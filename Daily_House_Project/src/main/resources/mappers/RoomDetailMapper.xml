@@ -24,7 +24,7 @@
 		(select * from tbl_room_review
 		where room_num = #{room_num}
 		order by room_review_num desc) a)
-		where rnum &gt;= #{startRow} and rnum &lt;= #{endRow}
+		where rnum &gt;= #{reviewPagingDto.startRow} and rnum &lt;= #{reviewPagingDto.endRow}
   	</select>
   	
   	<!-- 후기 작성 -->

@@ -111,6 +111,9 @@ $(function() {
 .mousePointer {
 	cursor : pointer
 }
+.page_link {
+	cursor : pointer
+}
 </style>
  
 <script>
@@ -182,7 +185,6 @@ $(function() {
 <%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
 <form id="frmPage" action="/boo/detail" method="get">
 	<input type="hidden" name="page" value="${reviewPagingDto.page}">
-	<input type="hidden" name="perPage" value="${reviewPagingDto.perPage}">
 </form>
 <!-- section -->
 <!-- 이미지 뷰 -->
@@ -247,15 +249,15 @@ $(function() {
        		<div class="col text-center">
 				<div class="block-27">
 					<ul>
-					<c:if test="${pagingDto.hasPrev == true}">
+					<c:if test="${reviewPagingDto.hasPrev == true}">
 								<li>
-									<a class="page_link" data-page="${pagingDto.startPage - 1}">&lt;</a>
+									<a class="page_link" data-page="${reviewPagingDto.startPage - 1}">&lt;</a>
 								</li>
 							</c:if>
-							<c:forEach begin="${pagingDto.startPage}" end="${pagingDto.endPage}" var="v">
+							<c:forEach begin="${reviewPagingDto.startPage}" end="${reviewPagingDto.endPage}" var="v">
 								<li 
 									<c:choose>
-										<c:when test="${pagingDto.page == v}">
+										<c:when test="${reviewPagingDto.page == v}">
 											class="active"
 										</c:when>
 										<c:otherwise>
@@ -266,9 +268,9 @@ $(function() {
 									<a class="page_link" data-page="${v}">${v}</a>
 								</li>
 							</c:forEach>
-							<c:if test="${pagingDto.hasNext == true}">
+							<c:if test="${reviewPagingDto.hasNext == true}">
 								<li>
-									<a class="page_link" data-page="${pagingDto.endPage + 1}">&gt;</a>
+									<a class="page_link" data-page="${reviewPagingDto.endPage + 1}">&gt;</a>
 								</li>
 							</c:if>
 					</ul>
@@ -387,6 +389,7 @@ $(function() {
 					});
 				</script>
           	</div>
+          </div>
 <!-- /내용 센터쪽 -->
 <!-- 메뉴 좌측쪽 -->
           <div class="col-lg-4 sidebar ftco-animate">
