@@ -124,13 +124,16 @@ $(function() {
 });
 
 $(window).scroll(function() {
-	console.log("작동됨");
 	var position = $(window).scrollTop();
-	if (position < 100) {
-		position = 10;
+	console.log(position);
+	if (position < 900) {
+		position = 900;
+	}
+	if (position > 2455) {
+		position = 2455;
 	}
 	$("#sidebox").stop();
-	$("#sidebox").animate({"top":position});
+	$("#sidebox").animate({"top":position-900});
 });
 </script>
 
@@ -220,7 +223,7 @@ $(window).scroll(function() {
           </div>
         </div>
       </div>
-    </section>
+</section>
 <!-- /이미지 뷰 -->
 <!--  -->
 		<section class="ftco-section">
