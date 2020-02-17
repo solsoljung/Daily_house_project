@@ -39,5 +39,5 @@
   			room_score = #{room_score}
   		where room_num = #{room_num}
   	</update>
-  	
+
 </mapper>

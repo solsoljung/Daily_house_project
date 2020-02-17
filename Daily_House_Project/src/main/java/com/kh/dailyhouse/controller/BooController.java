@@ -51,5 +51,4 @@ public class BooController {
 		booRoomDetailService.insertReview(roomReviewVo);
 		return "redirect:/boo/detail";
 	}
-	
 }

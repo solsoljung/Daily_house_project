@@ -95,18 +95,6 @@ $(function(){
 });
 </script>
 
-
-<script>
-$(function() {
-	$(".page_link").click(function(e) {
-		e.preventDefault();
-		var page = $(this).attr("data-page");
-		$("input[name=page]").val(page);
-		$("#frmPage").submit();
-	});
-});
-</script>
-
 <style>
 .mousePointer {
 	cursor : pointer
