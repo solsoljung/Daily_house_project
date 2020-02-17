@@ -43,6 +43,8 @@ public class CyController {
 	public String HostRoomDetail(Model model, @RequestParam("room_num") int room_num) throws Exception{
 		RoomDetailDto roomDetailDto = roomService.getHostRoomDetail(room_num);
 		model.addAttribute("roomDetailDto", roomDetailDto);
+		model.addAttribute("roomTypeList", roomTypeService.getRoomTypeList());
+		model.addAttribute("roomOptionList", roomOptionService.getRoomOptionList());
 		return "/host/host_room_detail";
 	}
 	
