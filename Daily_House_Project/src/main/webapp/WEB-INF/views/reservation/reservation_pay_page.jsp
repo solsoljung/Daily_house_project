@@ -98,7 +98,7 @@ ${userVo}
               <div class="col-md-10 ml-auto contact-info">
                 <p><span class="d-block">숙소명:</span> <span style="font-size: 1em; font-family: 고딕;">숙소 이름</span></p>
                 <p><span class="d-block">최대인원:</span> <span style="font-size: 1em; font-family: 고딕;">인원</span></p>
-                <p><span class="d-block">옵션:</span> <span style="font-size: 1em; font-family: 고딕;">숙소 옵션</span></p>
+                <p><span class="d-block">금액/1박:</span> <span style="font-size: 1em; font-family: 고딕;">해당 숙소 금액</span></p>
               </div>
             </div>
           </div>

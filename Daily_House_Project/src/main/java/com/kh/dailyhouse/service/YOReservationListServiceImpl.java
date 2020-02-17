@@ -16,8 +16,8 @@ public class YOReservationListServiceImpl implements YOReservationListService {
 	private YOReservationListDao dao;
 
 	@Override
-	public List<ReservationVo> getReservationList() throws Exception {
-		List<ReservationVo> list = dao.getReservationList();
+	public List<ReservationVo> getReservationList(String user_email) throws Exception {
+		List<ReservationVo> list = dao.getReservationList(user_email);
 		System.out.println("service:" + list);
 		return list;
 	}

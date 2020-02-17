@@ -18,8 +18,8 @@ public class YOReservationListDaoImpl implements YOReservationListDao {
 	public SqlSession sqlSession;
 
 	@Override
-	public List<ReservationVo> getReservationList() throws Exception {
-		List<ReservationVo> list = sqlSession.selectList(NAMESPACE + ".getReservationList");
+	public List<ReservationVo> getReservationList(String user_email) throws Exception {
+		List<ReservationVo> list = sqlSession.selectList(NAMESPACE + ".getReservationList", user_email);
 				System.out.println("dao:" + list);
 		return list;
 		

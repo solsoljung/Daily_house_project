@@ -38,9 +38,12 @@ public class YOController {
 	}
 	
 	@RequestMapping(value="/reservation_list", method=RequestMethod.GET)
-	public String reservationList(Model model) throws Exception {
+	public String reservationList(HttpSession session, Model model) throws Exception {
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		model.addAttribute("userVo" + userVo);
 		System.out.println("service:" + service);
-		List<ReservationVo> list = service.getReservationList();
+		String user_email = userVo.getUser_email();
+		List<ReservationVo> list = service.getReservationList(user_email);
 		System.out.println("list: " + list);
 		model.addAttribute("list", list);
 		return "/reservation/reservation_list_page";
