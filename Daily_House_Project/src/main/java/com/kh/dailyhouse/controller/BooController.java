@@ -26,9 +26,6 @@ public class BooController {
 	
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public String getRoomDetail(Model model, ReviewPagingDto reviewPagingDto) throws Exception{
-		int totalCount = booRoomDetailService.reviewCount();
-		reviewPagingDto.setTotalCount(totalCount);
-		
 		//방을 선택시 room_num을 받아야됨
 		Map<String, Object> paramMap = booRoomDetailService.detail(51, reviewPagingDto);
 		RoomDto roomDto = (RoomDto)paramMap.get("dto");
@@ -54,5 +51,4 @@ public class BooController {
 		booRoomDetailService.insertReview(roomReviewVo);
 		return "redirect:/boo/detail";
 	}
-	
 }
