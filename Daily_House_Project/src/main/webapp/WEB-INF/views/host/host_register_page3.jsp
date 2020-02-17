@@ -112,7 +112,7 @@ $(function(){
 				<div class="form-group">
 					<label class="lblTitle2">건물 유형을 선택하세요</label>
 					<select class="browser-default custom-select" id="room_type_num">
-				        <option selected="">하나를 선택해주세요.</option>
+				        <option selected="" disabled="disabled" >하나를 선택해주세요.</option>
 				        <c:forEach items="${roomTypeList}" var="roomTypeVo">
 					        <option value="${roomTypeVo.room_type_num}"
 					        	<c:if test="${roomVo.room_type_num eq roomTypeVo.room_type_num}">selected</c:if>

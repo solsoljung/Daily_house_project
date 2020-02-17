@@ -19,6 +19,7 @@ public interface CyRoomDao {
 	public void registerRoom(RoomVo roomVo) throws Exception;
 	
 	// 숙소 수정하기
+	public void updateHostRoom(RoomVo roomVo) throws Exception;
 	
 	// 숙소 삭제하기
 }

@@ -31,10 +31,10 @@
 					    <li class="nav-item"><a href="/si/loginHost" class="nav-link">로그인</a></li>
 				   	</c:when>
 				   	<c:otherwise> 
-						<div class="dropdown" style="left: 15px">
+						<div class="dropdown" style="margin-top: 7px; margin-left: 15px">
 				   	<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:15px;">내정보</button>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						   		<li class="nav-item"><a href="/si/userInformation">${userVo.user_name}&nbsp;&nbsp;&nbsp;<img src="images/user.jpg" width="30" height="30"></a></li>
+						   		<li class="nav-item"><a href="/si/userInformation">${userVo.user_name}님&nbsp;&nbsp;&nbsp;<img src="/images/user.jpg" width="30" height="30"></a></li>
 						   		<li class="nav-item"><a href="/cy/HostRoomList">숙소관리</a></li>
 						   		<li class="nav-item"><a href="/si/logout">로그아웃</a></li>
 				   		</div>

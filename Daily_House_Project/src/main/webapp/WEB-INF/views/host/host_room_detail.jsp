@@ -23,12 +23,130 @@ $(function(){
 	$(".nav-item:eq(0)").attr("class", "nav-item");
 	$(".nav-item:eq(6)").attr("class", "nav-item active");
 	
+	// 수정완료 버튼 숨기기
+	$("#btnConplete").hide();
+	$("#btnAddress").hide();
+	
 	// room_location을 저장할 공간
+	var room_location_full = "${roomDetailDto.room_location}" + " " + "${roomDetailDto.room_location_detail}";
+	$("#roadFullAddr").val(room_location_full);
+	
+	// input[name]의 값을 체크하기 위한 변수들
 	var room_location = "";
 	var room_location_detail = "";
 	
-	// host_register_page2으로 이동
-	$("#btnNext").click(function(e){
+	var room_type_num = "";
+	
+	var script_data_options = [];
+	
+	// room_option_code
+	var room_option_code = "${roomDetailDto.room_option_code}";
+// 	console.log("room_option_code: " + room_option_code);
+	
+	split();
+	function split() {			
+		var res = room_option_code.split(",");	
+// 		console.log("==============================res==============================");
+// 		console.log(res);
+		
+		var data_options = [];
+		$(".chb").each(function(){
+			data_options.push($(this).attr("data-option"));
+		});
+// 		console.log("==========================data_options==========================");
+// 		console.log(data_options);
+		
+		for(var i=0; i<res.length; i++){
+// 			console.log("i"+i+ ": " + res[i]);
+			for(var v=0; v<data_options.length; v++){
+// 				console.log("v"+v+ ": " + data_options[v]);
+				if(res[i] == data_options[v]){
+					$(".chb").eq(v).prop("checked", true);
+				}
+			}
+		}
+	};	//function split()	
+	
+	
+	// 수정하기
+	$("#btnModify").click(function(){
+		$("#btnAddress").show(600); // 주소검색 버튼 보이기
+		$(this).hide(600); 			// 수정하기 버튼 숨기기
+		$("#btnConplete").show(); 	// 수정완료 버튼 보이기
+		
+		$("input[name=room_title]").prop("readonly", false);
+		$("textarea[name=room_explain]").prop("readonly", false);
+		$("input[name=room_price]").prop("readonly", false);
+		
+		$(".romm_type_nums").prop("disabled", false);
+		$(".plus").prop("disabled", false);
+		$(".minus").prop("disabled", false);
+		
+		$(".chb").prop("disabled", false);		
+	});
+	
+	// select room_type_num
+	$("#room_type_num").change(function() {
+		$("input[name=room_type_num]").val($(this).val());
+// 		console.log($("input[name=room_type_num]").val());
+	});
+	
+	// btnTest
+	$("#btnTest").click(function(){
+		room_location = $("#roadAddrPart1").val();
+		room_location_detail = $("#addrDetail").val();
+		if(room_location == null || room_location == ""){
+			alert("주소를 입력해주세요.");
+			return;
+		}
+		
+		if($("input[name=room_title]").val() == null || $("input[name=room_title]").val() == ""){
+			alert("숙소이름을 입력해주세요.");
+			return;
+		}
+		if($("textarea[name=room_explain]").val() == null || $("textarea[name=room_explain]").val() == ""){
+			alert("숙소이름을 입력해주세요.");
+			return;
+		}
+		if($("input[name=room_price]").val() == null || $("input[name=room_price]").val() == ""){
+			alert("숙소이름을 입력해주세요.");
+			return;
+		}
+		
+		$(".chb:checked").each(function() { 
+			script_data_options.push($(this).attr("data-option"));
+	    });
+// 		console.log("script_data_options: " + script_data_options);
+		$("input[name=room_option_code]").val(script_data_options);
+		
+		$("input[name=room_location]").val(room_location);
+		$("input[name=room_location_detail]").val(room_location_detail);
+		
+		$("input[name=room_people]").val($("#room_people").val());
+		$("input[name=room_bed]").val($("#room_bed").val());
+		$("input[name=room_bathroom]").val($("#room_bathroom").val());
+		
+		console.log("room_location: " + $("input[name=room_location]").val());
+		console.log("room_location_detail: " + $("input[name=room_location_detail]").val());
+		
+		console.log("room_title: " + $("input[name=room_title]").val());	
+		console.log("room_explain: " + $("textarea[name=room_explain]").val());	
+		console.log("room_price: " + $("input[name=room_price]").val());	
+		
+		console.log("room_option_code: " + $("input[name=room_option_code]").val());
+		
+		console.log("room_type_num: " + $("input[name=room_type_num]").val());
+		console.log("room_people: " + $("input[name=room_people]").val());	
+		console.log("room_bed: " + $("input[name=room_bed]").val());	
+		console.log("room_bathroom: " + $("input[name=room_bathroom]").val());	
+		
+		$("#form").attr("action", "/cy/HostModifyRoom"); 
+		$("#form").submit();
+		
+	});
+	
+	// 수정완료
+	$("#btnConplete").click(function(e){
 		e.preventDefault();
 		room_location = $("#roadAddrPart1").val();
 		room_location_detail = $("#addrDetail").val();
@@ -40,13 +158,46 @@ $(function(){
 		$("input[name=room_location").val(room_location);
 		$("input[name=room_location_detail]").val(room_location_detail);
 		
-		$("#form").attr("action", "/cy/registerHost2Post");
+		$("#form").attr("action", "/cy/HostRoomDetail");
 		$("#form").submit();
+	}); // btnConplete
+	
+	// room_price는 숫자만 입력할 수 있도록 설정
+	$("input[name=room_price]").on("keyup", function() {
+	    $(this).val($(this).val().replace(/[^0-9]/g,""));
 	});
+	
+	// 수량 버튼 SRATR
+	// .plus
+	$(".plus").on("click", function(e){
+		var num = $(this).parent().find(".numBox").val();
+		var plusNum = Number(num) + 1;
+		var max = 50;
+		
+		var target = $(this).parent().find(".numBox");
+		if(plusNum > max) {
+			target.val(num);
+		} else {
+		    target.val(plusNum);          
+		}
+	});
+	
+	// .minus
+	$(".minus").on("click", function(e){
+		var num = $(this).parent().find(".numBox").val();
+		var minusNum = Number(num) - 1;
+		   
+		var target = $(this).parent().find(".numBox");
+		if(minusNum <= 0) {
+			target.val(num);
+		} else {
+			target.val(minusNum);          
+		}
+	});
+	// 수량 버튼 END
 
 });
 </script>
-
 
 <!-- 주소 api -->
 <script language="javascript">
@@ -74,13 +225,15 @@ $(function(){
 <!-- host_register_page1 START -->
 <br><br><br><br>
 
-roomDetailDto: ${roomDetailDto}
+<%-- roomDetailDto: ${roomDetailDto} --%>
+<!-- <hr> -->
+<%-- roomTypeList: ${roomTypeList} --%>
 
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<label class="lblTitle1">숙소의 위치</label><br>
+			<label class="lblTitle2">* 숙소의 위치</label><br>
 				<!-- 위치등록 -->
 				<form id="form" name="form" method="post">
 				<input type="hidden" id="confmKey" name="confmKey" value=""/>
@@ -88,15 +241,24 @@ roomDetailDto: ${roomDetailDto}
 				<input type="hidden" id="resultType" name="resultType" value=""/>
 				<!-- 해당시스템의 인코딩타입이 EUC-KR일경우에만 추가 START-->
 				<!-- <input type="hidden" id="encodingType" name="encodingType" value="EUC-KR"/> -->
-<%-- 				<input type="hidden" name="room_location" value="${roomVo.room_location}"/> --%>
-<%-- 				<input type="hidden" name="room_location_detail"  value="${roomVo.room_location_detail}"/> --%>
+				
+				<input type="hidden" name="room_num" value="${roomDetailDto.room_num}"/>
+				
+				<input type="hidden" name="room_location" value="${roomDetailDto.room_location}"/>
+				<input type="hidden" name="room_location_detail"  value="${roomDetailDto.room_location_detail}"/>
+				
+				<input type="hidden" name="room_type_num" value="${roomDetailDto.room_type_num}"/>
+				<input type="hidden" name="room_people" value="${roomDetailDto.room_people}"/>
+				<input type="hidden" name="room_bed" value="${roomDetailDto.room_bed}"/>
+				<input type="hidden" name="room_bathroom" value="${roomDetailDto.room_bathroom}"/>
+				
+				<input type="hidden" name="room_option_code"  value="${roomDetailDto.room_bathroom}"/>
 				
 				<div class="row">
-					<div class="col-md-10">
-						
-					</div>
+					<div class="col-md-10"></div>
 					<div class="col-md-2">
-						<button type="button" class="btn btn-primary btn-block" onClick="goPopup();" style="font-size:15px;">주소검색</button>
+						<button type="button" class="btn btn-primary btn-block" onClick="goPopup();" 
+						style="font-size:15px;" id="btnAddress">주소검색</button>
 					</div>
 				</div><br>
 				
@@ -106,7 +268,7 @@ roomDetailDto: ${roomDetailDto}
 					</div>
 					<div class="col-md-10">
 						<input type="text" id="roadFullAddr" name="roadFullAddr" style="width:100%;" placeholder="Enter Addr" required readonly
-						value="울산광역시 남구 삼산로 143번길 35, 1(달동)"
+						value=""
 						/><br>
 					</div></div>	
 				<div class="row">
@@ -115,7 +277,7 @@ roomDetailDto: ${roomDetailDto}
 					</div>
 					<div class="col-md-10">
 						<input type="text" id="roadAddrPart1" name="roadAddrPart1" style="width:100%;" placeholder="Enter Addr" required readonly
-						value="울산광역시 남구 삼산로 143번길 35"
+						value="${roomDetailDto.room_location}"
 						/><br>
 					</div></div>
 				<div class="row">
@@ -124,7 +286,7 @@ roomDetailDto: ${roomDetailDto}
 					</div>
 					<div class="col-md-10">
 						<input type="text" id="addrDetail" name="addrDetail" style="width:100%;" placeholder="Enter Addr" required readonly
-						value="1"
+						value="${roomDetailDto.room_location_detail}"
 						/><br>
 					</div></div>
 				<div class="row">
@@ -142,20 +304,20 @@ roomDetailDto: ${roomDetailDto}
 				
 				<!-- 사진 및 소개 등록 -->
 				<div class="form-group">
-					<label class="lblTitle1">숙소 이름</label>
-					<input type="text" class="form-control" name="room_title"
-						<c:if test="${not empty roomDetailDto.room_title}">value="${roomDetailDto.room_title}"</c:if>					
+					<label class="lblTitle2">* 숙소 이름</label>
+					<input type="text" class="form-control" name="room_title" readonly="readonly"
+						value="${roomDetailDto.room_title}"			
 					/><br><br>
 					
-					<label class="lblTitle1">숙소 소개</label>
-					<textarea rows="10" cols="50" name="room_explain" style="width:100%;" maxlength="350"><c:if test="${not empty roomDetailDto.room_explain}">
-${roomDetailDto.room_explain}</c:if></textarea><br><br>
+					<label class="lblTitle2">* 숙소 소개</label>
+					<textarea rows="10" cols="50" name="room_explain" style="width:100%;" maxlength="350" readonly="readonly">
+${roomDetailDto.room_explain}</textarea><br><br>
 					
-					<label class="lblTitle1">가격</label>
+					<label class="lblTitle2">* 가격</label>
 					<div class="row">
 						<div class="col-md-3">
-							<input type="text" class="form-control" name="room_price"
-								<c:if test="${roomDetailDto.room_price != 0}">value="${roomDetailDto.room_price}"</c:if>				
+							<input type="text" class="form-control" name="room_price" readonly="readonly"
+								value="${roomDetailDto.room_price}"			
 							/>
 						</div>
 						<div class="col-md-3"></div>
@@ -166,13 +328,12 @@ ${roomDetailDto.room_explain}</c:if></textarea><br><br>
 					
 					<!-- 파일 첨부 -->
 					<div class="form-group">
-						<label for="fileDrop" class="lblTitle1">첨부 파일</label>
+						<label for="fileDrop" class="lblTitle2">* 첨부 파일</label>
 						<div id="fileDrop"></div>
 					</div>
 					
 					<!-- 썸네일 이미지 -->
 					<div class="form-group" id="uploadedList">
-					
 					</div>
 					
 				</div><br><br>
@@ -180,84 +341,83 @@ ${roomDetailDto.room_explain}</c:if></textarea><br><br>
 				
 				<!-- 건물 유형 -->
 				<div class="form-group">
-					<label class="lblTitle2">건물 유형을 선택하세요</label>
-<!-- 					<select class="browser-default custom-select" id="room_type_num"> -->
-<!-- 				        <option selected="">하나를 선택해주세요.</option> -->
-<%-- 				        <c:forEach items="${roomTypeList}" var="roomTypeVo"> --%>
-<%-- 					        <option value="${roomTypeVo.room_type_num}" --%>
-<%-- 					        	<c:if test="${roomDetailDto.room_type_num eq roomTypeVo.room_type_num}">selected</c:if> --%>
-<%-- 					        >${roomTypeVo.room_type_explain}</option> --%>
-<%-- 				        </c:forEach> --%>
+					<label class="lblTitle2">* 건물 유형</label>
+					<select class="browser-default custom-select" id="room_type_num">
+				        <option selected="" disabled="disabled" >하나를 선택해주세요.</option>
+				        <c:forEach items="${roomTypeList}" var="roomTypeVo">
+					        <option value="${roomTypeVo.room_type_num}" disabled="disabled" class="romm_type_nums" 
+					        	<c:if test="${roomTypeVo.room_type_num eq roomDetailDto.room_type_num}">selected</c:if>
+					        >${roomTypeVo.room_type_explain}</option>
+				        </c:forEach>
 				       
-<!-- 				     </select> -->
+				     </select>
 				</div><br><br><br>
 				
 				<!-- 인원수 -->
 				<div class="form-group">
-					<label class="lblTitle2">숙소에 얼마나 많은 인원이 숙박할 수 있나요?</label>
-					<br>
-					
 					<div class="row">
 						<div class="col-md-3">
-							<label class="lblTitle3">최대 숙박 인원</label>
+							<label class="lblTitle2">* 최대 숙박 인원</label>
 						</div>
 						<div class="col-md-3">
-							<button type="button" class="minus" style="border: none; background: none;">-</button>
+							<button type="button" class="minus" style="border: none; background: none;" disabled="disabled" >-</button>
 							
-							<input type="number" class="numBox" min="1" max="20" value="4" 
+							<input type="number" class="numBox" min="1" max="20" value="${roomDetailDto.room_people}" 
 							readonly="readonly" id="room_people"/>
 									
-							<button type="button" class="plus" style="border: none; background: none;">+</button>
+							<button type="button" class="plus" style="border: none; background: none;" disabled="disabled" >+</button>
 						</div>
 						<div class="col-md-3"></div>
 						<div class="col-md-3"></div>
 					</div>
-				</div><br><br><br>
+				</div><br>
 				
 				<!-- 침대수 -->
 				<div class="form-group">
-					<label class="lblTitle2">게스트가 사용할 수 있는 침대는 몇 개인가요?</label>
-					<br>
-					
 					<div class="row">
 						<div class="col-md-3">
-							<label class="lblTitle3">침대</label>
+							<label class="lblTitle2">* 침대</label>
 						</div>
 						<div class="col-md-3">
-							<button type="button" class="minus" style="border: none; background: none;">-</button>
+							<button type="button" class="minus" style="border: none; background: none;" disabled="disabled"  >-</button>
 							
-							<input type="number" class="numBox" min="1" max="20" value="1"
+							<input type="number" class="numBox" min="1" max="20" value="${roomDetailDto.room_bed}"
 							readonly="readonly" id="room_bed"/>
 									
-							<button type="button" class="plus" style="border: none; background: none;">+</button>
+							<button type="button" class="plus" style="border: none; background: none;" disabled="disabled" >+</button>
 						</div>
 						<div class="col-md-3"></div>
 						<div class="col-md-3"></div>
 					</div>
-				</div><br><br><br>
+				</div><br>
 				
 				<!-- 욕실수 -->
 				<div class="form-group">
-					<label class="lblTitle2">욕실 수를 선택해주세요.</label>
-					<br>
-					
 					<div class="row">
 						<div class="col-md-3">
-							<label class="lblTitle3">욕실</label>
+							<label class="lblTitle2">* 욕실</label>
 						</div>
 						<div class="col-md-3">
-							<button type="button" class="minus" style="border: none; background: none;">-</button>
+							<button type="button" class="minus" style="border: none; background: none;" disabled="disabled" >-</button>
 								
-							<input type="number" class="numBox" min="1" max="20" value="1"
+							<input type="number" class="numBox" min="1" max="20" value="${roomDetailDto.room_bathroom}"
 							readonly="readonly" id="room_bathroom"/>
 							
-							<button type="button" class="plus" style="border: none; background: none;">+</button>
+							<button type="button" class="plus" style="border: none; background: none;" disabled="disabled" >+</button>
 						</div>
 						<div class="col-md-3"></div>
 						<div class="col-md-3"></div>
 					</div>
-				</div><br><br>
+				</div><br>
 
+				<!-- roomOptionList -->
+				<label class="lblTitle2">* 편의시설</label>
+					<div class="checkbox"  >
+					<c:forEach items="${roomOptionList}" var="roomOptionVo">
+						<label class="lblTitle2" ><input type="checkbox" class="chb" disabled="disabled" 
+						data-option="${roomOptionVo.room_option_code}"/> ${roomOptionVo.room_option_explain}</label><br>
+					</c:forEach>
+					</div> 
 
 
 				<!-- Button -->
@@ -266,10 +426,12 @@ ${roomDetailDto.room_explain}</c:if></textarea><br><br>
 					<div class="col-md-3"></div>
 					<div class="col-md-3"></div>
 					<div class="col-md-3" align="right">
-						<button type="button" class="btn btn-primary btn-block py-3 px-3" id="btnUpdate" style="font-size:20px;" >수정</button>
+						<button type="button" class="btn btn-primary btn-block" id="btnTest" >TEST</button>
 					</div>
 					<div class="col-md-3" align="right">
-						<button type="button" class="btn btn-primary btn-block py-3 px-3" id="btnDelete" style="font-size:20px;" >삭제</button>
+						<button type="button" class="btn btn-primary " id="btnConplete">완료</button>
+						<button type="button" class="btn btn-primary " id="btnModify" >수정</button>
+						<button type="button" class="btn btn-primary " id="btnDelete" >삭제</button>
 					</div>
 				</div>
 				

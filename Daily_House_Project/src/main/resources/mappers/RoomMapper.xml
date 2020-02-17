@@ -20,6 +20,22 @@
 		where  r.room_num = #{room_num}
 		and r.room_type_num = t.room_type_num
 	</select>
+	
+	<!-- 숙소 정보 수정하기 -->
+	<update id="updateHostRoom">
+		update tbl_room set 
+					room_type_num = #{room_type_num}, 
+                    room_location = #{room_location},
+                    room_location_detail = #{room_location_detail},
+                    room_title = #{room_title},
+                    room_explain = #{room_explain},
+                    room_price = #{room_price},
+                    room_people = #{room_people},
+                    room_bed = #{room_bed},
+                    room_bathroom = #{room_bathroom},
+                    room_option_code = #{room_option_code}
+                where room_num = #{room_num}
+	</update>
 
 	<!-- 숙소 업로드를위한 tbl_room의 room_num.nextval 받아오기 -->
 	<!-- SELECT LAST_NUMBER FROM USER_SEQUENCES WHERE SEQUENCE_NAME = 'SEQ_ROOM_NUM' -->

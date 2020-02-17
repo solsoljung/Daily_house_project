@@ -1,6 +1,7 @@
 package com.kh.dailyhouse.controller;
 
 import javax.inject.Inject;
+import javax.mail.Session;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -36,7 +37,6 @@ public class SIController {
 		// 요청정보 얻어서
 		// DB 에 넣기 - Service - Dao - Mybatis - Oracle
 		siUserService.setUserData(userVo);
-		System.out.println("userVo : " + userVo);
 		return "/register/registerSuccess";
 	}
 	
@@ -81,7 +81,15 @@ public class SIController {
 	
 	// 내정보 가는 컨트롤러
 	@RequestMapping(value = "/userInformation", method = RequestMethod.GET)
-	public String userInformation(HttpSession session) throws Exception {
+	public String userInformation() throws Exception {
+		return "/user/user";
+	}
+	// 내정보 수정 처리
+	@RequestMapping(value = "/userUpdate", method = RequestMethod.POST)
+	public String userUpdate(HttpSession session, UserVo userVo) throws Exception {
+		siUserService.userUpdate(userVo);
+		System.out.println(userVo);
+		session.setAttribute("userVo", userVo);
 		return "/user/user";
 	}
 }
