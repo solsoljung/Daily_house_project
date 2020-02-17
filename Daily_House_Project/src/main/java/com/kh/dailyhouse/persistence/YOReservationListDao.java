@@ -6,6 +6,6 @@ import com.kh.dailyhouse.domain.ReservationVo;
 
 public interface YOReservationListDao {
 	
-	public List<ReservationVo> getReservationList() throws Exception;
+	public List<ReservationVo> getReservationList(String user_email) throws Exception;
 
 }
