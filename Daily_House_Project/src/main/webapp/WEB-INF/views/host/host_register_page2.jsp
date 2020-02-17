@@ -15,6 +15,14 @@
 	.lblTitle1{ font-size: 30px; font-weight: bold;}
 	.lblTitle2{ font-size: 20px;}
 	.lblTitle3{ font-size: 15px; font-weight: bold;}
+	
+	#fileDrop {
+	width: 100%;
+	height: 100px;
+	border: 1px dashed #fb929e;
+	background-color: #F2F2F2;
+	margin: auto;
+}
 </style>
 
 <script>
@@ -22,14 +30,6 @@ $(function(){
 	// 현재 클릭된 메뉴를 활성화
 	$(".nav-item:eq(0)").attr("class", "nav-item");
 	$(".nav-item:eq(5)").attr("class", "nav-item active");
-	
-	// host_register_page1로 이동
-/*	$("#btnPrev").click(function(e){
-		e.preventDefault();
-		// 400 Bad Request 
-		// 클라이언트는 요청을 수정하지 않고 동일한 형태로 다시 보내서는 안됩니다.
-		// $("#registerForm").submit();
-	}); */ // 이전으로 이동 금지!!!!!!!!!!!!
 	
 	// host_register_page3으로 이동
 	$("#btnNext").click(function(e){
@@ -106,13 +106,24 @@ ${roomVo.room_explain}</c:if></textarea><br><br>
 						<div class="col-md-3"></div>
 						</div>
 					<br><br>
+					
+					<!-- 파일 첨부 -->
+					<div class="form-group">
+						<label for="fileDrop" class="lblTitle2">첨부할 파일을 드래그, 드롭하세요</label>
+						<div id="fileDrop"></div>
+					</div>
+					
+					<!-- 썸네일 이미지 -->
+					<div class="form-group" id="uploadedList">
+					
+					</div>
+					
 				</div><br><br><br>
 					
 				<!-- Button -->
 				<br>
 				<div class="row">
-					<div class="col-md-3">
-					</div>
+					<div class="col-md-3"></div>
 					<div class="col-md-3"></div>
 					<div class="col-md-3"></div>
 					<div class="col-md-3" align="right">

@@ -5,6 +5,22 @@
   
 <mapper namespace="com.kh.mappers.RoomMapper">
 
+	<!-- 호스트가 등록한 숙소 목록 보기 -->
+	<select id="getHostRoomList" resultType="RoomDetailDto">
+		select * from tbl_room r, tbl_room_type t 
+		where  user_email = #{user_email}
+		and r.room_type_num = t.room_type_num
+		order by room_location
+	</select>
+	
+	<!-- 숙소 1개 상세보기 -->
+	<select id="getHostRoomDetail" resultType="RoomDetailDto">
+		select *
+		from tbl_room r, tbl_room_type t
+		where  r.room_num = #{room_num}
+		and r.room_type_num = t.room_type_num
+	</select>
+
 	<!-- 숙소 업로드를위한 tbl_room의 room_num.nextval 받아오기 -->
 	<!-- SELECT LAST_NUMBER FROM USER_SEQUENCES WHERE SEQUENCE_NAME = 'SEQ_ROOM_NUM' -->
 	<select id="getNextRoomNum" resultType="int" >
@@ -30,18 +46,41 @@
 
 	<!-- 방 목록 보기 -->
 	<select id="getRoomList" resultType="RoomVo">
-		select * from (select rownum rnum, a.* 
+		<!-- select * from (select rownum rnum, a.* 
         	  from (select * from tbl_room 
                     where room_location like '%' || #{keyword} || '%'
                     order by room_num asc
                    ) a
              )
+		where rnum &gt;= #{startRow} and rnum &lt;= #{endRow} -->
+		
+		
+	select * from (select rownum rnum, a.* 
+		from (select r.* from tbl_room r 
+			where r.room_location like '%' || #{keyword} || '%'
+			<if test="room_reserv_start_date != null">
+			and r.room_num not in (
+				select v.room_num from tbl_reservation v where
+				(room_reserv_start_date &gt; #{room_reserv_start_date} and room_reserv_end_date &lt;= #{room_reserv_end_date}) or
+				(room_reserv_start_date &gt; #{room_reserv_start_date} and room_reserv_start_date &lt;= #{room_reserv_end_date}) or
+				(room_reserv_end_date &gt; #{room_reserv_start_date} and room_reserv_end_date &lt;= #{room_reserv_end_date})
+			)
+			</if>
+			order by r.room_num asc) a)
 		where rnum &gt;= #{startRow} and rnum &lt;= #{endRow}
 	</select>
 	
 	<select id="getRoomCount" resultType="int">
-		select count(*) from tbl_room
-		where room_location like '%' || #{keyword} || '%'
+		select count(*) from tbl_room r 
+			where r.room_location like '%' || #{keyword} || '%'
+		<if test="room_reserv_start_date != null">
+			and r.room_num not in (
+				select v.room_num from tbl_reservation v where
+				(room_reserv_start_date &gt; #{room_reserv_start_date} and room_reserv_end_date &lt;= #{room_reserv_end_date}) or
+				(room_reserv_start_date &gt; #{room_reserv_start_date} and room_reserv_start_date &lt;= #{room_reserv_end_date}) or
+				(room_reserv_end_date &gt; #{room_reserv_start_date} and room_reserv_end_date &lt;= #{room_reserv_end_date})
+			)
+		</if>
 	</select>
   
 </mapper>

@@ -20,4 +20,10 @@ private static final String NAMESPACE = "com.kh.mappers.HostMapper";
 	public void registerHost(HostVo hostVo) throws Exception {
 		sqlSession.insert(NAMESPACE + ".registerHost", hostVo);
 	}
+	
+	// 호스트 정보 검색
+	@Override
+	public HostVo getHostInfo(String user_email) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getHostInfo", user_email);
+	}
 }

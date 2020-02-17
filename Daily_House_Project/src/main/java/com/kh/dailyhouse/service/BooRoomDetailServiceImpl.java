@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.kh.dailyhouse.domain.ReviewPagingDto;
 import com.kh.dailyhouse.domain.RoomDto;
 import com.kh.dailyhouse.domain.RoomReviewVo;
 import com.kh.dailyhouse.persistence.BooRoomDetailDao;
@@ -20,9 +21,9 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 	
 	//Room 상세 보기
 	@Override
-	public Map<String, Object> detail(int room_num) throws Exception {
+	public Map<String, Object> detail(int room_num, ReviewPagingDto reviewPagingDto) throws Exception {
 		//후기 리스트 받아오기
-		List<RoomReviewVo> reviewList = booRoomDetailDao.getReviewinfo(room_num);
+		List<RoomReviewVo> reviewList = booRoomDetailDao.getReviewinfo(room_num, reviewPagingDto);
 		System.out.println("ReviewList : " + reviewList);
 		
 		if (reviewList.size() != 0 ) {
@@ -51,6 +52,12 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 	@Override
 	public void insertReview(RoomReviewVo roomReviewVo) throws Exception {
 		booRoomDetailDao.setReview(roomReviewVo);
+	}
+	
+	//후기 목록에 사용할 총 갯수
+	@Override
+	public int reviewCount() throws Exception {
+		return booRoomDetailDao.getReviewCount();
 	}
 
 }
