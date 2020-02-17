@@ -10,7 +10,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.dailyhouse.domain.ReviewPagingDto;
-import com.kh.dailyhouse.domain.RoomDetailDto;
 import com.kh.dailyhouse.domain.RoomDto;
 import com.kh.dailyhouse.domain.RoomReviewVo;
 
@@ -76,7 +75,4 @@ public class BooRoomDetailDaoImpl implements BooRoomDetailDao {
 		String room_option_explain = sqlSession.selectOne(NAMESPACE+".getRoomOption", room_option_code);
 		return room_option_explain;
 	}
-	
-	
-	
 }

@@ -20,6 +20,22 @@
 		where  r.room_num = #{room_num}
 		and r.room_type_num = t.room_type_num
 	</select>
+	
+	<!-- 숙소 정보 수정하기 -->
+	<update id="updateHostRoom">
+		update tbl_room set 
+					room_type_num = #{room_type_num}, 
+                    room_location = #{room_location},
+                    room_location_detail = #{room_location_detail},
+                    room_title = #{room_title},
+                    room_explain = #{room_explain},
+                    room_price = #{room_price},
+                    room_people = #{room_people},
+                    room_bed = #{room_bed},
+                    room_bathroom = #{room_bathroom},
+                    room_option_code = #{room_option_code}
+                where room_num = #{room_num}
+	</update>
 
 	<!-- 숙소 업로드를위한 tbl_room의 room_num.nextval 받아오기 -->
 	<!-- SELECT LAST_NUMBER FROM USER_SEQUENCES WHERE SEQUENCE_NAME = 'SEQ_ROOM_NUM' -->
@@ -46,15 +62,6 @@
 
 	<!-- 방 목록 보기 -->
 	<select id="getRoomList" resultType="RoomVo">
-		<!-- select * from (select rownum rnum, a.* 
-        	  from (select * from tbl_room 
-                    where room_location like '%' || #{keyword} || '%'
-                    order by room_num asc
-                   ) a
-             )
-		where rnum &gt;= #{startRow} and rnum &lt;= #{endRow} -->
-		
-		
 	select * from (select rownum rnum, a.* 
 		from (select r.* from tbl_room r 
 			where r.room_location like '%' || #{keyword} || '%'
@@ -70,6 +77,7 @@
 		where rnum &gt;= #{startRow} and rnum &lt;= #{endRow}
 	</select>
 	
+	<!-- 방 count -->
 	<select id="getRoomCount" resultType="int">
 		select count(*) from tbl_room r 
 			where r.room_location like '%' || #{keyword} || '%'
@@ -81,6 +89,11 @@
 				(room_reserv_end_date &gt; #{room_reserv_start_date} and room_reserv_end_date &lt;= #{room_reserv_end_date})
 			)
 		</if>
+	</select>
+	
+	<!-- 방 type -->
+	<select id="getRoomType" resultType="RoomTypeVo">
+		select * from tbl_room_type
 	</select>
   
 </mapper>

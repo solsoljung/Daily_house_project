@@ -16,5 +16,11 @@
 		select * from tbl_user
 		where user_email = #{user_email} and user_pw = #{user_pw}
 	</select>
-
+	
+	<update id="userUpdate">
+		update tbl_user set
+		user_name = #{user_name},
+		user_phone = #{user_phone}
+		where user_email = #{user_email}
+	</update>
 </mapper>

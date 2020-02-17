@@ -19,13 +19,13 @@
 .dropdown-menu{
 	color: #222;
     background-color: #fff;
-    font-size: 18px;
-    font-weight: 600;
-    padding: 50px 50px;
+    font-size: 20px;
+    font-weight: 200;
+    padding: 30px 30px;
     border: none;
     outline: none;
     box-shadow: 0 0 10px #555;
-    line-height: 3;
+    /* line-height: 3; */
 }
 
 </style>
@@ -130,9 +130,31 @@ $(document).ready(function(){
 		$("#frmPage").submit();
 	});
 	
-	$("#btnTest").click(function(){
-		console.log("click");
-		$("#myModal").modal();
+	//minus
+	$("#minus").click(function(e){
+		var num = $(this).next().text();			
+		var minusNum = parseInt(num) - 1;			
+					
+		if(minusNum < 0) {			
+			$("#numBox").text(num);		
+		} else {			
+			$("#numBox").text(minusNum);		
+		}
+		e.stopPropagation();
+	});
+	
+	//plus
+	$("#plus").click(function(e){	
+		e.stopPropagation();
+		var num = $(this).prev().text();	
+		console.log(num);
+		var plusNum = parseInt(num) + 1;			
+					
+		if(plusNum >= 20) {			
+			$("#numBox").text(num);	
+		} else {			
+			$("#numBox").text(plusNum);		
+		}
 	});
 	
 	
@@ -185,18 +207,9 @@ $(document).ready(function(){
     </div>
 <!-- 검색바 끝 -->
 
-<div class="dropdown">
-<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:15px;">내정보</button>
-	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="text-align:center;">
-		<ul>
-			<li class="nav-item" style="list-style:none;padding-left:0px;"><a>성인</a></li>
-			<li class="nav-item" style="list-style:none;padding-left:0px;"><a>-</a><input type="text" style="display:inline"><a>+</a></li>
-		</ul>
-	</div>
-</div>
-
-<!-- 모달창 -->
+<!-- 드롭다운 -->
 <div class="row">
+<div class="dropdown">
 <c:choose>
 	<c:when test="${empty searchVo.str_start_date}">
 	<input type="button" value="체크인" class="btn btn-primary py-3 px-5" style="font-size:20px;" id= "startDate">
@@ -207,33 +220,66 @@ $(document).ready(function(){
 	<input type="button" value="${searchVo.str_end_date}" class="btn btn-primary py-3 px-5" style="font-size:20px;" id= "endDate">
 	</c:otherwise>
 </c:choose>
-<div class="modal-box">
-<!-- 선택버튼 -->
-	<input type="button" value="인원" class="btn btn-primary py-3 px-5" style="font-size:20px;">
-	<input type="button" value="숙소 유형" class="btn btn-primary py-3 px-5" style="font-size:20px;">
-	<input type="button" value="요금" class="btn btn-primary py-3 px-5" style="font-size:20px;">
-	<!-- <input type="button" value="필터" class="btn btn-primary py-3 px-5" style="font-size:20px;" id= "btnTest" data-toggle="modal" data-target="#myModal"> -->
-	<input type="button" value="필터" class="btn btn-primary py-3 px-5" style="font-size:20px;" id= "btnTest">
-<!-- 선택버튼 끝 -->
-<!-- Modal -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                            <div class="modal-body">
-                                <div class="icon"><i class="fa fa-check"></i></div>
-                                <h3 class="title">Woohoo! <br> Lorem ipsum dolor sit amet</h3>
-                                <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid commodi consequatur cumque </p>
-                                <button class="subscribe">Subscribe</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-<!-- Modal 끝 -->
-                
+</div>
+
+<!-- 인원 -->
+<div class="dropdown" id="d1">
+<button class="btn btn-primary py-3 px-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:20px;margin-bottom:10px;">인원</button>
+	<div class="dropdown-menu block-27" aria-labelledby="dropdownMenuButton" style="text-align:center;">
+		<ul style="padding:0px;">
+			<li class="nav-item" style="list-style:none;padding-left:0px;"><label style="font-weight:200;">인원 수</label></li>
+			<li class="nav-item" style="list-style:none;padding-left:0px;width:240px;" id="target">
+			<a id="minus" style="cursor:pointer">-</a>
+			<!-- <input type="number" id="numBox" min="1" max="20" value="1" readonly style="font-weight:200;width:50px;height:40px;margin-left:10px;margin-right:10px;text-align:center;"/> -->
+			<label id="numBox" style="font-weight:200;width:50px;height:40px;margin-left:10px;margin-right:10px;text-align:center;">1</label>
+			<a id="plus" style="cursor:pointer">+</a></li>
+		</ul>
 	</div>
 </div>
-<!-- 모달창 끝 -->
+<!-- 숙소 유형 -->
+<div class="dropdown">
+<button class="btn btn-primary py-3 px-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:20px;margin-bottom:10px;">숙소 유형</button>
+	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="text-align:left;">
+		<ul style="padding:0px;">
+			<c:forEach items="${typeList}" var="typeVo">
+			<li class="nav-item" style="list-style:none;padding-left:0px;width:240px;"><input type="checkbox" class="chb"/>
+			<label style="margin-left:10px;font-weight:200;">${typeVo.room_type_explain}</label></li>
+			</c:forEach>
+		</ul>
+	</div>
+</div>
+<!-- 요금 -->
+<div class="dropdown">
+<button class="btn btn-primary py-3 px-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:20px;margin-bottom:10px;">요금</button>
+	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="text-align:center;">
+		<ul style="padding:0px;">
+			<!-- <li class="nav-item" style="list-style:none;padding-left:0px;">
+			<label style="margin-left:10px;font-weight:200;">최저가격</label>
+			<label style="margin-left:10px;font-weight:200;">최고가격</label>
+			</li> -->
+			
+			<li class="nav-item" style="list-style:none;padding-left:0px;width:400px;" id="target">
+			<input type="number" id="lowPrice" placeholder="최저 요금" style="font-size:12px;font-weight:200;width:150px;height:40px;margin-left:10px;margin-right:10px;text-align:center;"/>
+			<label>~</label>
+			<input type="number" id="highPrice" placeholder="최고 요금" style="font-size:12px;font-weight:200;width:150px;height:40px;margin-left:10px;margin-right:10px;text-align:center;"/>
+			</li>
+		</ul>
+	</div>
+</div>
+<!-- 필터 -->
+<div class="dropdown">
+<button class="btn btn-primary py-3 px-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:20px;margin-bottom:10px;">필터</button>
+	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="text-align:left;">
+		<ul style="padding:0px;">
+			<li class="nav-item" style="text-align:center;list-style:none;padding-left:0px;width:240px;"><label style="margin-left:10px;font-weight:200;">편의시설</label></li>
+			<li class="nav-item" style="list-style:none;padding-left:0px;width:240px;"><input type="checkbox" class="chb"/><label style="margin-left:10px;font-weight:200;">에어컨</label></li>
+			<li class="nav-item" style="list-style:none;padding-left:0px;"><input type="checkbox" class="chb"/><label style="margin-left:10px;font-weight:200;">주차공간</label></li>
+			<li class="nav-item" style="list-style:none;padding-left:0px;"><input type="checkbox" class="chb"/><label style="margin-left:10px;font-weight:200;">반려동물</label></li>
+		</ul>
+	</div>
+</div>
+</div>
+<!-- 드롭다운 끝 -->
 
 <br>
 <c:if test="${not empty searchVo.keyword}">

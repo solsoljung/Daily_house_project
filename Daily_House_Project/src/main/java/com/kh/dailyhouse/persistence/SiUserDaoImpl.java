@@ -26,4 +26,10 @@ public class SiUserDaoImpl implements SiUserDao {
 		return sqlSession.selectOne(NAMESPACE+".login_run", userVo);
 	}
 
+	@Override
+	public void userUpdate(UserVo userVo) throws Exception {
+		System.out.println("다오!!!!!!"+userVo);
+		sqlSession.update(NAMESPACE+".userUpdate", userVo);
+	}
+
 }

@@ -81,5 +81,5 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 	public void insertReview(RoomReviewVo roomReviewVo) throws Exception {
 		booRoomDetailDao.setReview(roomReviewVo);
 	}
-	
+
 }

@@ -118,10 +118,10 @@ $(function(){
         <div class="row">
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
             <form action="/si/register_run" method="post" role="form" class="bg-white p-md-5 p-4 mb-5 border" id="joinForm">
-            <input hidden="">
-                <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold">회원가입</label>
-                </div>
+            	<input type="hidden" name="user_email" value="user.jpg">
+              <div class="col-md-6 form-group">
+                <label class="text-black font-weight-bold">회원가입</label>
+              </div>
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="email">Email</label>
