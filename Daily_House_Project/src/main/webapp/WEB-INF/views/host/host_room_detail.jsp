@@ -23,6 +23,10 @@ $(function(){
 	$(".nav-item:eq(0)").attr("class", "nav-item");
 	$(".nav-item:eq(6)").attr("class", "nav-item active");
 	
+	var room_location_full = "";
+	room_location_full += "${roomDetailDto.room_location}" + " " + "${roomDetailDto.room_location_detail}";
+	console.log("room_location_full: " + room_location_full);
+	
 	// room_location을 저장할 공간
 	var room_location = "";
 	var room_location_detail = "";
@@ -40,8 +44,8 @@ $(function(){
 		$("input[name=room_location").val(room_location);
 		$("input[name=room_location_detail]").val(room_location_detail);
 		
-		$("#form").attr("action", "/cy/registerHost2Post");
-		$("#form").submit();
+// 		$("#form").attr("action", "/cy/@@");
+// 		$("#form").submit();
 	});
 
 });
@@ -74,13 +78,15 @@ $(function(){
 <!-- host_register_page1 START -->
 <br><br><br><br>
 
-roomDetailDto: ${roomDetailDto}
+<%-- roomDetailDto: ${roomDetailDto} --%>
+<!-- <hr> -->
+<%-- roomTypeList: ${roomTypeList} --%>
 
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<label class="lblTitle1">숙소의 위치</label><br>
+			<label class="lblTitle2">* 숙소의 위치</label><br>
 				<!-- 위치등록 -->
 				<form id="form" name="form" method="post">
 				<input type="hidden" id="confmKey" name="confmKey" value=""/>
@@ -88,13 +94,11 @@ roomDetailDto: ${roomDetailDto}
 				<input type="hidden" id="resultType" name="resultType" value=""/>
 				<!-- 해당시스템의 인코딩타입이 EUC-KR일경우에만 추가 START-->
 				<!-- <input type="hidden" id="encodingType" name="encodingType" value="EUC-KR"/> -->
-<%-- 				<input type="hidden" name="room_location" value="${roomVo.room_location}"/> --%>
-<%-- 				<input type="hidden" name="room_location_detail"  value="${roomVo.room_location_detail}"/> --%>
+				<input type="hidden" name="room_location" value="${roomDetailDto.room_location}"/>
+				<input type="hidden" name="room_location_detail"  value="${roomDetailDto.room_location_detail}"/>
 				
 				<div class="row">
-					<div class="col-md-10">
-						
-					</div>
+					<div class="col-md-10"></div>
 					<div class="col-md-2">
 						<button type="button" class="btn btn-primary btn-block" onClick="goPopup();" style="font-size:15px;">주소검색</button>
 					</div>
@@ -106,7 +110,7 @@ roomDetailDto: ${roomDetailDto}
 					</div>
 					<div class="col-md-10">
 						<input type="text" id="roadFullAddr" name="roadFullAddr" style="width:100%;" placeholder="Enter Addr" required readonly
-						value="울산광역시 남구 삼산로 143번길 35, 1(달동)"
+						value=""
 						/><br>
 					</div></div>	
 				<div class="row">
@@ -115,7 +119,7 @@ roomDetailDto: ${roomDetailDto}
 					</div>
 					<div class="col-md-10">
 						<input type="text" id="roadAddrPart1" name="roadAddrPart1" style="width:100%;" placeholder="Enter Addr" required readonly
-						value="울산광역시 남구 삼산로 143번길 35"
+						value="${roomDetailDto.room_location}"
 						/><br>
 					</div></div>
 				<div class="row">
@@ -124,7 +128,7 @@ roomDetailDto: ${roomDetailDto}
 					</div>
 					<div class="col-md-10">
 						<input type="text" id="addrDetail" name="addrDetail" style="width:100%;" placeholder="Enter Addr" required readonly
-						value="1"
+						value="${roomDetailDto.room_location_detail}"
 						/><br>
 					</div></div>
 				<div class="row">
@@ -142,16 +146,16 @@ roomDetailDto: ${roomDetailDto}
 				
 				<!-- 사진 및 소개 등록 -->
 				<div class="form-group">
-					<label class="lblTitle1">숙소 이름</label>
+					<label class="lblTitle2">* 숙소 이름</label>
 					<input type="text" class="form-control" name="room_title"
 						<c:if test="${not empty roomDetailDto.room_title}">value="${roomDetailDto.room_title}"</c:if>					
 					/><br><br>
 					
-					<label class="lblTitle1">숙소 소개</label>
+					<label class="lblTitle2">* 숙소 소개</label>
 					<textarea rows="10" cols="50" name="room_explain" style="width:100%;" maxlength="350"><c:if test="${not empty roomDetailDto.room_explain}">
 ${roomDetailDto.room_explain}</c:if></textarea><br><br>
 					
-					<label class="lblTitle1">가격</label>
+					<label class="lblTitle2">* 가격</label>
 					<div class="row">
 						<div class="col-md-3">
 							<input type="text" class="form-control" name="room_price"
@@ -166,7 +170,7 @@ ${roomDetailDto.room_explain}</c:if></textarea><br><br>
 					
 					<!-- 파일 첨부 -->
 					<div class="form-group">
-						<label for="fileDrop" class="lblTitle1">첨부 파일</label>
+						<label for="fileDrop" class="lblTitle2">* 첨부 파일</label>
 						<div id="fileDrop"></div>
 					</div>
 					
@@ -180,31 +184,28 @@ ${roomDetailDto.room_explain}</c:if></textarea><br><br>
 				
 				<!-- 건물 유형 -->
 				<div class="form-group">
-					<label class="lblTitle2">건물 유형을 선택하세요</label>
-<!-- 					<select class="browser-default custom-select" id="room_type_num"> -->
-<!-- 				        <option selected="">하나를 선택해주세요.</option> -->
-<%-- 				        <c:forEach items="${roomTypeList}" var="roomTypeVo"> --%>
-<%-- 					        <option value="${roomTypeVo.room_type_num}" --%>
-<%-- 					        	<c:if test="${roomDetailDto.room_type_num eq roomTypeVo.room_type_num}">selected</c:if> --%>
-<%-- 					        >${roomTypeVo.room_type_explain}</option> --%>
-<%-- 				        </c:forEach> --%>
+					<label class="lblTitle2">* 건물 유형</label>
+					<select class="browser-default custom-select" id="room_type_num">
+				        <option selected="" disabled="disabled" >하나를 선택해주세요.</option>
+				        <c:forEach items="${roomTypeList}" var="roomTypeVo">
+					        <option value="${roomTypeVo.room_type_num}" disabled="disabled" 
+					        	<c:if test="${roomTypeVo.room_type_num eq roomDetailDto.room_type_num}">selected</c:if>
+					        >${roomTypeVo.room_type_explain}</option>
+				        </c:forEach>
 				       
-<!-- 				     </select> -->
+				     </select>
 				</div><br><br><br>
 				
 				<!-- 인원수 -->
 				<div class="form-group">
-					<label class="lblTitle2">숙소에 얼마나 많은 인원이 숙박할 수 있나요?</label>
-					<br>
-					
 					<div class="row">
 						<div class="col-md-3">
-							<label class="lblTitle3">최대 숙박 인원</label>
+							<label class="lblTitle2">* 최대 숙박 인원</label>
 						</div>
 						<div class="col-md-3">
 							<button type="button" class="minus" style="border: none; background: none;">-</button>
 							
-							<input type="number" class="numBox" min="1" max="20" value="4" 
+							<input type="number" class="numBox" min="1" max="20" value="${roomDetailDto.room_people}" 
 							readonly="readonly" id="room_people"/>
 									
 							<button type="button" class="plus" style="border: none; background: none;">+</button>
@@ -216,17 +217,14 @@ ${roomDetailDto.room_explain}</c:if></textarea><br><br>
 				
 				<!-- 침대수 -->
 				<div class="form-group">
-					<label class="lblTitle2">게스트가 사용할 수 있는 침대는 몇 개인가요?</label>
-					<br>
-					
 					<div class="row">
 						<div class="col-md-3">
-							<label class="lblTitle3">침대</label>
+							<label class="lblTitle2">* 침대</label>
 						</div>
 						<div class="col-md-3">
 							<button type="button" class="minus" style="border: none; background: none;">-</button>
 							
-							<input type="number" class="numBox" min="1" max="20" value="1"
+							<input type="number" class="numBox" min="1" max="20" value="${roomDetailDto.room_bed}"
 							readonly="readonly" id="room_bed"/>
 									
 							<button type="button" class="plus" style="border: none; background: none;">+</button>
@@ -238,17 +236,14 @@ ${roomDetailDto.room_explain}</c:if></textarea><br><br>
 				
 				<!-- 욕실수 -->
 				<div class="form-group">
-					<label class="lblTitle2">욕실 수를 선택해주세요.</label>
-					<br>
-					
 					<div class="row">
 						<div class="col-md-3">
-							<label class="lblTitle3">욕실</label>
+							<label class="lblTitle2">* 욕실</label>
 						</div>
 						<div class="col-md-3">
 							<button type="button" class="minus" style="border: none; background: none;">-</button>
 								
-							<input type="number" class="numBox" min="1" max="20" value="1"
+							<input type="number" class="numBox" min="1" max="20" value="${roomDetailDto.room_bathroom}"
 							readonly="readonly" id="room_bathroom"/>
 							
 							<button type="button" class="plus" style="border: none; background: none;">+</button>
@@ -258,6 +253,13 @@ ${roomDetailDto.room_explain}</c:if></textarea><br><br>
 					</div>
 				</div><br><br>
 
+				<!-- roomOptionList -->
+				<label class="lblTitle2">* 편의시설</label>
+					<div class="checkbox">
+					<c:forEach items="${roomOptionList}" var="roomOptionVo">
+						<label class="lblTitle2" ><input type="checkbox" class="chb" data-option="${roomOptionVo.room_option_code}"/> ${roomOptionVo.room_option_explain}</label><br>
+					</c:forEach>
+					</div> 
 
 
 				<!-- Button -->
@@ -266,10 +268,11 @@ ${roomDetailDto.room_explain}</c:if></textarea><br><br>
 					<div class="col-md-3"></div>
 					<div class="col-md-3"></div>
 					<div class="col-md-3" align="right">
-						<button type="button" class="btn btn-primary btn-block py-3 px-3" id="btnUpdate" style="font-size:20px;" >수정</button>
+<!-- 						<button type="button" class="btn btn-primary btn-block" id="btnUpdate" style="font-size:20px;" >수정</button> -->
 					</div>
 					<div class="col-md-3" align="right">
-						<button type="button" class="btn btn-primary btn-block py-3 px-3" id="btnDelete" style="font-size:20px;" >삭제</button>
+						<button type="button" class="btn btn-primary " id="btnUpdate" >수정</button>
+						<button type="button" class="btn btn-primary " id="btnDelete" >삭제</button>
 					</div>
 				</div>
 				

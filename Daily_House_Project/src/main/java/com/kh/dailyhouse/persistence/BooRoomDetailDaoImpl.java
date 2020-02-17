@@ -30,14 +30,10 @@ public class BooRoomDetailDaoImpl implements BooRoomDetailDao {
 	
 	//roomDetail review 목록 정보 얻기
 	@Override
-	public List<RoomReviewVo> getReviewinfo(int room_num, ReviewPagingDto reviewPagingDto) throws Exception {
-		System.out.println("Dao:reviewPagingDto : " + reviewPagingDto);
-		
+	public List<RoomReviewVo> getReviewinfo(int room_num, ReviewPagingDto reviewPagingDto) throws Exception {	
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("room_num", room_num);
 		paramMap.put("reviewPagingDto", reviewPagingDto);
-		
-		System.out.println("paramMap : " + paramMap);
 		
 		List<RoomReviewVo> ReviewList = sqlSession.selectList(NAMESPACE+".getRoomDetailReview", paramMap);
 		return ReviewList;
