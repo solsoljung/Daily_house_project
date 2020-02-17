@@ -140,7 +140,7 @@ $(function(){
 		console.log("room_bed: " + $("input[name=room_bed]").val());	
 		console.log("room_bathroom: " + $("input[name=room_bathroom]").val());	
 		
-		$("#form").attr("action", "/cy/HostModifyRoom");
+		$("#form").attr("action", "/cy/HostModifyRoom"); 
 		$("#form").submit();
 		
 	});
