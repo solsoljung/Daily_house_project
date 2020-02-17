@@ -30,10 +30,16 @@ public class BooController {
 		Map<String, Object> paramMap = booRoomDetailService.detail(51, reviewPagingDto);
 		RoomDto roomDto = (RoomDto)paramMap.get("dto");
 		List<RoomReviewVo> reviewList = (List<RoomReviewVo>)paramMap.get("ReviewList");
+		String type = (String)paramMap.get("type");
+		List<String> OptionList = (List<String>)paramMap.get("OptionList");
+		List<String> OptionCode = (List<String>)paramMap.get("OptionCode");
 		
 		model.addAttribute("roomDto", roomDto);
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("reviewPagingDto", reviewPagingDto);
+		model.addAttribute("type", type);
+		model.addAttribute("OptionList", OptionList);
+		model.addAttribute("OptionCode", OptionCode);
 		
 		return "/room_detail/Room_Detail";
 	}
@@ -46,7 +52,6 @@ public class BooController {
 		int Review_score_communication = roomReviewVo.getReview_score_communication();
 		int total_score = (Review_score_location+Review_score_cleanliness+Review_score_checkin+Review_score_communication)/4;
 		roomReviewVo.setTotal_score(total_score);
-		System.out.println("RoomReviewVo : " + roomReviewVo);
 		
 		booRoomDetailService.insertReview(roomReviewVo);
 		return "redirect:/boo/detail";

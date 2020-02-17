@@ -225,7 +225,14 @@ $(function() {
 <!-- 내용 센터쪽 -->
           <div class="col-lg-8 ftco-animate">
 <!--          	 방의 기본정보 -->
-         	<table>
+			${roomDto}
+			<hr>
+			${type}
+			<hr>
+			${OptionList}
+			<hr>
+			${OptionCode}
+         	<table border="1">
          		<tr>
          			<th colspan="3" class="padding"><h1>${roomDto.room_title}</h1></th>
          			<th class="padding"><h2>호스트 사진</h2><h2>${roomDto.user_name}</h2></th>
@@ -241,7 +248,7 @@ $(function() {
          			<th>
          				<table>
          					<tr>
-         						<td><p id="rateCount" class="rate"></p></td>
+         						<td><div class="text pt-4 pl-lg-5"><p id="rateCount" class="rate"></p></div></td>
          						<td><p>${roomDto.room_score}점</p></td>
          					</tr>
          				</table>
@@ -249,7 +256,7 @@ $(function() {
          			<th class="padding">
          				<table>
          					<tr>
-         						<td><img alt="people" src="/images/peoples.png" width="30px"></td>
+         						<td><img alt="people" src="/images/peoples.png" width="37px"></td>
          						<td><p>인원 ${roomDto.room_people}명</p></td>
          					</tr>
          				</table>
@@ -265,7 +272,7 @@ $(function() {
          			<td class="padding">
          				<table>
          					<tr>
-         						<td><img alt="people" src="/images/restroom.png" width="30px"></td>
+         						<td><img alt="people" src="/images/restroom.png" width="35px"></td>
          						<td><p>화장실 수 : ${roomDto.room_bathroom}</p></td>
          					</tr>
          				</table>
@@ -274,7 +281,21 @@ $(function() {
          	</table>
 <!--          	방의 기본정보 끝 -->
          	<hr>
+<!--          	방의 옵션 정보 보여주기 -->
           	<h1>방에 대한 옵션</h1>
+			<div class="container">
+	       		<div class="row">
+	       			<c:forEach var="OptionCode" items="${OptionCode}" varStatus="status">
+			        	<div class="col-md-4">
+			        		<div class="room-wrap ftco-animate">
+			        			<img src="/images/${OptionCode}.png"  width="35px">
+          						${OptionList[status.index]}
+			        		</div>
+			        	</div>
+	        		</c:forEach>
+	        	</div>
+			</div>
+<!--           		방의 옵션 정보 보여주기 끝 -->
           	<hr>
 <!--           	방의 설명문 -->
           	<p>${roomDto.room_explain}</p>
