@@ -12,6 +12,5 @@ public interface BooRoomDetailService {
 	//후기 작성 insert
 	public void insertReview(RoomReviewVo roomReviewVo) throws Exception;
 	
-	//후기 목록에 사용할 총 갯수
-	public int reviewCount() throws Exception;
+	
 }

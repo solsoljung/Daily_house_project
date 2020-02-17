@@ -22,6 +22,12 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 	//Room 상세 보기
 	@Override
 	public Map<String, Object> detail(int room_num, ReviewPagingDto reviewPagingDto) throws Exception {
+		System.out.println("Service : reviewPagingDto : " + reviewPagingDto);
+		//댓글 총 갯수 구하기
+		int totalCount = booRoomDetailDao.getReviewCount();
+		reviewPagingDto.setTotalCount(totalCount);
+		System.out.println("totalCount : " + totalCount);
+		
 		//후기 리스트 받아오기
 		List<RoomReviewVo> reviewList = booRoomDetailDao.getReviewinfo(room_num, reviewPagingDto);
 		System.out.println("ReviewList : " + reviewList);
@@ -54,10 +60,4 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 		booRoomDetailDao.setReview(roomReviewVo);
 	}
 	
-	//후기 목록에 사용할 총 갯수
-	@Override
-	public int reviewCount() throws Exception {
-		return booRoomDetailDao.getReviewCount();
-	}
-
 }

@@ -2,17 +2,17 @@ package com.kh.dailyhouse.domain;
 
 public class ReviewPagingDto {
 	
-	public static final int PAGE_BLOCK = 10;
+	public static final int REVIEW_PAGE_BLOCK = 5;
 	
 	private int page = 1;
 	private int startRow = 1;
-	private int endRow = 10;
+	private int endRow = 5;
 	private int startPage = 1;
-	private int endPage = 10;
+	private int endPage = 5;
 	private int totalCount;
 	private boolean hasPrev = true;
 	private boolean hasNext = true;
-	private int perPage = 10;
+	private int perPage = 5;
 	
 	public int getPage() {
 		return page;
@@ -23,8 +23,8 @@ public class ReviewPagingDto {
 		startRow = page * perPage - (perPage -1);
 		endRow = page * perPage;
 		
-		startPage = ((page - 1) / PAGE_BLOCK) * PAGE_BLOCK + 1;
-		endPage = startPage + (PAGE_BLOCK - 1);
+		startPage = ((page - 1) / REVIEW_PAGE_BLOCK) * REVIEW_PAGE_BLOCK + 1;
+		endPage = startPage + (REVIEW_PAGE_BLOCK - 1);
 	}
 	public int getStartRow() {
 		return startRow;
