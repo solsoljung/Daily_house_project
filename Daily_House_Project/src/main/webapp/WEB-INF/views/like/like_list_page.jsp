@@ -46,6 +46,49 @@
         </div>
 	</div>
 </section>
+<section>
+<div class="container-fluid">
+	<div class="row">
+	<div class="col-md-2">
+	</div>
+	<div class="col-md-8">
+		<ul class="post-list list-unstyled">
+			<li>
+				<a href="#" class="d-flex">
+				<span class="mr-3 image">
+					<img src="/casahotel/img/img_1.jpg" alt="Image placeholder" class="img-fluid">
+				</span>
+				<div>
+					<span>숙소 이름</span>
+					<br>
+					<span class="meta">숙소 주소</span>
+					<br>
+					<span>♥</span>
+				</div>
+				</a>
+			</li>  
+		</ul>
+		<ul class="post-list list-unstyled">
+			<li>
+				<a href="#" class="d-flex">
+				<span class="mr-3 image">
+					<img src="/casahotel/img/img_1.jpg" alt="Image placeholder" class="img-fluid">
+				</span>
+				<div>
+					<span>${RoomVo.room_title}</span>
+					<br>
+					<span class="meta">${RoomVo.room_location_detail}</span>
+					<br>
+					<span>♥</span>
+				</div>
+				</a>
+			</li>  
+		</ul>
+		</div>
+	</div>
+</div>
+
+</section>
 
 <!-- end section -->
 

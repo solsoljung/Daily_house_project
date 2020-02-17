@@ -2,7 +2,9 @@ package com.kh.dailyhouse.domain;
 
 import java.util.Arrays;
 
+
 public class RoomVo { 
+
 
 	private int room_num;
 	private String room_type_num;

@@ -16,53 +16,45 @@ $(function() {
 	
 	// 데이트 피커
 	//달력
+	// 체크인 start
 	$('#datePickerStart').datepicker({
-		    format: "yyyy-MM-dd",	
-		    startDate: 'd',	
-		    endDate: '+30d',	
-		    autoclose : true,
-		    clearBtn : false, 
-		    datesDisabled : false,
-		    daysOfWeekDisabled : false,
-		    daysOfWeekHighlighted : [0,6],
-		    disableTouchKeyboard : false,	
-		    immediateUpdates: false,	
-		    templates : {
-		        leftArrow: '&laquo;',
-		        rightArrow: '&raquo;'
-		    }, 
-		    showWeekDays : true ,
-		    title: "CheckIn",
-		    todayHighlight : true ,	
-		    toggleActive : true,
-		    weekStart : 0 ,
-		    language : "ko"            
-		    
-		});//datepickerin end
+		format: "yyyy-mm-dd",
+	    startDate: '1d',
+	    autoclose : true,
+	    datesDisabled : [],	//'2020-02-18','2020-02-20'이런 형식
+	    multidateSeparator :",",
+	    templates : {
+	        leftArrow: '&laquo;',
+	        rightArrow: '&raquo;'
+	    },
+	    showWeekDays : true ,
+	    title: "체크인 날짜 선택",
+	    todayHighlight : true ,
+	    toggleActive : true,
+	    weekStart : 0 ,
+	    language : "ko"
+	});
+	// 체크인 end
 
-
-		$('#datePickerEnd').datepicker({
- 			format: "yyyy-MM-dd",	
-		    startDate:'d',	
-		    endDate: '+30d',	
-		    autoclose : true,
-		    clearBtn : false, 
-		    datesDisabled : false,
-		    daysOfWeekDisabled : false,
-		    daysOfWeekHighlighted : [0,6],
-		    disableTouchKeyboard : false,	
-		    immediateUpdates: false,	
-		    templates : {
-		        leftArrow: '&laquo;',
-		        rightArrow: '&raquo;'
-		    }, 
-		    showWeekDays : true ,
-		    title: "CheckOut",
-		    todayHighlight : true ,	
-		    toggleActive : true,
-		    weekStart : 0 ,
-		    language : "ko"
-		});//datepicker end
+	// 체크아웃 start
+	$('#datePickerEnd').datepicker({
+		format: "yyyy-mm-dd",
+		startDate: '1d',
+		autoclose : true,
+		datesDisabled : [],
+		multidateSeparator :",",
+		templates : {
+		    leftArrow: '&laquo;',
+		    rightArrow: '&raquo;'
+		 },
+		showWeekDays : true ,
+		title: "체크아웃 날짜 선택",
+		todayHighlight : true ,
+		toggleActive : true,
+		weekStart : 0 ,
+		language : "ko"
+	});
+	// 체크아웃 end
 	
 	// 날짜 사이 세기
 	$("#btnTest").click(function() {
