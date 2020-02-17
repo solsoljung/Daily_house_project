@@ -50,7 +50,7 @@ public class YOController {
 	}
 	
 	@RequestMapping(value="/like_list", method=RequestMethod.GET)
-	public String likeList() throws Exception {
+	public String likeList(HttpSession session, Model model) throws Exception {
 		return "/like/like_list_page";
 	}
 }
