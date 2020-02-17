@@ -102,10 +102,25 @@ $(function(){
 .page_link {
 	cursor : pointer
 }
+.padding {
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
 </style>
 
 <script>
 $(function() {
+// 	별점 보여주기
+	var rateAppend = "";
+	var i = 0;
+	for (i = 0; i < "${roomDto.room_score}"; i++) {
+		rateAppend += "<span class='icon-star'></span>";
+	}
+	$("#rateCount").append(rateAppend);
+	
+// 	페이징 기능
 	$(".page_link").click(function(e) {
 		e.preventDefault();
 		var page = $(this).attr("data-page");
@@ -209,18 +224,61 @@ $(function() {
         <div class="row">
 <!-- 내용 센터쪽 -->
           <div class="col-lg-8 ftco-animate">
-         	 ${roomDto}
-          	<h1>방에 대한 이름 : ${roomDto.room_title}</h1>
-          	<h2>호스트 이름 : ${roomDto.user_name}</h2>
-          	<h2>방 평점 : ${roomDto.room_score}</h2>
-          	<h5>기본적인 방의 구성요소</h5>
-          	<h5>인원 수 : ${roomDto.room_people}</h5>
-          	<h5>침대 수 : ${roomDto.room_bed}</h5>
-          	<h5>화장실 수 : ${roomDto.room_bathroom}</h5>
-          	<h4>방에 대한 설명문</h4>
-          	<h4>: ${roomDto.room_explain}</h4>
-          	<hr>
+<!--          	 방의 기본정보 -->
+         	<table>
+         		<tr>
+         			<th colspan="3" class="padding"><h1>${roomDto.room_title}</h1></th>
+         			<th class="padding"><h2>호스트 사진</h2><h2>${roomDto.user_name}</h2></th>
+         		</tr>
+         		<tr>
+         			<td colspan="4">
+         			<div class="meta">
+         				<div><span class="icon-person"></span>${roomDto.user_email}</div>
+         			</div>
+         			</td>
+         		</tr>
+         		<tr>
+         			<th>
+         				<table>
+         					<tr>
+         						<td><p id="rateCount" class="rate"></p></td>
+         						<td><p>${roomDto.room_score}점</p></td>
+         					</tr>
+         				</table>
+         			</th>
+         			<th class="padding">
+         				<table>
+         					<tr>
+         						<td><img alt="people" src="/images/peoples.png" width="30px"></td>
+         						<td><p>인원 ${roomDto.room_people}명</p></td>
+         					</tr>
+         				</table>
+         			</th>
+         			<td class="padding">
+         				<table>
+         					<tr>
+         						<td><img alt="people" src="/images/bed.png" width="30px"></td>
+         						<td><p>침대 수 : ${roomDto.room_bed}</p></td>
+         					</tr>
+         				</table>
+         			</td>
+         			<td class="padding">
+         				<table>
+         					<tr>
+         						<td><img alt="people" src="/images/restroom.png" width="30px"></td>
+         						<td><p>화장실 수 : ${roomDto.room_bathroom}</p></td>
+         					</tr>
+         				</table>
+         			</td>
+         		</tr>
+         	</table>
+<!--          	방의 기본정보 끝 -->
+         	<hr>
           	<h1>방에 대한 옵션</h1>
+          	<hr>
+<!--           	방의 설명문 -->
+          	<p>${roomDto.room_explain}</p>
+<!--           	방의 설명문 끝 -->
           	<hr>
           	<div>
           	<h1>후기 테이블 부분</h1>
@@ -277,7 +335,8 @@ $(function() {
           	</div>
 <!-- 후기 작성란 구역 -->
 			<c:if test="${not empty userVo}">
-          	<div >
+			<label for="review_text">☆후기 쓰기★</label>
+          	<div>
           		<form action="/boo/review" method="post">
           		<input type="hidden" name="room_num" value="${roomDto.room_num}">
           		<input type="hidden" name="user_email" value="${userVo.user_email}">
@@ -335,8 +394,7 @@ $(function() {
 				   </tr>
 				  </table>
 				
-          		<label for="review_text">댓글내용</label>
-          		<input type="text" id="review_text" name="room_review_text"/>
+          		<textarea id="review_text" name="room_review_text" rows="5" cols="100" placeholder="200자 이내로 써주세요"></textarea>
           		<button type="submit" id="btnReview">작성완료</button>
           		
           		</form>

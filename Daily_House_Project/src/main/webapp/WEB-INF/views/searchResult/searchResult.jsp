@@ -185,6 +185,16 @@ $(document).ready(function(){
     </div>
 <!-- 검색바 끝 -->
 
+<div class="dropdown">
+<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:15px;">내정보</button>
+	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="text-align:center;">
+		<ul>
+			<li class="nav-item" style="list-style:none;padding-left:0px;"><a>성인</a></li>
+			<li class="nav-item" style="list-style:none;padding-left:0px;"><a>-</a><input type="text" style="display:inline"><a>+</a></li>
+		</ul>
+	</div>
+</div>
+
 <!-- 모달창 -->
 <div class="row">
 <c:choose>
@@ -197,7 +207,7 @@ $(document).ready(function(){
 	<input type="button" value="${searchVo.str_end_date}" class="btn btn-primary py-3 px-5" style="font-size:20px;" id= "endDate">
 	</c:otherwise>
 </c:choose>
-            <div class="modal-box">
+<div class="modal-box">
 <!-- 선택버튼 -->
 	<input type="button" value="인원" class="btn btn-primary py-3 px-5" style="font-size:20px;">
 	<input type="button" value="숙소 유형" class="btn btn-primary py-3 px-5" style="font-size:20px;">

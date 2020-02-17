@@ -11,9 +11,16 @@
 		where user_email = #{user_email}
 	</select>
 	
-	<!-- 예약 등록하기 테스트 -->
-	<insert id="">
+	<!-- 시퀀스 값 얻기 -->
+	<select id="getNextVal" resultType="int">
+		select seq_reserv_num.nextval
+		from dual
+	</select>
 	
+	<!-- 예약 등록하기 테스트 -->
+	<insert id="insertReservation">
+		insert into tbl_reservation(reserv_num, room_num, user_email, room_reserv_start_date, room_reserv_end_date, room_score)
+		values(#{reserv_num}, #{room_num}, #{user_email}, #{room_reserv_start_date}, #{room_reserv_end_date}, #{room_score})
 	</insert>
   
 </mapper>
