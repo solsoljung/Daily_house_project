@@ -72,7 +72,13 @@ public class BooRoomDetailDaoImpl implements BooRoomDetailDao {
 	//room option 코드판별
 	@Override
 	public String getRoomOption(String room_option_code) throws Exception {
-		String room_option_explain = sqlSession.selectOne(NAMESPACE+".getRoomOption", room_option_code);
+		String room_option_explain = "";
+		String notNull = sqlSession.selectOne(NAMESPACE+".getRoomOption", room_option_code);
+		if (notNull != null) {
+			System.out.println("Dao option 작동됨");
+			room_option_explain = notNull;
+		}
+				
 		return room_option_explain;
 	}
 }
