@@ -23,28 +23,40 @@ $(function(){
 	var isCerficate = false;
 
 	$("#btnSubmit").click(function(e) {
+		// 얻어온 값
 		var pw1 = $("#pw").val().trim();
 		var pw2 = $("#pw2").val().trim();
-// 		var phone = $("#phone").val().trim();
-		
-// 		if (phone < 0) {
-// 			alert("phone");
-// 			return false;
-// 		}
-		if (pw1 ) {
-			alert("특수문자가 들어있지 않습니다.");
+		var phone = $("#phone").val().trim();
+		var name = $("#name").val().trim();
+		// 테스트 내용
+		var pattern1 = /[0-9]/;
+		var pattern2 = /[a-zA-Z]/;
+		var pattern3 = /[~!@#$%^&*()_+|<>?:{}]/;
+
+		if (isCerficate == false) {
+			alert("이메일 인증을 해주세요.");
+			return false;
+		}
+		if (!pattern1.test(pw1) || !pattern2.test(pw1) || !pattern3.test(pw1) || pw1.length < 6) {
+			alert("비밀번호는 6자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다.");
 			return false;
 		}
 		if (pw1 != pw2) {
 			alert("비밀번호 불일치합니다.");
 			return false;
 		}
-		if (isCerficate == false) {
-			alert("이메일 인증을 해주세요.");
+		if (name == "") {
+			alert("이름을 입력해주세요.");
+			return false;
+		}
+		if (!pattern1.test(phone) || phone.length < 11) {
+			console.log(phone);
+			alert("-없이 010포함한 번호 11자리를 입력해주세요.");
 			return false;
 		}
 		$("#joinForm").submit();
 	});
+	
 	$("#btn_list").click(function(){
 		location.href = "/test/board/listAll";
 	});
@@ -76,7 +88,6 @@ $(function(){
 				dice = rData;
 				console.log("dice: " + dice);
 			}
-
 		}); // $.ajax()
 	}); //$("#btn_certification1").click
 	
@@ -117,6 +128,8 @@ $(function(){
 </script>
 	
 
+<br>
+<br>
 <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">
@@ -143,7 +156,7 @@ $(function(){
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="password">Password</label>
-                  <input type="password" id="pw" name="user_pw" placeholder="6자 이상 특수문자 1개를 입력해주세요" class="form-control" required maxlength="20">
+                  <input type="password" id="pw" name="user_pw" placeholder="6자 이상 영문,숫자,특수문자를 조합해서 입력해주세요." class="form-control" required maxlength="20">
                   <label class="text-black font-weight-bold" for="password">Password Check</label>
                   <input type="password" id="pw2" class="form-control" placeholder="Password Check" required maxlength="20">
                 </div>
@@ -151,12 +164,12 @@ $(function(){
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="name">Name</label>
-                  <input type="text" id="name" name="user_name" class="form-control" placeholder="Name" required maxlength="12">
+                  <input type="text" id="name" name="user_name" class="form-control" placeholder="Name" maxlength="12" required>
                 </div>
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="phone">Phone</label>
                   <!--  required꼭 적게 만듬  readonly꼭 수정 못하게함-->
-                  <input type="text" id="phone" name="user_phone" placeholder="-없이 숫자만 입력해주세요." class="form-control" required maxlength="11">
+                  <input type="text" id="phone" name="user_phone" placeholder="-없이 숫자만 입력해주세요." class="form-control" maxlength="11" required>
                 </div>
               </div>
               <div class="col-md-8 text-right" data-aos="fade-up" data-aos-delay="200">

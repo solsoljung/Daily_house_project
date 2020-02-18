@@ -53,7 +53,7 @@ $(function(){
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<label class="lblTitle1">${hostVo.user_name}님이 등록한 숙소들입니다.</label><br><br>
+			<label class="lblTitle1">${hostVo.user_name}님이 등록한 숙소들입니다.</label><br>
 <!-- <label>2단계: 등록할 숙소의 사진과 정보를 입력해주세요.</label><br><br> -->
 	
 	<!-- Button -->
@@ -74,6 +74,7 @@ $(function(){
 					<th>이름</th>
 					<th>건물 형식</th>
 					<th>가격</th>
+					<th>공개여부</th>
 					<th>REMOVE</th>
 				</tr>
 			</thead>
@@ -84,6 +85,7 @@ $(function(){
 					<td>${RoomDetailDto.room_location}</td>
 					<td><a href="#" class="room_title_a" data-room-num="${RoomDetailDto.room_num}">${RoomDetailDto.room_title}</a></td>
 					<td>${RoomDetailDto.room_type_explain}</td>
+					<td>공개</td>
 					<td>${RoomDetailDto.room_price}</td>
 					<td align="center"><a href="#" class="remove_img" >
 						<img alt="remove" src="../../islagrande/images/remove.png" width="30" height="30" />

@@ -7,7 +7,7 @@
 					
 <%@ include file = "../views/casahotel/casahotel_link2.jsp" %>					
 <%@ include file = "../views/islagrande/islagrande_link.jsp" %>					
-					
+				
 <%@ include file = "../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->					
 <!-- 데이터피커X -->								
 

@@ -16,6 +16,11 @@
 	color: #fb929e;
 }
 
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 .dropdown-menu{
 	color: #222;
     background-color: #fff;
@@ -58,6 +63,39 @@ $(document).ready(function(){
 			$("#frmPage").submit();
 		}
 	});
+	
+	//인원
+	$('.people').on('hidden.bs.dropdown', function(){
+		
+		$("#frmPage").submit();
+  	});
+	
+	//가격
+	$('.price').on('hidden.bs.dropdown', function(e){
+		e.stopPropagation(); 
+		var lowPrice = $("#lowPrice").val();
+		var highPrice = $("#highPrice").val();
+		console.log(lowPrice);
+		console.log(highPrice);
+		$("input[name=low_price]").val(lowPrice);
+		$("input[name=high_price]").val(highPrice);
+		$("#frmPage").submit();
+		
+		console.log("ㅇ요오옹!");
+  	});
+	
+	//룸타입
+	$('.roomtype').on('hidden.bs.dropdown', function(e){
+		e.stopPropagation();
+		var arrType = [];
+		$("input:checkbox[name=typeChb]:checked").each(function(){
+			arrType.push($(this).val());
+		});
+		console.log(arrType);
+		$("input[name=arrType]").val(arrType);
+		$("#frmPage").submit();
+  	});
+	
 	
 	//체크인
 	$('#startDate').datepicker({
@@ -126,34 +164,38 @@ $(document).ready(function(){
 		console.log(checkout);
 		
 		$("input[name=str_end_date]").val(checkout);
-		$('#startDate').show()
+		$('#startDate').show();
 		$("#frmPage").submit();
 	});
 	
 	//minus
-	$("#minus").click(function(e){
+	$(".minus").click(function(e){
 		var num = $(this).next().text();			
 		var minusNum = parseInt(num) - 1;			
 					
 		if(minusNum < 0) {			
-			$("#numBox").text(num);		
+			$(this).next().text(num);
+			$("input[name=room_people]").val(num);
 		} else {			
-			$("#numBox").text(minusNum);		
+			$(this).next().text(minusNum);
+			$("input[name=room_people]").val(minusNum);
 		}
 		e.stopPropagation();
 	});
 	
 	//plus
-	$("#plus").click(function(e){	
+	$(".plus").click(function(e){	
 		e.stopPropagation();
 		var num = $(this).prev().text();	
 		console.log(num);
 		var plusNum = parseInt(num) + 1;			
 					
 		if(plusNum >= 20) {			
-			$("#numBox").text(num);	
+			$(this).prev().text(num);
+			$("input[name=room_people]").val(num);
 		} else {			
-			$("#numBox").text(plusNum);		
+			$(this).prev().text(plusNum);
+			$("input[name=room_people]").val(plusNum);
 		}
 	});
 	
@@ -179,8 +221,8 @@ $(document).ready(function(){
 
 <section class="ftco-section ftco-room">
 <div class="container">
-
-
+${searchVo}
+${priceDto}
 <!-- 히든 폼 -->
 <form id="frmPage" action="/sol/room" method="get">
 	<input type="hidden" name="room_num" />
@@ -188,6 +230,10 @@ $(document).ready(function(){
 	<input type="hidden" name="keyword" value="${searchVo.keyword}"/>
 	<input type="hidden" name="str_start_date" value="${searchVo.str_start_date}"/>
 	<input type="hidden" name="str_end_date" value="${searchVo.str_end_date}"/>
+	<input type="hidden" name="room_people" value="${searchVo.room_people}"/>
+	<input type="hidden" name="low_price" value="${searchVo.low_price}"/>
+	<input type="hidden" name="high_price" value="${searchVo.high_price}"/>
+	<input type="hidden" name="arrType"/>
 </form>
 <!-- 히든 폼 끝 -->
 
@@ -223,45 +269,51 @@ $(document).ready(function(){
 </div>
 
 <!-- 인원 -->
-<div class="dropdown" id="d1">
+<div class="dropdown people" id="d1">
 <button class="btn btn-primary py-3 px-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:20px;margin-bottom:10px;">인원</button>
 	<div class="dropdown-menu block-27" aria-labelledby="dropdownMenuButton" style="text-align:center;">
 		<ul style="padding:0px;">
 			<li class="nav-item" style="list-style:none;padding-left:0px;"><label style="font-weight:200;">인원 수</label></li>
 			<li class="nav-item" style="list-style:none;padding-left:0px;width:240px;" id="target">
-			<a id="minus" style="cursor:pointer">-</a>
+			<a class="minus" style="cursor:pointer">-</a>
 			<!-- <input type="number" id="numBox" min="1" max="20" value="1" readonly style="font-weight:200;width:50px;height:40px;margin-left:10px;margin-right:10px;text-align:center;"/> -->
-			<label id="numBox" style="font-weight:200;width:50px;height:40px;margin-left:10px;margin-right:10px;text-align:center;">1</label>
-			<a id="plus" style="cursor:pointer">+</a></li>
+			<label id="numBox" style="font-weight:200;width:50px;height:40px;margin-left:10px;margin-right:10px;text-align:center;">${searchVo.room_people}</label>
+			<a class="plus" style="cursor:pointer">+</a></li>
 		</ul>
 	</div>
 </div>
 <!-- 숙소 유형 -->
-<div class="dropdown">
+<div class="dropdown roomtype">
 <button class="btn btn-primary py-3 px-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:20px;margin-bottom:10px;">숙소 유형</button>
 	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="text-align:left;">
 		<ul style="padding:0px;">
 			<c:forEach items="${typeList}" var="typeVo">
-			<li class="nav-item" style="list-style:none;padding-left:0px;width:240px;"><input type="checkbox" class="chb"/>
+			<li class="nav-item" style="list-style:none;padding-left:0px;width:240px;"><input type="checkbox" value="${typeVo.room_type_num}" class="typeChb" name="typeChb" style="width:20px;height:20px;"/>
 			<label style="margin-left:10px;font-weight:200;">${typeVo.room_type_explain}</label></li>
 			</c:forEach>
 		</ul>
 	</div>
 </div>
+
 <!-- 요금 -->
-<div class="dropdown">
+<div class="dropdown price">
 <button class="btn btn-primary py-3 px-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:20px;margin-bottom:10px;">요금</button>
 	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="text-align:center;">
 		<ul style="padding:0px;">
-			<!-- <li class="nav-item" style="list-style:none;padding-left:0px;">
-			<label style="margin-left:10px;font-weight:200;">최저가격</label>
-			<label style="margin-left:10px;font-weight:200;">최고가격</label>
-			</li> -->
+			<li class="nav-item" style="list-style:none;padding-left:0px;width:430px;" id="target">
+			<c:choose>
+				<c:when test="${searchVo.low_price ne priceDto.min_low_price || searchVo.high_price ne priceDto.max_high_price}">
+					<input type="number" id="lowPrice" value="${searchVo.low_price}" style="font-size:20px;font-weight:200;width:150px;height:40px;margin-left:10px;margin-right:10px;text-align:center;"/>원
+					<label>~</label>
+					<input type="number" id="highPrice" value="${searchVo.high_price}" style="font-size:20px;font-weight:200;width:150px;height:40px;margin-left:10px;margin-right:10px;text-align:center;"/>원
+				</c:when>
+				<c:otherwise>
+					<input type="number" id="lowPrice" value="${priceDto.min_low_price}" style="font-size:20px;font-weight:200;width:150px;height:40px;margin-left:10px;margin-right:10px;text-align:center;"/>원
+					<label>~</label>
+					<input type="number" id="highPrice" value="${priceDto.max_high_price}" style="font-size:20px;font-weight:200;width:150px;height:40px;margin-left:10px;margin-right:10px;text-align:center;"/>원
+				</c:otherwise>
+			</c:choose>
 			
-			<li class="nav-item" style="list-style:none;padding-left:0px;width:400px;" id="target">
-			<input type="number" id="lowPrice" placeholder="최저 요금" style="font-size:12px;font-weight:200;width:150px;height:40px;margin-left:10px;margin-right:10px;text-align:center;"/>
-			<label>~</label>
-			<input type="number" id="highPrice" placeholder="최고 요금" style="font-size:12px;font-weight:200;width:150px;height:40px;margin-left:10px;margin-right:10px;text-align:center;"/>
 			</li>
 		</ul>
 	</div>
@@ -269,12 +321,26 @@ $(document).ready(function(){
 <!-- 필터 -->
 <div class="dropdown">
 <button class="btn btn-primary py-3 px-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:20px;margin-bottom:10px;">필터</button>
-	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="text-align:left;">
+	<div class="dropdown-menu block-27" aria-labelledby="dropdownMenuButton" style="text-align:left;">
 		<ul style="padding:0px;">
+			<li class="nav-item" style="text-align:center;list-style:none;padding-left:0px;width:300px;"><label style="margin-left:10px;font-weight:200;">침대와 욕실</label></li>
+			<li class="nav-item" style="list-style:none;padding-left:0px;width:240px;"><label style="margin-left:10px;margin-right:25px;font-weight:200;">침대</label>
+			<a class="minus" style="cursor:pointer">-</a>
+			<label id="numBox" style="font-weight:200;width:50px;height:40px;margin-left:10px;margin-right:10px;text-align:center;">1</label>
+			<a class="plus" style="cursor:pointer">+</a></li>
+			
+			<li class="nav-item" style="list-style:none;padding-left:0px;width:240px;"><label style="margin-left:10px;margin-right:25px;font-weight:200;">욕실</label>
+			<a class="minus" style="cursor:pointer">-</a>
+			<label id="numBox" style="font-weight:200;width:50px;height:40px;margin-left:10px;margin-right:10px;text-align:center;">1</label>
+			<a class="plus" style="cursor:pointer">+</a></li>
+			
+			<hr>
+			
 			<li class="nav-item" style="text-align:center;list-style:none;padding-left:0px;width:240px;"><label style="margin-left:10px;font-weight:200;">편의시설</label></li>
-			<li class="nav-item" style="list-style:none;padding-left:0px;width:240px;"><input type="checkbox" class="chb"/><label style="margin-left:10px;font-weight:200;">에어컨</label></li>
-			<li class="nav-item" style="list-style:none;padding-left:0px;"><input type="checkbox" class="chb"/><label style="margin-left:10px;font-weight:200;">주차공간</label></li>
-			<li class="nav-item" style="list-style:none;padding-left:0px;"><input type="checkbox" class="chb"/><label style="margin-left:10px;font-weight:200;">반려동물</label></li>
+			<c:forEach items="${optionList}" var="optionVo">
+				<li class="nav-item" style="list-style:none;padding-left:0px;width:240px;"><input type="checkbox" class="chb" style="width:20px;height:20px;"/><label style="margin-left:10px;font-weight:200;">${optionVo.room_option_explain}</label></li>
+			</c:forEach>
+			
 		</ul>
 	</div>
 </div>
