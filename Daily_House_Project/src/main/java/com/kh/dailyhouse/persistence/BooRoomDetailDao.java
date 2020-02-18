@@ -22,4 +22,9 @@ public interface BooRoomDetailDao {
 	//방 평점 수정
 	public void setRoomScore(int room_num, int room_score) throws Exception;
 	
+	//room type 코드판별
+	public String getRoomType(RoomDto roomDto) throws Exception;
+	
+	//room option 코드판별
+	public String getRoomOption(String room_option_code) throws Exception;
 }

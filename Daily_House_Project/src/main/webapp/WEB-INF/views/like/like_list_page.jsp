@@ -59,9 +59,11 @@ $(document).ready(function() {
 	</div>
 </section>
 <section>
+${likeList}
 <div class="row">
 	<div class="col-md-2">
 	</div>
+	<c:forEach items="${likeList}" var="LikeVo">
 	<div class="col-md-3">
 		<div class="room-wrap ftco-animate">
 				<a href="room.html" class="img" style="background-image: url(/islagrande/images/room-1.jpg);">
@@ -83,6 +85,7 @@ $(document).ready(function() {
 			</div>
 		</div>
 	</div>
+	</c:forEach>
 </div>
 </section>
 

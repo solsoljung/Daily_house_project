@@ -39,5 +39,18 @@
   			room_score = #{room_score}
   		where room_num = #{room_num}
   	</update>
-
+	
+<!-- 	room type 검색 -->
+	<select id="getRoomType" resultType="String">
+		select room_type_explain from tbl_room_type
+		where room_type_num = #{room_type_num}
+	</select>
+	
+<!-- 	room option 검색 -->
+	<select id="getRoomOption" resultType="String">
+		select room_option_explain from tbl_room_option
+		where room_option_code = #{room_option_code}
+	</select>
+	
+	
 </mapper>

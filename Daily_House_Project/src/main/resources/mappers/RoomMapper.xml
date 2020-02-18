@@ -62,15 +62,6 @@
 
 	<!-- 방 목록 보기 -->
 	<select id="getRoomList" resultType="RoomVo">
-		<!-- select * from (select rownum rnum, a.* 
-        	  from (select * from tbl_room 
-                    where room_location like '%' || #{keyword} || '%'
-                    order by room_num asc
-                   ) a
-             )
-		where rnum &gt;= #{startRow} and rnum &lt;= #{endRow} -->
-		
-		
 	select * from (select rownum rnum, a.* 
 		from (select r.* from tbl_room r 
 			where r.room_location like '%' || #{keyword} || '%'
@@ -86,6 +77,7 @@
 		where rnum &gt;= #{startRow} and rnum &lt;= #{endRow}
 	</select>
 	
+	<!-- 방 count -->
 	<select id="getRoomCount" resultType="int">
 		select count(*) from tbl_room r 
 			where r.room_location like '%' || #{keyword} || '%'
@@ -97,6 +89,11 @@
 				(room_reserv_end_date &gt; #{room_reserv_start_date} and room_reserv_end_date &lt;= #{room_reserv_end_date})
 			)
 		</if>
+	</select>
+	
+	<!-- 방 type -->
+	<select id="getRoomType" resultType="RoomTypeVo">
+		select * from tbl_room_type
 	</select>
   
 </mapper>
