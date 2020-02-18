@@ -121,19 +121,32 @@ $(function() {
 		$("input[name=page]").val(page);
 		$("#frmPage").submit();
 	});
+	
 });
 
 $(window).scroll(function() {
+	var footHeight = $("#footHeight").outerHeight(true);
+	var mainImg = $("#mainImg").outerHeight(true);
+	var bodyHeight = $("body").outerHeight(true);
+	var sideHeight = $("#sidebox").outerHeight(true);
+	var ftcoHeight = $("#ftco-navbar").outerHeight(true);
+	
+	
+	var v = bodyHeight - footHeight - sideHeight - ftcoHeight;
+	
+	
+	
 	var position = $(window).scrollTop();
-	console.log(position);
-	if (position < 900) {
-		position = 900;
+	if (position < mainImg) {
+		position = mainImg;
 	}
-	if (position > 2455) {
-		position = 2455;
+	if (position > v) {
+		position = v;
 	}
+	
 	$("#sidebox").stop();
-	$("#sidebox").animate({"top":position-900});
+	$("#sidebox").animate({"top":position-mainImg});
+	
 });
 </script>
 
@@ -209,6 +222,7 @@ $(window).scroll(function() {
 </form>
 <!-- section -->
 <!-- 이미지 뷰 -->
+<div id="mainImg">
 <section class="home-slider js-fullheight owl-carousel">
       <div class="slider-item js-fullheight" style="background-image:url(/islagrande/images/bg_3.jpg);">
       	<div class="overlay"></div>
@@ -224,6 +238,8 @@ $(window).scroll(function() {
         </div>
       </div>
 </section>
+</div>
+
 <!-- /이미지 뷰 -->
 <!--  -->
 		<section class="ftco-section">
@@ -237,7 +253,7 @@ $(window).scroll(function() {
          			<th colspan="3" class="padding"><h1 style="font-family: inherit;">${roomDto.room_title}</h1></th>
          			<th class="padding">
          			<h2>호스트 사진</h2>
-         			<h2>${roomDto.user_name}</h2><p>${roomDto.user_phone}</p>
+         			<p>${roomDto.user_name}</p>
          			</th>
          		</tr>
          		<tr>
@@ -493,9 +509,9 @@ $(window).scroll(function() {
 <!-- 자유롭게 부분 -->
 
 <!-- end section -->
-
+<div id="footHeight">
 <%@ include file = "../../views/casahotel/casahotel_footer.jsp" %>
-
+</div>
 <%@ include file = "../../views/casahotel/casahotel_script.jsp" %>
 <%@ include file = "../../views/islagrande/islagrande_script.jsp" %>
 
