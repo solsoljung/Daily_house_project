@@ -92,6 +92,7 @@ public class CyController {
 		for(int i=0; i<arrPics.length; i++) {
 			System.out.println("arrPics " + i + ": " + arrPics[i]);
 		}
+		roomVo.setPics(arrPics);
 		System.out.println(">>>> controller333 roomVo: " + roomVo);
 		model.addAttribute("roomVo", roomVo);
 		model.addAttribute("roomTypeList", roomTypeService.getRoomTypeList());
@@ -106,6 +107,7 @@ public class CyController {
 		for(int i=0; i<arrPics.length; i++) {
 			System.out.println("arrPics " + i + ": " + arrPics[i]);
 		}
+		roomVo.setPics(arrPics);
 		System.out.println(">>>> controller444 roomVo: " + roomVo);
 		model.addAttribute("roomVo", roomVo);
 		model.addAttribute("roomOptionList", roomOptionService.getRoomOptionList());
@@ -120,6 +122,7 @@ public class CyController {
 		for(int i=0; i<arrPics.length; i++) {
 			System.out.println("arrPics " + i + ": " + arrPics[i]);
 		}
+		roomVo.setPics(arrPics);
 		System.out.println(">>>> registerHost roomVo: " + roomVo);
 		model.addAttribute("roomVo", roomVo);
 		roomService.registerRoom(roomVo);

@@ -22,7 +22,7 @@ import com.kh.dailyhouse.util.FileUploadUtil;
 public class UploadController {
 	
 	@Resource
-	private String uploadPath; // servlet-context.xml (id="uploadPath")
+	private String uploadPath; 
 	
 	@Inject
 	private CyRoomService roomService;

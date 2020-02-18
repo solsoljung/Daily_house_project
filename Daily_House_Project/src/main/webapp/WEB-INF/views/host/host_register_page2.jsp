@@ -36,6 +36,7 @@ $(function(){
 		e.preventDefault();
 	});
 	
+	// 첨부파일 삭제랑 여기는 host_register_page4로 이동
 	$("#fileDrop").on("drop", function(e) {
 		e.preventDefault(); // 브라우저로 파일 열기 안하기
 		var file = e.originalEvent.dataTransfer.files[0];
@@ -55,7 +56,7 @@ $(function(){
 			"contentType" : false,
 			"data" : formData,
 			"success" : function(fullName) {
-				console.log(fullName); // 2020/1/20/0080b7f5-9cb3-451b-97cc-e7abfdc75524_Penguins.jpg
+				console.log(fullName); 
 				// 파일명 얻기
 				var underScoreIndex = fullName.indexOf("_");
 				var fileName = fullName.substring(underScoreIndex + 1); // Penguins.jpg
