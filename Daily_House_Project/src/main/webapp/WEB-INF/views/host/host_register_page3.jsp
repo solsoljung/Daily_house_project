@@ -108,9 +108,11 @@ $(function(){
 			<input type="hidden" name="room_title" value="${roomVo.room_title}"/>
 			<input type="hidden" name="room_explain" value="${roomVo.room_explain}"/>
 			<input type="hidden" name="room_price" value="${roomVo.room_price}"/>
+			<c:if test="${not empty roomVo.pics}">
 			<c:forEach var="pic" items="${roomVo.pics}" varStatus="status">
 				<input type="hidden" name="pics" value="${roomVo.pics[status.index]}"/>
 			</c:forEach>
+			</c:if>
 			
 				<!-- 건물 유형 -->
 				<div class="form-group">

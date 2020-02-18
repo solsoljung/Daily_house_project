@@ -32,11 +32,12 @@ $(function(){
 	$(".nav-item:eq(0)").attr("class", "nav-item");
 	$(".nav-item:eq(5)").attr("class", "nav-item active");
 	
+	// https://sub0709.tistory.com/46
+	
 	$("#fileDrop").on("dragenter dragover", function(e) {
 		e.preventDefault();
 	});
 	
-	// 첨부파일 삭제랑 여기는 host_register_page4로 이동
 	$("#fileDrop").on("drop", function(e) {
 		e.preventDefault(); // 브라우저로 파일 열기 안하기
 		var file = e.originalEvent.dataTransfer.files[0];
