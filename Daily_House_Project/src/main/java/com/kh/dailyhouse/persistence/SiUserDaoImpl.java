@@ -28,7 +28,6 @@ public class SiUserDaoImpl implements SiUserDao {
 
 	@Override
 	public void userUpdate(UserVo userVo) throws Exception {
-		System.out.println("다오!!!!!!"+userVo);
 		sqlSession.update(NAMESPACE+".userUpdate", userVo);
 	}
 
