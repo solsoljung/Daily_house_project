@@ -91,8 +91,9 @@ $(function(){
 // 		console.log($("input[name=room_type_num]").val());
 	});
 	
-	// btnTest
-	$("#btnTest").click(function(){
+	// 수정완료
+	$("#btnConplete").click(function(e){
+		e.preventDefault();
 		room_location = $("#roadAddrPart1").val();
 		room_location_detail = $("#addrDetail").val();
 		if(room_location == null || room_location == ""){
@@ -126,39 +127,21 @@ $(function(){
 		$("input[name=room_bed]").val($("#room_bed").val());
 		$("input[name=room_bathroom]").val($("#room_bathroom").val());
 		
-		console.log("room_location: " + $("input[name=room_location]").val());
-		console.log("room_location_detail: " + $("input[name=room_location_detail]").val());
+// 		console.log("room_location: " + $("input[name=room_location]").val());
+// 		console.log("room_location_detail: " + $("input[name=room_location_detail]").val());
 		
-		console.log("room_title: " + $("input[name=room_title]").val());	
-		console.log("room_explain: " + $("textarea[name=room_explain]").val());	
-		console.log("room_price: " + $("input[name=room_price]").val());	
+// 		console.log("room_title: " + $("input[name=room_title]").val());	
+// 		console.log("room_explain: " + $("textarea[name=room_explain]").val());	
+// 		console.log("room_price: " + $("input[name=room_price]").val());	
 		
-		console.log("room_option_code: " + $("input[name=room_option_code]").val());
+// 		console.log("room_option_code: " + $("input[name=room_option_code]").val());
 		
-		console.log("room_type_num: " + $("input[name=room_type_num]").val());
-		console.log("room_people: " + $("input[name=room_people]").val());	
-		console.log("room_bed: " + $("input[name=room_bed]").val());	
-		console.log("room_bathroom: " + $("input[name=room_bathroom]").val());	
+// 		console.log("room_type_num: " + $("input[name=room_type_num]").val());
+// 		console.log("room_people: " + $("input[name=room_people]").val());	
+// 		console.log("room_bed: " + $("input[name=room_bed]").val());	
+// 		console.log("room_bathroom: " + $("input[name=room_bathroom]").val());	
 		
 		$("#form").attr("action", "/cy/HostModifyRoom"); 
-		$("#form").submit();
-		
-	});
-	
-	// 수정완료
-	$("#btnConplete").click(function(e){
-		e.preventDefault();
-		room_location = $("#roadAddrPart1").val();
-		room_location_detail = $("#addrDetail").val();
-		if(room_location == null || room_location == ""){
-			alert("주소를 입력해주세요.");
-			return;
-		}
-		
-		$("input[name=room_location").val(room_location);
-		$("input[name=room_location_detail]").val(room_location_detail);
-		
-		$("#form").attr("action", "/cy/HostRoomDetail");
 		$("#form").submit();
 	}); // btnConplete
 	
@@ -233,6 +216,7 @@ $(function(){
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
+			<br><br>
 			<label class="lblTitle2">* 숙소의 위치</label><br>
 				<!-- 위치등록 -->
 				<form id="form" name="form" method="post">
@@ -426,7 +410,7 @@ ${roomDetailDto.room_explain}</textarea><br><br>
 					<div class="col-md-3"></div>
 					<div class="col-md-3"></div>
 					<div class="col-md-3" align="right">
-						<button type="button" class="btn btn-primary btn-block" id="btnTest" >TEST</button>
+<!-- 						<button type="button" class="btn btn-primary btn-block" id="btnTest" >TEST</button> -->
 					</div>
 					<div class="col-md-3" align="right">
 						<button type="button" class="btn btn-primary " id="btnConplete">완료</button>

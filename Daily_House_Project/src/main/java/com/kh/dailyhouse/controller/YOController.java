@@ -10,16 +10,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.kh.dailyhouse.domain.LikeVo;
 import com.kh.dailyhouse.domain.ReservationVo;
 import com.kh.dailyhouse.domain.UserVo;
+import com.kh.dailyhouse.service.YOLikeListService;
 import com.kh.dailyhouse.service.YOReservationListService;
 
 @Controller
 @RequestMapping("/yo/*")
-public class YOController {
+public class YOController { 
 	
 	@Inject
 	private YOReservationListService service;
+	
+	@Inject
+	private YOLikeListService likeService;
 
 	
 	@RequestMapping(value="/reservation", method=RequestMethod.GET)
@@ -51,6 +56,11 @@ public class YOController {
 	
 	@RequestMapping(value="/like_list", method=RequestMethod.GET)
 	public String likeList(HttpSession session, Model model) throws Exception {
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		model.addAttribute("userVo" + userVo);
+		String user_email = userVo.getUser_email();
+		List<LikeVo> likeList = likeService.getLikeList(user_email);
+		model.addAttribute("likeList", likeList);
 		return "/like/like_list_page";
 	}
 }
