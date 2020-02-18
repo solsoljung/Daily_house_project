@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.dailyhouse.domain.ReviewPagingDto;
 import com.kh.dailyhouse.domain.RoomDto;
@@ -23,9 +24,10 @@ public class BooController {
 	private BooRoomDetailService booRoomDetailService;
 	
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
-	public String getRoomDetail(Model model, ReviewPagingDto reviewPagingDto) throws Exception{
+	public String getRoomDetail(@RequestParam("room_num") int room_num, Model model, ReviewPagingDto reviewPagingDto) throws Exception{
 		//방을 선택시 room_num을 받아야됨
-		Map<String, Object> paramMap = booRoomDetailService.detail(51, reviewPagingDto);
+		System.out.println("BooController room_num : " + room_num);
+		Map<String, Object> paramMap = booRoomDetailService.detail(room_num, reviewPagingDto);
 		RoomDto roomDto = (RoomDto)paramMap.get("dto");
 		List<RoomReviewVo> reviewList = (List<RoomReviewVo>)paramMap.get("ReviewList");
 		String type = (String)paramMap.get("type");
