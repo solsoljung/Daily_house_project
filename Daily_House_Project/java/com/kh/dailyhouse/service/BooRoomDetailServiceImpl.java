@@ -25,7 +25,7 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 	@Override
 	public Map<String, Object> detail(int room_num, ReviewPagingDto reviewPagingDto) throws Exception {
 		//댓글 총 갯수 구하기
-		int totalCount = booRoomDetailDao.getReviewCount();
+		int totalCount = booRoomDetailDao.getReviewCount(room_num);
 		reviewPagingDto.setTotalCount(totalCount);
 		
 		//후기 리스트 받아오기
@@ -45,8 +45,6 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 		
 		//방 상세보기 정보 받기
 		RoomDto dto = booRoomDetailDao.getRoominfo(room_num);
-		System.out.println("Service room_num : " + room_num);
-		System.out.println("dto : " + dto);
 		
 		//방 옵션 코드 받기
 		String optionCode = "";

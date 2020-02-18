@@ -11,7 +11,7 @@ public interface BooRoomDetailDao {
 	public RoomDto getRoominfo(int room_num) throws Exception;
 	
 	//후기 목록에 사용할 총개수
-	public int getReviewCount() throws Exception;
+	public int getReviewCount(int room_num) throws Exception;
 	
 	//roomDetail review 목록 정보 얻기
 	public List<RoomReviewVo> getReviewinfo(int room_num, ReviewPagingDto reviewPagingDto) throws Exception;

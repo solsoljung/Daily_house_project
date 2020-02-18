@@ -57,8 +57,8 @@ public class BooRoomDetailDaoImpl implements BooRoomDetailDao {
 	
 	//후기 목록에 사용할 총개수
 	@Override
-	public int getReviewCount() throws Exception {
-		int count = sqlSession.selectOne(NAMESPACE+".getReviewCount");
+	public int getReviewCount(int room_num) throws Exception {
+		int count = sqlSession.selectOne(NAMESPACE+".getReviewCount", room_num);
 		return count;
 	}
 
@@ -75,7 +75,6 @@ public class BooRoomDetailDaoImpl implements BooRoomDetailDao {
 		String room_option_explain = "";
 		String notNull = sqlSession.selectOne(NAMESPACE+".getRoomOption", room_option_code);
 		if (notNull != null) {
-			System.out.println("Dao option 작동됨");
 			room_option_explain = notNull;
 		}
 				

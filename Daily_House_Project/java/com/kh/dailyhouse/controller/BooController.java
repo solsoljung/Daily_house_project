@@ -45,7 +45,8 @@ public class BooController {
 	}
 	
 	@RequestMapping(value="/review", method = RequestMethod.POST)
-	public String postInputReview(RoomReviewVo roomReviewVo) throws Exception{		
+	public String postInputReview(RoomReviewVo roomReviewVo) throws Exception{
+		
 		int Review_score_location = roomReviewVo.getReview_score_location();
 		int Review_score_cleanliness = roomReviewVo.getReview_score_cleanliness();
 		int Review_score_checkin = roomReviewVo.getReview_score_checkin();
@@ -54,6 +55,7 @@ public class BooController {
 		roomReviewVo.setTotal_score(total_score);
 		
 		booRoomDetailService.insertReview(roomReviewVo);
-		return "redirect:/boo/detail";
+		int num = roomReviewVo.getRoom_num();
+		return "redirect:/boo/detail?room_num="+num;
 	}
 }
