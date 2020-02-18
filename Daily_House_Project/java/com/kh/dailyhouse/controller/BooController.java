@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.dailyhouse.domain.ReservationVo;
 import com.kh.dailyhouse.domain.ReviewPagingDto;
 import com.kh.dailyhouse.domain.RoomDto;
 import com.kh.dailyhouse.domain.RoomReviewVo;
@@ -34,12 +35,18 @@ public class BooController {
 		List<String> OptionList = (List<String>)paramMap.get("OptionList");
 		List<String> OptionCode = (List<String>)paramMap.get("OptionCode");
 		
+		Map<String, Object> roomReservationMap = booRoomDetailService.roomReservation(room_num);
+		List<String> startList = (List<String>)roomReservationMap.get("startList");
+		List<String> endList = (List<String>)roomReservationMap.get("endList");
+		
 		model.addAttribute("roomDto", roomDto);
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("reviewPagingDto", reviewPagingDto);
 		model.addAttribute("type", type);
 		model.addAttribute("OptionList", OptionList);
 		model.addAttribute("OptionCode", OptionCode);
+		model.addAttribute("startList", startList);
+		model.addAttribute("endList", endList);
 		
 		return "/room_detail/Room_Detail";
 	}

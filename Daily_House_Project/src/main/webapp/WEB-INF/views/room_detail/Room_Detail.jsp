@@ -6,9 +6,6 @@
 <%@ include file = "../../views/casahotel/casahotel_link.jsp" %>
 <%@ include file = "../../views/islagrande/islagrande_link.jsp" %>
 
-
-
-
 <style>
 .mousePointer {
 	cursor : pointer
@@ -138,9 +135,98 @@ $(window).scroll(function() {
  	};
 </script>
 
+<!-- check in,out -->
+<script>
+$(document).ready(function(){
+	//체크인
+	$('#startDate').datepicker({
+		format: "yyyy-mm-dd",
+	    startDate: '1d',
+	    autoclose : true,
+	    datesDisabled : ['2020-02-20','2020-02-26'],	//'2020-02-18','2020-02-20'이런 형식
+	    multidateSeparator :",",
+	    templates : {
+	        leftArrow: '&laquo;',
+	        rightArrow: '&raquo;'
+	    },
+	    showWeekDays : true ,
+	    title: "체크인 날짜 선택",
+	    todayHighlight : true ,
+	    toggleActive : true,
+	    weekStart : 0 ,
+	    language : "ko"
+		    
+	}).on("changeDate", function(e) {
+		
+		var date = formatDate(e.date);
+		
+		if(date == "NaN-NaN-NaN"){
+			var now = new Date();
+			var year= now.getFullYear();
+			var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
+			var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
+			date = year + '-' + mon + '-' + day;
+		}
+		
+		var arrDate = date.split("-");
+		var intNewDay = parseInt(arrDate[2]) + 1;
+		arrDate[2] = intNewDay.toString();
+		var newDate = arrDate.join('-');
+        console.log(date);
+        
+        $("input[name=str_start_date]").val(date);
+
+        $("#endDate").datepicker("setStartDate", newDate);
+        $(this).hide();
+        $('#endDate').show().datepicker("show");
+	});
+	 
+	//체크아웃
+	$('#endDate').datepicker({
+		format: "yyyy-mm-dd",
+	    startDate: '1d',
+	    autoclose : true,
+	    datesDisabled : ['2020-02-22','2020-02-28'],
+	    multidateSeparator :",",
+	    templates : {
+	        leftArrow: '&laquo;',
+	        rightArrow: '&raquo;'
+	    },
+	    showWeekDays : true ,
+	    title: "체크아웃 날짜 선택",
+	    todayHighlight : true ,
+	    toggleActive : true,
+	    weekStart : 0 ,
+	    language : "ko"
+		    
+	}).on("changeDate", function(e) {
+		
+		var checkout = formatDate(e.date);
+		console.log(checkout);
+		
+		$("input[name=str_end_date]").val(checkout);
+		$('#startDate').show()
+		$("#frmPage").submit();
+	});
+
+	//날짜 포멧 함수
+	function formatDate(date) { 
+		var d = new Date(date),
+	 	month = '' + (d.getMonth() + 1),
+		day = '' + d.getDate(), 
+		year = d.getFullYear(); 
+
+		if (month.length < 2) month = '0' + month; 
+		if (day.length < 2) day = '0' + day; 
+
+		return [year, month, day].join('-'); 
+	}
+});
+</script>
 
 <%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
 <form id="frmPage" action="/boo/detail" method="get">
+	<input type="hidden" name="room_num" value="${roomDto.room_num}">
 	<input type="hidden" name="page" value="${reviewPagingDto.page}">
 </form>
 <!-- section -->
@@ -164,7 +250,6 @@ $(window).scroll(function() {
 </div>
 
 <!-- /이미지 뷰 -->
-<!--  -->
 		<section class="ftco-section">
       <div class="container">
         <div class="row">
@@ -410,10 +495,19 @@ $(window).scroll(function() {
           	</div>
           </div>
 <!-- /내용 센터쪽 -->
+
 <!-- 메뉴 좌측쪽 -->
         <div class="col-lg-4 sidebar ftco-animate">
         	<div id="sidebox" style="position: absolute;">
 	         	<div class="sidebar-box subs-wrap">
+	         	${startList}
+	         	${endList}
+	         		<div class="row">
+						<div class="dropdown">
+							<input type="button" value="체크인" class="btn btn-primary py-3 px-5" style="font-size:20px;" id= "startDate">
+							<input type="button" value="체크아웃" class="btn btn-primary py-3 px-5" style="font-size:20px;display:none;" id= "endDate">
+						</div>
+					</div>
 								<h3>Subcribe to our Newsletter</h3>
 								<p>Far far away, behind the word mountains, far from the countries Vokalia</p>
 	              <form action="#" class="subscribe-form">
