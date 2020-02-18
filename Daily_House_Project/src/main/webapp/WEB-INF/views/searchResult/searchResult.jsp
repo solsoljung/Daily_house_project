@@ -71,15 +71,31 @@ $(document).ready(function(){
   	});
 	
 	//가격
-	$('.price').on('hidden.bs.dropdown', function(){
+	$('.price').on('hidden.bs.dropdown', function(e){
+		e.stopPropagation(); 
 		var lowPrice = $("#lowPrice").val();
 		var highPrice = $("#highPrice").val();
+		console.log(lowPrice);
 		console.log(highPrice);
-		$("input[name=room_low_price]").val(lowPrice);
-		$("input[name=room_high_price]").val(highPrice);
+		$("input[name=low_price]").val(lowPrice);
+		$("input[name=high_price]").val(highPrice);
+		$("#frmPage").submit();
 		
+		console.log("ㅇ요오옹!");
+  	});
+	
+	//룸타입
+	$('.roomtype').on('hidden.bs.dropdown', function(e){
+		e.stopPropagation();
+		var arrType = [];
+		$("input:checkbox[name=typeChb]:checked").each(function(){
+			arrType.push($(this).val());
+		});
+		console.log(arrType);
+		$("input[name=arrType]").val(arrType);
 		$("#frmPage").submit();
   	});
+	
 	
 	//체크인
 	$('#startDate').datepicker({
@@ -148,7 +164,7 @@ $(document).ready(function(){
 		console.log(checkout);
 		
 		$("input[name=str_end_date]").val(checkout);
-		$('#startDate').show()
+		$('#startDate').show();
 		$("#frmPage").submit();
 	});
 	
@@ -215,8 +231,9 @@ ${priceDto}
 	<input type="hidden" name="str_start_date" value="${searchVo.str_start_date}"/>
 	<input type="hidden" name="str_end_date" value="${searchVo.str_end_date}"/>
 	<input type="hidden" name="room_people" value="${searchVo.room_people}"/>
-	<input type="hidden" name="room_low_price" value="${priceDto.low_price}"/>
-	<input type="hidden" name="room_high_price" value="${priceDto.high_price}"/>
+	<input type="hidden" name="low_price" value="${searchVo.low_price}"/>
+	<input type="hidden" name="high_price" value="${searchVo.high_price}"/>
+	<input type="hidden" name="arrType"/>
 </form>
 <!-- 히든 폼 끝 -->
 
@@ -266,12 +283,12 @@ ${priceDto}
 	</div>
 </div>
 <!-- 숙소 유형 -->
-<div class="dropdown">
+<div class="dropdown roomtype">
 <button class="btn btn-primary py-3 px-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:20px;margin-bottom:10px;">숙소 유형</button>
 	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="text-align:left;">
 		<ul style="padding:0px;">
 			<c:forEach items="${typeList}" var="typeVo">
-			<li class="nav-item" style="list-style:none;padding-left:0px;width:240px;"><input type="checkbox" class="chb" style="width:20px;height:20px;"/>
+			<li class="nav-item" style="list-style:none;padding-left:0px;width:240px;"><input type="checkbox" value="${typeVo.room_type_num}" class="typeChb" name="typeChb" style="width:20px;height:20px;"/>
 			<label style="margin-left:10px;font-weight:200;">${typeVo.room_type_explain}</label></li>
 			</c:forEach>
 		</ul>
@@ -284,9 +301,19 @@ ${priceDto}
 	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="text-align:center;">
 		<ul style="padding:0px;">
 			<li class="nav-item" style="list-style:none;padding-left:0px;width:430px;" id="target">
-			<input type="number" id="lowPrice" value="${priceDto.low_price}" style="font-size:20px;font-weight:200;width:150px;height:40px;margin-left:10px;margin-right:10px;text-align:center;"/>원
-			<label>~</label>
-			<input type="number" id="highPrice" value="${priceDto.high_price}" style="font-size:20px;font-weight:200;width:150px;height:40px;margin-left:10px;margin-right:10px;text-align:center;"/>원
+			<c:choose>
+				<c:when test="${searchVo.low_price ne priceDto.min_low_price || searchVo.high_price ne priceDto.max_high_price}">
+					<input type="number" id="lowPrice" value="${searchVo.low_price}" style="font-size:20px;font-weight:200;width:150px;height:40px;margin-left:10px;margin-right:10px;text-align:center;"/>원
+					<label>~</label>
+					<input type="number" id="highPrice" value="${searchVo.high_price}" style="font-size:20px;font-weight:200;width:150px;height:40px;margin-left:10px;margin-right:10px;text-align:center;"/>원
+				</c:when>
+				<c:otherwise>
+					<input type="number" id="lowPrice" value="${priceDto.min_low_price}" style="font-size:20px;font-weight:200;width:150px;height:40px;margin-left:10px;margin-right:10px;text-align:center;"/>원
+					<label>~</label>
+					<input type="number" id="highPrice" value="${priceDto.max_high_price}" style="font-size:20px;font-weight:200;width:150px;height:40px;margin-left:10px;margin-right:10px;text-align:center;"/>원
+				</c:otherwise>
+			</c:choose>
+			
 			</li>
 		</ul>
 	</div>

@@ -6,6 +6,19 @@ public class LikeVo {
 	private String user_email;
 	
 	
+	public LikeVo() {
+		super();
+	}
+	
+	
+	public LikeVo(int like_num, int room_num, String user_email) {
+		super();
+		this.like_num = like_num;
+		this.room_num = room_num;
+		this.user_email = user_email;
+	}
+
+
 	public int getLike_num() {
 		return like_num;
 	}

@@ -2,24 +2,23 @@ package com.kh.dailyhouse.domain;
 
 public class RoomLowHighPriceDto {
 	
-	private static int high_price;
-	private int low_price;
-	public int getHigh_price() {
-		return high_price;
+	private int max_high_price;
+	private int min_low_price;
+	public int getMax_high_price() {
+		return max_high_price;
 	}
-	public void setHigh_price(int high_price) {
-		this.high_price = high_price;
+	public void setMax_high_price(int max_high_price) {
+		this.max_high_price = max_high_price;
 	}
-	public int getLow_price() {
-		return low_price;
+	public int getMin_low_price() {
+		return min_low_price;
 	}
-	public void setLow_price(int low_price) {
-		this.low_price = low_price;
+	public void setMin_low_price(int min_low_price) {
+		this.min_low_price = min_low_price;
 	}
 	@Override
 	public String toString() {
-		return "RoomLowHighPriceDto [high_price=" + high_price + ", low_price=" + low_price + "]";
+		return "RoomLowHighPriceDto [max_high_price=" + max_high_price + ", min_low_price=" + min_low_price + "]";
 	}
-	
 
 }

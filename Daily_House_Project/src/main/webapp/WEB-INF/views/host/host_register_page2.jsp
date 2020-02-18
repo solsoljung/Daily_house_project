@@ -32,6 +32,8 @@ $(function(){
 	$(".nav-item:eq(0)").attr("class", "nav-item");
 	$(".nav-item:eq(5)").attr("class", "nav-item active");
 	
+	// https://sub0709.tistory.com/46
+	
 	$("#fileDrop").on("dragenter dragover", function(e) {
 		e.preventDefault();
 	});
@@ -55,7 +57,7 @@ $(function(){
 			"contentType" : false,
 			"data" : formData,
 			"success" : function(fullName) {
-				console.log(fullName); // 2020/1/20/0080b7f5-9cb3-451b-97cc-e7abfdc75524_Penguins.jpg
+				console.log(fullName); 
 				// 파일명 얻기
 				var underScoreIndex = fullName.indexOf("_");
 				var fileName = fullName.substring(underScoreIndex + 1); // Penguins.jpg

@@ -7,8 +7,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.dailyhouse.domain.LikeVo;
 import com.kh.dailyhouse.domain.ReservationVo;
@@ -58,9 +60,21 @@ public class YOController {
 	public String likeList(HttpSession session, Model model) throws Exception {
 		UserVo userVo = (UserVo)session.getAttribute("userVo");
 		model.addAttribute("userVo" + userVo);
+		if (userVo == null) {
+			return "redirect:/si/loginHost";
+		}
 		String user_email = userVo.getUser_email();
 		List<LikeVo> likeList = likeService.getLikeList(user_email);
 		model.addAttribute("likeList", likeList);
 		return "/like/like_list_page";
 	}
+	
+	@RequestMapping(value="/like_delete/{like_num}", method=RequestMethod.DELETE)
+	@ResponseBody
+	public String deleteLike(@PathVariable("like_num") int like_num) throws Exception {
+		System.out.println("like_num:" + like_num);
+		likeService.deleteLike(like_num);
+		return "success";
+	}
+
 }

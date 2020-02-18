@@ -2,6 +2,7 @@ package com.kh.dailyhouse.controller;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -64,14 +65,36 @@ public class SolController {
 			System.out.println("start_date: " + start_date);
 			System.out.println("end_date: " + end_date);
 		}
-		
+		RoomLowHighPriceDto priceDto = service.getRoomPrice();
+		System.out.println("searchVo222222222: " + searchVo);
+		System.out.println("priceDto7777777: " + priceDto);
+		if(searchVo.getLow_price() == 0 && searchVo.getLow_price() == 0) {
+			searchVo.setLow_price(priceDto.getMin_low_price());
+			searchVo.setHigh_price(priceDto.getMax_high_price());
+		}
 		List<RoomVo> list = service.getRoomList(searchVo);
 		int totalCount = service.getRoomCount(searchVo);
 		List<RoomTypeVo> typeList = service.getRoomType();
 		List<RoomOptionVo> optionList = service.getRoomOption();
-		RoomLowHighPriceDto priceDto = service.getRoomPrice();
-		System.out.println("priceDto: "+priceDto);
 		searchVo.setTotalCount(totalCount);
+		
+		if(searchVo.getArrType() != null) {
+
+			String type = searchVo.getArrType();
+			System.out.println("여기기가리ㅏ;ㄴ: "+type);
+			String[] typeSplit = type.split(",");
+			System.out.println("여기기가리ㅏ;ㄴ111111: "+typeSplit[0]);
+			System.out.println("여기기가리ㅏ;ㄴ222222: "+typeSplit[1]);
+			
+			ArrayList<String> TypeList = new ArrayList<>();
+	        
+			for(String item : typeSplit) {
+				TypeList.add(item);
+			}
+//			여기하고 있었음!!!!!! 이제 mybatis foreach 하면 됨!
+
+		}
+		
 		model.addAttribute("list", list);
 		model.addAttribute("searchVo", searchVo);
 		model.addAttribute("typeList", typeList);

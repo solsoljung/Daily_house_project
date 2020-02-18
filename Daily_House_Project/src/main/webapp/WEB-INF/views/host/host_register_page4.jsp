@@ -68,7 +68,11 @@ $(function(){
 			<input type="hidden" name="room_price" value="${roomVo.room_price}"/>
 			<input type="hidden" name="room_option_code" />
 			
-			<input type="hidden" name="pics" value="${roomVo.pics}"/>
+			<c:if test="${not empty roomVo.pics}">
+			<c:forEach var="pic" items="${roomVo.pics}" varStatus="status">
+				<input type="hidden" name="pics" value="${roomVo.pics[status.index]}"/>
+			</c:forEach>
+			</c:if>
 			
 				<!-- 편의시설 -->
 				<div class="form-group">
