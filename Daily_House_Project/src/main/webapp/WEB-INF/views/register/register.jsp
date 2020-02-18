@@ -155,9 +155,9 @@ $(function(){
                   <input type="text" id="phone" name="user_phone" placeholder="-없이 숫자만 입력해주세요." class="form-control" required>
                 </div>
               </div>
-              <div class="col-md-10 text-right" data-aos="fade-up" data-aos-delay="200">
+              <div class="col-md-8 text-right" data-aos="fade-up" data-aos-delay="200">
+              <br>
 	            <button type="button" class="btn btn-primary text-white py-3 px-5" id="btnSubmit">회원가입</button>&nbsp;&nbsp;&nbsp;&nbsp;
-	            <a href="/si/goHome"><button type="button" class="btn btn-primary text-white py-3 px-5">홈으로</button></a>
 	          </div>
             </form>
           </div>
