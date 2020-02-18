@@ -157,7 +157,7 @@ $(function(){
               </div>
               <div class="col-md-8 text-right" data-aos="fade-up" data-aos-delay="200">
               <br>
-	            <button type="button" class="btn btn-primary text-white py-3 px-5" id="btnSubmit">회원가입</button>&nbsp;&nbsp;&nbsp;&nbsp;
+	            <button type="button" class="btn btn-primary text-white py-3 px-5" id="btnSubmit">회원가입</button>
 	          </div>
             </form>
           </div>
