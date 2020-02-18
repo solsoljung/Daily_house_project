@@ -27,7 +27,6 @@
 	        	<li class="nav-item"><a href="/cy/HostRoomList" class="nav-link">숙소관리</a></li>
 				  <c:choose>
 				   	<c:when test="${empty userVo}">
-					    <li class="nav-item"><a href="/si/registerHost" class="nav-link">회원가입</a></li>
 					    <li class="nav-item"><a href="/si/loginHost" class="nav-link">로그인</a></li>
 				   	</c:when>
 				   	<c:otherwise> 

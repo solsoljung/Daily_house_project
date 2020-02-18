@@ -46,8 +46,8 @@ $(document).ready(function() {
               
               <br>
               <div class="col-md-10 text-right" data-aos="fade-up" data-aos-delay="200">
-	            <button type="submit" class="btn btn-primary text-white py-3 px-5" style="font-size:20px;">로그인</button>&nbsp;&nbsp;&nbsp;&nbsp;
-	            <a href="/si/goHome"><button type="button" class="btn btn-primary text-white py-3 px-5">홈으로</button></a>
+	            <button type="submit" class="btn btn-primary text-white py-3 px-5">로그인</button>&nbsp;&nbsp;&nbsp;&nbsp;
+	            <a href="/si/registerHost"><button type="button" class="btn btn-primary text-white py-3 px-5">회원가입</button></a>
 	          </div>
             </form>
           </div>

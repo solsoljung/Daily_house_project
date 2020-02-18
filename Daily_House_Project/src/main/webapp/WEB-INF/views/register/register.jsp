@@ -31,12 +31,16 @@ $(function(){
 // 			alert("phone");
 // 			return false;
 // 		}
+		if (pw1 ) {
+			alert("특수문자가 들어있지 않습니다.");
+			return false;
+		}
 		if (pw1 != pw2) {
-			alert("비밀번호 불일치");
+			alert("비밀번호 불일치합니다.");
 			return false;
 		}
 		if (isCerficate == false) {
-			alert("이메일 인증을 해주세요");
+			alert("이메일 인증을 해주세요.");
 			return false;
 		}
 		$("#joinForm").submit();
@@ -118,7 +122,7 @@ $(function(){
         <div class="row">
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
             <form action="/si/register_run" method="post" role="form" class="bg-white p-md-5 p-4 mb-5 border" id="joinForm">
-            	<input type="hidden" name="user_email" value="user.jpg">
+            	<input type="hidden" name="user_pic" value="user.jpg">
               <div class="col-md-6 form-group">
                 <label class="text-black font-weight-bold">회원가입</label>
               </div>
@@ -131,7 +135,7 @@ $(function(){
               </div>
               <div class="row">
                 <div class="col-md-12 form-group">
-                  <label class="text-black font-weight-bold" for="email">Email Certification</label>
+                  <label class="text-black font-weight-bold" for="email">Email 인증</label>
                   <input type="text" id="emailCertification" name="certification" placeholder="인증번호" class="form-control" required>
                   <button type="button" id="btn_certification2" value="인증번호 확인" class="btn btn-primary text-white">인증번호 확인</button>
                 </div>
@@ -139,25 +143,25 @@ $(function(){
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="password">Password</label>
-                  <input type="password" id="pw" name="user_pw" class="form-control" placeholder="Password" required>
+                  <input type="password" id="pw" name="user_pw" placeholder="6자 이상 특수문자 1개를 입력해주세요" class="form-control" required maxlength="20">
                   <label class="text-black font-weight-bold" for="password">Password Check</label>
-                  <input type="password" id="pw2" class="form-control" placeholder="Password Check" required>
+                  <input type="password" id="pw2" class="form-control" placeholder="Password Check" required maxlength="20">
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="name">Name</label>
-                  <input type="text" id="name" name="user_name" class="form-control" placeholder="Name" required>
+                  <input type="text" id="name" name="user_name" class="form-control" placeholder="Name" required maxlength="12">
                 </div>
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="phone">Phone</label>
                   <!--  required꼭 적게 만듬  readonly꼭 수정 못하게함-->
-                  <input type="text" id="phone" name="user_phone" placeholder="-없이 숫자만 입력해주세요." class="form-control" required>
+                  <input type="text" id="phone" name="user_phone" placeholder="-없이 숫자만 입력해주세요." class="form-control" required maxlength="11">
                 </div>
               </div>
-              <div class="col-md-10 text-right" data-aos="fade-up" data-aos-delay="200">
-	            <button type="button" class="btn btn-primary text-white py-3 px-5" id="btnSubmit">회원가입</button>&nbsp;&nbsp;&nbsp;&nbsp;
-	            <a href="/si/goHome"><button type="button" class="btn btn-primary text-white py-3 px-5">홈으로</button></a>
+              <div class="col-md-8 text-right" data-aos="fade-up" data-aos-delay="200">
+              <br>
+	            <button type="button" class="btn btn-primary text-white py-3 px-5" id="btnSubmit">회원가입</button>
 	          </div>
             </form>
           </div>
