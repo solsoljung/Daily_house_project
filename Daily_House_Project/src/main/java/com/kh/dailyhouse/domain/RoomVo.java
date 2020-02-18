@@ -17,6 +17,7 @@ public class RoomVo {
 	private String room_title;
 	private String room_option_code;
 	private String[] pics; 
+	private String room_status; 
 	
 	public int getRoom_num() {
 		return room_num;
@@ -102,6 +103,12 @@ public class RoomVo {
 	public void setPics(String[] pics) {
 		this.pics = pics;
 	}
+	public String getRoom_status() {
+		return room_status;
+	}
+	public void setRoom_status(String room_status) {
+		this.room_status = room_status;
+	}
 	
 	@Override
 	public String toString() {
@@ -110,6 +117,6 @@ public class RoomVo {
 				+ ", room_score=" + room_score + ", room_price=" + room_price + ", room_explain=" + room_explain
 				+ ", room_people=" + room_people + ", room_bed=" + room_bed + ", room_bathroom=" + room_bathroom
 				+ ", room_title=" + room_title + ", room_option_code=" + room_option_code + ", pics="
-				+ Arrays.toString(pics) + "]";
+				+ Arrays.toString(pics) + ", room_status=" + room_status + "]";
 	}
 }
