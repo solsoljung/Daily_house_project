@@ -12,15 +12,28 @@
 <!-- reservation page section -->
 <style>
 #heartDiv {
-	margin-left: 320px;
+	margin-left: 210px;
 	font-size: 40px;
 }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
+	// 좋아요 해제하기
 	$("#heartDiv").click(function() {
 		
 	});
+
+	
+	//상세 페이지로 이동
+	$(".room_title").click(function(e) {
+		e.preventDefault();
+		var room_num = $(this).attr("data-num");
+		console.log(room_num);
+		$("input[name=room_num]").val(room_num);
+		$("#frmPage").submit();
+	});
+
 });
 </script>
 <section class="site-hero inner-page overlay" style="background-image: url(/casahotel/img/slider-6.jpg)" data-stellar-background-ratio="0.5">
@@ -59,33 +72,30 @@ $(document).ready(function() {
 	</div>
 </section>
 <section>
-${likeList}
+<form id="frmPage" action="/boo/detail" method="get">
+	<input type="hidden" name="room_num" />
+</form>
+<div class="container">
 <div class="row">
-	<div class="col-md-2">
+	<c:forEach items="${likeList}" var="LikeDto">
+	
+	<div class="col-md-3">	
+	<div class="row mb-5">
 	</div>
-	<c:forEach items="${likeList}" var="LikeVo">
-	<div class="col-md-3">
 		<div class="room-wrap ftco-animate">
 				<a href="room.html" class="img" style="background-image: url(/islagrande/images/room-1.jpg);">
 					<span id="heartDiv">♥</span>
 				</a>
 				<div class="text pt-4 pl-lg-5">
-				<h2><a data-num="1" class="room-title">숙소이름</a></h2>
-				<p class="rate">
-						<span class="icon-star"></span>
-						<span class="icon-star"></span>
-						<span class="icon-star"></span>
-						<span class="icon-star"></span>
-						<span class="icon-star-half-full"></span>
-				</p>
+				<h2><a data-num="${LikeDto.room_num}" class="room_title">${LikeDto.room_title}</a></h2>
 				<p class="d-flex price-details align-items-center pt-3">
-					<span class="price">￦가격<small>&nbsp;/&nbsp;&nbsp;&nbsp;1박</small></span>
+					<span class="price">￦${LikeDto.room_price}<small>&nbsp;/&nbsp;&nbsp;&nbsp;1박</small></span>
 				</p>
-				<p><a data-num="1" class="room-title btn-customize">지금 예약하기</a></p>
 			</div>
 		</div>
 	</div>
 	</c:forEach>
+</div>
 </div>
 </section>
 

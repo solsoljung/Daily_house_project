@@ -45,9 +45,14 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 		
 		//방 상세보기 정보 받기
 		RoomDto dto = booRoomDetailDao.getRoominfo(room_num);
+		System.out.println("Service room_num : " + room_num);
+		System.out.println("dto : " + dto);
 		
 		//방 옵션 코드 받기
-		String optionCode = dto.getRoom_option_code();
+		String optionCode = "";
+		if (dto.getRoom_option_code() != null) {
+			optionCode = dto.getRoom_option_code();
+		}
 		
 		//room type 코드판별
 		String type = booRoomDetailDao.getRoomType(dto);
@@ -57,7 +62,7 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 		paramMap.put("ReviewList", reviewList);
 		paramMap.put("type", type);
 		
-		if (optionCode != null) {
+		if (!(optionCode.equals("")) || optionCode != null) {
 			StringTokenizer tokenizer = new StringTokenizer(optionCode,",");
 			
 			List<String> OptionList = new ArrayList<>();

@@ -2,14 +2,25 @@ package com.kh.dailyhouse.persistence;
 
 import java.util.List;
 
-import com.kh.dailyhouse.domain.LikeVo;
+import javax.inject.Inject;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
+
+import com.kh.dailyhouse.domain.LikeVo;
+import com.kh.dailyhouse.domain.RoomVo;
+
+@Repository
 public class YOLikeListDaoImpl implements YOLikeListDao {
+	
+	private static final String NAMESPACE = "com.kh.mappers.LikeMapper";
+	
+	@Inject
+	public SqlSession sqlSession;
 
 	@Override
 	public List<LikeVo> getLikeList(String user_email) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		List<LikeVo> list = sqlSession.selectList(NAMESPACE + ".getLikeList", user_email);
+		return list;
 	}
-
 }
