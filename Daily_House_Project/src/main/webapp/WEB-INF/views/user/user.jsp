@@ -97,6 +97,7 @@ $(function(){
             <form action="/si/userUpdate" method="post" role="form" class="bg-white p-md-5 p-4 mb-5 border" id="joinForm">
             <input type="hidden" name="user_email" value="${userVo.user_email}">
             <input type="hidden" name="user_pic" value="${userVo.user_pic}">
+            <input type="hidden" name="user_point" value="${userVo.user_point}">
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold">개인 정보</label>
                 </div>
@@ -108,7 +109,7 @@ $(function(){
                   <img src="/images/user.jpg" width="150" height="150">
                   <br>
                   <br>
-                  <button type="button" id="btnUserPictureChange" class="btn btn-primary text-white" style="display: none;">사진 수정</button>
+                  <input type="file" id="btnUserPictureChange" class="btn btn-primary text-white" > <!--   style="display: none;" -->
                   <hr>
                 </div>
               </div>
