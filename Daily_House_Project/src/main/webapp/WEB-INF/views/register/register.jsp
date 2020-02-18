@@ -23,24 +23,40 @@ $(function(){
 	var isCerficate = false;
 
 	$("#btnSubmit").click(function(e) {
+		// 얻어온 값
 		var pw1 = $("#pw").val().trim();
 		var pw2 = $("#pw2").val().trim();
-// 		var phone = $("#phone").val().trim();
-		
-// 		if (phone < 0) {
-// 			alert("phone");
-// 			return false;
-// 		}
-		if (pw1 != pw2) {
-			alert("비밀번호 불일치");
+		var phone = $("#phone").val().trim();
+		var name = $("#name").val().trim();
+		// 테스트 내용
+		var pattern1 = /[0-9]/;
+		var pattern2 = /[a-zA-Z]/;
+		var pattern3 = /[~!@#$%^&*()_+|<>?:{}]/;
+
+		if (isCerficate == false) {
+			alert("이메일 인증을 해주세요.");
 			return false;
 		}
-		if (isCerficate == false) {
-			alert("이메일 인증을 해주세요");
+		if (!pattern1.test(pw1) || !pattern2.test(pw1) || !pattern3.test(pw1) || pw1.length < 6) {
+			alert("비밀번호는 6자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다.");
+			return false;
+		}
+		if (pw1 != pw2) {
+			alert("비밀번호 불일치합니다.");
+			return false;
+		}
+		if (name == "") {
+			alert("이름을 입력해주세요.");
+			return false;
+		}
+		if (!pattern1.test(phone) || phone.length < 11) {
+			console.log(phone);
+			alert("-없이 010포함한 번호 11자리를 입력해주세요.");
 			return false;
 		}
 		$("#joinForm").submit();
 	});
+	
 	$("#btn_list").click(function(){
 		location.href = "/test/board/listAll";
 	});
@@ -118,7 +134,7 @@ $(function(){
         <div class="row">
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
             <form action="/si/register_run" method="post" role="form" class="bg-white p-md-5 p-4 mb-5 border" id="joinForm">
-            	<input type="hidden" name="user_email" value="user.jpg">
+            	<input type="hidden" name="user_pic" value="user.jpg">
               <div class="col-md-6 form-group">
                 <label class="text-black font-weight-bold">회원가입</label>
               </div>
@@ -131,7 +147,7 @@ $(function(){
               </div>
               <div class="row">
                 <div class="col-md-12 form-group">
-                  <label class="text-black font-weight-bold" for="email">Email Certification</label>
+                  <label class="text-black font-weight-bold" for="email">Email 인증</label>
                   <input type="text" id="emailCertification" name="certification" placeholder="인증번호" class="form-control" required>
                   <button type="button" id="btn_certification2" value="인증번호 확인" class="btn btn-primary text-white">인증번호 확인</button>
                 </div>
@@ -139,25 +155,25 @@ $(function(){
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="password">Password</label>
-                  <input type="password" id="pw" name="user_pw" class="form-control" placeholder="Password" required>
+                  <input type="password" id="pw" name="user_pw" placeholder="6자 이상 영문,숫자,특수문자를 조합해서 입력해주세요." class="form-control" required maxlength="20">
                   <label class="text-black font-weight-bold" for="password">Password Check</label>
-                  <input type="password" id="pw2" class="form-control" placeholder="Password Check" required>
+                  <input type="password" id="pw2" class="form-control" placeholder="Password Check" required maxlength="20">
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="name">Name</label>
-                  <input type="text" id="name" name="user_name" class="form-control" placeholder="Name" required>
+                  <input type="text" id="name" name="user_name" class="form-control" placeholder="Name" maxlength="12" required>
                 </div>
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="phone">Phone</label>
                   <!--  required꼭 적게 만듬  readonly꼭 수정 못하게함-->
-                  <input type="text" id="phone" name="user_phone" placeholder="-없이 숫자만 입력해주세요." class="form-control" required>
+                  <input type="text" id="phone" name="user_phone" placeholder="-없이 숫자만 입력해주세요." class="form-control" maxlength="11" required>
                 </div>
               </div>
-              <div class="col-md-10 text-right" data-aos="fade-up" data-aos-delay="200">
-	            <button type="button" class="btn btn-primary text-white py-3 px-5" id="btnSubmit">회원가입</button>&nbsp;&nbsp;&nbsp;&nbsp;
-	            <a href="/si/goHome"><button type="button" class="btn btn-primary text-white py-3 px-5">홈으로</button></a>
+              <div class="col-md-8 text-right" data-aos="fade-up" data-aos-delay="200">
+              <br>
+	            <button type="button" class="btn btn-primary text-white py-3 px-5" id="btnSubmit">회원가입</button>
 	          </div>
             </form>
           </div>

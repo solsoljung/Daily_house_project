@@ -6,6 +6,8 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.kh.dailyhouse.domain.RoomLowHighPriceDto;
+import com.kh.dailyhouse.domain.RoomOptionVo;
 import com.kh.dailyhouse.domain.RoomTypeVo;
 import com.kh.dailyhouse.domain.RoomVo;
 import com.kh.dailyhouse.domain.SearchVo;
@@ -33,6 +35,18 @@ public class SolRoomServiceImpl implements SolRoomService {
 	public List<RoomTypeVo> getRoomType() throws Exception {
 		
 		return dao.getRoomType();
+	}
+
+	@Override
+	public List<RoomOptionVo> getRoomOption() throws Exception {
+		
+		return dao.getRoomOption();
+	}
+
+	@Override
+	public RoomLowHighPriceDto getRoomPrice() throws Exception {
+		
+		return dao.getRoomPrice();
 	}
 
 }

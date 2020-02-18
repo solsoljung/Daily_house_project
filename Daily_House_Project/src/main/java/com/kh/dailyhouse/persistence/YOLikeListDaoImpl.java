@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.dailyhouse.domain.LikeVo;
+import com.kh.dailyhouse.domain.RoomVo;
 
 @Repository
 public class YOLikeListDaoImpl implements YOLikeListDao {
@@ -22,5 +23,4 @@ public class YOLikeListDaoImpl implements YOLikeListDao {
 		List<LikeVo> list = sqlSession.selectList(NAMESPACE + ".getLikeList", user_email);
 		return list;
 	}
-
 }
