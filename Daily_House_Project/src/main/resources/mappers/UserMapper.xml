@@ -16,11 +16,16 @@
 		select * from tbl_user
 		where user_email = #{user_email} and user_pw = #{user_pw}
 	</select>
-	
+<!-- 	회원정보 수정 -->
 	<update id="userUpdate">
 		update tbl_user set
 		user_name = #{user_name},
 		user_phone = #{user_phone}
 		where user_email = #{user_email}
 	</update>
+<!-- 	회원비밀번호 확인 -->
+	<select id="foundPassword" resultType="String">
+		select user_pw from tbl_user
+		where user_email = #{user_email}
+	</select>
 </mapper>

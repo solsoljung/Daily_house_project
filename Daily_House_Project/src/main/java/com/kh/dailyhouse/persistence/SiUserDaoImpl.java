@@ -32,4 +32,9 @@ public class SiUserDaoImpl implements SiUserDao {
 		sqlSession.update(NAMESPACE+".userUpdate", userVo);
 	}
 
+	@Override
+	public String foundPassword(String user_email) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+".foundPassword", user_email);
+	}
+
 }

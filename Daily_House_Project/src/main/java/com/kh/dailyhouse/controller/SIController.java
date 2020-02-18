@@ -1,7 +1,6 @@
 package com.kh.dailyhouse.controller;
 
 import javax.inject.Inject;
-import javax.mail.Session;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -11,8 +10,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.dailyhouse.domain.UserVo;
 import com.kh.dailyhouse.service.SiUserService;
-
-import sun.security.util.Length;
 
 @Controller
 @RequestMapping("/si/*")
@@ -90,9 +87,25 @@ public class SIController {
 	@RequestMapping(value = "/userUpdate", method = RequestMethod.POST)
 	public String userUpdate(HttpSession session, UserVo userVo) throws Exception {
 		siUserService.userUpdate(userVo);
-		System.out.println(userVo);
 		session.setAttribute("userVo", userVo);
 		return "/user/user";
 	}
+	// 비밀번호 찾기로 가는 컨트롤러
+	@RequestMapping(value = "/findPassword", method = RequestMethod.GET)
+	public String findPassword() throws Exception {
+		return "/login/passwordFind";
+	}
+	// 비밀번호 찾기 처리
+	@RequestMapping(value = "/foundPassword", method = RequestMethod.POST)
+	public String foundPassword(HttpSession session, RedirectAttributes rttr, String user_email) throws Exception {
+		String user_pw = siUserService.foundPassword(user_email);
+		if (user_pw == null) {
+			rttr.addFlashAttribute("msg", "notFoundEmail");
+			return "redirect:/si/loginHost";
+		}
+		session.setAttribute("user_pw", user_pw);
+		return "/login/passwordFound";
+	}
+	
 }
 	

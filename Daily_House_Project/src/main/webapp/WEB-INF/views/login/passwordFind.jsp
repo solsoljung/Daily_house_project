@@ -9,21 +9,8 @@
 <%@ include file = "../../views/islagrande/islagrande_link.jsp" %>					
 					
 <%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->					
-<!-- 데이터피커X -->					
-
-<script>
-$(document).ready(function() {
-	var msg = "${msg}";
-	if (msg == "fail") {
-		alert("회원 정보가 없습니다.");
-	}
-	var msg = "${msg}";
-	if (msg == "notFoundEmail") {
-		alert("회원 정보가 없습니다.");
-	}
-});
-</script>
-
+<!-- 데이터피커X -->
+		
 <!-- section -->
 <br>
 <br>
@@ -31,35 +18,19 @@ $(document).ready(function() {
       <div class="container">
         <div class="row">
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
-            <form action="/si/login_run" method="post" role="form" class="bg-white p-md-5 p-4 mb-5 border">
+            <form action="/si/foundPassword" method="post" role="form" class="bg-white p-md-5 p-4 mb-5 border">
                 <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold">로그인</label>
+                  <label class="text-black font-weight-bold">비밀번호 찾기</label>
                 </div>
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="email">Email</label>
-                  <input type="email" id="email" name="user_email" class="form-control" placeholder="Email" required="required">
+                  <input type="email" id="email" name="user_email" placeholder="Email" class="form-control">
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12 form-group">
-                  <label class="text-black font-weight-bold" for="password">Password</label>
-                  <input type="password" id="pw" name="user_pw" class="form-control" placeholder="Password" required="required">
-                </div>
-              </div>
-              
+               </div>
               <br>
-              <div class="col-md-8 text-left" data-aos="fade-up" data-aos-delay="200">
-            	<div class="row">
-		            <button type="submit" class="btn btn-primary text-white py-3 px-5">로그인</button>
-	         	</div>
-	          </div>
-	          <br>
-              <div class="col-md-8 text-left" data-aos="fade-up" data-aos-delay="200">
-            	<div class="row">
-		            <a href="/si/registerHost"><button type="button" class="btn btn-primary text-white py-2 px-4">회원가입</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
-		            <a href="/si/findPassword"><button type="button" class="btn btn-primary text-white py-2 px-4">비밀번호 찾기</button></a>
-	         	</div>
+              <div class="col-md-8 text-right" data-aos="fade-up" data-aos-delay="200">
+	            <input type="submit" class="btn btn-primary text-white py-3 px-5" value="비밀번호 찾기">
 	          </div>
             </form>
           </div>
