@@ -16,17 +16,23 @@
 	font-size: 40px;
 }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
+	// 좋아요 해제하기
 	$("#heartDiv").click(function() {
 		
 	});
+
 	
-
-	$("#reservBtn").click(function() {
-		location.href = "/yo/reservation";
+	//상세 페이지로 이동
+	$(".room_title").click(function(e) {
+		e.preventDefault();
+		var room_num = $(this).attr("data-num");
+		console.log(room_num);
+		$("input[name=room_num]").val(room_num);
+		$("#frmPage").submit();
 	});
-
 
 });
 </script>
@@ -66,6 +72,9 @@ $(document).ready(function() {
 	</div>
 </section>
 <section>
+<form id="frmPage" action="/boo/detail" method="get">
+	<input type="hidden" name="room_num" />
+</form>
 <div class="container">
 <div class="row">
 	<c:forEach items="${likeList}" var="LikeDto">
@@ -74,16 +83,14 @@ $(document).ready(function() {
 	<div class="row mb-5">
 	</div>
 		<div class="room-wrap ftco-animate">
-		
 				<a href="room.html" class="img" style="background-image: url(/islagrande/images/room-1.jpg);">
 					<span id="heartDiv">♥</span>
 				</a>
 				<div class="text pt-4 pl-lg-5">
-				<h2><a data-num="${LikeDto.room_num}" class="room-title">${LikeDto.room_title}</a></h2>
+				<h2><a data-num="${LikeDto.room_num}" class="room_title">${LikeDto.room_title}</a></h2>
 				<p class="d-flex price-details align-items-center pt-3">
 					<span class="price">￦${LikeDto.room_price}<small>&nbsp;/&nbsp;&nbsp;&nbsp;1박</small></span>
 				</p>
-				<p><a data-num="${LikeDto.room_num}" class="room-title btn-customize" id="reservBtn">지금 예약하기</a></p>
 			</div>
 		</div>
 	</div>

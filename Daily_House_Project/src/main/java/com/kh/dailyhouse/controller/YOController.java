@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.dailyhouse.domain.LikeVo;
 import com.kh.dailyhouse.domain.ReservationVo;
-import com.kh.dailyhouse.domain.RoomVo;
 import com.kh.dailyhouse.domain.UserVo;
 import com.kh.dailyhouse.service.YOLikeListService;
 import com.kh.dailyhouse.service.YOReservationListService;
