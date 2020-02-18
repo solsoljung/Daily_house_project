@@ -1,7 +1,6 @@
 package com.kh.dailyhouse.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -88,13 +87,6 @@ public class CyController {
 	@RequestMapping(value = "/registerHost3Post", method = RequestMethod.POST)
 	public String registerHost3(Model model, RoomVo roomVo) throws Exception{
 		roomVo.setUser_email("test@naver.com"); //나중에 로그인했는지 안했는지 검사하기@@@@@@@@@@@@@@@@@@@@@@@
-		if(roomVo.getPics()!=null) {
-			String[] arrPics = roomVo.getPics();
-			for(int i=0; i<arrPics.length; i++) {
-				System.out.println("arrPics " + i + ": " + arrPics[i]);
-			}
-			roomVo.setPics(arrPics);
-		}
 		System.out.println(">>>> controller333 roomVo: " + roomVo);
 		model.addAttribute("roomVo", roomVo);
 		model.addAttribute("roomTypeList", roomTypeService.getRoomTypeList());
@@ -105,37 +97,40 @@ public class CyController {
 	@RequestMapping(value = "/registerHost4Post", method = RequestMethod.POST)
 	public String registerHost4(Model model, RoomVo roomVo) throws Exception{
 		roomVo.setUser_email("test@naver.com"); //나중에 로그인했는지 안했는지 검사하기@@@@@@@@@@@@@@@@@@@@@@@
-		if(roomVo.getPics()!=null) {
-			String[] arrPics = roomVo.getPics();
-			for(int i=0; i<arrPics.length; i++) {
-				System.out.println("arrPics " + i + ": " + arrPics[i]);
-			}
-			roomVo.setPics(arrPics);
-		}
 		System.out.println(">>>> controller444 roomVo: " + roomVo);
 		model.addAttribute("roomVo", roomVo);
 		model.addAttribute("roomOptionList", roomOptionService.getRoomOptionList());
 		return "/host/host_register_page4";
 	}
 	
+	// 호스트 등록하기 5page
+	@RequestMapping(value = "/registerHost5Post", method = RequestMethod.POST)
+	public String registerHost5(Model model, RoomVo roomVo) throws Exception{
+		roomVo.setUser_email("test@naver.com"); //나중에 로그인했는지 안했는지 검사하기@@@@@@@@@@@@@@@@@@@@@@@
+		System.out.println(">>>> controller555 roomVo: " + roomVo);
+		model.addAttribute("roomVo", roomVo);
+		model.addAttribute("roomOptionList", roomOptionService.getRoomOptionList());
+		return "/host/host_register_page5";
+	}
+	
 	// 호스트 등록하기 최종
 	@RequestMapping(value = "/registerHost", method = RequestMethod.POST)
 	public String registerHost(Model model, RoomVo roomVo) throws Exception{
 		roomVo.setUser_email("test@naver.com"); //나중에 로그인했는지 안했는지 검사하기@@@@@@@@@@@@@@@@@@@@@@@
-		if(roomVo.getPics()!=null) {
-			String[] arrPics = roomVo.getPics();
-			for(int i=0; i<arrPics.length; i++) {
-				System.out.println("arrPics " + i + ": " + arrPics[i]);
-			}
-			roomVo.setPics(arrPics);
-		}
+//		if(roomVo.getPics()!=null) {
+//			String[] arrPics = roomVo.getPics();
+//			for(int i=0; i<arrPics.length; i++) {
+//				System.out.println("arrPics " + i + ": " + arrPics[i]);
+//			}
+//			roomVo.setPics(arrPics);
+//		}
 		System.out.println(">>>> registerHost roomVo: " + roomVo);
 		model.addAttribute("roomVo", roomVo);
 		roomService.registerRoom(roomVo);
 		return "redirect:/";
 	}
 	
-	@RequestMapping(value = "/getAttach/{bno}", method = RequestMethod.GET)
+	@RequestMapping(value = "/getAttach/{room_num}", method = RequestMethod.GET)
 	@ResponseBody
 	public List<String> getAttach(@PathVariable("room_num") int room_num) throws Exception {
 		return roomService.getAttach(room_num);

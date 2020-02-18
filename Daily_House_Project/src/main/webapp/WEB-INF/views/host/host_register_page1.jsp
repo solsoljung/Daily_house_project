@@ -77,12 +77,12 @@ $(function(){
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
-		<div class="col-md-8">
+		<div class="col-md-8"><br><br>
 			<label class="lblTitle1">숙소의 위치를 알려주세요.</label><br>
 			<div class="progress">
-				<div class="progress-bar w-25"></div>
+				<div class="progress-bar" style="width: 20%"></div>
 			</div><br>
-			<label>1단계: 등록할 숙소의 주소를 입력해주세요.</label><br><br>
+			<label>1단계: 등록할 숙소의 주소를 입력해주세요.</label><br><br><br>
 
 				<!-- 위치등록 -->
 				<form id="form" name="form" method="post">
@@ -92,13 +92,13 @@ $(function(){
 				<!-- 해당시스템의 인코딩타입이 EUC-KR일경우에만 추가 START-->
 				<!-- <input type="hidden" id="encodingType" name="encodingType" value="EUC-KR"/> -->
 				
-				roomVo: ${roomVo}
+<%-- 				roomVo: ${roomVo} --%>
 				<input type="hidden" name="room_location" value="${roomVo.room_location}"/>
 				<input type="hidden" name="room_location_detail"  value="${roomVo.room_location_detail}"/>
 				
 				<div class="row">
 					<div class="col-md-2">
-						<button type="button" class="btn btn-primary btn-block" onClick="goPopup();" style="font-size:15px;">주소검색</button>
+						<button type="button" class="btn btn-primary btn-block py-3 px-4" onClick="goPopup();" style="font-size:15px;">주소검색</button>
 					</div>
 					<div class="col-md-10"></div>
 				</div><br>

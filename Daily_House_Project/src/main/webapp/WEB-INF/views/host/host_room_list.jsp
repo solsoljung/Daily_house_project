@@ -52,7 +52,7 @@ $(function(){
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
-		<div class="col-md-8">
+		<div class="col-md-8"><br><br>
 			<label class="lblTitle1">${hostVo.user_name}님이 등록한 숙소들입니다.</label><br>
 <!-- <label>2단계: 등록할 숙소의 사진과 정보를 입력해주세요.</label><br><br> -->
 	
@@ -62,9 +62,9 @@ $(function(){
 			<div class="col-md-3"></div>
 			<div class="col-md-3"></div>
 			<div class="col-md-3" align="right">
-				<button type="button" class="btn btn-primary btn-block" id="btnAddRoom" style="font-size:15px;" >숙소 추가하기</button>
+				<button type="button" class="btn btn-primary btn-block py-3 px-5" id="btnAddRoom" style="font-size:15px;" >숙소 추가하기</button>
 			</div>
-		</div><br>
+		</div><br><br>
 	<!-- table START -->
 		<div class="row" align="center">
 		<table class="table" id="tbl_room">
