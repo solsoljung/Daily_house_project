@@ -26,6 +26,15 @@ $(function(){
 	
 	var room_type_num = "${roomVo.room_type_num}";
 	
+	var get_pics = "${roomVo.pics}";
+	split();
+	
+	function split(){
+		var pics = get_pics.split(",");
+		console.log("pics: " + pics);
+	}
+	
+	
 	// host_register_page4로 이동
 	$("#btnNext").click(function(e){
 		e.preventDefault();
@@ -34,6 +43,8 @@ $(function(){
 			alert("건물 유형을 선택해주세요.");
 			return;
 		}
+		
+		
 		$("input[name=room_people]").val($("#room_people").val());
 		$("input[name=room_bed]").val($("#room_bed").val());
 		$("input[name=room_bathroom]").val($("#room_bathroom").val());
@@ -107,6 +118,8 @@ $(function(){
 			<input type="hidden" name="room_title" value="${roomVo.room_title}"/>
 			<input type="hidden" name="room_explain" value="${roomVo.room_explain}"/>
 			<input type="hidden" name="room_price" value="${roomVo.room_price}"/>
+			
+			<input type="hidden" name="pics" value="${roomVo.pics}"/>
 			
 				<!-- 건물 유형 -->
 				<div class="form-group">

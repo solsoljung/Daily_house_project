@@ -68,6 +68,8 @@ $(function(){
 			<input type="hidden" name="room_price" value="${roomVo.room_price}"/>
 			<input type="hidden" name="room_option_code" />
 			
+			<input type="hidden" name="pics" value="${roomVo.pics}"/>
+			
 				<!-- 편의시설 -->
 				<div class="form-group">
 					<label class="lblTitle2">어떤 편의시설을 제공하시나요?</label>

@@ -25,11 +25,76 @@
 }
 </style>
 
+<script src="/js/myscript.js"></script>
 <script>
 $(function(){
 	// 현재 클릭된 메뉴를 활성화
 	$(".nav-item:eq(0)").attr("class", "nav-item");
 	$(".nav-item:eq(5)").attr("class", "nav-item active");
+	
+	$("#fileDrop").on("dragenter dragover", function(e) {
+		e.preventDefault();
+	});
+	
+	$("#fileDrop").on("drop", function(e) {
+		e.preventDefault(); // 브라우저로 파일 열기 안하기
+		var file = e.originalEvent.dataTransfer.files[0];
+		console.log(file);
+		var formData = new FormData(); // <form>
+		formData.append("file", file); // <input name="file"/>
+		
+		var url = "/upload/uploadAjax"; // UploadController.java
+		
+		// <form enctype="multipart/form-data"
+		// -> enctyp의 기본값: application/x-www-form-urlencoded
+		// "processData":false, "contentType":false
+		$.ajax({
+			"type" : "post",
+			"url" : url,
+			"processData" : false,
+			"contentType" : false,
+			"data" : formData,
+			"success" : function(fullName) {
+				console.log(fullName); // 2020/1/20/0080b7f5-9cb3-451b-97cc-e7abfdc75524_Penguins.jpg
+				// 파일명 얻기
+				var underScoreIndex = fullName.indexOf("_");
+				var fileName = fullName.substring(underScoreIndex + 1); // Penguins.jpg
+				// 썸네일 이미지의 이름 얻기
+				var thumbnailName = getThumbnailName(fullName); // myscript.js
+				console.log("thumbnailName:	" + thumbnailName);
+				var isImage = checkImage(thumbnailName);
+				console.log("isImage:" + isImage);
+				var html = "<div data-filename='"+fullName+"' style='display: inline;'>";
+				if (isImage == true) {
+					html +=
+	"<img class='img-thumbnail' src='/upload/displayFile?fileName=" + thumbnailName + "' /><br>";
+				} else {
+					html += 
+	"<img class='img-thumbnail' src='/resources/images/file_image.png'/><br>";
+				}
+				html += "<span>" + fileName + "</span>";
+				html += "<a href='"+fullName+"' class='attach-del'><span>x</span></a>";
+				html += "</div><br>";
+				$("#uploadedList").append(html);
+			}
+		}); // $.ajax()
+	}); // $("#fileDrop").on("drop",
+			
+	// 첨부 파일 삭제 링크
+	$("#uploadedList").on("click", ".attach-del", function(e) {
+		e.preventDefault();
+		var that = $(this);
+		var fullName = that.attr("href");
+		console.log("fullName:" + fullName);
+		var url = "/upload/deleteFile";
+		var sendData = {"fileName" : fullName};
+		$.get(url, sendData, function(rData) {
+			console.log(rData);
+			if (rData == "success") {
+				that.parent().remove();
+			}
+		});
+	});
 	
 	// host_register_page3으로 이동
 	$("#btnNext").click(function(e){
@@ -51,9 +116,33 @@ $(function(){
 			alert("숙소 가격을 정하세요.");
 			return;
 		}
-
+		
+		var upDiv = $("#uploadedList > div");
+		var pics = [];
+		console.log("upDiv: " + upDiv);
+		
+		upDiv.each(function(index) {
+			var pic_uri = $(this).attr("data-filename");
+			console.log(pic_uri);
+			pics.push(pic_uri);
+			
+		});
+		console.log("pics: " + pics);
+		$("input[name=pics]").val(pics);
+		console.log("input[name=pics]: " + $("input[name=pics]").val());
+		
 		$("#registerForm").attr("action", "/cy/registerHost3Post");
 		$("#registerForm").submit();
+		
+// 		upDiv.each(function(index) {
+// 			var pic_uri = $(this).attr("data-filename");
+// 			console.log(pic_uri);
+// 			var hiddenInput = "<input type='hidden' name='pics["+index+"]'" 
+// 							+ " value='"+pic_uri+"'/>";
+// 			console.log("hiddenInput: " + hiddenInput);
+// 		$("#registerForm").attr("action", "/cy/registerHost3Post");
+// 		$("#registerForm").submit();
+// 		});
 	});
 	
 	// room_price는 숫자만 입력할 수 있도록 설정
@@ -82,6 +171,7 @@ $(function(){
 			roomVo: ${roomVo}
 			<input type="hidden" name="room_location" value="${roomVo.room_location}"/>
 			<input type="hidden" name="room_location_detail"  value="${roomVo.room_location_detail}"/>
+			<input type="hidden" name="pics" />
 			
 				<!-- 사진 및 소개 등록 -->
 				<div class="form-group">
@@ -114,7 +204,7 @@ ${roomVo.room_explain}</c:if></textarea><br><br>
 					</div>
 					
 					<!-- 썸네일 이미지 -->
-					<div class="form-group" id="uploadedList">
+					<div class="form-group" id="uploadedList" style="display: inline;">
 					
 					</div>
 					
