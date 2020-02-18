@@ -2,8 +2,11 @@ package com.kh.dailyhouse.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.kh.dailyhouse.domain.LikeVo;
 
+@Service
 public class YOLikeListServiceImpl implements YOLikeListService {
 
 	@Override
