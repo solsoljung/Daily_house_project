@@ -25,12 +25,8 @@ public class SiUserServiceImpl implements SiUserService {
 
 	@Override
 	public void userUpdate(UserVo userVo) throws Exception {
+		System.out.println("서비스!!!!!!"+userVo);
 		siUserDao.userUpdate(userVo);
-	}
-
-	@Override
-	public String foundPassword(String user_email) throws Exception {
-		return siUserDao.foundPassword(user_email);
 	}
 
 

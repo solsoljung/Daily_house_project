@@ -6,89 +6,6 @@
 <%@ include file = "../../views/casahotel/casahotel_link.jsp" %>
 <%@ include file = "../../views/islagrande/islagrande_link.jsp" %>
 
-
-<!-- 달력 api script -->
-<script>
-//datepicker START 
-$.datepicker.setDefaults({  
-	 dateFormat: 'yy-mm-dd', 	 //Input Display Format 변경
-	 showOtherMonths: true, 	 //빈 공간에 현재월의 앞뒤월의 날짜를 표시
-	 showMonthAfterYear: true,   //년도 먼저 나오고, 뒤에 월 표시
-	 
-	 prevText: "이전달",
-	 nextText: "다음달",
-	 
-	 changeYear: true, 			 //콤보박스에서 년 선택 가능
-	 changeMonth: true, 		 //콤보박스에서 월 선택 가능        
-	 
-	 showOn: "both", 			 //both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시
-	 buttonImage: "images/calendar.PNG",
-	 buttonImageOnly: true, 	 //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
-	 buttonText: "Select date",  //버튼에 마우스 갖다 댔을 때 표시되는 텍스트   
-	 
-	//달력의 년도 부분 뒤에 붙는 텍스트
-	 yearSuffix: '년',  
-	 
-	//달력의 월 부분 Tooltip 텍스트
-	 monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-	//달력의 월 부분 텍스트
-	 monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-	 
-	//달력의 요일 부분 Tooltip 텍스트
-	 dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],  
-	//달력의 요일 부분 텍스트
-	 dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],  
-	 
-	 minDate: 0, 	 //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-     maxDate: "+2M"  //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)  
-	 });  
-//datepicker END
-
-$(function(){
-	//목록으로
-	$("#btn_list").click(function(){
-		location.href = "/test/board/listAll";
-	});
-	
-	//https://m.blog.naver.com/PostView.nhn?blogId=javaking75&logNo=220546927730&proxyReferer=https%3A%2F%2Fwww.google.com%2F
-	
-	//오늘 날짜를 출력
-    $("#today").text(new Date().toLocaleDateString());
-	
-	//입실, 퇴실을 위한 공간
-	var startData = "";
-	var endDate = "";
-	
-	$("#startDate").datepicker({
-// 		minDate:0, //선택할수있는 최소날짜, (0 : 오늘 이전 날짜 선택 불가)
-// 		startDate datepicker가 닫힐때
-// 		종료일(endDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
-		onClose:function(selectedDate){
-			$("#endDate").datepicker("option", "minDate", selectedDate);
-			console.log("startDate: " + selectedDate);
-		}  
-
-	});
-	$("#endDate").datepicker({
-// 		endDate datepicker가 닫힐때
-// 		시작일(startDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정
-		onClose:function(selectedDate){
-			$("#startDate").datepicker("option","maxDate",selectedDate);  
-			console.log("endDate: " + selectedDate);
-		}  
-	});
-	
-	//예약버튼 클릭
-	$("#btn_reservation").click(function(){
-		startDate = $("#startDate").val();
-		endDate = $("#endDate").val();
-		console.log("startDate: " + startDate);
-		console.log("endDate: " + endDate);
-	});
-	
-});
-</script>
-
 <style>
 .mousePointer {
 	cursor : pointer
@@ -124,6 +41,7 @@ $(function() {
 	
 });
 
+// 예약 창 이동
 $(window).scroll(function() {
 	var footHeight = $("#footHeight").outerHeight(true);
 	var mainImg = $("#mainImg").outerHeight(true);
@@ -150,6 +68,7 @@ $(window).scroll(function() {
 });
 </script>
 
+<!-- 후기 작성시 필요한 버튼 -->
 <script>
  	function locDown() {
  		var expense = $("#loc").val();
@@ -216,8 +135,98 @@ $(window).scroll(function() {
  	};
 </script>
 
+<!-- check in,out -->
+<script>
+$(document).ready(function(){
+	//체크인
+	$('#startDate').datepicker({
+		format: "yyyy-mm-dd",
+	    startDate: '1d',
+	    autoclose : true,
+	    datesDisabled : ['2020-02-20','2020-02-26'],	//'2020-02-18','2020-02-20'이런 형식
+	    multidateSeparator :",",
+	    templates : {
+	        leftArrow: '&laquo;',
+	        rightArrow: '&raquo;'
+	    },
+	    showWeekDays : true ,
+	    title: "체크인 날짜 선택",
+	    todayHighlight : true ,
+	    toggleActive : true,
+	    weekStart : 0 ,
+	    language : "ko"
+		    
+	}).on("changeDate", function(e) {
+		
+		var date = formatDate(e.date);
+		
+		if(date == "NaN-NaN-NaN"){
+			var now = new Date();
+			var year= now.getFullYear();
+			var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
+			var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
+			date = year + '-' + mon + '-' + day;
+		}
+		
+		var arrDate = date.split("-");
+		var intNewDay = parseInt(arrDate[2]) + 1;
+		arrDate[2] = intNewDay.toString();
+		var newDate = arrDate.join('-');
+        console.log(date);
+        
+        $("input[name=str_start_date]").val(date);
+
+        $("#endDate").datepicker("setStartDate", newDate);
+        $(this).hide();
+        $('#endDate').show().datepicker("show");
+	});
+	 
+	//체크아웃
+	$('#endDate').datepicker({
+		format: "yyyy-mm-dd",
+	    startDate: '1d',
+	    autoclose : true,
+	    datesDisabled : ['2020-02-22','2020-02-28'],
+	    multidateSeparator :",",
+	    templates : {
+	        leftArrow: '&laquo;',
+	        rightArrow: '&raquo;'
+	    },
+	    showWeekDays : true ,
+	    title: "체크아웃 날짜 선택",
+	    todayHighlight : true ,
+	    toggleActive : true,
+	    weekStart : 0 ,
+	    language : "ko"
+		    
+	}).on("changeDate", function(e) {
+		
+		var checkout = formatDate(e.date);
+		console.log(checkout);
+		
+		$("input[name=str_end_date]").val(checkout);
+		$('#startDate').show()
+		$("#frmPage").submit();
+	});
+
+	//날짜 포멧 함수
+	function formatDate(date) { 
+		var d = new Date(date),
+	 	month = '' + (d.getMonth() + 1),
+		day = '' + d.getDate(), 
+		year = d.getFullYear(); 
+
+		if (month.length < 2) month = '0' + month; 
+		if (day.length < 2) day = '0' + day; 
+
+		return [year, month, day].join('-'); 
+	}
+});
+</script>
+
 <%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
 <form id="frmPage" action="/boo/detail" method="get">
+	<input type="hidden" name="room_num" value="${roomDto.room_num}">
 	<input type="hidden" name="page" value="${reviewPagingDto.page}">
 </form>
 <!-- section -->
@@ -241,7 +250,6 @@ $(window).scroll(function() {
 </div>
 
 <!-- /이미지 뷰 -->
-<!--  -->
 		<section class="ftco-section">
       <div class="container">
         <div class="row">
@@ -487,10 +495,19 @@ $(window).scroll(function() {
           	</div>
           </div>
 <!-- /내용 센터쪽 -->
+
 <!-- 메뉴 좌측쪽 -->
         <div class="col-lg-4 sidebar ftco-animate">
         	<div id="sidebox" style="position: absolute;">
 	         	<div class="sidebar-box subs-wrap">
+	         	${startList}
+	         	${endList}
+	         		<div class="row">
+						<div class="dropdown">
+							<input type="button" value="체크인" class="btn btn-primary py-3 px-5" style="font-size:20px;" id= "startDate">
+							<input type="button" value="체크아웃" class="btn btn-primary py-3 px-5" style="font-size:20px;display:none;" id= "endDate">
+						</div>
+					</div>
 								<h3>Subcribe to our Newsletter</h3>
 								<p>Far far away, behind the word mountains, far from the countries Vokalia</p>
 	              <form action="#" class="subscribe-form">

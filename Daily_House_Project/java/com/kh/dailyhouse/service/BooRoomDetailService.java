@@ -12,5 +12,6 @@ public interface BooRoomDetailService {
 	//후기 작성 insert
 	public void insertReview(RoomReviewVo roomReviewVo) throws Exception;
 	
-	
+	//room_num에 해당하는 reservation정보 얻기
+	public Map<String, Object> roomReservation(int room_num) throws Exception;
 }

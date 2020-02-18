@@ -145,6 +145,58 @@ $(function(){
 		$("#form").submit();
 	}); // btnConplete
 	
+	
+	
+	
+	
+	function getAttachList() {
+		var url = "/cy/getAttach/${roomDetailDto.room_num}";
+		$.getJSON(url, function(list) {
+			console.log("list:", list);
+			$(list).each(function() {
+				var full_name = this;
+				var underScoreIndex = full_name.indexOf("_");
+				var file_name = full_name.substring(underScoreIndex + 1);
+				var el = $("#attach_template").clone();
+				el.removeAttr("id");
+				el.find("span:first").text(file_name);
+				var imgEl = el.find("img");
+				if (checkImage(file_name) == true) {
+					var thumbnailName = getThumbnailName(full_name); // myscript.js
+					imgEl.attr("src", "/upload/displayFile?fileName=" + thumbnailName);
+				} else {
+					imgEl.attr("src", "/resources/images/file_image.png");
+				}
+				
+				el.attr("data-filename", full_name);
+				el.find("a").attr("href", full_name);
+				
+				el.css("display", "block");
+				$("#uploadedList").append(el);
+			});
+		});
+	}
+	
+	// 첨부 파일 삭제 링크
+	$("#uploadedList").on("click", ".attach-del", function(e) {
+		e.preventDefault();
+		var that = $(this);
+		var fullName = that.attr("href");
+		console.log("fullName:" + fullName);
+		var url = "/upload/deleteFileAndData";
+		var sendData = {"fileName" : fullName};
+		$.get(url, sendData, function(rData) {
+			console.log(rData);
+			if (rData == "success") {
+				that.parent().remove();
+			}
+		});
+	});
+	
+	getAttachList();
+	
+	
+	
 	// room_price는 숫자만 입력할 수 있도록 설정
 	$("input[name=room_price]").on("keyup", function() {
 	    $(this).val($(this).val().replace(/[^0-9]/g,""));
@@ -310,15 +362,32 @@ ${roomDetailDto.room_explain}</textarea><br><br>
 						</div>
 					<br><br>
 					
-					<!-- 파일 첨부 -->
+					
+					<!-- 첨부 파일 목록 템플릿 : clone해서 사용 -->
 					<div class="form-group">
-						<label for="fileDrop" class="lblTitle2">* 첨부 파일</label>
-						<div id="fileDrop"></div>
+						<label for="uploadedList" class="lblTitle2">* 첨부파일</label>
+						<div id="uploadedList">
+						
+						</div>
+					</div>
+					<div id="attach_template" style="display:none;" data-filename="">
+						<img class="img-thumbnail"><br>
+						<span></span>
+						<a href="#" class="attach-del">
+						<span class="pull-right" style="display:none;">x</span></a>
 					</div>
 					
-					<!-- 썸네일 이미지 -->
-					<div class="form-group" id="uploadedList">
-					</div>
+					
+					
+<!-- 					파일 첨부 -->
+<!-- 					<div class="form-group"> -->
+<!-- 						<label for="fileDrop" class="lblTitle2">* 첨부 파일</label> -->
+<!-- 						<div id="fileDrop"></div> -->
+<!-- 					</div> -->
+					
+<!-- 					썸네일 이미지 -->
+<!-- 					<div class="form-group" id="uploadedList"> -->
+<!-- 					</div> -->
 					
 				</div><br><br>
 				
