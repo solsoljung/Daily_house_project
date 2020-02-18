@@ -11,7 +11,7 @@
 
 <!-- reservation page section -->
 <style>
-#heartDiv {
+.heartDiv {
 	margin-left: 210px;
 	font-size: 40px;
 }
@@ -19,9 +19,26 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
-	// 좋아요 해제하기
-	$("#heartDiv").click(function() {
-		
+	// 좋아요 해제하기(삭제) ajax 이용
+	$(".heartDiv").click(function(e) {
+		e.preventDefault();
+		console.log("댓글 삭제 버튼");
+		var like_num = $(this).attr("data-like_num");
+		var url = "/yo/like_delete/" + like_num;
+		/* $.get(url, function(rData) {
+			console.log(rData);
+		}); */
+		$.ajax({
+			"type" : "delete",
+			"url" : url,
+			"headers" : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "delete"
+			},
+			"success" : function(rData) {
+				console.log(rData);
+			}
+		});
 	});
 
 	
@@ -72,19 +89,20 @@ $(document).ready(function() {
 	</div>
 </section>
 <section>
+
 <form id="frmPage" action="/boo/detail" method="get">
 	<input type="hidden" name="room_num" />
 </form>
+
 <div class="container">
 <div class="row">
 	<c:forEach items="${likeList}" var="LikeDto">
-	
 	<div class="col-md-3">	
 	<div class="row mb-5">
 	</div>
 		<div class="room-wrap ftco-animate">
-				<a href="room.html" class="img" style="background-image: url(/islagrande/images/room-1.jpg);">
-					<span id="heartDiv">♥</span>
+				<a href="#" class="img" style="background-image: url(/islagrande/images/room-1.jpg);">
+					<span class="heartDiv" data-like_num="${LikeDto.like_num}">♥</span>
 				</a>
 				<div class="text pt-4 pl-lg-5">
 				<h2><a data-num="${LikeDto.room_num}" class="room_title">${LikeDto.room_title}</a></h2>

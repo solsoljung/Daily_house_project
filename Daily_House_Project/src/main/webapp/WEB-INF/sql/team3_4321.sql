@@ -53,7 +53,8 @@ create table tbl_room(
 	room_people number not null,	
 	room_bed number not null,	
 	room_bathroom number not null,
-	room_option_code VARCHAR2(200) 
+	room_option_code VARCHAR2(200) ,
+	room_status varchar2(200) default 'Y'
 );	      
 create sequence seq_room_num;	
 
@@ -64,13 +65,11 @@ create table tbl_host(
 );
 
 --tbl_room_picture=====================================================
-create table tbl_room_picture(		
-	room_num NUMBER REFERENCES tbl_room(room_num),	
-	pic_num NUMBER PRIMARY KEY,	
-	pic_uri VARCHAR2(200) NOT NULL,	
-	pic_reg_date TIMESTAMP DEFAULT SYSDATE	
+create table tbl_room_picture(	
+pic_uri VARCHAR(200) PRIMARY KEY,	
+room_num NUMBER REFERENCES tbl_room(room_num),	
+pic_reg_date TIMESTAMP DEFAULT SYSDATE	
 );	
-create sequence seq_pic_num;	
 
 --tbl_reservation========================================================
 --tbl_point_code=========================================================

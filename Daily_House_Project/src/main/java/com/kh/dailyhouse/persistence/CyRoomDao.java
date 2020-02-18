@@ -22,4 +22,16 @@ public interface CyRoomDao {
 	public void updateHostRoom(RoomVo roomVo) throws Exception;
 	
 	// 숙소 삭제하기
+	
+	// 첨부파일 추가
+	public void attach(String pic_uri, int room_num) throws Exception;
+	
+	// 첨부파일명 목록 얻기
+	public List<String> getAttach(int room_num) throws Exception;
+	
+	// 첨부파일 데이터 삭제
+	public void deleteAttach(String pic_uri) throws Exception;
+	
+	// 첨부파일 데이터 삭제(by room_num)
+	public void deleteAttachByRoomNum(int room_num) throws Exception;
 }

@@ -5,6 +5,34 @@
   
 <mapper namespace="com.kh.mappers.RoomMapper">
 
+	<!-- 첨부 파일 경로(위치+파일명) 추가 -->
+	<insert id="attach">
+		insert into tbl_room_picture(pic_uri, room_num)
+		values (#{pic_uri}, #{room_num})
+	</insert>
+	
+	<!-- 첨부파일명 목록 -->
+	<select id="getAttach" resultType="string">
+		select pic_uri from tbl_room_picture
+		where room_num = #{room_num}
+	</select>
+	
+	<!-- 첨부파일 데이터 삭제 -->
+	<delete id="deleteAttach">
+		delete from tbl_room_picture
+		where pic_uri = #{pic_uri}
+	</delete>
+	
+	<!-- 첨부파일 테이블 데이터(by room_num) 삭제 -->
+	<delete id="deleteAttachByRoomNum">
+		delete from tbl_room_picture
+		where room_num = #{room_num}
+	</delete>
+	
+
+
+
+
 	<!-- 호스트가 등록한 숙소 목록 보기 -->
 	<select id="getHostRoomList" resultType="RoomDetailDto">
 		select * from tbl_room r, tbl_room_type t 

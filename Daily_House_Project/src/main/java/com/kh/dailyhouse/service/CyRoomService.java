@@ -23,4 +23,12 @@ public interface CyRoomService {
 	
 	// 숙소 정보 수정하기
 	public void updateHostRoom(RoomVo roomVo) throws Exception;
+	
+	
+	
+	// 첨부파일명 목록
+	public List<String> getAttach(int room_num) throws Exception;
+		
+	// 첨부파일 데이터 삭제
+	public void deleteAttach(String pic_uri) throws Exception;
 }
