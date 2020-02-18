@@ -2,6 +2,7 @@ package com.kh.dailyhouse.persistence;
 
 import java.util.List;
 
+import com.kh.dailyhouse.domain.ReservationVo;
 import com.kh.dailyhouse.domain.ReviewPagingDto;
 import com.kh.dailyhouse.domain.RoomDto;
 import com.kh.dailyhouse.domain.RoomReviewVo;
@@ -11,7 +12,7 @@ public interface BooRoomDetailDao {
 	public RoomDto getRoominfo(int room_num) throws Exception;
 	
 	//후기 목록에 사용할 총개수
-	public int getReviewCount() throws Exception;
+	public int getReviewCount(int room_num) throws Exception;
 	
 	//roomDetail review 목록 정보 얻기
 	public List<RoomReviewVo> getReviewinfo(int room_num, ReviewPagingDto reviewPagingDto) throws Exception;
@@ -27,4 +28,7 @@ public interface BooRoomDetailDao {
 	
 	//room option 코드판별
 	public String getRoomOption(String room_option_code) throws Exception;
+	
+	//room_num에 해당하는 reservation정보 얻기
+	public List<ReservationVo> getReservation(int room_num) throws Exception;
 }

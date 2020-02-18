@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.dailyhouse.domain.ReservationVo;
 import com.kh.dailyhouse.domain.ReviewPagingDto;
 import com.kh.dailyhouse.domain.RoomDto;
 import com.kh.dailyhouse.domain.RoomReviewVo;
@@ -34,18 +35,25 @@ public class BooController {
 		List<String> OptionList = (List<String>)paramMap.get("OptionList");
 		List<String> OptionCode = (List<String>)paramMap.get("OptionCode");
 		
+		Map<String, Object> roomReservationMap = booRoomDetailService.roomReservation(room_num);
+		List<String> startList = (List<String>)roomReservationMap.get("startList");
+		List<String> endList = (List<String>)roomReservationMap.get("endList");
+		
 		model.addAttribute("roomDto", roomDto);
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("reviewPagingDto", reviewPagingDto);
 		model.addAttribute("type", type);
 		model.addAttribute("OptionList", OptionList);
 		model.addAttribute("OptionCode", OptionCode);
+		model.addAttribute("startList", startList);
+		model.addAttribute("endList", endList);
 		
 		return "/room_detail/Room_Detail";
 	}
 	
 	@RequestMapping(value="/review", method = RequestMethod.POST)
-	public String postInputReview(RoomReviewVo roomReviewVo) throws Exception{		
+	public String postInputReview(RoomReviewVo roomReviewVo) throws Exception{
+		
 		int Review_score_location = roomReviewVo.getReview_score_location();
 		int Review_score_cleanliness = roomReviewVo.getReview_score_cleanliness();
 		int Review_score_checkin = roomReviewVo.getReview_score_checkin();
@@ -54,6 +62,7 @@ public class BooController {
 		roomReviewVo.setTotal_score(total_score);
 		
 		booRoomDetailService.insertReview(roomReviewVo);
-		return "redirect:/boo/detail";
+		int num = roomReviewVo.getRoom_num();
+		return "redirect:/boo/detail?room_num="+num;
 	}
 }

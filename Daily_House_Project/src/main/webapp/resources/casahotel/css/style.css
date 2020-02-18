@@ -24,7 +24,7 @@ a {
 
 h1, h2, h3, h4, h5 {
   color: #000;
-  font-family: "Playfair+Display", times, serif; }
+  font-family: "맑은 고딕", times, serif; }
 
 .container-fluid {
   max-width: 1600px; }
@@ -71,7 +71,7 @@ textarea.form-control {
   color: #fff;
   font-weight: bold;
   line-height: 1;
-  font-family: "Playfair+Display", times, serif; }
+  font-family: "맑은 고딕", times, serif; }
 
 .site-navbar {
   position: fixed;
@@ -86,7 +86,7 @@ textarea.form-control {
   .site-navbar nav {
     text-align: left; }
     .site-navbar nav .menu {
-      font-family: "Playfair+Display", times, serif; }
+      font-family: "맑은 고딕", "Playfair+Display", times, serif; }
       .site-navbar nav .menu li a {
         color: #000;
         font-size: 40px;
@@ -161,7 +161,7 @@ textarea.form-control {
   min-height: 700px; }
   .site-hero-inner .heading {
     font-size: 80px;
-    font-family: "Playfair+Display", times, serif;
+    font-family: "맑은 고딕", "Playfair+Display", times, serif;
     color: #fff;
     line-height: 1;
     font-weight: bold; }
@@ -293,7 +293,7 @@ textarea.form-control {
 
 .heading-serif, .heading, .testimonial-section .heading, .slider-section .heading, .blog-post-entry .heading {
   font-size: 60px;
-  font-family: "Playfair+Display", times, serif; }
+  font-family: "맑은 고딕", "Playfair+Display", times, serif; }
   @media (max-width: 991.98px) {
     .heading-serif, .heading, .testimonial-section .heading, .slider-section .heading, .blog-post-entry .heading {
       font-size: 40px; } }
@@ -336,7 +336,7 @@ textarea.form-control {
   padding: 0; }
   .testimonial blockquote p {
     line-height: 1.5;
-    font-family: "Playfair+Display", times, serif;
+    font-family: "맑은 고딕", "Playfair+Display", times, serif;
     font-size: 20px;
     color: #000;
     font-style: italic; }
@@ -667,7 +667,7 @@ textarea.form-control {
     border-color: #343a40; }
 
 .contact-section .contact-info p {
-  font-family: "Playfair+Display", times, serif;
+  font-family: "맑은 고딕", "Playfair+Display", times, serif;
   font-size: 30px;
   margin-bottom: 30px; }
   .contact-section .contact-info p .d-block {
