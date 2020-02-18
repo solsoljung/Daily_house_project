@@ -12,6 +12,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.dailyhouse.domain.UserVo;
 import com.kh.dailyhouse.service.SiUserService;
 
+import sun.security.util.Length;
+
 @Controller
 @RequestMapping("/si/*")
 public class SIController {

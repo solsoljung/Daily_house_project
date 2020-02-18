@@ -23,8 +23,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<!-- 업로드 경로 
-		String uploadPath = new String("") -->
+	<!-- 업로드 경로 String uploadPath = new String("") -->
 	<beans:bean
 		id="uploadPath"
 		class="java.lang.String">

@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.kh.dailyhouse.domain.RoomLowHighPriceDto;
+import com.kh.dailyhouse.domain.RoomOptionVo;
 import com.kh.dailyhouse.domain.RoomTypeVo;
 import com.kh.dailyhouse.domain.RoomVo;
 import com.kh.dailyhouse.domain.SearchVo;
@@ -66,10 +68,15 @@ public class SolController {
 		List<RoomVo> list = service.getRoomList(searchVo);
 		int totalCount = service.getRoomCount(searchVo);
 		List<RoomTypeVo> typeList = service.getRoomType();
+		List<RoomOptionVo> optionList = service.getRoomOption();
+		RoomLowHighPriceDto priceDto = service.getRoomPrice();
+		System.out.println("priceDto: "+priceDto);
 		searchVo.setTotalCount(totalCount);
 		model.addAttribute("list", list);
 		model.addAttribute("searchVo", searchVo);
 		model.addAttribute("typeList", typeList);
+		model.addAttribute("optionList", optionList);
+		model.addAttribute("priceDto", priceDto);
 		
 		return "searchResult/searchResult";
 	}

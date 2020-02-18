@@ -3,13 +3,21 @@ package com.kh.dailyhouse.domain;
 import java.sql.Timestamp;
 
 public class SearchVo {
+	//인원
+	private int room_people = 1;
+	
+	//가격
+	private int room_low_price;
+	private int room_high_price;
 
+	//날짜
 	private String str_start_date = null;
 	private String str_end_date = null;
 	
 	private Timestamp room_reserv_start_date = null;
 	private Timestamp room_reserv_end_date = null;
 	
+	//페이징
 	public static final int PAGE_BLOCK = 10;
 
 	private int page = 1;
@@ -180,15 +188,39 @@ public class SearchVo {
 		this.str_end_date = str_end_date;
 	}
 
+	public int getRoom_people() {
+		return room_people;
+	}
+
+	public void setRoom_people(int room_people) {
+		this.room_people = room_people;
+	}
+
+	public int getRoom_low_price() {
+		return room_low_price;
+	}
+
+	public void setRoom_low_price(int room_low_price) {
+		this.room_low_price = room_low_price;
+	}
+
+	public int getRoom_high_price() {
+		return room_high_price;
+	}
+
+	public void setRoom_high_price(int room_high_price) {
+		this.room_high_price = room_high_price;
+	}
+
 	@Override
 	public String toString() {
-		return "SearchVo [str_start_date=" + str_start_date + ", str_end_date=" + str_end_date
+		return "SearchVo [room_people=" + room_people + ", room_low_price=" + room_low_price + ", room_high_price="
+				+ room_high_price + ", str_start_date=" + str_start_date + ", str_end_date=" + str_end_date
 				+ ", room_reserv_start_date=" + room_reserv_start_date + ", room_reserv_end_date="
 				+ room_reserv_end_date + ", page=" + page + ", startRow=" + startRow + ", endRow=" + endRow
 				+ ", startPage=" + startPage + ", endPage=" + endPage + ", totalCount=" + totalCount + ", hasPrev="
 				+ hasPrev + ", hasNext=" + hasNext + ", perPage=" + perPage + ", totalPage=" + totalPage
 				+ ", searchType=" + searchType + ", keyword=" + keyword + "]";
 	}
-	
 	
 }

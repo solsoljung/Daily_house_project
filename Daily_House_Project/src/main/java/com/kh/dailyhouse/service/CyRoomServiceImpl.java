@@ -43,13 +43,22 @@ public class CyRoomServiceImpl implements CyRoomService {
 	
 	// 숙소 등록하기
 	// 호스트 등록하기
+	// 사진파일 업로드
 	@Transactional
 	@Override
 	public void registerRoom(RoomVo roomVo) throws Exception {
 		int room_num = roomDao.getNextRoomNum();
 		roomVo.setRoom_num(room_num);
 		roomDao.registerRoom(roomVo);
+		// 사진파일 업로드
+		String[] pics = roomVo.getPics();
+		if(pics != null && pics.length != 0) {
+			for(String pic_uri : pics) {
+				roomDao.attach(pic_uri, room_num);
+			}
+		}
 		
+		// 호스트 등록
 		HostVo hostVo = new HostVo();
 		hostVo.setUser_email(roomVo.getUser_email());
 		hostVo.setRoom_num(room_num);
@@ -60,6 +69,19 @@ public class CyRoomServiceImpl implements CyRoomService {
 	@Override
 	public void updateHostRoom(RoomVo roomVo) throws Exception {
 		roomDao.updateHostRoom(roomVo);
+	}
+
+
+	// 첨부파일명 목록
+	@Override
+	public List<String> getAttach(int room_num) throws Exception {
+		return roomDao.getAttach(room_num);
+	}
+
+	// 첨부파일 데이터 삭제
+	@Override
+	public void deleteAttach(String pic_uri) throws Exception {
+		roomDao.deleteAttach(pic_uri);
 	}
 
 
