@@ -18,7 +18,7 @@ import com.kh.dailyhouse.service.YOReservationListService;
 
 @Controller
 @RequestMapping("/yo/*")
-public class YOController {
+public class YOController { 
 	
 	@Inject
 	private YOReservationListService service;
