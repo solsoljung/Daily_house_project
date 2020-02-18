@@ -62,5 +62,17 @@ public class BooRoomDetailDaoImpl implements BooRoomDetailDao {
 		return count;
 	}
 
-	
+	//room type 코드판별
+	@Override
+	public String getRoomType(RoomDto roomDto) throws Exception {
+		String room_type_explain = sqlSession.selectOne(NAMESPACE+".getRoomType", roomDto);
+		return room_type_explain;
+	}
+
+	//room option 코드판별
+	@Override
+	public String getRoomOption(String room_option_code) throws Exception {
+		String room_option_explain = sqlSession.selectOne(NAMESPACE+".getRoomOption", room_option_code);
+		return room_option_explain;
+	}
 }

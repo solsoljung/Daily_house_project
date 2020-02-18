@@ -6,12 +6,6 @@
 <%@ include file = "../../views/casahotel/casahotel_link.jsp" %>
 <%@ include file = "../../views/islagrande/islagrande_link.jsp" %>
 
-<!-- datepicker -->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
-<!-- datepicker -->
 
 <!-- 달력 api script -->
 <script>
@@ -128,6 +122,19 @@ $(function() {
 		$("#frmPage").submit();
 	});
 });
+
+$(window).scroll(function() {
+	var position = $(window).scrollTop();
+	console.log(position);
+	if (position < 900) {
+		position = 900;
+	}
+	if (position > 2455) {
+		position = 2455;
+	}
+	$("#sidebox").stop();
+	$("#sidebox").animate({"top":position-900});
+});
 </script>
 
 <script>
@@ -216,7 +223,7 @@ $(function() {
           </div>
         </div>
       </div>
-    </section>
+</section>
 <!-- /이미지 뷰 -->
 <!--  -->
 		<section class="ftco-section">
@@ -227,8 +234,11 @@ $(function() {
 <!--          	 방의 기본정보 -->
          	<table>
          		<tr>
-         			<th colspan="3" class="padding"><h1>${roomDto.room_title}</h1></th>
-         			<th class="padding"><h2>호스트 사진</h2><h2>${roomDto.user_name}</h2></th>
+         			<th colspan="3" class="padding"><h1 style="font-family: inherit;">${roomDto.room_title}</h1></th>
+         			<th class="padding">
+         			<h2>호스트 사진</h2>
+         			<h2>${roomDto.user_name}</h2><p>${roomDto.user_phone}</p>
+         			</th>
          		</tr>
          		<tr>
          			<td colspan="4">
@@ -241,32 +251,32 @@ $(function() {
          			<th>
          				<table>
          					<tr>
-         						<td><p id="rateCount" class="rate"></p></td>
-         						<td><p>${roomDto.room_score}점</p></td>
+         						<td width=50 style="word-break:break-all"><div class="text pt-4 pl-lg-5"><p id="rateCount" class="rate"></p></div></td>
+         						<td width=150 style="word-break:break-all"><p>${roomDto.room_score}점</p></td>
          					</tr>
          				</table>
          			</th>
          			<th class="padding">
          				<table>
          					<tr>
-         						<td><img alt="people" src="/images/peoples.png" width="30px"></td>
-         						<td><p>인원 ${roomDto.room_people}명</p></td>
+         						<td width=50 style="word-break:break-all"><img alt="people" src="/images/peoples.png" width="37px"></td>
+         						<td width=150 style="word-break:break-all"><p>인원 ${roomDto.room_people}명</p></td>
          					</tr>
          				</table>
          			</th>
          			<td class="padding">
          				<table>
          					<tr>
-         						<td><img alt="people" src="/images/bed.png" width="30px"></td>
-         						<td><p>침대 수 : ${roomDto.room_bed}</p></td>
+         						<td width=50 style="word-break:break-all"><img alt="people" src="/images/bed.png" width="30px"></td>
+         						<td width=150 style="word-break:break-all"><p>침대 수 : ${roomDto.room_bed}</p></td>
          					</tr>
          				</table>
          			</td>
          			<td class="padding">
          				<table>
          					<tr>
-         						<td><img alt="people" src="/images/restroom.png" width="30px"></td>
-         						<td><p>화장실 수 : ${roomDto.room_bathroom}</p></td>
+         						<td width=50 style="word-break:break-all"><img alt="people" src="/images/restroom.png" width="35px"></td>
+         						<td width=150 style="word-break:break-all"><p>화장실 수 : ${roomDto.room_bathroom}</p></td>
          					</tr>
          				</table>
          			</td>
@@ -274,14 +284,28 @@ $(function() {
          	</table>
 <!--          	방의 기본정보 끝 -->
          	<hr>
-          	<h1>방에 대한 옵션</h1>
+<!--          	방의 옵션 정보 보여주기 -->
+          	<h1>Room Option & Room Rule</h1>
+			<div class="container">
+	       		<div class="row">
+	       			<c:forEach var="OptionCode" items="${OptionCode}" varStatus="status">
+			        	<div class="col-md-4">
+			        		<div class="room-wrap ftco-animate">
+			        			<img src="/images/${OptionCode}.png"  width="35px">
+          						${OptionList[status.index]}
+			        		</div>
+			        	</div>
+	        		</c:forEach>
+	        	</div>
+			</div>
+<!--           		방의 옵션 정보 보여주기 끝 -->
           	<hr>
 <!--           	방의 설명문 -->
           	<p>${roomDto.room_explain}</p>
 <!--           	방의 설명문 끝 -->
           	<hr>
           	<div>
-          	<h1>후기 테이블 부분</h1>
+          	<h2 style="font-family: inherit;">후기</h2>
           	
        		<c:forEach items="${reviewList}" var="RoomReviewVo">  			
    			<div class="block-21 mb-4 d-flex">
@@ -401,9 +425,8 @@ $(function() {
           	</div>
           	</c:if>
           	<hr>
-          	<h1>간단한 room의 호스트에 대한 정보</h1>
-          	<hr>
-          	<!-- 지도 api -->
+<!-- 지도 api -->
+			<h3 style="font-family: inherit;">주소 : ${roomDto.room_location} ${roomDto.room_location_detail}</h3>
           	<div id="map1" style="width:100%;height:350px;"></div>								
 				<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cb28eeac595843b6872c9756479d8624&libraries=services,clusterer65"></script>								
 				<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services"></script>								
@@ -436,7 +459,7 @@ $(function() {
 										
 					// 인포윈도우로 장소에 대한 설명을 표시 -> 호스트 DB 참조								
 					var infowindow = new kakao.maps.InfoWindow({								
-					content: '<div style="width:150px;text-align:center;padding:6px 0;">여기</div>'								
+					content: '<div style="width:150px;text-align:center;padding:6px 0;">${roomDto.room_location_detail}</div>'								
 					});								
 					infowindow.open(map, marker);
 					
@@ -449,83 +472,22 @@ $(function() {
           </div>
 <!-- /내용 센터쪽 -->
 <!-- 메뉴 좌측쪽 -->
-          <div class="col-lg-4 sidebar ftco-animate">
-         	<!-- 달력 api -->
-         	<div>
-			<h1>reservationForm</h1>
-	오늘 날짜 : <span id="today"></span>
-	<form>
-	<input type="text" name="date" id="startDate" size="12" /> ~ 
-	<input type="text" name="date" id="endDate" size="12" />
-	<input type="button" value="예약" id="btn_reservation"/>
-	
-	</form>
-			</div>
-            <div class="sidebar-box">
-              <form action="#" class="search-form">
-                <div class="form-group">
-                  <span class="icon icon-search"></span>
-                  <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
-                </div>
-              </form>
+        <div class="col-lg-4 sidebar ftco-animate">
+        	<div id="sidebox" style="position: absolute;">
+	         	<div class="sidebar-box subs-wrap">
+								<h3>Subcribe to our Newsletter</h3>
+								<p>Far far away, behind the word mountains, far from the countries Vokalia</p>
+	              <form action="#" class="subscribe-form">
+	                <div class="form-group">
+	                  <input type="text" class="form-control" placeholder="Email Address">
+	                  <input type="submit" value="Subscribe" class="mt-2 btn btn-white submit">
+	                </div>
+	              </form>
+	            </div>
             </div>
-            <div class="sidebar-box ftco-animate">
-            	<h3>Categories</h3>
-              <ul class="categories">
-                <li><a href="#">Family Law <span>(6)</span></a></li>
-                <li><a href="#">Criminal Law <span>(8)</span></a></li>
-                <li><a href="#">Business Law <span>(2)</span></a></li>
-                <li><a href="#">Insurance Law <span>(2)</span></a></li>
-                <li><a href="#">Drug Control Law <span>(7)</span></a></li>
-              </ul>
-            </div>
-            
-
-            <div class="sidebar-box ftco-animate">
-              <h3>Tag Cloud</h3>
-              <ul class="tagcloud">
-                <a href="#" class="tag-cloud-link">dish</a>
-                <a href="#" class="tag-cloud-link">menu</a>
-                <a href="#" class="tag-cloud-link">food</a>
-                <a href="#" class="tag-cloud-link">sweet</a>
-                <a href="#" class="tag-cloud-link">tasty</a>
-                <a href="#" class="tag-cloud-link">delicious</a>
-                <a href="#" class="tag-cloud-link">desserts</a>
-                <a href="#" class="tag-cloud-link">drinks</a>
-              </ul>
-            </div>
-
-						<div class="sidebar-box subs-wrap">
-							<h3>Subcribe to our Newsletter</h3>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia</p>
-              <form action="#" class="subscribe-form">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Email Address">
-                  <input type="submit" value="Subscribe" class="mt-2 btn btn-white submit">
-                </div>
-              </form>
-            </div>
-
-            <div class="sidebar-box ftco-animate">
-            	<h3>Archives</h3>
-              <ul class="categories">
-                <li><a href="#">September 2018 <span>(6)</span></a></li>
-                <li><a href="#">August 2018 <span>(8)</span></a></li>
-                <li><a href="#">July 2018 <span>(2)</span></a></li>
-                <li><a href="#">June 2018 <span>(7)</span></a></li>
-                <li><a href="#">May 2018 <span>(5)</span></a></li>
-                <li><a href="#">April 2018 <span>(3)</span></a></li>
-              </ul>
-            </div>
-
-
-            <div class="sidebar-box ftco-animate">
-              <h3>Paragraph</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
-            </div>
-          </div>
-<!-- 메뉴 좌측쪽 -->
         </div>
+<!-- 메뉴 좌측쪽 -->
+        </div> 
       </div>
     </section>
 <!-- 자유롭게 부분 -->

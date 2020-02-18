@@ -1,8 +1,10 @@
 package com.kh.dailyhouse.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import javax.inject.Inject;
 
@@ -28,7 +30,6 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 		
 		//후기 리스트 받아오기
 		List<RoomReviewVo> reviewList = booRoomDetailDao.getReviewinfo(room_num, reviewPagingDto);
-		System.out.println("ReviewList : " + reviewList);
 		
 		if (reviewList.size() != 0 ) {
 			//후기 리스트의 total_score를 기반으로 방의 점수 계산
@@ -45,9 +46,32 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 		//방 상세보기 정보 받기
 		RoomDto dto = booRoomDetailDao.getRoominfo(room_num);
 		
+		//방 옵션 코드 받기
+		String optionCode = dto.getRoom_option_code();
+		
+		//room type 코드판별
+		String type = booRoomDetailDao.getRoomType(dto);
+		
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("dto", dto);
 		paramMap.put("ReviewList", reviewList);
+		paramMap.put("type", type);
+		
+		if (optionCode != null) {
+			StringTokenizer tokenizer = new StringTokenizer(optionCode,",");
+			
+			List<String> OptionList = new ArrayList<>();
+			List<String> OptionCode = new ArrayList<>();
+			
+			while(tokenizer.hasMoreElements()) {
+				String token = tokenizer.nextToken();
+				String Option = booRoomDetailDao.getRoomOption(token);
+				OptionList.add(Option);
+				OptionCode.add(token);
+			}
+			paramMap.put("OptionList", OptionList);
+			paramMap.put("OptionCode", OptionCode);
+		}
 		
 		return paramMap;
 	}
@@ -57,5 +81,5 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 	public void insertReview(RoomReviewVo roomReviewVo) throws Exception {
 		booRoomDetailDao.setReview(roomReviewVo);
 	}
-	
+
 }
