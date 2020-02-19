@@ -4,13 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.kh.mappers.UserMapper">
-
 	<!-- 유저 정보 저장 -->
 	<insert id="setUserData">
 		insert into tbl_user (user_email, user_pw, user_name, user_phone)
 		values (#{user_email}, #{user_pw}, #{user_name}, #{user_phone})
 	</insert>
-	
 <!-- 	회원정보(아이디 비밀번호) 얻기 -->
 	<select id="login_run" resultType="UserVo">
 		select * from tbl_user
@@ -28,4 +26,11 @@
 		select user_pw from tbl_user
 		where user_email = #{user_email}
 	</select>
+<!-- 	비밀번호 수정 -->
+	<update id="updatePassword">
+		update tbl_user set
+		user_pw = #{user_pw}
+		where user_email = #{user_email}
+	</update>
+	
 </mapper>
