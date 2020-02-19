@@ -83,12 +83,20 @@ $(function(){
 		$(".minus").prop("disabled", false);
 		
 		$(".chb").prop("disabled", false);		
+		
+		$(".room_states").prop("disabled", false);
 	});
 	
 	// select room_type_num
 	$("#room_type_num").change(function() {
 		$("input[name=room_type_num]").val($(this).val());
 // 		console.log($("input[name=room_type_num]").val());
+	});
+	
+	// select room_status
+	$("#room_status").change(function() {
+		$("input[name=room_status]").val($(this).val());
+		console.log($("input[name=room_status]").val());
 	});
 	
 	// 수정완료
@@ -127,26 +135,25 @@ $(function(){
 		$("input[name=room_bed]").val($("#room_bed").val());
 		$("input[name=room_bathroom]").val($("#room_bathroom").val());
 		
-// 		console.log("room_location: " + $("input[name=room_location]").val());
-// 		console.log("room_location_detail: " + $("input[name=room_location_detail]").val());
+		console.log("room_location: " + $("input[name=room_location]").val());
+		console.log("room_location_detail: " + $("input[name=room_location_detail]").val());
 		
-// 		console.log("room_title: " + $("input[name=room_title]").val());	
-// 		console.log("room_explain: " + $("textarea[name=room_explain]").val());	
-// 		console.log("room_price: " + $("input[name=room_price]").val());	
+		console.log("room_title: " + $("input[name=room_title]").val());	
+		console.log("room_explain: " + $("textarea[name=room_explain]").val());	
+		console.log("room_price: " + $("input[name=room_price]").val());	
 		
-// 		console.log("room_option_code: " + $("input[name=room_option_code]").val());
+		console.log("room_option_code: " + $("input[name=room_option_code]").val());
 		
-// 		console.log("room_type_num: " + $("input[name=room_type_num]").val());
-// 		console.log("room_people: " + $("input[name=room_people]").val());	
-// 		console.log("room_bed: " + $("input[name=room_bed]").val());	
-// 		console.log("room_bathroom: " + $("input[name=room_bathroom]").val());	
+		console.log("room_type_num: " + $("input[name=room_type_num]").val());
+		console.log("room_people: " + $("input[name=room_people]").val());	
+		console.log("room_bed: " + $("input[name=room_bed]").val());	
+		console.log("room_bathroom: " + $("input[name=room_bathroom]").val());	
+		
+		console.log("room_status: " + $("input[name=room_status]").val());	
 		
 		$("#form").attr("action", "/cy/HostModifyRoom"); 
 		$("#form").submit();
 	}); // btnConplete
-	
-	
-	
 	
 	
 	function getAttachList() {
@@ -261,8 +268,6 @@ $(function(){
 <br><br><br><br>
 
 <%-- roomDetailDto: ${roomDetailDto} --%>
-<!-- <hr> -->
-<%-- roomTypeList: ${roomTypeList} --%>
 
 <div class="container-fluid">
 	<div class="row">
@@ -288,7 +293,9 @@ $(function(){
 				<input type="hidden" name="room_bed" value="${roomDetailDto.room_bed}"/>
 				<input type="hidden" name="room_bathroom" value="${roomDetailDto.room_bathroom}"/>
 				
-				<input type="hidden" name="room_option_code"  value="${roomDetailDto.room_bathroom}"/>
+				<input type="hidden" name="room_option_code"  value="${roomDetailDto.room_option_code}"/>
+				
+				<input type="hidden" name="room_status"  value="${roomDetailDto.room_status}"/>
 				
 				<div class="row">
 					<div class="col-md-10"></div>
@@ -362,7 +369,6 @@ ${roomDetailDto.room_explain}</textarea><br><br>
 						</div>
 					<br><br>
 					
-					
 					<!-- 첨부 파일 목록 템플릿 : clone해서 사용 -->
 					<div class="form-group">
 						<label for="uploadedList" class="lblTitle2">* 첨부파일</label>
@@ -377,8 +383,6 @@ ${roomDetailDto.room_explain}</textarea><br><br>
 						<span class="pull-right" style="display:none;">x</span></a>
 					</div>
 					
-					
-					
 <!-- 					파일 첨부 -->
 <!-- 					<div class="form-group"> -->
 <!-- 						<label for="fileDrop" class="lblTitle2">* 첨부 파일</label> -->
@@ -391,7 +395,6 @@ ${roomDetailDto.room_explain}</textarea><br><br>
 					
 				</div><br><br>
 				
-				
 				<!-- 건물 유형 -->
 				<div class="form-group">
 					<label class="lblTitle2">* 건물 유형</label>
@@ -402,7 +405,6 @@ ${roomDetailDto.room_explain}</textarea><br><br>
 					        	<c:if test="${roomTypeVo.room_type_num eq roomDetailDto.room_type_num}">selected</c:if>
 					        >${roomTypeVo.room_type_explain}</option>
 				        </c:forEach>
-				       
 				     </select>
 				</div><br><br><br>
 				
@@ -470,21 +472,34 @@ ${roomDetailDto.room_explain}</textarea><br><br>
 						<label class="lblTitle2" ><input type="checkbox" class="chb" disabled="disabled" 
 						data-option="${roomOptionVo.room_option_code}"/> ${roomOptionVo.room_option_explain}</label><br>
 					</c:forEach>
-					</div> 
-
+					</div><br> 
+				
+				<!-- 숙소 공개, 비공개 여부	-->
+				<div class="form-group">
+					<label class="lblTitle2">* 숙소 공개여부</label>
+					<select class="browser-default custom-select" id="room_status">
+				        <option selected="" disabled="disabled" >하나를 선택해주세요.</option>
+					        <option value="Y" disabled="disabled" class="room_states" 
+					        	<c:if test="${roomDetailDto.room_status eq 'Y'}">selected</c:if>
+					        >공개</option>
+					        <option value="N" disabled="disabled" class="room_states" 
+					        	<c:if test="${roomDetailDto.room_status eq 'N'}">selected</c:if>
+					        >비공개</option>
+				     </select>
+				</div><br><br>
 
 				<!-- Button -->
 				<br>
 				<div class="row">
-					<div class="col-md-3"></div>
-					<div class="col-md-3"></div>
-					<div class="col-md-3" align="right">
-<!-- 						<button type="button" class="btn btn-primary btn-block" id="btnTest" >TEST</button> -->
+					<div class="col-md-8">
 					</div>
-					<div class="col-md-3" align="right">
-						<button type="button" class="btn btn-primary " id="btnConplete">완료</button>
-						<button type="button" class="btn btn-primary " id="btnModify" >수정</button>
-						<button type="button" class="btn btn-primary " id="btnDelete" >삭제</button>
+					<div class="col-md-2" align="right">
+						<button type="button" class="btn btn-primary btn-block py-3 px-4" style="font-size:15px; margin-top: 10px" id="btnConplete">완료</button>
+						<button type="button" class="btn btn-primary btn-block py-3 px-4" style="font-size:15px;" id="btnModify">수정</button>
+					</div>
+					<div class="col-md-2" align="right">
+						<button type="button" class="btn btn-primary btn-block py-3 px-4"  
+							style="font-size:15px; margin-top: 9px" id="btnDelete">삭제</button>
 					</div>
 				</div>
 				
