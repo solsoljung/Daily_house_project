@@ -17,12 +17,16 @@ $(document).ready(function() {
 	if (msg == "fail") {
 		alert("회원 정보가 없습니다.");
 	}
+	var msg = "${msg}";
+	if (msg == "notFoundEmail") {
+		alert("회원 정보가 없습니다.");
+	}
 });
 </script>
 
-
-
 <!-- section -->
+<br>
+<br>
 <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">
@@ -45,9 +49,17 @@ $(document).ready(function() {
               </div>
               
               <br>
-              <div class="col-md-10 text-right" data-aos="fade-up" data-aos-delay="200">
-	            <button type="submit" class="btn btn-primary text-white py-3 px-5">로그인</button>&nbsp;&nbsp;&nbsp;&nbsp;
-	            <a href="/si/registerHost"><button type="button" class="btn btn-primary text-white py-3 px-5">회원가입</button></a>
+              <div class="col-md-8 text-left" data-aos="fade-up" data-aos-delay="200">
+            	<div class="row">
+		            <button type="submit" class="btn btn-primary text-white py-3 px-5">로그인</button>
+	         	</div>
+	          </div>
+	          <br>
+              <div class="col-md-8 text-left" data-aos="fade-up" data-aos-delay="200">
+            	<div class="row">
+		            <a href="/si/registerHost"><button type="button" class="btn btn-primary text-white py-2 px-4">회원가입</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+		            <a href="/si/findPassword"><button type="button" class="btn btn-primary text-white py-2 px-4">비밀번호 찾기</button></a>
+	         	</div>
 	          </div>
             </form>
           </div>

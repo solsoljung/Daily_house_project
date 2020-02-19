@@ -24,9 +24,7 @@
 	</beans:bean>
 	
 	<!-- 업로드 경로 String uploadPath = new String("") -->
-	<beans:bean
-		id="uploadPath"
-		class="java.lang.String">
+	<beans:bean id="uploadPath" class="java.lang.String">
 		<beans:constructor-arg value="//192.168.0.34/upload/team3"/>
 	</beans:bean>
 	

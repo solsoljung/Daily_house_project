@@ -26,7 +26,7 @@ $(function(){
 	// checkbox에서 checked인 room_option을 저장할 배열
 	var data_options = [];
 	
-	// 전송페이지로 이동
+	// host_register_page5로 이동
 	$("#btnNext").click(function(e){
 		e.preventDefault();
 		$(".chb:checked").each(function() { 
@@ -36,7 +36,7 @@ $(function(){
 		$("input[name=room_option_code]").val(data_options);
 		console.log("input room_option_code: " + $("input[name=room_option_code]").val());
 		
-		$("#registerForm").attr("action", "/cy/registerHost");
+		$("#registerForm").attr("action", "/cy/registerHost5Post");
 		$("#registerForm").submit();
 	});
 });
@@ -48,15 +48,15 @@ $(function(){
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
-		<div class="col-md-8">
-			<label class="lblTitle1">숙소 등록이 거의 다 되어갑니다!</label><br>
+		<div class="col-md-8"><br><br>
+			<label class="lblTitle1">숙소 등록이 거의 다 되어갑니다!</label>
 			<div class="progress">
-				<div class="progress-bar w-100"></div>
+				<div class="progress-bar" style="width: 80%"></div>
 			</div><br>
-			<label>4단계: 상세한 사항을 입력하세요</label><br><br>
+			<label>4단계: 상세한 사항을 입력하세요</label><br><br><br>
 			
 			<form role="form" id="registerForm" method="post">
-			roomVo: ${roomVo}
+<%-- 			roomVo: ${roomVo} --%>
 			<input type="hidden" name="room_type_num" value="${roomVo.room_type_num}"/>
 			<input type="hidden" name="room_people" value="${roomVo.room_people}"/>
 			<input type="hidden" name="room_bed" value="${roomVo.room_bed}"/>
@@ -67,12 +67,6 @@ $(function(){
 			<input type="hidden" name="room_explain" value="${roomVo.room_explain}"/>
 			<input type="hidden" name="room_price" value="${roomVo.room_price}"/>
 			<input type="hidden" name="room_option_code" />
-			
-			<c:if test="${not empty roomVo.pics}">
-			<c:forEach var="pic" items="${roomVo.pics}" varStatus="status">
-				<input type="hidden" name="pics" value="${roomVo.pics[status.index]}"/>
-			</c:forEach>
-			</c:if>
 			
 				<!-- 편의시설 -->
 				<div class="form-group">

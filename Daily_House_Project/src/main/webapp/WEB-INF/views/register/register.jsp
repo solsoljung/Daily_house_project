@@ -88,7 +88,6 @@ $(function(){
 				dice = rData;
 				console.log("dice: " + dice);
 			}
-
 		}); // $.ajax()
 	}); //$("#btn_certification1").click
 	
@@ -129,6 +128,8 @@ $(function(){
 </script>
 	
 
+<br>
+<br>
 <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">

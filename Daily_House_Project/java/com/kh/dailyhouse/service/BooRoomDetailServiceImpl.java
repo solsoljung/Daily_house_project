@@ -1,5 +1,6 @@
 package com.kh.dailyhouse.service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.kh.dailyhouse.domain.ReservationVo;
 import com.kh.dailyhouse.domain.ReviewPagingDto;
 import com.kh.dailyhouse.domain.RoomDto;
 import com.kh.dailyhouse.domain.RoomReviewVo;
@@ -25,7 +27,7 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 	@Override
 	public Map<String, Object> detail(int room_num, ReviewPagingDto reviewPagingDto) throws Exception {
 		//댓글 총 갯수 구하기
-		int totalCount = booRoomDetailDao.getReviewCount();
+		int totalCount = booRoomDetailDao.getReviewCount(room_num);
 		reviewPagingDto.setTotalCount(totalCount);
 		
 		//후기 리스트 받아오기
@@ -45,8 +47,6 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 		
 		//방 상세보기 정보 받기
 		RoomDto dto = booRoomDetailDao.getRoominfo(room_num);
-		System.out.println("Service room_num : " + room_num);
-		System.out.println("dto : " + dto);
 		
 		//방 옵션 코드 받기
 		String optionCode = "";
@@ -86,5 +86,25 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 	public void insertReview(RoomReviewVo roomReviewVo) throws Exception {
 		booRoomDetailDao.setReview(roomReviewVo);
 	}
-
+	
+	//room_num에 해당하는 reservation정보 얻기
+	@Override
+	public Map<String, Object> roomReservation(int room_num) throws Exception {
+		List<ReservationVo> roomReservation = booRoomDetailDao.getReservation(room_num);
+		
+		List<Timestamp> startList = new ArrayList<>();
+		List<Timestamp> endList = new ArrayList<>();
+		
+		for (ReservationVo reservationVo : roomReservation) {		
+			startList.add(reservationVo.getRoom_reserv_start_date());
+			endList.add(reservationVo.getRoom_reserv_end_date());
+		}
+		
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("startList", startList);
+		paramMap.put("endList", endList);
+		
+		return paramMap;
+	}
+	
 }

@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.kh.dailyhouse.domain.LikeVo;
-import com.kh.dailyhouse.domain.RoomVo;
 import com.kh.dailyhouse.persistence.YOLikeListDao;
 
 @Service
@@ -21,5 +20,11 @@ public class YOLikeListServiceImpl implements YOLikeListService {
 		List<LikeVo> list = dao.getLikeList(user_email);
 		return list;
 	}
+
+	@Override
+	public void deleteLike(int like_num) throws Exception {
+		dao.deleteLike(like_num);	
+	}
+
 
 }

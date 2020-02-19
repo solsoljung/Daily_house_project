@@ -5,9 +5,10 @@
   
 <mapper namespace="com.kh.mappers.LikeMapper">
 	<select id="getLikeList" resultType="LikeDto">
-		select r.room_title, r.room_price, r.room_num from tbl_room r where r.room_num in (
-   			 select l.room_num from tbl_like l where l.user_email = #{user_email}
-		)
+		select l.like_num, r.room_title, r.room_price
+		from tbl_room r, tbl_like l
+		where r.room_num = l.room_num
+		and l.user_email = #{user_email}
 	</select>
 	
 	<delete id="deleteLike">

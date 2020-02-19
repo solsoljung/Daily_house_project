@@ -89,16 +89,16 @@ $(function(){
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
-		<div class="col-md-8">
-			<label class="lblTitle1">숙소에 얼마나 많은 인원이 숙박할 수 있나요?</label><br>
+		<div class="col-md-8"><br><br>
+			<label class="lblTitle1">숙소에 얼마나 많은 인원이 숙박할 수 있나요?</label>
 			<div class="progress">
-				<div class="progress-bar w-75"></div>
+				<div class="progress-bar" style="width: 60%"></div>
 			</div><br>
-			<label>3단계: 모든 게스트가 편안하게 숙박할 수 있도록 침대가 충분히 구비되어있는지 확인하세요.</label><br><br>
+			<label>3단계: 모든 게스트가 편안하게 숙박할 수 있도록 침대가 충분히 구비되어있는지 확인하세요.</label><br><br><br>
 
 			<form role="form" id="registerForm" action="/cy/registerHost4Post" method="post">
-			roomTypeList: ${roomTypeList}
-			roomVo: ${roomVo}
+<%-- 			roomTypeList: ${roomTypeList} --%>
+<%-- 			roomVo: ${roomVo} --%>
 			<input type="hidden" name="room_type_num" value="${roomVo.room_type_num}"/>
 			<input type="hidden" name="room_people" value="${roomVo.room_people}"/>
 			<input type="hidden" name="room_bed" value="${roomVo.room_bed}"/>
@@ -108,11 +108,6 @@ $(function(){
 			<input type="hidden" name="room_title" value="${roomVo.room_title}"/>
 			<input type="hidden" name="room_explain" value="${roomVo.room_explain}"/>
 			<input type="hidden" name="room_price" value="${roomVo.room_price}"/>
-			<c:if test="${not empty roomVo.pics}">
-			<c:forEach var="pic" items="${roomVo.pics}" varStatus="status">
-				<input type="hidden" name="pics" value="${roomVo.pics[status.index]}"/>
-			</c:forEach>
-			</c:if>
 			
 				<!-- 건물 유형 -->
 				<div class="form-group">
