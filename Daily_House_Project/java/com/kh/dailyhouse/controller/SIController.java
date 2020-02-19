@@ -23,13 +23,11 @@ public class SIController {
 	public String goHome() throws Exception {
 		return "redirect:/";
 	}
-	
 	//회원가입으로 가는 컨트롤러
 	@RequestMapping(value = "/registerHost", method = RequestMethod.GET)
 	public String registerHost() throws Exception {
 		return "/register/register";
 	}
-	
 	// 회원가입 처리
 	@RequestMapping(value = "/register_run", method = RequestMethod.POST)
 	public String register_run(UserVo userVo) throws Exception{
@@ -38,20 +36,16 @@ public class SIController {
 		siUserService.setUserData(userVo);
 		return "/register/registerSuccess";
 	}
-	
 	// 회원가입 완료창
 	@RequestMapping(value = "/register_succes", method = RequestMethod.POST)
 	public String register_succes() throws Exception{
 		return "redirect:/";
 	}
-	
-	
 	// 로그인으로 가는 컨트롤러
 	@RequestMapping(value = "/loginHost", method = RequestMethod.GET)
 	public String loginHost() throws Exception {
 		return "/login/login";
 	}
-	
 	// 로그인 처리
 	@RequestMapping(value = "/login_run", method = RequestMethod.POST)
 	public String login_run(HttpSession session, RedirectAttributes rttr, UserVo userVo) throws Exception{
@@ -70,14 +64,12 @@ public class SIController {
 		rttr.addFlashAttribute("msg", "success");
 		return "redirect:/";
 	}
-	
 	// 로그아웃 처리
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) throws Exception {
 		session.invalidate();
 		return "redirect:/";
 	}
-	
 	// 내정보 가는 컨트롤러
 	@RequestMapping(value = "/userInformation", method = RequestMethod.GET)
 	public String userInformation() throws Exception {
@@ -105,6 +97,20 @@ public class SIController {
 		}
 		session.setAttribute("user_pw", user_pw);
 		return "/login/passwordFound";
+	}
+	// 비밀번호 수정으로 가는 컨트롤러
+	@RequestMapping(value = "/updatePasswordHost", method = RequestMethod.GET)
+	public String updatePasswordHost() throws Exception {
+		return "/user/updatePassword";
+	}
+	// 비밀번호 수정 처리
+	@RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
+	public String updatePassword(HttpSession session, RedirectAttributes rttr, UserVo userVo) throws Exception {
+		System.out.println(userVo);
+		siUserService.updatePassword(userVo);
+		rttr.addFlashAttribute("msg", "updatePassword");
+		session.invalidate();
+		return "redirect:/si/loginHost";
 	}
 	
 }

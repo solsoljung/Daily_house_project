@@ -11,5 +11,7 @@ public interface SiUserDao {
 	public void userUpdate(UserVo userVo) throws Exception;
 	// 유저 비밀번호 찾기
 	public String foundPassword(String user_email) throws Exception;
+	// 유저 비밀번호 수정
+	public void updatePassword(UserVo userVo) throws Exception;
 	
 }
