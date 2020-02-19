@@ -27,6 +27,12 @@
 
 <script>
 $(function(){
+	// msg
+	var msg = "${msg}";
+	if (msg == "room_delete_success") {
+		alert("삭제 되었습니다.");
+	}
+	
 	// 현재 클릭된 메뉴를 활성화
 	$(".nav-item:eq(0)").attr("class", "nav-item");
 	$(".nav-item:eq(6)").attr("class", "nav-item active");
@@ -66,6 +72,7 @@ $(function(){
 		<table class="table" id="tbl_room">
 			<thead align="center">
 				<tr align="center">
+					<th> </th>
 					<th>숙소 위치</th>
 					<th>이름</th>
 					<th>건물 형식</th>
@@ -78,6 +85,7 @@ $(function(){
 			<tbody align="center">
 				<c:forEach items="${list}" var="RoomDetailDto">
 				<tr align="center">
+					<td>${RoomDetailDto.room_num}</td>
 					<td>${RoomDetailDto.room_location}</td>
 					<td><a href="#" class="room_title_a" data-room-num="${RoomDetailDto.room_num}">${RoomDetailDto.room_title}</a></td>
 					<td>${RoomDetailDto.room_type_explain}</td>

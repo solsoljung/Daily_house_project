@@ -9,4 +9,7 @@ public interface CyHostDao {
 	// 호스트 등록하기
 	public void registerHost(HostVo hostVo) throws Exception;
 	
+	// 호스트 삭제하기
+	public void deleteHost(String user_email, int room_num) throws Exception;
+	
 }

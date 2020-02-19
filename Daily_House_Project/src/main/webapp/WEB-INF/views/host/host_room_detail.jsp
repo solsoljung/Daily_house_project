@@ -15,8 +15,16 @@
 	.lblTitle1{ font-size: 30px; font-weight: bold;}
 	.lblTitle2{ font-size: 20px;}
 	.lblTitle3{ font-size: 15px; font-weight: bold;}
+	
+	#fileDrop {
+	width: 100%;
+	height: 100px;
+	border: 1px dashed #fb929e;
+	background-color: #F2F2F2;
+	margin: auto;
 </style>
 
+<script src="/js/myscript.js"></script>
 <script>
 $(function(){
 	// 현재 클릭된 메뉴를 활성화
@@ -26,6 +34,7 @@ $(function(){
 	// 수정완료 버튼 숨기기
 	$("#btnConplete").hide();
 	$("#btnAddress").hide();
+	$(".addFile").hide();
 	
 	// room_location을 저장할 공간
 	var room_location_full = "${roomDetailDto.room_location}" + " " + "${roomDetailDto.room_location_detail}";
@@ -41,7 +50,6 @@ $(function(){
 	
 	// room_option_code
 	var room_option_code = "${roomDetailDto.room_option_code}";
-// 	console.log("room_option_code: " + room_option_code);
 	
 	split();
 	function split() {			
@@ -85,6 +93,9 @@ $(function(){
 		$(".chb").prop("disabled", false);		
 		
 		$(".room_states").prop("disabled", false);
+		
+		$(".pull").fadeIn(1000);    // 첨부파일 삭제링크(x) 나타내기
+		$(".addFile").fadeIn(1000); // 파일첨부 나타내기
 	});
 	
 	// select room_type_num
@@ -96,7 +107,7 @@ $(function(){
 	// select room_status
 	$("#room_status").change(function() {
 		$("input[name=room_status]").val($(this).val());
-		console.log($("input[name=room_status]").val());
+// 		console.log($("input[name=room_status]").val());
 	});
 	
 	// 수정완료
@@ -135,31 +146,71 @@ $(function(){
 		$("input[name=room_bed]").val($("#room_bed").val());
 		$("input[name=room_bathroom]").val($("#room_bathroom").val());
 		
-		console.log("room_location: " + $("input[name=room_location]").val());
-		console.log("room_location_detail: " + $("input[name=room_location_detail]").val());
+// 		console.log("room_location: " + $("input[name=room_location]").val());
+// 		console.log("room_location_detail: " + $("input[name=room_location_detail]").val());
 		
-		console.log("room_title: " + $("input[name=room_title]").val());	
-		console.log("room_explain: " + $("textarea[name=room_explain]").val());	
-		console.log("room_price: " + $("input[name=room_price]").val());	
+// 		console.log("room_title: " + $("input[name=room_title]").val());	
+// 		console.log("room_explain: " + $("textarea[name=room_explain]").val());	
+// 		console.log("room_price: " + $("input[name=room_price]").val());	
 		
-		console.log("room_option_code: " + $("input[name=room_option_code]").val());
+// 		console.log("room_option_code: " + $("input[name=room_option_code]").val());
 		
-		console.log("room_type_num: " + $("input[name=room_type_num]").val());
-		console.log("room_people: " + $("input[name=room_people]").val());	
-		console.log("room_bed: " + $("input[name=room_bed]").val());	
-		console.log("room_bathroom: " + $("input[name=room_bathroom]").val());	
+// 		console.log("room_type_num: " + $("input[name=room_type_num]").val());
+// 		console.log("room_people: " + $("input[name=room_people]").val());	
+// 		console.log("room_bed: " + $("input[name=room_bed]").val());	
+// 		console.log("room_bathroom: " + $("input[name=room_bathroom]").val());	
 		
-		console.log("room_status: " + $("input[name=room_status]").val());	
+// 		console.log("room_status: " + $("input[name=room_status]").val());	
 		
 		$("#form").attr("action", "/cy/HostModifyRoom"); 
 		$("#form").submit();
 	}); // btnConplete
 	
 	
+	$("#btnDelete").click(function(e){
+		e.preventDefault();
+		var status = "${roomDetailDto.room_status}";
+		if(status == "Y"){
+			alert("숙소 공개여부가 공개일 경우 삭제할 수 없습니다.");
+			return;
+		}
+		
+		// 예약이 있는지 없는지 알아낸 후 없다면 삭제
+		var room_num = "${roomDetailDto.room_num}";
+		var url = "/cy/isReserved/" + room_num;
+		$.ajax({
+			"type" : "post",
+			"url" : url,
+			"headers" : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "post"
+			},
+			"success" : function(rData) {
+				console.log("rData: " + rData);
+				if(rData > 0){
+					alert("현재 예약된 숙소는 삭제할 수 없습니다.");
+				}else{
+					location.href = "/cy/deleteRoom?room_num=" + room_num;
+				}
+			}
+		}); // $.ajax()
+	});
+	
+	
+	// 첨부파일 START ===================================================================================
+	getAttachList();
+	
+	// 사진파일 가져오기
 	function getAttachList() {
 		var url = "/cy/getAttach/${roomDetailDto.room_num}";
 		$.getJSON(url, function(list) {
-			console.log("list:", list);
+			
+			if(list.length == null || list.length < 1){
+				$("#lblUploadList").text("* 첨부파일이 없습니다.");
+				return;
+			}
+			
+			console.log("file list:", list);
 			$(list).each(function() {
 				var full_name = this;
 				var underScoreIndex = full_name.indexOf("_");
@@ -182,9 +233,9 @@ $(function(){
 				$("#uploadedList").append(el);
 			});
 		});
-	}
+	} // function getAttachList()
 	
-	// 첨부 파일 삭제 링크
+	// 첨부 파일과 데이터 삭제 링크
 	$("#uploadedList").on("click", ".attach-del", function(e) {
 		e.preventDefault();
 		var that = $(this);
@@ -199,10 +250,7 @@ $(function(){
 			}
 		});
 	});
-	
-	getAttachList();
-	
-	
+	// 첨부파일 END ====================================================================================
 	
 	// room_price는 숫자만 입력할 수 있도록 설정
 	$("input[name=room_price]").on("keyup", function() {
@@ -293,9 +341,11 @@ $(function(){
 				<input type="hidden" name="room_bed" value="${roomDetailDto.room_bed}"/>
 				<input type="hidden" name="room_bathroom" value="${roomDetailDto.room_bathroom}"/>
 				
-				<input type="hidden" name="room_option_code"  value="${roomDetailDto.room_option_code}"/>
+				<input type="hidden" name="room_option_code" value="${roomDetailDto.room_option_code}"/>
 				
-				<input type="hidden" name="room_status"  value="${roomDetailDto.room_status}"/>
+				<input type="hidden" name="room_status" value="${roomDetailDto.room_status}"/>
+				
+				<input type="hidden" name="pics" value="${roomDetailDto.pics}"/>
 				
 				<div class="row">
 					<div class="col-md-10"></div>
@@ -370,30 +420,35 @@ ${roomDetailDto.room_explain}</textarea><br><br>
 					<br><br>
 					
 					<!-- 첨부 파일 목록 템플릿 : clone해서 사용 -->
-					<div class="form-group">
-						<label for="uploadedList" class="lblTitle2">* 첨부파일</label>
-						<div id="uploadedList">
-						
-						</div>
-					</div>
+					
 					<div id="attach_template" style="display:none;" data-filename="">
 						<img class="img-thumbnail"><br>
 						<span></span>
 						<a href="#" class="attach-del">
-						<span class="pull-right" style="display:none;">x</span></a>
+						<span class="pull" style="display:none;">x</span></a>
 					</div>
 					
-<!-- 					파일 첨부 -->
-<!-- 					<div class="form-group"> -->
-<!-- 						<label for="fileDrop" class="lblTitle2">* 첨부 파일</label> -->
-<!-- 						<div id="fileDrop"></div> -->
-<!-- 					</div> -->
+					<div class="form-group">
+						<label for="uploadedList" class="lblTitle2" id="lblUploadList">* 첨부파일</label>
+						<div id="uploadedList">
+						
+						</div>
+					</div>
 					
-<!-- 					썸네일 이미지 -->
-<!-- 					<div class="form-group" id="uploadedList"> -->
-<!-- 					</div> -->
 					
-				</div><br><br>
+					<!-- 파일 첨부 -->
+					<div class="form-group">
+						<label for="fileDrop" class="lblTitle2 addFile">첨부할 파일을 드래그, 드롭하세요</label>
+						<div id="fileDrop" class="addFile"></div>
+					</div>
+					
+					<!-- 썸네일 이미지 -->
+					<div class="form-group addFile" id="uploadedList" style="display: inline;" >
+					
+					</div>
+					
+					
+					</div><br><br>
 				
 				<!-- 건물 유형 -->
 				<div class="form-group">

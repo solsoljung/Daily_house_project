@@ -28,7 +28,6 @@ public class CyRoomServiceImpl implements CyRoomService {
 		return hostDao.getHostInfo(user_email);
 	}
 	
-	
 	// 호스트가 등록한 숙소 리스트 불러오기
 	@Override
 	public List<RoomDetailDto> getHostRoomList(String user_email) throws Exception {
@@ -69,8 +68,23 @@ public class CyRoomServiceImpl implements CyRoomService {
 	@Override
 	public void updateHostRoom(RoomVo roomVo) throws Exception {
 		roomDao.updateHostRoom(roomVo);
+		// 사진파일도 수정
 	}
-
+	
+	// 숙소 삭제하기
+	@Transactional
+	@Override
+	public void deleteHostRoom(String user_email, int room_num) throws Exception {
+		roomDao.deleteAttachByRoomNum(room_num); 		// tbl_room_picture 데이터 삭제
+		hostDao.deleteHost(user_email, room_num);		// tbl_host 데이터 삭제
+		roomDao.deleteHostRoom(user_email, room_num); 	// tbl_room 데이터 삭제
+	}
+	
+	// 숙소 예약이 있는지 없는지 알아내기
+	@Override
+	public int isReserved(int room_num) throws Exception {
+		return roomDao.isReserved(room_num);
+	}
 
 	// 첨부파일명 목록
 	@Override
@@ -83,7 +97,6 @@ public class CyRoomServiceImpl implements CyRoomService {
 	public void deleteAttach(String pic_uri) throws Exception {
 		roomDao.deleteAttach(pic_uri);
 	}
-
 
 
 	

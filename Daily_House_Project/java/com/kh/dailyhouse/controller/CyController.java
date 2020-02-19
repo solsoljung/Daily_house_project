@@ -2,6 +2,7 @@ package com.kh.dailyhouse.controller;
 
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.dailyhouse.domain.HostVo;
 import com.kh.dailyhouse.domain.RoomDetailDto;
@@ -18,11 +20,15 @@ import com.kh.dailyhouse.domain.RoomVo;
 import com.kh.dailyhouse.service.CyRoomOptionService;
 import com.kh.dailyhouse.service.CyRoomService;
 import com.kh.dailyhouse.service.CyRoomTypeService;
+import com.kh.dailyhouse.util.FileUploadUtil;
 
 @Controller
 @RequestMapping("/cy/*")
 public class CyController {
 
+	@Resource
+	private String uploadPath; // servlet-context.xml (id="uploadPath")
+	
 	@Inject
 	private CyRoomTypeService roomTypeService;
 	@Inject
@@ -31,7 +37,7 @@ public class CyController {
 	private CyRoomService roomService;
 	
 	// 호스트의 방 리스트 보기
-	@RequestMapping(value = "/HostRoomList", method = RequestMethod.GET)
+	@RequestMapping(value = "/HostRoomList", method = {RequestMethod.GET, RequestMethod.POST})
 	public String HostRoomList(Model model) throws Exception{
 		HostVo hostVo = roomService.getHostInfo("test@naver.com");
 		model.addAttribute("hostVo", hostVo);
@@ -130,9 +136,34 @@ public class CyController {
 		return "redirect:/";
 	}
 	
+	// room_num에 해당하는 사진파일 정보 가져오기
 	@RequestMapping(value = "/getAttach/{room_num}", method = RequestMethod.GET)
 	@ResponseBody
 	public List<String> getAttach(@PathVariable("room_num") int room_num) throws Exception {
 		return roomService.getAttach(room_num);
+	}
+	
+	// 예약이 있는지 없는지 알아내기
+	@RequestMapping(value="/isReserved/{room_num}", method=RequestMethod.POST)
+	@ResponseBody
+	public int isReserved(@PathVariable("room_num") int room_num) throws Exception {
+		System.out.println("room_num:" + room_num);
+		int result = roomService.isReserved(room_num); 
+		return result;
+	}
+	
+	// 호스트 숙소 삭제하기(room_num으로 사진, 호스트 정보, 방 정보 삭제)
+	@RequestMapping(value = "/deleteRoom", method = RequestMethod.GET)
+	public String delete(@RequestParam("room_num") int room_num, RedirectAttributes rttr) throws Exception {
+		
+		System.out.println("deleteRoom room_num: " + room_num);
+		String user_email = "test@naver.com"; //나중에 로그인했는지 안했는지 검사하기@@@@@@@@@@@@@@@@@@@@@@@
+		
+		// 파일 삭제
+		List<String> fileNameList = roomService.getAttach(room_num);
+		FileUploadUtil.delete(fileNameList, uploadPath);
+		roomService.deleteHostRoom(user_email, room_num);
+		rttr.addFlashAttribute("msg", "room_delete_success");
+		return "redirect:/cy/HostRoomList";
 	}
 }
