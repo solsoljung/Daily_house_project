@@ -45,6 +45,7 @@ public class SolController {
 			str_end_date = null;
 		}
 
+		//날짜
 		if (str_start_date != null) {
 			if(str_start_date.equals("NaN-NaN-NaN")) {
 				System.out.println("nan이 나타났다!!!!!!!!!!!!!!!!!!!");
@@ -65,35 +66,40 @@ public class SolController {
 			System.out.println("start_date: " + start_date);
 			System.out.println("end_date: " + end_date);
 		}
+		
 		RoomLowHighPriceDto priceDto = service.getRoomPrice();
 		System.out.println("searchVo222222222: " + searchVo);
 		System.out.println("priceDto7777777: " + priceDto);
+		
+		//가격
 		if(searchVo.getLow_price() == 0 && searchVo.getLow_price() == 0) {
 			searchVo.setLow_price(priceDto.getMin_low_price());
 			searchVo.setHigh_price(priceDto.getMax_high_price());
 		}
+		
+		//타입
+		String type = searchVo.getArrType();
+		System.out.println("타입이 널이 아닐때 실행!!!: "+type);
+		String[] typeSplit = searchVo.getTypeSplit();
+		typeSplit = type.split(",");
+		searchVo.setTypeSplit(typeSplit);
+		for(int i = 0; i < typeSplit.length; i++) {
+			System.out.println("타입의 "+i+"번째: "+typeSplit[i]);
+		}
+		System.out.println("setTypeSplit 후 실행!!!: "+searchVo);
+		/* 굳이 리스트로 안해도 될 것 같아서 일단 막아둡니다.
+		 * ArrayList<String> TypeList = new ArrayList<>();
+        
+		for(String item : typeSplit) {
+			TypeList.add(item);
+		}*/
+//		여기하고 있었음!!!!!! 이제 mybatis foreach 하면 됨!
+		
 		List<RoomVo> list = service.getRoomList(searchVo);
 		int totalCount = service.getRoomCount(searchVo);
 		List<RoomTypeVo> typeList = service.getRoomType();
 		List<RoomOptionVo> optionList = service.getRoomOption();
 		searchVo.setTotalCount(totalCount);
-		
-		if(searchVo.getArrType() != null) {
-
-			String type = searchVo.getArrType();
-			System.out.println("여기기가리ㅏ;ㄴ: "+type);
-			String[] typeSplit = type.split(",");
-			System.out.println("여기기가리ㅏ;ㄴ111111: "+typeSplit[0]);
-			System.out.println("여기기가리ㅏ;ㄴ222222: "+typeSplit[1]);
-			
-			ArrayList<String> TypeList = new ArrayList<>();
-	        
-			for(String item : typeSplit) {
-				TypeList.add(item);
-			}
-//			여기하고 있었음!!!!!! 이제 mybatis foreach 하면 됨!
-
-		}
 		
 		model.addAttribute("list", list);
 		model.addAttribute("searchVo", searchVo);

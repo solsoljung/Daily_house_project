@@ -19,6 +19,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
+	
 	// 좋아요 해제하기(삭제) ajax 이용
 	$(".heartDiv").click(function(e) {
 		e.preventDefault();
@@ -28,6 +29,8 @@ $(document).ready(function() {
 		/* $.get(url, function(rData) {
 			console.log(rData);
 		}); */
+		var that = $(this);
+		console.log("that:" , that);
 		$.ajax({
 			"type" : "delete",
 			"url" : url,
@@ -36,11 +39,15 @@ $(document).ready(function() {
 				"X-HTTP-Method-Override" : "delete"
 			},
 			"success" : function(rData) {
-				console.log(rData);
+				console.log("rData:" + rData);
+// 				likeList();
+				var p = that.parent().parent().parent();
+				console.log(p);
+				p.fadeOut('1000');
 			}
-		});
-	});
-
+		}); // ajax
+	});	// 삭제버튼
+	
 	
 	//상세 페이지로 이동
 	$(".room_title").click(function(e) {
@@ -100,7 +107,7 @@ $(document).ready(function() {
 	<div class="col-md-3">	
 	<div class="row mb-5">
 	</div>
-		<div class="room-wrap ftco-animate">
+		<div class="room-wrap ftco-animate" id="likeList">
 				<a href="#" class="img" style="background-image: url(/islagrande/images/room-1.jpg);">
 					<span class="heartDiv" data-like_num="${LikeDto.like_num}">♥</span>
 				</a>

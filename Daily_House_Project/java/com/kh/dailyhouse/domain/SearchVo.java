@@ -1,8 +1,14 @@
 package com.kh.dailyhouse.domain;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 
 public class SearchVo {
+
+	//방타입
+	private String arrType = "R1,R2,R3";
+	private String[] typeSplit;
+	
 	//인원
 	private int room_people = 1;
 	
@@ -13,9 +19,6 @@ public class SearchVo {
 	//날짜
 	private String str_start_date = null;
 	private String str_end_date = null;
-	
-	//방타입
-	private String arrType;
 	
 	private Timestamp room_reserv_start_date = null;
 	private Timestamp room_reserv_end_date = null;
@@ -223,16 +226,23 @@ public class SearchVo {
 		this.arrType = arrType;
 	}
 
-	@Override
-	public String toString() {
-		return "SearchVo [room_people=" + room_people + ", low_price=" + low_price + ", high_price=" + high_price
-				+ ", str_start_date=" + str_start_date + ", str_end_date=" + str_end_date + ", arrType=" + arrType
-				+ ", room_reserv_start_date=" + room_reserv_start_date + ", room_reserv_end_date="
-				+ room_reserv_end_date + ", page=" + page + ", startRow=" + startRow + ", endRow=" + endRow
-				+ ", startPage=" + startPage + ", endPage=" + endPage + ", totalCount=" + totalCount + ", hasPrev="
-				+ hasPrev + ", hasNext=" + hasNext + ", perPage=" + perPage + ", totalPage=" + totalPage
-				+ ", searchType=" + searchType + ", keyword=" + keyword + "]";
+	public String[] getTypeSplit() {
+		return typeSplit;
 	}
 
+	public void setTypeSplit(String[] typeSplit) {
+		this.typeSplit = typeSplit;
+	}
+
+	@Override
+	public String toString() {
+		return "SearchVo [arrType=" + arrType + ", typeSplit=" + Arrays.toString(typeSplit) + ", room_people="
+				+ room_people + ", low_price=" + low_price + ", high_price=" + high_price + ", str_start_date="
+				+ str_start_date + ", str_end_date=" + str_end_date + ", room_reserv_start_date="
+				+ room_reserv_start_date + ", room_reserv_end_date=" + room_reserv_end_date + ", page=" + page
+				+ ", startRow=" + startRow + ", endRow=" + endRow + ", startPage=" + startPage + ", endPage=" + endPage
+				+ ", totalCount=" + totalCount + ", hasPrev=" + hasPrev + ", hasNext=" + hasNext + ", perPage="
+				+ perPage + ", totalPage=" + totalPage + ", searchType=" + searchType + ", keyword=" + keyword + "]";
+	}
 	
 }
