@@ -23,7 +23,7 @@ public class SolRoomDaoImpl implements SolRoomDao {
 	
 	@Override
 	public List<RoomVo> getRoomList(SearchVo searchVo) throws Exception {
-		
+		System.out.println("SolRoomDaoImpl, searchVo:" + searchVo);
 		return sqlSession.selectList(NAMESPACE + ".getRoomList", searchVo);
 	}
 

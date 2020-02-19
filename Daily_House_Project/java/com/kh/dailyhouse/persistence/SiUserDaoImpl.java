@@ -36,4 +36,9 @@ public class SiUserDaoImpl implements SiUserDao {
 		return sqlSession.selectOne(NAMESPACE+".foundPassword", user_email);
 	}
 
+	@Override
+	public void updatePassword(UserVo userVo) throws Exception {
+		sqlSession.update(NAMESPACE+".updatePassword", userVo);
+	}
+
 }

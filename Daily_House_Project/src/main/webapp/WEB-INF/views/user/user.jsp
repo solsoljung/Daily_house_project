@@ -89,7 +89,8 @@ $(function(){
 	
 });
 </script>
-
+<br>
+<br>
 <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">
@@ -149,17 +150,18 @@ $(function(){
                   <input type="text" value="${userVo.user_phone}" id="user_phone" name="user_phone" placeholder="-없이 숫자만 입력해주세요." class="form-control" required readonly >
                 </div>
               </div>
+	          <div class="col-md-12 text-right" data-aos="fade-up" data-aos-delay="200">
+              	<div class="row">
+		        	<button type="button" class="btn btn-primary text-white py-2 px-5" id="btnUpdate">수정하기</button>
+			        <button type="button" class="btn btn-primary text-white py-2 px-5" id="btnSubmit" style="display: none;">저장하기</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			        <button type="button" class="btn btn-primary text-white py-2 px-5" id="btnBack" style="display: none;">취소</button>
+		        </div>
+		      </div>
                 <hr>
               <div class="row">
 	              <div class="col-md-1 text-right" data-aos="fade-up" data-aos-delay="200">
-		            <button type="button" class="btn btn-primary text-white py-3 px-5" id="btnUpdate">수정하기</button>
-		          </div>
-	          </div>
-	              <div class="col-md-12 text-right" data-aos="fade-up" data-aos-delay="200">
-              		<div class="row">
-		            <button type="button" class="btn btn-primary text-white py-3 px-5" id="btnSubmit" style="display: none;">저장하기</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		            <button type="button" class="btn btn-primary text-white py-3 px-5" id="btnBack" style="display: none;">취소</button>
-		            <br>
+	              	<br>
+		            <a href="/si/updatePasswordHost"><button type="button" class="btn btn-primary text-white py-3 px-5" id="btnUpdate">비밀번호 변경</button></a>
 		          </div>
 	          </div>
             </form>
