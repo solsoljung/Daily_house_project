@@ -18,6 +18,7 @@
 	<update id="userUpdate">
 		update tbl_user set
 		user_name = #{user_name},
+		user_pic = #{user_pic},
 		user_phone = #{user_phone}
 		where user_email = #{user_email}
 	</update>

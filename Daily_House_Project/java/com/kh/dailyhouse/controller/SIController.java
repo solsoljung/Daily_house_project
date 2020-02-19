@@ -1,19 +1,29 @@
 package com.kh.dailyhouse.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.dailyhouse.domain.UserVo;
 import com.kh.dailyhouse.service.SiUserService;
+import com.kh.dailyhouse.util.FileUploadUtil;
 
 @Controller
 @RequestMapping("/si/*")
 public class SIController {
+	
+	@Resource
+	private String uploadPath; 
 	
 	@Inject
 	private SiUserService siUserService;
@@ -77,8 +87,14 @@ public class SIController {
 	}
 	// 내정보 수정 처리
 	@RequestMapping(value = "/userUpdate", method = RequestMethod.POST)
-	public String userUpdate(HttpSession session, UserVo userVo) throws Exception {
-		siUserService.userUpdate(userVo);
+	public String userUpdate(HttpSession session, UserVo userVo, MultipartFile file) throws Exception {
+		String originalFilename = file.getOriginalFilename();
+		String dirPath = FileUploadUtil.uploadFile(uploadPath, originalFilename, file.getBytes());
+		String path = dirPath.replace("\\", "/");
+		
+		userVo.setUser_pic(originalFilename); 	// pic에 파일 이름 넣음
+		siUserService.userUpdate(userVo);		// pic에 파일 이름이 들어간채로 데이터 베이스로 감
+//		userVo.setUser_pic(originalFilename); 	// 세션에 넣을 이름 작성하셈
 		session.setAttribute("userVo", userVo);
 		return "/user/user";
 	}
