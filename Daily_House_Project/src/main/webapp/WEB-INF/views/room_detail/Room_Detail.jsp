@@ -138,18 +138,26 @@ $(window).scroll(function() {
 <!-- check in,out -->
 <script>
 $(document).ready(function(){
+	var rDate2 = [];
 	var room_num = ${roomDto.room_num};
 	var url = "/datepicker/start/"+room_num;
 	$.get(url, function(rDate){
-    	console.log(rDate);
+    	console.log("get");
+    	console.log("rDate:", rDate);
+    	rDate2 = rDate;
+    	
+    	console.log("rDate2:", rDate2);
+    	console.log("get2");
+    	checkIn();
     });
 	
+	function checkIn() {
 // 	체크인
 	$('#startDate').datepicker({
 		format: "yyyy-mm-dd",
 	    startDate: '1d',
 	    autoclose : true,
-	    datesDisabled : [],	//'2020-02-18','2020-02-20'이런 형식
+	    datesDisabled : rDate2,	//'2020-02-18','2020-02-20'이런 형식
 	    multidateSeparator :",",
 	    templates : {
 	        leftArrow: '&laquo;',
@@ -195,7 +203,7 @@ $(document).ready(function(){
         $(this).hide();
         $('#endDate').show().datepicker("show");
 	});
-	 
+	}
 	//체크아웃
 	$('#endDate').datepicker({
 		format: "yyyy-mm-dd",

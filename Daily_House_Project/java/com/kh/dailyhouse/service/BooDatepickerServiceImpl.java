@@ -1,5 +1,6 @@
 package com.kh.dailyhouse.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -21,10 +22,20 @@ public class BooDatepickerServiceImpl implements BooDatepickerService {
 	}
 
 	@Override
-	public void getCheckInIndex(int room_num) throws Exception {
+	public List<String> getCheckInIndex(int room_num) throws Exception {
 		List<Integer> reservNumList = booDatepickerDao.getReservNumList(room_num);
-		System.out.println("DatepickerService/reservNumList :"+ reservNumList);
 		
+		List<String> CheckInList = new ArrayList<>();
+		for (int i = 0; i < reservNumList.size(); i++ ) {
+			int reserv_num	 = reservNumList.get(i);
+			int indexNum = booDatepickerDao.getReservIndexNum(reserv_num);
+			for (int j = 0; j < indexNum; j++) {
+				String CheckInIndex = booDatepickerDao.getCheckInIndex(j, reserv_num);
+				CheckInList.add(CheckInIndex);
+			}
+		}
+		System.out.println("체크인시 안보여야 될 날짜들 : " + CheckInList);
+		return CheckInList;
 	}
 	
 }

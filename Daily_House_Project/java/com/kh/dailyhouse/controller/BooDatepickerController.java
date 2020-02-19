@@ -1,5 +1,7 @@
 package com.kh.dailyhouse.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,8 +24,8 @@ public class BooDatepickerController {
 	}
 	
 	@RequestMapping(value="/start/{room_num}", method = RequestMethod.GET)
-	public String getCheckInDate(@PathVariable("room_num") int room_num) throws Exception {
-		booDatepickerService.getCheckInIndex(room_num);
-		return "success";
+	public List<String> getCheckInDate(@PathVariable("room_num") int room_num) throws Exception {
+		List<String> CheckInList = booDatepickerService.getCheckInIndex(room_num);
+		return CheckInList;
 	}
 }
