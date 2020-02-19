@@ -44,6 +44,14 @@ public class YOController {
 		return "/reservation/reservation_pay_page";
 	}
 	
+	// 결제하기
+	@RequestMapping(value="/reservation_insert", method=RequestMethod.POST)
+	public String payment(ReservationVo vo) throws Exception {
+		System.out.println("service:" + service);
+		service.insertReservation(vo);
+		return "/reservation/reservation_list_page";
+	}
+	
 	// 예약 및 결제내역
 	@RequestMapping(value="/reservation_list", method=RequestMethod.GET)
 	public String reservationList(HttpSession session, Model model) throws Exception {
