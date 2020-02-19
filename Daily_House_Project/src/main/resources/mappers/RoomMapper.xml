@@ -29,9 +29,20 @@
 		where room_num = #{room_num}
 	</delete>
 	
-
-
-
+	<!-- 오늘 이후로 예약이 있는지 없는지 확인 -->
+	<!-- 이것의 결과가 0이면 삭제가능 -->
+	<select id="isReserved" resultType="int">
+		select count(*) 
+		from tbl_reservation rsvd, tbl_room room 
+		where rsvd.room_num = room.room_num
+		and room.room_num = #{room_num} and rsvd.room_reserv_end_date > sysdate
+	</select>
+	
+	<!-- 방 삭제하기 -->
+	<!-- 방 삭제전 호스트 삭제 트랜잭션 하기 -->
+	<delete id="deleteHostRoom" >
+		delete from tbl_room where room_num = #{room_num} and user_email = #{user_email}
+	</delete>
 
 	<!-- 호스트가 등록한 숙소 목록 보기 -->
 	<select id="getHostRoomList" resultType="RoomDetailDto">
@@ -85,9 +96,7 @@
                      #{room_people}, #{room_bed}, #{room_bathroom}, #{room_option_code})
 	</insert>
 	
-	<!-- 숙소 수정하기 -->
-	<!-- 숙소 삭제하기 -->
-
+	
 
 	<!-- 방 목록 보기 -->
 	<!-- <select id="getRoomList" resultType="RoomVo" parameterType="SearchVo">

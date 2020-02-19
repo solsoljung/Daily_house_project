@@ -11,7 +11,6 @@ public interface CyRoomService {
 	public HostVo getHostInfo(String user_email) throws Exception;
 	
 	
-	
 	// 숙소 검색하기
 	public List<RoomDetailDto> getHostRoomList(String user_email) throws Exception;
 	
@@ -24,6 +23,12 @@ public interface CyRoomService {
 	// 숙소 정보 수정하기
 	public void updateHostRoom(RoomVo roomVo) throws Exception;
 	
+	// 숙소 삭제하기
+	public void deleteHostRoom(String user_email, int room_num) throws Exception;
+	
+	
+	// 숙소 예약이 있는지 없는지 알아내기
+	public int isReserved(int room_num) throws Exception;
 	
 	
 	// 첨부파일명 목록

@@ -22,6 +22,12 @@ public interface CyRoomDao {
 	public void updateHostRoom(RoomVo roomVo) throws Exception;
 	
 	// 숙소 삭제하기
+	public void deleteHostRoom(String user_email, int room_num) throws Exception;
+	
+	
+	// 예약이 있는지 없는지 알아내기
+	public int isReserved(int room_num) throws Exception;
+	
 	
 	// 첨부파일 추가
 	public void attach(String pic_uri, int room_num) throws Exception;

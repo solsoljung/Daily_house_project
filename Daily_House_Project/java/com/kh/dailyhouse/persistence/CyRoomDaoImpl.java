@@ -50,6 +50,22 @@ public class CyRoomDaoImpl implements CyRoomDao {
 		sqlSession.update(NAMESPACE + ".updateHostRoom", roomVo);
 	}
 
+	// 숙소 삭제하기
+	@Override
+	public void deleteHostRoom(String user_email, int room_num) throws Exception {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("user_email", user_email);
+		paramMap.put("room_num", room_num);
+		sqlSession.delete(NAMESPACE + ".deleteHostRoom", paramMap);
+	}
+
+	// 숙소 예약이 있는지 없는지 알아내기
+	@Override
+	public int isReserved(int room_num) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".isReserved", room_num);
+	}
+	
+
 	// 첨부파일 추가
 	@Override
 	public void attach(String pic_uri, int room_num) throws Exception {
@@ -76,8 +92,5 @@ public class CyRoomDaoImpl implements CyRoomDao {
 	public void deleteAttachByRoomNum(int room_num) throws Exception {
 		sqlSession.delete(NAMESPACE + ".deleteAttachByRoomNum", room_num);
 	}
-
-
-	
 
 }

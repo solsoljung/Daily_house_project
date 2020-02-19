@@ -17,5 +17,10 @@
 		insert into tbl_host (user_email, room_num)
 		values (#{user_email}, #{room_num})
 	</insert>
+	
+	<!-- 호스트 삭제하기 -->
+	<delete id="deleteHost" >
+		delete from tbl_host where room_num = #{room_num} and user_email = #{user_email}
+	</delete>
 
 </mapper>
