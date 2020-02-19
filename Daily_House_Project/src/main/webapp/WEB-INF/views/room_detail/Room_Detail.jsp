@@ -138,12 +138,18 @@ $(window).scroll(function() {
 <!-- check in,out -->
 <script>
 $(document).ready(function(){
-	//체크인
+	var room_num = ${roomDto.room_num};
+	var url = "/datepicker/start/"+room_num;
+	$.get(url, function(rDate){
+    	console.log(rDate);
+    });
+	
+// 	체크인
 	$('#startDate').datepicker({
 		format: "yyyy-mm-dd",
 	    startDate: '1d',
 	    autoclose : true,
-	    datesDisabled : ['2020-02-20','2020-02-26'],	//'2020-02-18','2020-02-20'이런 형식
+	    datesDisabled : [],	//'2020-02-18','2020-02-20'이런 형식
 	    multidateSeparator :",",
 	    templates : {
 	        leftArrow: '&laquo;',
@@ -174,9 +180,18 @@ $(document).ready(function(){
 		var newDate = arrDate.join('-');
         console.log(date);
         
+        //setEndDate값 받아오기
+        var room_num = ${roomDto.room_num};
+        var url = "/datepicker/end/"+room_num+"/"+date;
+        $.get(url, function(rDate){
+        	console.log(rDate);
+        	$("#endDate").datepicker("setEndDate", rDate);
+        });
+        //setEndDate값 받아오기 끝
+        
         $("input[name=str_start_date]").val(date);
 
-        $("#endDate").datepicker("setStartDate", newDate);
+        $("#endDate").datepicker("setStartDate", newDate); //이것 처럼 setEndDate값을 넘겨 줘야 됨
         $(this).hide();
         $('#endDate').show().datepicker("show");
 	});
@@ -186,7 +201,7 @@ $(document).ready(function(){
 		format: "yyyy-mm-dd",
 	    startDate: '1d',
 	    autoclose : true,
-	    datesDisabled : ['2020-02-22','2020-02-28'],
+	    datesDisabled : [],
 	    multidateSeparator :",",
 	    templates : {
 	        leftArrow: '&laquo;',
@@ -205,8 +220,7 @@ $(document).ready(function(){
 		console.log(checkout);
 		
 		$("input[name=str_end_date]").val(checkout);
-		$('#startDate').show()
-		$("#frmPage").submit();
+		$('#startDate').show();
 	});
 
 	//날짜 포멧 함수
