@@ -25,4 +25,9 @@ public class YOReservationListDaoImpl implements YOReservationListDao {
 		
 	}
 
+	@Override
+	public void insertReservation(ReservationVo vo) throws Exception {
+		sqlSession.insert(NAMESPACE + ".insertReservation", vo);
+	}
+
 }

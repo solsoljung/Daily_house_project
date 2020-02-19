@@ -22,4 +22,9 @@ public class YOReservationListServiceImpl implements YOReservationListService {
 		return list;
 	}
 
+	@Override
+	public void insertReservation(ReservationVo vo) throws Exception {
+		dao.insertReservation(vo);
+	}
+
 }

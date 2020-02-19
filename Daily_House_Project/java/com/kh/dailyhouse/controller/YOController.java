@@ -28,15 +28,15 @@ public class YOController {
 	@Inject
 	private YOLikeListService likeService;
 
-	
+	// 예약 페이지
 	@RequestMapping(value="/reservation", method=RequestMethod.GET)
-//	public String reservation(HttpSession session, UserVo userVo) throws Exception {
 	public String reservation(HttpSession session, Model model) throws Exception {
 		UserVo userVo = (UserVo)session.getAttribute("userVo");
 		model.addAttribute("userVo" + userVo);
 		return "/reservation/reservation_page";
 	}
 	
+	// 결제 페이지
 	@RequestMapping(value="/reservation_pay", method=RequestMethod.GET)
 	public String reservationPay(HttpSession session, Model model) throws Exception {
 		UserVo userVo = (UserVo)session.getAttribute("userVo");
@@ -44,6 +44,15 @@ public class YOController {
 		return "/reservation/reservation_pay_page";
 	}
 	
+	// 결제하기
+	@RequestMapping(value="/reservation_insert", method=RequestMethod.POST)
+	public String payment(ReservationVo vo) throws Exception {
+		System.out.println("service:" + service);
+		service.insertReservation(vo);
+		return "/reservation/reservation_list_page";
+	}
+	
+	// 예약 및 결제내역
 	@RequestMapping(value="/reservation_list", method=RequestMethod.GET)
 	public String reservationList(HttpSession session, Model model) throws Exception {
 		UserVo userVo = (UserVo)session.getAttribute("userVo");
@@ -56,6 +65,8 @@ public class YOController {
 		return "/reservation/reservation_list_page";
 	}
 	
+	
+	// 찜목록 가져오기
 	@RequestMapping(value="/like_list", method=RequestMethod.GET)
 	public String likeList(HttpSession session, Model model) throws Exception {
 		UserVo userVo = (UserVo)session.getAttribute("userVo");
@@ -69,6 +80,8 @@ public class YOController {
 		return "/like/like_list_page";
 	}
 	
+	
+	// 찜목록 삭제
 	@RequestMapping(value="/like_delete/{like_num}", method=RequestMethod.DELETE)
 	@ResponseBody
 	public String deleteLike(@PathVariable("like_num") int like_num) throws Exception {

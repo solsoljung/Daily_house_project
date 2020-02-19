@@ -33,5 +33,10 @@ public class SiUserServiceImpl implements SiUserService {
 		return siUserDao.foundPassword(user_email);
 	}
 
+	@Override
+	public void updatePassword(UserVo userVo) throws Exception {
+		siUserDao.updatePassword(userVo);
+	}
+
 
 }
