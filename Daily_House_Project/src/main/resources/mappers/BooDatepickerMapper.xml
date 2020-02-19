@@ -13,4 +13,25 @@
 		order by room_reserv_start_date)a)
 		where rnum=1
 	</select>
+	
+<!-- 	방번호에 해당하는 reserv_num들을 받는다 -->
+	<select id="getReservNumList" resultType="int">
+		select reserv_num from tbl_reservation
+		where room_num = #{room_num}
+	</select>
+	
+<!-- 	reserv_num의 일수 차이를 구한다(반복문 이용에 사용함) -->
+	<select id="getReservIndexNum" resultType="int">
+		select to_number(cast(room_reserv_end_date as date) - cast(room_reserv_start_date as date)) from tbl_reservation
+		where reserv_num = #{reserv_num};
+	</select>
+	
+<!-- 	reserv_num에 해당하는 일를 얻는다 -->
+	<select id="getCheckInIndex" resultType="String">
+		select to_char(room_reserv_start_date + #{num}, 'YYYY-MM-DD')
+		from tbl_reservation
+		where reserv_num = #{reserv_num};
+	</select>
+	
+	
 </mapper>

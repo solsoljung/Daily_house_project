@@ -138,7 +138,13 @@ $(window).scroll(function() {
 <!-- check in,out -->
 <script>
 $(document).ready(function(){
-	//체크인
+	var room_num = ${roomDto.room_num};
+	var url = "/datepicker/start/"+room_num;
+	$.get(url, function(rDate){
+    	console.log(rDate);
+    });
+	
+// 	체크인
 	$('#startDate').datepicker({
 		format: "yyyy-mm-dd",
 	    startDate: '1d',
@@ -175,12 +181,13 @@ $(document).ready(function(){
         console.log(date);
         
         //setEndDate값 받아오기
-        var room_num = ${roomDto.room_num}
+        var room_num = ${roomDto.room_num};
         var url = "/datepicker/end/"+room_num+"/"+date;
         $.get(url, function(rDate){
         	console.log(rDate);
         	$("#endDate").datepicker("setEndDate", rDate);
         });
+        //setEndDate값 받아오기 끝
         
         $("input[name=str_start_date]").val(date);
 

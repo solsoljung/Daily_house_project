@@ -16,9 +16,14 @@ public class BooDatepickerController {
 	private BooDatepickerService booDatepickerService;
 	
 	@RequestMapping(value = "/end/{room_num}/{date}", method = RequestMethod.GET)
-	public String getRoomDetail(@PathVariable("room_num") int room_num, @PathVariable("date") String date) throws Exception{
+	public String getEndDate(@PathVariable("room_num") int room_num, @PathVariable("date") String date) throws Exception{
 		String endDate = booDatepickerService.getEndDate(room_num, date);
 		return endDate;
 	}
 	
+	@RequestMapping(value="/start/{room_num}", method = RequestMethod.GET)
+	public String getCheckInDate(@PathVariable("room_num") int room_num) throws Exception {
+		booDatepickerService.getCheckInIndex(room_num);
+		return "success";
+	}
 }

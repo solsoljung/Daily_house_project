@@ -1,5 +1,7 @@
 package com.kh.dailyhouse.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -18,4 +20,11 @@ public class BooDatepickerServiceImpl implements BooDatepickerService {
 		return endDate;
 	}
 
+	@Override
+	public void getCheckInIndex(int room_num) throws Exception {
+		List<Integer> reservNumList = booDatepickerDao.getReservNumList(room_num);
+		System.out.println("DatepickerService/reservNumList :"+ reservNumList);
+		
+	}
+	
 }
