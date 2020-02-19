@@ -23,4 +23,9 @@ public class YOLikeListDaoImpl implements YOLikeListDao {
 		return list;
 	}
 
+	@Override
+	public void deleteLike(int like_num) throws Exception {
+		sqlSession.delete(NAMESPACE + ".deleteLike", like_num);	
+	}
+
 }

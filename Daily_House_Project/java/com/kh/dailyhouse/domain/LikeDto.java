@@ -3,9 +3,9 @@ package com.kh.dailyhouse.domain;
 public class LikeDto {
 	private int like_num;
 	private int room_num;
+	private String user_email;
 	private String room_title;
 	private int room_price;
-	private String user_email;
 	
 	
 	public int getLike_num() {
@@ -20,6 +20,12 @@ public class LikeDto {
 	public void setRoom_num(int room_num) {
 		this.room_num = room_num;
 	}
+	public String getUser_email() {
+		return user_email;
+	}
+	public void setUser_email(String user_email) {
+		this.user_email = user_email;
+	}
 	public String getRoom_title() {
 		return room_title;
 	}
@@ -32,17 +38,11 @@ public class LikeDto {
 	public void setRoom_price(int room_price) {
 		this.room_price = room_price;
 	}
-	public String getUser_email() {
-		return user_email;
-	}
-	public void setUser_email(String user_email) {
-		this.user_email = user_email;
-	}
 	
 	
 	@Override
 	public String toString() {
-		return "LikeDto [like_num=" + like_num + ", room_num=" + room_num + ", room_title=" + room_title
-				+ ", room_price=" + room_price + ", user_email=" + user_email + "]";
+		return "LikeDto [like_num=" + like_num + ", room_num=" + room_num + ", user_email=" + user_email
+				+ ", room_title=" + room_title + ", room_price=" + room_price + "]";
 	}
 }

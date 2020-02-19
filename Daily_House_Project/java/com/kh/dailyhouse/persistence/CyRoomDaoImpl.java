@@ -1,6 +1,8 @@
 package com.kh.dailyhouse.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -46,6 +48,33 @@ public class CyRoomDaoImpl implements CyRoomDao {
 	@Override
 	public void updateHostRoom(RoomVo roomVo) throws Exception {
 		sqlSession.update(NAMESPACE + ".updateHostRoom", roomVo);
+	}
+
+	// 첨부파일 추가
+	@Override
+	public void attach(String pic_uri, int room_num) throws Exception {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("pic_uri", pic_uri);
+		paramMap.put("room_num", room_num);
+		sqlSession.insert(NAMESPACE + ".attach", paramMap);
+	}
+
+	// 첨부파일명 목록 얻기
+	@Override
+	public List<String> getAttach(int room_num) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".getAttach", room_num);
+	}
+
+	// 첨부파일 데이터 삭제
+	@Override
+	public void deleteAttach(String pic_uri) throws Exception {
+		sqlSession.delete(NAMESPACE + ".deleteAttach", pic_uri);
+	}
+
+	// 첨부파일 데이터 삭제(by room_num)
+	@Override
+	public void deleteAttachByRoomNum(int room_num) throws Exception {
+		sqlSession.delete(NAMESPACE + ".deleteAttachByRoomNum", room_num);
 	}
 
 

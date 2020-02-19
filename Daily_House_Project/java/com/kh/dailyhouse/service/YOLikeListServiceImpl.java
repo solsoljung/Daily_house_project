@@ -21,4 +21,10 @@ public class YOLikeListServiceImpl implements YOLikeListService {
 		return list;
 	}
 
+	@Override
+	public void deleteLike(int like_num) throws Exception {
+		dao.deleteLike(like_num);	
+	}
+
+
 }

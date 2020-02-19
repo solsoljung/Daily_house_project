@@ -3,13 +3,24 @@ package com.kh.dailyhouse.domain;
 import java.sql.Timestamp;
 
 public class SearchVo {
+	//인원
+	private int room_people = 1;
+	
+	//가격
+	private int low_price;
+	private int high_price;
 
+	//날짜
 	private String str_start_date = null;
 	private String str_end_date = null;
+	
+	//방타입
+	private String arrType;
 	
 	private Timestamp room_reserv_start_date = null;
 	private Timestamp room_reserv_end_date = null;
 	
+	//페이징
 	public static final int PAGE_BLOCK = 10;
 
 	private int page = 1;
@@ -180,15 +191,48 @@ public class SearchVo {
 		this.str_end_date = str_end_date;
 	}
 
+	public int getRoom_people() {
+		return room_people;
+	}
+
+	public void setRoom_people(int room_people) {
+		this.room_people = room_people;
+	}
+
+	public int getLow_price() {
+		return low_price;
+	}
+
+	public void setLow_price(int low_price) {
+		this.low_price = low_price;
+	}
+
+	public int getHigh_price() {
+		return high_price;
+	}
+
+	public void setHigh_price(int high_price) {
+		this.high_price = high_price;
+	}
+
+	public String getArrType() {
+		return arrType;
+	}
+
+	public void setArrType(String arrType) {
+		this.arrType = arrType;
+	}
+
 	@Override
 	public String toString() {
-		return "SearchVo [str_start_date=" + str_start_date + ", str_end_date=" + str_end_date
+		return "SearchVo [room_people=" + room_people + ", low_price=" + low_price + ", high_price=" + high_price
+				+ ", str_start_date=" + str_start_date + ", str_end_date=" + str_end_date + ", arrType=" + arrType
 				+ ", room_reserv_start_date=" + room_reserv_start_date + ", room_reserv_end_date="
 				+ room_reserv_end_date + ", page=" + page + ", startRow=" + startRow + ", endRow=" + endRow
 				+ ", startPage=" + startPage + ", endPage=" + endPage + ", totalCount=" + totalCount + ", hasPrev="
 				+ hasPrev + ", hasNext=" + hasNext + ", perPage=" + perPage + ", totalPage=" + totalPage
 				+ ", searchType=" + searchType + ", keyword=" + keyword + "]";
 	}
-	
+
 	
 }
