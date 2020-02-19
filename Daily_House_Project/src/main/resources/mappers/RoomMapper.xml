@@ -38,7 +38,7 @@
 		select * from tbl_room r, tbl_room_type t 
 		where  user_email = #{user_email}
 		and r.room_type_num = t.room_type_num
-		order by r.room_num desc
+		order by r.room_status asc, r.room_num desc
 	</select>
 	
 	<!-- 숙소 1개 상세보기 -->
@@ -61,7 +61,8 @@
                     room_people = #{room_people},
                     room_bed = #{room_bed},
                     room_bathroom = #{room_bathroom},
-                    room_option_code = #{room_option_code}
+                    room_option_code = #{room_option_code},
+                    room_status = #{room_status}
                 where room_num = #{room_num}
 	</update>
 
