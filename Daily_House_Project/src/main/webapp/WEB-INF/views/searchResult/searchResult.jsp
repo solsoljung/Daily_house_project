@@ -87,10 +87,12 @@ $(document).ready(function(){
 	//룸타입
 	$('.roomtype').on('hidden.bs.dropdown', function(e){
 		e.stopPropagation();
+		console.log("널이 아니다라라라랄");
 		var arrType = [];
 		$("input:checkbox[name=typeChb]:checked").each(function(){
 			arrType.push($(this).val());
 		});
+		console.log($("input:checkbox[name=typeChb]:checked"));
 		console.log(arrType);
 		$("input[name=arrType]").val(arrType);
 		$("#frmPage").submit();
@@ -233,7 +235,7 @@ ${priceDto}
 	<input type="hidden" name="room_people" value="${searchVo.room_people}"/>
 	<input type="hidden" name="low_price" value="${searchVo.low_price}"/>
 	<input type="hidden" name="high_price" value="${searchVo.high_price}"/>
-	<input type="hidden" name="arrType"/>
+	<input type="hidden" name="arrType" value="${searchVo.arrType}"/>
 </form>
 <!-- 히든 폼 끝 -->
 
