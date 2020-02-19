@@ -34,7 +34,6 @@ public class BooDatepickerServiceImpl implements BooDatepickerService {
 				CheckInList.add(CheckInIndex);
 			}
 		}
-		System.out.println("체크인시 안보여야 될 날짜들 : " + CheckInList);
 		return CheckInList;
 	}
 	

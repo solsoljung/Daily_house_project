@@ -27,7 +27,6 @@ public class BooController {
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public String getRoomDetail(@RequestParam("room_num") int room_num, Model model, ReviewPagingDto reviewPagingDto) throws Exception{
 		//방을 선택시 room_num을 받아야됨
-		System.out.println("BooController room_num : " + room_num);
 		Map<String, Object> paramMap = booRoomDetailService.detail(room_num, reviewPagingDto);
 		RoomDto roomDto = (RoomDto)paramMap.get("dto");
 		List<RoomReviewVo> reviewList = (List<RoomReviewVo>)paramMap.get("ReviewList");
