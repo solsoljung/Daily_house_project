@@ -101,11 +101,11 @@ $(function(){
                   <label class="text-black font-weight-bold" for="picture" id="picture" style="color: #ff0000;">Profile</label>
                   <br>
                   <c:choose>
-				   	<c:when test="${empty userVo.user_pic}">
-                 	 <img src="/images/profile/user.jpg" width="150" height="150">
+				   	<c:when test="${null == userVo.user_pic}">
+                 	 <img src="/images/profile/user.jpg" height="150">
 				   	</c:when>
 				   	<c:otherwise>
-                 	 <img src="//192.168.0.34/upload/team3/2020/2/19/8dd0f02b-2e30-440a-9da9-e53fed06bd16_u.jpg" width="150" height="150">
+                 	 <img src="/si/displayFile?fileName=/${userVo.user_pic}" height="150">
 					</c:otherwise>
 				  </c:choose>
                   <br>

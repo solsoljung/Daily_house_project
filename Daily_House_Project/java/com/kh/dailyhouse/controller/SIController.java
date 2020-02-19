@@ -11,6 +11,8 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -92,9 +94,10 @@ public class SIController {
 		String dirPath = FileUploadUtil.uploadFile(uploadPath, originalFilename, file.getBytes());
 		String path = dirPath.replace("\\", "/");
 		
-		userVo.setUser_pic(originalFilename); 	// pic에 파일 이름 넣음
+		
+		userVo.setUser_pic(path); 	// pic에 파일 이름 넣음
 		siUserService.userUpdate(userVo);		// pic에 파일 이름이 들어간채로 데이터 베이스로 감
-//		userVo.setUser_pic(originalFilename); 	// 세션에 넣을 이름 작성하셈
+		System.out.println("userVo입니다!!"+userVo);
 		session.setAttribute("userVo", userVo);
 		return "/user/user";
 	}
@@ -127,6 +130,17 @@ public class SIController {
 		rttr.addFlashAttribute("msg", "updatePassword");
 		session.invalidate();
 		return "redirect:/si/loginHost";
+	}
+	
+	@RequestMapping(value = "/displayFile", method =  RequestMethod.GET)
+	@ResponseBody
+	public byte[] displayFile(@RequestParam("fileName") String fileName) throws Exception {
+		String realPath = uploadPath + File.separator + fileName.replace("/", "\\");
+		System.out.println("realPath:"+ realPath);
+		FileInputStream is = new FileInputStream(realPath);
+		byte[] bytes = IOUtils.toByteArray(is);
+		is.close();
+		return bytes;
 	}
 	
 }
