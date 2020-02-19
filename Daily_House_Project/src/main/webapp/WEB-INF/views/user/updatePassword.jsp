@@ -9,24 +9,29 @@
 <%@ include file = "../../views/islagrande/islagrande_link.jsp" %>					
 					
 <%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->					
-<!-- 데이터피커X -->					
-
+<!-- 데이터피커X -->
 <script>
-$(document).ready(function() {
-	var msg = "${msg}";
-	
-	if (msg == "fail") {
-		alert("회원 정보가 없습니다.");
-	}
-	if (msg == "notFoundEmail") {
-		alert("회원 정보가 없습니다.");
-	}
-	if (msg == "updatePassword") {
-		alert("비밀번호가 변경되었습니다 다시 로그인해주세요.");
-	}
+$(function(){
+	$("#btnSubmit").click(function(e) {
+		// 얻어온 값
+		var pw1 = $("#pw").val().trim();
+		var pw2 = $("#pw2").val().trim();
+		// 테스트 내용
+		var pattern1 = /[0-9]/;
+		var pattern2 = /[a-zA-Z]/;
+		var pattern3 = /[~!@#$%^&*()_+|<>?:{}]/;
+
+		if (!pattern1.test(pw1) || !pattern2.test(pw1) || !pattern3.test(pw1) || pw1.length < 6) {
+			alert("비밀번호는 6자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다.");
+			return false;
+		}
+		if (pw1 != pw2) {
+			alert("비밀번호 불일치합니다.");
+			return false;
+		}
+	});
 });
 </script>
-
 <!-- section -->
 <br>
 <br>
@@ -34,36 +39,27 @@ $(document).ready(function() {
       <div class="container">
         <div class="row">
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
-            <form action="/si/login_run" method="post" role="form" class="bg-white p-md-5 p-4 mb-5 border">
-                <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold">로그인</label>
-                </div>
-              <div class="row">
-                <div class="col-md-12 form-group">
-                  <label class="text-black font-weight-bold" for="email">Email</label>
-                  <input type="email" id="email" name="user_email" class="form-control" placeholder="Email" required="required">
-                </div>
-              </div>
-              <div class="row">
+            <form action="/si/updatePassword" method="post" role="form" class="bg-white p-md-5 p-4 mb-5 border">
+            	<input type="hidden" name="user_email" value="${userVo.user_email}">
+             <div class="col-md-6 form-group">
+               <label class="text-black font-weight-bold">비밀번호 변경</label>
+             </div>
+             <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="password">Password</label>
-                  <input type="password" id="pw" name="user_pw" class="form-control" placeholder="Password" required="required">
+                  <input type="password" id="pw" name="user_pw" placeholder="6자 이상 영문,숫자,특수문자를 조합해서 입력해주세요." class="form-control" required maxlength="20">
+                  <br>
+                  <label class="text-black font-weight-bold" for="password">Password Check</label>
+                  <input type="password" id="pw2" class="form-control" placeholder="Password Check" required maxlength="20">
+	              <br>
                 </div>
               </div>
-              
-              <br>
-              <div class="col-md-8 text-left" data-aos="fade-up" data-aos-delay="200">
-            	<div class="row">
-		            <button type="submit" class="btn btn-primary text-white py-3 px-5">로그인</button>
-	         	</div>
-	          </div>
-	          <br>
-              <div class="col-md-8 text-left" data-aos="fade-up" data-aos-delay="200">
-            	<div class="row">
-		            <a href="/si/registerHost"><button type="button" class="btn btn-primary text-white py-2 px-4">회원가입</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
-		            <a href="/si/findPassword"><button type="button" class="btn btn-primary text-white py-2 px-4">비밀번호 찾기</button></a>
-	         	</div>
-	          </div>
+	          <div class="col-md-12 text-right" data-aos="fade-up" data-aos-delay="200">
+              	<div class="row">
+	            	<input type="submit" id="btnSubmit" class="btn btn-primary text-white py-2 px-4" value="비밀번호 변경">&nbsp;&nbsp;&nbsp;&nbsp;
+			        <a href="/si/userInformation"><button type="button" class="btn btn-primary text-white py-2 px-5" id="btnBack">취소</button></a>
+		        </div>
+		      </div>
             </form>
           </div>
           
