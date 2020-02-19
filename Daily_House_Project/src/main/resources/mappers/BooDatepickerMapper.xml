@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kh.mappers.BooDatepickerMapper">
+	
+	<select id="getEndDate" resultType="String">
+		select to_char(room_reserv_start_date, 'YYYY-MM-DD') from
+		(select rownum rnum, a.*from
+		(select room_reserv_start_date from tbl_reservation
+		where room_num = #{room_num} and room_reserv_start_date > #{date}
+		order by room_reserv_start_date)a)
+		where rnum=1
+	</select>
+</mapper>
