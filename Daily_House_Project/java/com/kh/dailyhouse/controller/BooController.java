@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.kh.dailyhouse.controller;
 
 import java.util.List;
@@ -124,6 +123,5 @@ public class BooController {
 		booRoomDetailService.insertReview(roomReviewVo);
 		int num = roomReviewVo.getRoom_num();
 		return "redirect:/boo/detail?room_num="+num;
->>>>>>> branch 'master' of https://github.com/solsoljung/Daily_house_project.git
 	}
 }
