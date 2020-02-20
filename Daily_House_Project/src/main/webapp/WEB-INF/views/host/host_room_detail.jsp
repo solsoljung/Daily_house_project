@@ -179,11 +179,11 @@ $(function(){
 		var room_num = "${roomDetailDto.room_num}";
 		var url = "/cy/isReserved/" + room_num;
 		$.ajax({
-			"type" : "post",
+			"type" : "get",
 			"url" : url,
 			"headers" : {
 				"Content-Type" : "application/json",
-				"X-HTTP-Method-Override" : "post"
+				"X-HTTP-Method-Override" : "get"
 			},
 			"success" : function(rData) {
 				console.log("rData: " + rData);
