@@ -21,6 +21,10 @@ $(function(){
 	var user_name = "${userVo.user_name}";
 	var user_phone = "${userVo.user_phone}";
 	
+	$("#fileButton").click(function() {
+			$("#btnUserPictureChange").trigger("click");
+	});
+	
 	$("#btnUpdate").click(function(e) {
 		// 타이틀에 " - 수정" 추가
 		$("#name").text(nameText + " - 수정");
@@ -29,24 +33,13 @@ $(function(){
 		$("#user_name").prop('readonly', false);
 		$("#user_phone").prop('readonly', false);
 		// 수정 버튼 숨기고 저장,취소,사진수정 버튼 표시
-		$("#btnUserPictureChange").css("display", "block");
+		$("#fileButton").css("display", "block");
 		$("#btnUpdate").css("display", "none");
 		$("#btnSubmit").css("display", "block");
 		$("#btnBack").css("display", "block");
 	});
 	
 	$("#btnSubmit").click(function(e) {
-// 		// 타이틀에 "-수정" 제거
-// 		$("#name").text(nameText);
-// 		$("#phone").text(phoneText);
-// 		// 내용 수정 불가하게 전환
-// 		$("#user_name").prop('readonly', true);
-// 		$("#user_phone").prop('readonly', true);
-// 		// 수정 버튼 보이고 저장,취소,사진수정 버튼 숨김
-// 		$("#btnUserPictureChange").css("display", "none");
-// 		$("#btnUpdate").css("display", "block");
-// 		$("#btnSubmit").css("display", "none");
-// 		$("#btnBack").css("display", "none");
 		console.log("폼전송");
 		$("#joinForm").submit();
 	});
@@ -59,7 +52,7 @@ $(function(){
 		$("#user_name").prop('readonly', true).val(user_name);
 		$("#user_phone").prop('readonly', true).val(user_phone);
 		// 수정 버튼 보이고 저장,취소,사진수정 버튼 숨김
-		$("#btnUserPictureChange").css("display", "none");
+		$("#fileButton").css("display", "none");
 		$("#btnUpdate").css("display", "block");
 		$("#btnSubmit").css("display", "none");
 		$("#btnBack").css("display", "none");
@@ -111,6 +104,7 @@ $(function(){
                   <br>
                   <br>
                   <input type="file" id="btnUserPictureChange" name="file" class="btn btn-primary text-white" style="display: none;">
+                  <button type="button" class="btn btn-primary text-white py-2 px-5" id="fileButton" style="display: none;" >프로필 사진수정</button>
                 </div>
               </div>
               <div class="row">
@@ -123,22 +117,17 @@ $(function(){
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="phone" id="phone">Phone</label>
                   <input type="text" value="${userVo.user_phone}" id="user_phone" name="user_phone" placeholder="-없이 숫자만 입력해주세요." class="form-control" required readonly >
+                  <br>
                 </div>
               </div>
 	          <div class="col-md-12 text-right" data-aos="fade-up" data-aos-delay="200">
               	<div class="row">
 		        	<button type="button" class="btn btn-primary text-white py-2 px-5" id="btnUpdate">수정하기</button>
 			        <button type="submit" class="btn btn-primary text-white py-2 px-5" id="btnSubmit" style="display: none;">저장하기</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			        <button type="button" class="btn btn-primary text-white py-2 px-5" id="btnBack" style="display: none;">취소</button>
+			        <button type="button" class="btn btn-primary text-white py-2 px-5" id="btnBack" style="display: none;">취소</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		            <a href="/si/updatePasswordHost"><button type="button" class="btn btn-primary text-white py-2 px-5" id="btnUpdate">비밀번호 변경</button></a>
 		        </div>
 		      </div>
-                <hr>
-              <div class="row">
-	              <div class="col-md-1 text-right" data-aos="fade-up" data-aos-delay="200">
-	              	<br>
-		            <a href="/si/updatePasswordHost"><button type="button" class="btn btn-primary text-white py-3 px-5" id="btnUpdate">비밀번호 변경</button></a>
-		          </div>
-	          </div>
             </form>
           </div>
         </div>
