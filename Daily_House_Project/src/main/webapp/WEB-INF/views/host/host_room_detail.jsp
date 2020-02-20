@@ -11,6 +11,8 @@
 <%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->					
 <!-- 데이터피커X -->					
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <style>
 	.lblTitle1{ font-size: 30px; font-weight: bold;}
 	.lblTitle2{ font-size: 20px;}
@@ -179,11 +181,11 @@ $(function(){
 		var room_num = "${roomDetailDto.room_num}";
 		var url = "/cy/isReserved/" + room_num;
 		$.ajax({
-			"type" : "post",
+			"type" : "get",
 			"url" : url,
 			"headers" : {
 				"Content-Type" : "application/json",
-				"X-HTTP-Method-Override" : "post"
+				"X-HTTP-Method-Override" : "get"
 			},
 			"success" : function(rData) {
 				console.log("rData: " + rData);
@@ -569,5 +571,10 @@ ${roomDetailDto.room_explain}</textarea><br><br>
 	</div>
 </div><br><br><br>
 <!-- host_register_page1 END -->
+
+<%-- <%@ include file = "../../views/casahotel/casahotel_footer.jsp" %>			 --%>
+			
+<%@ include file = "../../views/casahotel/casahotel_script2.jsp" %>			
+<%@ include file = "../../views/islagrande/islagrande_script2.jsp" %>	
 
 <%@ include file = "../../views/end.jsp"%> <!-- </body> -->

@@ -3,63 +3,65 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%@ include file = "../../views/title.jsp"%> <!-- <head> -->
-
-<%@ include file = "../../views/casahotel/casahotel_link.jsp" %>
-<%@ include file = "../../views/islagrande/islagrande_link.jsp" %>
-
-<%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
+<%@ include file = "../../views/title2.jsp"%> <!-- <head> -->					
+					
+<%@ include file = "../../views/casahotel/casahotel_link2.jsp" %>					
+<%@ include file = "../../views/islagrande/islagrande_link.jsp" %>					
+					
+<%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->					
 
 <!-- reservation page section -->
 <script>
 $(function() {
 	
-	// 데이트 피커
-	//달력
-	// 체크인 start
-	$('#datePickerStart').datepicker({
-		format: "yyyy-mm-dd",
-	    startDate: '1d',
-	    autoclose : true,
-	    datesDisabled : [],	//'2020-02-18','2020-02-20'이런 형식
-	    multidateSeparator :",",
-	    templates : {
-	        leftArrow: '&laquo;',
-	        rightArrow: '&raquo;'
-	    },
-	    showWeekDays : true ,
-	    title: "체크인 날짜 선택",
-	    todayHighlight : true ,
-	    toggleActive : true,
-	    weekStart : 0 ,
-	    language : "ko"
-	});
-	// 체크인 end
+	var v = 0;
+	
+// 	// 데이트 피커
+// 	//달력
+// 	// 체크인 start
+// 	$('#datePickerStart').datepicker({
+// 		format: "yyyy-mm-dd",
+// 	    startDate: '1d',
+// 	    autoclose : true,
+// 	    datesDisabled : [],	//'2020-02-18','2020-02-20'이런 형식
+// 	    multidateSeparator :",",
+// 	    templates : {
+// 	        leftArrow: '&laquo;',
+// 	        rightArrow: '&raquo;'
+// 	    },
+// 	    showWeekDays : true ,
+// 	    title: "체크인 날짜 선택",
+// 	    todayHighlight : true ,
+// 	    toggleActive : true,
+// 	    weekStart : 0 ,
+// 	    language : "ko"
+// 	});
+// 	// 체크인 end
 
-	// 체크아웃 start
-	$('#datePickerEnd').datepicker({
-		format: "yyyy-mm-dd",
-		startDate: '1d',
-		autoclose : true,
-		datesDisabled : [],
-		multidateSeparator :",",
-		templates : {
-		    leftArrow: '&laquo;',
-		    rightArrow: '&raquo;'
-		 },
-		showWeekDays : true ,
-		title: "체크아웃 날짜 선택",
-		todayHighlight : true ,
-		toggleActive : true,
-		weekStart : 0 ,
-		language : "ko"
-	});
-	// 체크아웃 end
+// 	// 체크아웃 start
+// 	$('#datePickerEnd').datepicker({
+// 		format: "yyyy-mm-dd",
+// 		startDate: '1d',
+// 		autoclose : true,
+// 		datesDisabled : [],
+// 		multidateSeparator :",",
+// 		templates : {
+// 		    leftArrow: '&laquo;',
+// 		    rightArrow: '&raquo;'
+// 		 },
+// 		showWeekDays : true ,
+// 		title: "체크아웃 날짜 선택",
+// 		todayHighlight : true ,
+// 		toggleActive : true,
+// 		weekStart : 0 ,
+// 		language : "ko"
+// 	});
+// 	// 체크아웃 end
 	
 	// 날짜 사이 세기
-	$("#btnTest").click(function() {
-		var date1_val = $("#datePickerStart").val();
-		var date2_val = $("#datePickerEnd").val();
+	$("#reservationBtn").click(function() {
+		var date1_val = $("#dateCheckIn").val();
+		var date2_val = $("#dateCheckOut").val();
 		
 		var arrDate1 = date1_val.split("-");
 		var arrDate2 = date2_val.split("-");
@@ -74,7 +76,7 @@ $(function() {
 		var date2_month = arrDate2[1];
 		var date2_date = arrDate2[2];
 		
-		var v = 0;
+		
 		
 		if (date1_month == date2_month && date1_date < date2_date) {
 			v = parseInt(date2_date) - parseInt(date1_date);
@@ -106,25 +108,19 @@ $(function() {
 				}
 			}
 		}
+		// 
+// 		v = 3;
+		
+		console.log("v:" + v);
+		location.href = "/yo/reservation_pay?v=" + v;
  	});
-	
-	//날짜 포멧 함수
-	function formatDate(date) { 
-		var d = new Date(date),
-	 	month = '' + (d.getMonth() + 1),
-		day = '' + d.getDate(), 
-		year = d.getFullYear(); 
 
-		if (month.length < 2) month = '0' + month; 
-		if (day.length < 2) day = '0' + day; 
-
-		return [year, month, day].join('-'); 
-	}
 	
 	// 결제 페이지로 이동
-	$("#reservationBtn").click(function() {
-		location.href = "/yo/reservation_pay";
-	});
+// 	$("#reservationBtn").click(function() {
+// 		console.log("v:" + v);
+// 		location.href = "/yo/reservation_pay?v=" + v;
+// 	});
 
 	
 	// 인원수 빼고 더하기
@@ -230,15 +226,12 @@ ${userVo}
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="checkin_date">입실날짜</label>
-                  <input type="text" id="datePickerStart" class="form-control">
+                  <input type="text" id="dateCheckIn" class="form-control">
                 </div>
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="checkout_date">퇴실날짜</label>
-                  <input type="text" id="datePickerEnd" class="form-control">
+                  <input type="text" id="dateCheckOut" class="form-control">
                 </div>
-              </div>
-              <div>
-              	<button type="button" id="btnTest">클릭</button>
               </div>
 
               <div class="row">
@@ -300,9 +293,9 @@ ${userVo}
 </section>
 <!-- end section -->
 
-<%@ include file = "../../views/casahotel/casahotel_footer.jsp" %>
-
-<%@ include file = "../../views/casahotel/casahotel_script.jsp" %>
-<%@ include file = "../../views/islagrande/islagrande_script.jsp" %>
-
-<%@ include file = "../../views/end.jsp"%> <!-- </body> -->
+<%@ include file = "../../views/casahotel/casahotel_footer.jsp" %>				
+				
+<%@ include file = "../../views/casahotel/casahotel_script2.jsp" %>				
+<%@ include file = "../../views/islagrande/islagrande_script2.jsp" %>				
+				
+<%@ include file = "../../views/end.jsp"%> <!-- </body> -->				

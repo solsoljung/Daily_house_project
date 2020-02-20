@@ -1,6 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ include file = "../../views/title2.jsp"%> 
+<script>
+$(function() {
+	$("#host_room_list").hide();
+	
+	// 호스트인지 아닌지 검사해서 숙소관리 띄우기
+	var user_email = "${userVo.user_email}"
+
+	var url = "/cy/isHost?user_email=" + user_email;
+	$.get(url, function(rData) {
+		if(rData > 0){
+			$("#host_room_list").show();
+		}
+	});
+});
+</script>
+
  </head>
   <body>
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -24,7 +41,6 @@
 	        	<li class="nav-item"><a href="blog.html" class="nav-link">About</a></li>
 	        	<li class="nav-item"><a href="/yo/reservation" class="nav-link">예약하기</a></li>
 	        	<li class="nav-item"><a href="/cy/registerHost1" class="nav-link">호스팅하기</a></li>
-	        	<li class="nav-item"><a href="/cy/HostRoomList" class="nav-link">숙소관리</a></li>
 				  <c:choose>
 				   	<c:when test="${empty userVo}">
 					    <li class="nav-item"><a href="/si/loginHost" class="nav-link">로그인</a></li>
@@ -43,7 +59,8 @@
 									</c:otherwise>
 								 </c:choose>
 						   		</a></li>
-						   		<li class="nav-item"><a href="/cy/HostRoomList">숙소관리</a></li>
+						   		<li class="nav-item" id="host_room_list"><a href="/cy/HostRoomList">숙소관리</a></li>
+						   		<li class="nav-item" id="host_room_list"><a href="/yo/reservation_list">예약내역</a></li>
 						   		<li class="nav-item"><a href="/si/logout">로그아웃</a></li>
 				   		</div>
 				   		</div>

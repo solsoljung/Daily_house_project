@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.dailyhouse.domain.ReviewPagingDto;
 import com.kh.dailyhouse.domain.RoomDto;
+import com.kh.dailyhouse.domain.RoomReviewDto;
 import com.kh.dailyhouse.domain.RoomReviewVo;
 import com.kh.dailyhouse.persistence.BooRoomDetailDao;
 
@@ -29,12 +30,12 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 		reviewPagingDto.setTotalCount(totalCount);
 		
 		//후기 리스트 받아오기
-		List<RoomReviewVo> reviewList = booRoomDetailDao.getReviewinfo(room_num, reviewPagingDto);
+		List<RoomReviewDto> reviewList = booRoomDetailDao.getReviewinfo(room_num, reviewPagingDto);
 		
 		if (reviewList.size() != 0 ) {
 			//후기 리스트의 total_score를 기반으로 방의 점수 계산
 			int room_score_sum = 0;
-			for (RoomReviewVo vo : reviewList) {
+			for (RoomReviewDto vo : reviewList) {
 				room_score_sum += vo.getTotal_score();
 			}
 			int room_score = room_score_sum/reviewList.size();

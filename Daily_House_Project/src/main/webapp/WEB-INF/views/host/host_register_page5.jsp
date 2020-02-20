@@ -18,7 +18,7 @@
 	
 	#fileDrop {
 	width: 100%;
-	height: 400px;
+	height: 300px;
 	border: 1px dashed #fb929e;
 	background-color: #F2F2F2;
 	margin: auto;
@@ -50,14 +50,10 @@ $(function(){
 		formData.append("file", file); // <input name="file"/>
 		
 		var url = "/upload/uploadAjax"; // UploadController.java
-		v++;
-		if(v > 5){
-			alert("사진은 5장까지만 올릴 수 있습니다.");
-			return;
-		}
 		// <form enctype="multipart/form-data"
 		// -> enctyp의 기본값: application/x-www-form-urlencoded
 		// "processData":false, "contentType":false
+		
 		$.ajax({
 			"type" : "post",
 			"url" : url,
@@ -65,6 +61,8 @@ $(function(){
 			"contentType" : false,
 			"data" : formData,
 			"success" : function(fullName) {
+				v++;
+				console.log("v+: " + v);
 				console.log(fullName); 
 				// 파일명 얻기
 				var underScoreIndex = fullName.indexOf("_");
@@ -82,13 +80,14 @@ $(function(){
 					html += 
 	"<img class='img-thumbnail' src='/resources/images/file_image.png'/><br>";
 				}
-				html += "<span>" + fileName + "</span>";
-				html += "<a href='"+fullName+"' class='attach-del'><span class='right'>x</span></a>";
+// 				html += "<span>" + fileName + "</span>";
+				html += "<a href='"+fullName+"' class='attach-del' ><span class='right' float='right'>x</span></a>";
 				html += "</div><br>";
 				$("#uploadedList").append(html);
 			}
 		}); // $.ajax()
 	}); // $("#fileDrop").on("drop",
+			
 			
 	// 첨부 파일 삭제 링크
 	$("#uploadedList").on("click", ".attach-del", function(e) {
@@ -101,6 +100,8 @@ $(function(){
 		$.get(url, sendData, function(rData) {
 			console.log(rData);
 			if (rData == "success") {
+				v--;
+				console.log("v-: " + v);
 				that.parent().remove();
 			}
 		});
@@ -109,6 +110,11 @@ $(function(){
 	// registerHost으로 이동
 	$("#btnNext").click(function(e){
 		e.preventDefault();
+		
+		if(v < 1){
+			alert("한 장 이상의 사진을 등록해주세요!");
+			return;
+		}
 		
 		var upDiv = $("#uploadedList > div");
 		var pics = [];
@@ -144,7 +150,7 @@ $(function(){
 			<div class="progress">
 				<div class="progress-bar" style="width: 100%"></div>
 			</div><br>
-			<label>5단계: 숙소의 사진을 등록해주세요.</label><br><br><br>
+			<label>5단계: 숙소 사진을 한 장 이상 등록해주세요.</label><br><br><br>
 			
 			<form role="form" method="post" id="registerForm" >
 <%-- 			roomVo: ${roomVo} --%>
@@ -195,5 +201,8 @@ $(function(){
 	</div>
 </div><br><br><br>
 <!-- host_register_page1 END -->
+
+<%@ include file = "../../views/casahotel/casahotel_script2.jsp" %>			
+<%@ include file = "../../views/islagrande/islagrande_script2.jsp" %>	
 
 <%@ include file = "../../views/end.jsp"%> <!-- </body> -->

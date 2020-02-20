@@ -30,4 +30,9 @@ public class YOReservationListDaoImpl implements YOReservationListDao {
 		sqlSession.insert(NAMESPACE + ".insertReservation", vo);
 	}
 
+	@Override
+	public void getPrice() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 }

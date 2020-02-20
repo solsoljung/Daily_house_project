@@ -9,7 +9,8 @@
 <%@ include file = "../../views/islagrande/islagrande_link.jsp" %>					
 					
 <%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->					
-<!-- 데이터피커X -->	
+<!-- 데이터피커X -->					
+
 
 <style>
 	.lblTitle1{ font-size: 25px; font-weight: bold;}
@@ -35,7 +36,6 @@ $(function(){
 	
 	// 현재 클릭된 메뉴를 활성화
 	$(".nav-item:eq(0)").attr("class", "nav-item");
-	$(".nav-item:eq(6)").attr("class", "nav-item active");
 
 	$("#btnAddRoom").click(function(){
 		location.href = "/cy/registerHost1";
@@ -109,5 +109,8 @@ $(function(){
 	</div>
 </div><br><br><br>
 <!-- host_register_page1 END -->
+
+<%@ include file = "../../views/casahotel/casahotel_script2.jsp" %>			
+<%@ include file = "../../views/islagrande/islagrande_script2.jsp" %>	
 
 <%@ include file = "../../views/end.jsp"%> <!-- </body> -->
