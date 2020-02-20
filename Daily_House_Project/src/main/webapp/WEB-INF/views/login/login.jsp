@@ -28,7 +28,7 @@ $(document).ready(function() {
 		alert("호스트만 이용가능합니다.\n호스트가 되어보세요!");
 	}
 	if (msg == "notLogin") {
-		alert("회원가입 후 이용바랍니다.");
+		alert("로그인 후 이용 가능합니다. 로그인하시겠습니까?");
 	}
 });
 </script>

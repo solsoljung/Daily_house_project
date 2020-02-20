@@ -16,6 +16,7 @@ public class SearchVo {
 
 	//방타입
 	private String joinType = "R1|R2|R3";
+	private String joinTypeName;
 	
 	//인원
 	private int room_people = 1;
@@ -266,16 +267,24 @@ public class SearchVo {
 		this.arrOption = arrOption;
 	}
 
+	public String getJoinTypeName() {
+		return joinTypeName;
+	}
+
+	public void setJoinTypeName(String joinTypeName) {
+		this.joinTypeName = joinTypeName;
+	}
+
 	@Override
 	public String toString() {
 		return "SearchVo [room_bathroom=" + room_bathroom + ", room_bed=" + room_bed + ", listOption=" + listOption
-				+ ", arrOption=" + arrOption + ", joinType=" + joinType + ", room_people=" + room_people
-				+ ", low_price=" + low_price + ", high_price=" + high_price + ", str_start_date=" + str_start_date
-				+ ", str_end_date=" + str_end_date + ", room_reserv_start_date=" + room_reserv_start_date
-				+ ", room_reserv_end_date=" + room_reserv_end_date + ", page=" + page + ", startRow=" + startRow
-				+ ", endRow=" + endRow + ", startPage=" + startPage + ", endPage=" + endPage + ", totalCount="
-				+ totalCount + ", hasPrev=" + hasPrev + ", hasNext=" + hasNext + ", perPage=" + perPage + ", totalPage="
-				+ totalPage + ", searchType=" + searchType + ", keyword=" + keyword + "]";
+				+ ", arrOption=" + arrOption + ", joinType=" + joinType + ", joinTypeName=" + joinTypeName
+				+ ", room_people=" + room_people + ", low_price=" + low_price + ", high_price=" + high_price
+				+ ", str_start_date=" + str_start_date + ", str_end_date=" + str_end_date + ", room_reserv_start_date="
+				+ room_reserv_start_date + ", room_reserv_end_date=" + room_reserv_end_date + ", page=" + page
+				+ ", startRow=" + startRow + ", endRow=" + endRow + ", startPage=" + startPage + ", endPage=" + endPage
+				+ ", totalCount=" + totalCount + ", hasPrev=" + hasPrev + ", hasNext=" + hasNext + ", perPage="
+				+ perPage + ", totalPage=" + totalPage + ", searchType=" + searchType + ", keyword=" + keyword + "]";
 	}
 
 }

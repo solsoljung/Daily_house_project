@@ -13,7 +13,9 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
 <script>
+
 $(function(){
 	var nameText = $("#name").text();
 	var phoneText = $("#phone").text();
@@ -22,9 +24,17 @@ $(function(){
 	var user_phone = "${userVo.user_phone}";
 	
 	$("#fileButton").click(function() {
-			$("#btnUserPictureChange").trigger("click");
+			$("#input_img").trigger("click");
 	});
 	
+	var sel_file;
+	// 미리보기!
+	$("#input_img").on("change", handleImgFileSelect);
+	
+	
+	
+	
+	// 수정 버튼
 	$("#btnUpdate").click(function(e) {
 		// 타이틀에 " - 수정" 추가
 		$("#name").text(nameText + " - 수정");
@@ -38,12 +48,12 @@ $(function(){
 		$("#btnSubmit").css("display", "block");
 		$("#btnBack").css("display", "block");
 	});
-	
+	//저장 버튼
 	$("#btnSubmit").click(function(e) {
 		console.log("폼전송");
 		$("#joinForm").submit();
 	});
-	
+	// 취소버튼
 	$("#btnBack").click(function(e) {
 		// 타이틀에 "-수정" 제거
 		$("#name").text(nameText);
@@ -57,71 +67,42 @@ $(function(){
 		$("#btnSubmit").css("display", "none");
 		$("#btnBack").css("display", "none");
 	});
-	$("#fileDrop").on("drop", function(e) {
-		e.preventDefault(); // 브라우저로 파일 열기 안하기
-		file = e.originalEvent.dataTransfer.files[0];
-		console.log(file);
-		
-		var formData = new FormData(); // <form>
-		formData.append("file", file); // <input name="file"/>
-		
-		var url = "/upload/uploadAjax"; // UploadController.java
-		// <form enctype="multipart/form-data"
-		// -> enctyp의 기본값: application/x-www-form-urlencoded
-		// "processData":false, "contentType":false
-		$.ajax({
-			"type" : "post",
-			"url" : url,
-			"processData" : false,
-			"contentType" : false,
-			"data" : formData,
-			"success" : function(fullName) {
-				v++;
-				console.log("v+: " + v);
-				console.log(fullName); 
-				// 파일명 얻기
-				var underScoreIndex = fullName.indexOf("_");
-				var fileName = fullName.substring(underScoreIndex + 1); // Penguins.jpg
-				// 썸네일 이미지의 이름 얻기
-				var thumbnailName = getThumbnailName(fullName); // myscript.js
-				console.log("thumbnailName:	" + thumbnailName);
-				var isImage = checkImage(thumbnailName);
-				console.log("isImage:" + isImage);
-				var html = "<div data-filename='"+fullName+"' style='display: inline;'>";
-				if (isImage == true) {
-					html +=
-	"<img class='img-thumbnail' src='/upload/displayFile?fileName=" + thumbnailName + "'/><br>";
-				} else {
-					html += 
-	"<img class='img-thumbnail' src='/resources/images/file_image.png'/><br>";
-				}
-	//				html += "<span>" + fileName + "</span>";
-				html += "<a href='"+fullName+"' class='attach-del' ><span class='right' float='right'>x</span></a>";
-				html += "</div><br>";
-				$("#uploadedList").append(html);
+	
+	// 첨부 파일 삭제 링크
+	$("#uploadedList").on("click", ".attach-del", function(e) {
+		e.preventDefault();
+		var that = $(this);
+		var fullName = that.attr("href");
+		console.log("fullName:" + fullName);
+		var url = "/upload/deleteFile";
+		var sendData = {"fileName" : fullName};
+		$.get(url, sendData, function(rData) {
+			console.log(rData);
+			if (rData == "success") {
+				v--;
+				console.log("v-: " + v);
+				that.parent().remove();
 			}
-		}); // $.ajax()
-	}); // $("#fileDrop").on("drop",
-		
-		
-// 첨부 파일 삭제 링크
-$("#uploadedList").on("click", ".attach-del", function(e) {
-	e.preventDefault();
-	var that = $(this);
-	var fullName = that.attr("href");
-	console.log("fullName:" + fullName);
-	var url = "/upload/deleteFile";
-	var sendData = {"fileName" : fullName};
-	$.get(url, sendData, function(rData) {
-		console.log(rData);
-		if (rData == "success") {
-			v--;
-			console.log("v-: " + v);
-			that.parent().remove();
-		}
+		});
 	});
 });
-});
+// 미리보기
+function handleImgFileSelect(e) {
+	var files = e.target.files;
+	var filesArr = Array.prototype.slice.call(files);
+	filesArr.forEach(function(f){
+		if (!f.type.match("image.*")){
+			alert("학장자는 이미지 확장자만 가능합니다.");
+			return;
+		}
+		sel_file = f;
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			$("#img").attr("src", e.target.result);
+		}
+		reader.readAsDataURL(f);
+	});
+}
 </script>
 <br>
 <br>
@@ -156,18 +137,18 @@ $("#uploadedList").on("click", ".attach-del", function(e) {
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="picture" id="picture" style="color: #ff0000;">Profile</label>
-                  <br>
                   <c:choose>
 				   	<c:when test="${null == userVo.user_pic}">
-                 	 <img src="/images/profile/user.jpg" height="150">
+                 	 <img src="/images/profile/user.jpg" height="180">
 				   	</c:when>
 				   	<c:otherwise>
-                 	 <img src="/si/displayFile?fileName=/${userVo.user_pic}" height="150">
+					 <div class="img_wrap">
+		              	<img src="/si/displayFile?fileName=/${userVo.user_pic}" id="img" height="180"/>
+		             </div>
 					</c:otherwise>
 				  </c:choose>
                   <br>
-                  <br>
-                  <input type="file" id="btnUserPictureChange" name="file" class="btn btn-primary text-white" style="display: none;">
+                  <input type="file" id="input_img" name="file" class="btn btn-primary text-white" style="display: none;">
                   <button type="button" class="btn btn-primary text-white py-2 px-5" id="fileButton" style="display: none;" >프로필 사진수정</button>
                 </div>
               </div>
