@@ -66,8 +66,12 @@ $(document).ready(function(){
 	
 	//인원
 	$('.people').on('hidden.bs.dropdown', function(){
-		
-		$("#frmPage").submit();
+		var num = $("#numBox").text();
+		$("input[name=room_people]").val(num);
+		console.log(num);
+		console.log($(this).next().eq(0).text());
+		//여기하는중
+		//$("#frmPage").submit();
   	});
 	
 	//가격
@@ -92,9 +96,28 @@ $(document).ready(function(){
 		$("input:checkbox[name=typeChb]:checked").each(function(){
 			arrType.push($(this).val());
 		});
-		console.log($("input:checkbox[name=typeChb]:checked"));
-		console.log(arrType);
-		$("input[name=arrType]").val(arrType);
+		var joinType = arrType.join("|");
+		if(joinType == ""){
+			joinType = "R1|R2|R3";
+		}
+		console.log(joinType);
+		$("input[name=joinType]").val(joinType);
+		$("#frmPage").submit();
+  	});
+	
+	//룸옵션
+	$('.roomOption').on('hidden.bs.dropdown', function(e){
+		e.stopPropagation();
+		var room_bed = $("#room_bed").text();
+		$("input[name=room_bed]").val(room_bed);
+		var room_bathroom = $("#room_bathroom").text();
+		$("input[name=room_bathroom]").val(room_bathroom);
+		var arrOption = [];
+		$("input:checkbox[name=optionChb]:checked").each(function(){
+			arrOption.push($(this).val());
+		});
+		$("input[name=arrOption]").val(arrOption);
+		console.log(arrOption);
 		$("#frmPage").submit();
   	});
 	
@@ -177,10 +200,8 @@ $(document).ready(function(){
 					
 		if(minusNum < 0) {			
 			$(this).next().text(num);
-			$("input[name=room_people]").val(num);
 		} else {			
 			$(this).next().text(minusNum);
-			$("input[name=room_people]").val(minusNum);
 		}
 		e.stopPropagation();
 	});
@@ -189,15 +210,13 @@ $(document).ready(function(){
 	$(".plus").click(function(e){	
 		e.stopPropagation();
 		var num = $(this).prev().text();	
-		console.log(num);
+		//console.log(num);
 		var plusNum = parseInt(num) + 1;			
 					
 		if(plusNum >= 20) {			
 			$(this).prev().text(num);
-			$("input[name=room_people]").val(num);
 		} else {			
 			$(this).prev().text(plusNum);
-			$("input[name=room_people]").val(plusNum);
 		}
 	});
 	
@@ -235,7 +254,10 @@ ${priceDto}
 	<input type="hidden" name="room_people" value="${searchVo.room_people}"/>
 	<input type="hidden" name="low_price" value="${searchVo.low_price}"/>
 	<input type="hidden" name="high_price" value="${searchVo.high_price}"/>
-	<input type="hidden" name="arrType" value="${searchVo.arrType}"/>
+	<input type="hidden" name="joinType" value="${searchVo.joinType}"/>
+	<input type="hidden" name="room_bathroom" value="${searchVo.room_bathroom}"/>
+	<input type="hidden" name="room_bed" value="${searchVo.room_bed}"/>
+	<input type="hidden" name="arrOption" value="${searchVo.arrOption}"/>
 </form>
 <!-- 히든 폼 끝 -->
 
@@ -247,7 +269,7 @@ ${priceDto}
 	                <div class="form-group">
 	                  <span class="icon icon-search"></span>
 	                  <input type="text" id="searchTarget" class="form-control" value="${searchVo.keyword}" 
-	                  placeholder="모든 위치" style="font-size:30px;">
+	                  placeholder="모든 위치" style="font-size:25px;">
 	                </div>
 	              </form>
 	        </div>
@@ -321,26 +343,26 @@ ${priceDto}
 	</div>
 </div>
 <!-- 필터 -->
-<div class="dropdown">
+<div class="dropdown roomOption">
 <button class="btn btn-primary py-3 px-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:20px;margin-bottom:10px;">필터</button>
 	<div class="dropdown-menu block-27" aria-labelledby="dropdownMenuButton" style="text-align:left;">
 		<ul style="padding:0px;">
 			<li class="nav-item" style="text-align:center;list-style:none;padding-left:0px;width:300px;"><label style="margin-left:10px;font-weight:200;">침대와 욕실</label></li>
 			<li class="nav-item" style="list-style:none;padding-left:0px;width:240px;"><label style="margin-left:10px;margin-right:25px;font-weight:200;">침대</label>
 			<a class="minus" style="cursor:pointer">-</a>
-			<label id="numBox" style="font-weight:200;width:50px;height:40px;margin-left:10px;margin-right:10px;text-align:center;">1</label>
+			<label id="room_bed" style="font-weight:200;width:50px;height:40px;margin-left:10px;margin-right:10px;text-align:center;">${searchVo.room_bed}</label>
 			<a class="plus" style="cursor:pointer">+</a></li>
 			
 			<li class="nav-item" style="list-style:none;padding-left:0px;width:240px;"><label style="margin-left:10px;margin-right:25px;font-weight:200;">욕실</label>
 			<a class="minus" style="cursor:pointer">-</a>
-			<label id="numBox" style="font-weight:200;width:50px;height:40px;margin-left:10px;margin-right:10px;text-align:center;">1</label>
+			<label id="room_bathroom" style="font-weight:200;width:50px;height:40px;margin-left:10px;margin-right:10px;text-align:center;">${searchVo.room_bathroom}</label>
 			<a class="plus" style="cursor:pointer">+</a></li>
 			
 			<hr>
 			
 			<li class="nav-item" style="text-align:center;list-style:none;padding-left:0px;width:240px;"><label style="margin-left:10px;font-weight:200;">편의시설</label></li>
 			<c:forEach items="${optionList}" var="optionVo">
-				<li class="nav-item" style="list-style:none;padding-left:0px;width:240px;"><input type="checkbox" class="chb" style="width:20px;height:20px;"/><label style="margin-left:10px;font-weight:200;">${optionVo.room_option_explain}</label></li>
+				<li class="nav-item" style="list-style:none;padding-left:0px;width:240px;"><input type="checkbox" class="chb" style="width:20px;height:20px;" value="${optionVo.room_option_code}" name="optionChb"/><label style="margin-left:10px;font-weight:200;">${optionVo.room_option_explain}</label></li>
 			</c:forEach>
 			
 		</ul>
