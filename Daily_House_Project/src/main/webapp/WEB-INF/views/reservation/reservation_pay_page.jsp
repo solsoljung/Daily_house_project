@@ -13,6 +13,9 @@
 <script>
 $(function() {
 	$("#payBtn").click(function() {
+		// 결제금액 포인트가 차감되어야 하므로 tbl_user의 포인트 업데이트
+		// 결제내역 페이지에 저장된 정보를 insert 하기
+		// 결제내역 페이지로 이동
 		location.href = "/yo/reservation_list";
 	});
 });
