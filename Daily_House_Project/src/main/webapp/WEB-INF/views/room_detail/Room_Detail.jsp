@@ -139,12 +139,7 @@ $(document).ready(function(){
 	var room_num = ${roomDto.room_num};
 	var url = "/datepicker/start/"+room_num;
 	$.get(url, function(rDate){
-    	console.log("get");
-    	console.log("rDate:", rDate);
     	rDate2 = rDate;
-    	
-    	console.log("rDate2:", rDate2);
-    	console.log("get2");
     	checkIn();
     });
 	
@@ -275,6 +270,9 @@ $(document).ready(function(){
         <div class="row">
 <!-- 내용 센터쪽 -->
           <div class="col-lg-8 ftco-animate">
+				<c:forEach items="${roomPicInfoList}" var="RoomPictureVo">
+					${RoomPictureVo.pic_uri}
+				</c:forEach>
 <!--          	 방의 기본정보 -->
          	<table>
          		<tr>
@@ -363,7 +361,7 @@ $(document).ready(function(){
                   </tr>
                  </table>
                   <div class="meta">
-                    <div><span class="icon-person"></span>${RoomReviewDto.user_email}</div>
+                    <div><span class="icon-person"></span>${RoomReviewDto.user_name}</div>
                     <div><span class="icon-calendar"></span>${RoomReviewDto.room_review_write_date}</div>
                     <hr>
                   </div>
@@ -532,6 +530,11 @@ $(document).ready(function(){
 					  <input type="hidden" name="room_num" value="${roomDto.room_num}">
 	         		  <input type="hidden" name ="check_in" id="check_in">
 	         		  <input type="hidden" name ="check_out" id="check_out">
+	         		  <input type="hidden" name="user_email" value="${roomDto.user_email}">
+	         		  <input type="hidden" name="room_location" value="${roomDto.room_location}">
+	         		  <input type="hidden" name="room_title" value="${roomDto.room_title}">
+	         		  <input type="hidden" name="room_price" value="${roomDto.room_price}">
+	         		  <input type="hidden" name="room_people" value="${roomDto.room_people}">
 	                  <input type="submit" value="Subscribe" class="mt-2 btn btn-white submit">
 	                </div>
 	              </form>
