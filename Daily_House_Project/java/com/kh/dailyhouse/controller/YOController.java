@@ -35,7 +35,6 @@ public class YOController {
 		UserVo userVo = (UserVo)session.getAttribute("userVo");
 		model.addAttribute("userVo" + userVo);
 		System.out.println(testdto);
-//		session.setAttribute("userVo", userVo);
 		return "/reservation/reservation_page";
 	}
 	
