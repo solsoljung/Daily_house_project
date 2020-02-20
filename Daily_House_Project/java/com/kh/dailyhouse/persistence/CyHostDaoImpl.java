@@ -18,6 +18,11 @@ private static final String NAMESPACE = "com.kh.mappers.HostMapper";
 	@Inject
 	public SqlSession sqlSession;
 	
+	// 호스트 인지 아닌지 검색
+	public int isHost(String user_email) throws Exception{
+		return sqlSession.selectOne(NAMESPACE + ".isHost", user_email);
+	}
+	
 	// 호스트 등록
 	@Override
 	public void registerHost(HostVo hostVo) throws Exception {

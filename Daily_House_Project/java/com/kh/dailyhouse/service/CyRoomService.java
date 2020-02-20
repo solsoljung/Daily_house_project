@@ -10,6 +10,9 @@ public interface CyRoomService {
 	// 호스트 정보 검색
 	public HostVo getHostInfo(String user_email) throws Exception;
 	
+	// 호스트 인지 아닌지 검색
+	public int isHost(String user_email) throws Exception;
+	
 	
 	// 숙소 검색하기
 	public List<RoomDetailDto> getHostRoomList(String user_email) throws Exception;
