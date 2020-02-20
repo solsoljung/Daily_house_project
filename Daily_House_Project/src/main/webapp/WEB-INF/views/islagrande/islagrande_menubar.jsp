@@ -41,7 +41,6 @@ $(function() {
 	        	<li class="nav-item"><a href="blog.html" class="nav-link">About</a></li>
 	        	<li class="nav-item"><a href="/yo/reservation" class="nav-link">예약하기</a></li>
 	        	<li class="nav-item"><a href="/cy/registerHost1" class="nav-link">호스팅하기</a></li>
-	        	<li class="nav-item"><a href="/cy/HostRoomList" class="nav-link">숙소관리</a></li>
 				  <c:choose>
 				   	<c:when test="${empty userVo}">
 					    <li class="nav-item"><a href="/si/loginHost" class="nav-link">로그인</a></li>

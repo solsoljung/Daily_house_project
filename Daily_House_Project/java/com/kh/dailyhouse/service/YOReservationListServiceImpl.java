@@ -27,4 +27,10 @@ public class YOReservationListServiceImpl implements YOReservationListService {
 		dao.insertReservation(vo);
 	}
 
+	@Override
+	public void getPrice() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
