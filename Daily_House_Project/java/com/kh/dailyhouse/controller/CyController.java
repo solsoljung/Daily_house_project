@@ -143,6 +143,15 @@ public class CyController {
 		return roomService.getAttach(room_num);
 	}
 	
+	// 호스트인지아닌지알아내기
+	@RequestMapping(value="/isHost", method={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public int isHost(String user_email) throws Exception {
+		System.out.println("user_email:" + user_email);
+		int result = roomService.isHost(user_email);
+		return result;
+	}
+	
 	// 예약이 있는지 없는지 알아내기
 	@RequestMapping(value="/isReserved/{room_num}", method=RequestMethod.POST)
 	@ResponseBody

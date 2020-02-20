@@ -82,8 +82,8 @@ $(function(){
 					html += 
 	"<img class='img-thumbnail' src='/resources/images/file_image.png'/><br>";
 				}
-				html += "<span>" + fileName + "</span>";
-				html += "<a href='"+fullName+"' class='attach-del'><span class='right'>x</span></a>";
+// 				html += "<span>" + fileName + "</span>";
+				html += "<a href='"+fullName+"' class='attach-del' ><span class='right' float='right'>x</span></a>";
 				html += "</div><br>";
 				$("#uploadedList").append(html);
 			}
@@ -101,6 +101,7 @@ $(function(){
 		$.get(url, sendData, function(rData) {
 			console.log(rData);
 			if (rData == "success") {
+				v--;
 				that.parent().remove();
 			}
 		});

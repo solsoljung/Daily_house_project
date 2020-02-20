@@ -28,6 +28,14 @@ public class CyRoomServiceImpl implements CyRoomService {
 		return hostDao.getHostInfo(user_email);
 	}
 	
+	// 호스트 인지 아닌지 검색
+	@Override
+	public int isHost(String user_email) throws Exception {
+		return hostDao.isHost(user_email);
+	}
+
+	
+	
 	// 호스트가 등록한 숙소 리스트 불러오기
 	@Override
 	public List<RoomDetailDto> getHostRoomList(String user_email) throws Exception {
