@@ -59,4 +59,34 @@
 		where room_num = #{room_num}
 	</select>
 	
+<!-- 	1구역 사진  -->
+	<select id="getOneAreaPic" resultType="RoomPictureVo">
+		select * from
+		(select rownum rnum, p.*from        
+		(select * from tbl_room_picture
+		where room_num = #{room_num}) p
+		order by rnum)
+		where rnum = 1
+	</select>
+	
+<!-- 	2,3구역 사진 -->
+	<select id="getTwoAreaPic" resultType="RoomPictureVo">
+		select * from
+		(select rownum rnum, p.*from
+		(select * from tbl_room_picture
+		where room_num = #{room_num}) p
+		order by rnum)
+		where rnum &gt;= 2 and rnum &lt;= 3
+	</select>
+	
+<!-- 	4,5구역 사진 -->
+	<select id="getThreeAreaPic" resultType="RoomPictureVo">
+		select * from
+		(select rownum rnum, p.*from
+		(select * from tbl_room_picture
+		where room_num = #{room_num}) p
+		order by rnum)
+		where rnum &gt;= 4 and rnum &lt;= 5
+	</select>
+	
 </mapper>

@@ -5,9 +5,9 @@
   
 <mapper namespace="com.kh.mappers.ReservationMapper">
 	
-	<!-- 숙소정보 구하기 -->
+	<!-- 총 결제금액 -->
 	<select id="getHostInfo" resultType="testDto">
-		select room_price, room_people, room_title, user_email, room_location, (room_price * 3) from tbl_room
+		select room_price * 3 from tbl_room
 		where room_num= #{room_num}
 	</select>
 

@@ -82,11 +82,33 @@ public class BooRoomDetailDaoImpl implements BooRoomDetailDao {
 				
 		return room_option_explain;
 	}
-
+	
+	//room_pic 정보 얻기
 	@Override
 	public List<RoomPictureVo> getRoomPicInfo(int room_num) throws Exception {
 		List<RoomPictureVo> roomPicInfo = sqlSession.selectList(NAMESPACE+".getRoomPicInfo", room_num);
 		return roomPicInfo;
+	}
+	
+	//1구역 사진 정보 얻기
+	@Override
+	public RoomPictureVo getOneAreaPic(int room_num) throws Exception {
+		RoomPictureVo OneAreaPic = sqlSession.selectOne(NAMESPACE+".getOneAreaPic", room_num);
+		return OneAreaPic;
+	}
+	
+	//2구역 사진 정보 얻기
+	@Override
+	public List<RoomPictureVo> getTwoAreaPic(int room_num) throws Exception {
+		List<RoomPictureVo> TwoAreaPic = sqlSession.selectList(NAMESPACE+".getTwoAreaPic", room_num);
+		return 	TwoAreaPic;
+	}
+	
+	//3구역 사진 정보 얻기
+	@Override
+	public List<RoomPictureVo> getThreeAreapic(int room_num) throws Exception {
+		List<RoomPictureVo> ThreeAreaPic = sqlSession.selectList(NAMESPACE+".getThreeAreaPic", room_num);
+		return ThreeAreaPic;
 	}
 	
 }

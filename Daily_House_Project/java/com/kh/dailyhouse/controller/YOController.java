@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.dailyhouse.domain.LikeVo;
 import com.kh.dailyhouse.domain.ReservationVo;
 import com.kh.dailyhouse.domain.UserVo;
-import com.kh.dailyhouse.domain.testDto;
+import com.kh.dailyhouse.domain.TestDto;
 import com.kh.dailyhouse.service.YOLikeListService;
 import com.kh.dailyhouse.service.YOReservationListService;
 
@@ -31,22 +31,24 @@ public class YOController {
 
 	// 예약 페이지
 	@RequestMapping(value="/reservation", method=RequestMethod.GET)
-	public String reservation(HttpSession session, Model model, testDto testdto) throws Exception {
+	public String reservation(HttpSession session, Model model, TestDto testDto) throws Exception {
 		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		
 		model.addAttribute("userVo" + userVo);
-		System.out.println(testdto);
+		System.out.println(testDto);
 		return "/reservation/reservation_page";
 	}
 	
 	// 결제 페이지
 	@RequestMapping(value="/reservation_pay", method=RequestMethod.GET)
-	public String reservationPay(HttpSession session, Model model, int v, testDto testdto) throws Exception {
-		System.out.println("v:" + v);	
+	public String reservationPay(HttpSession session, Model model, TestDto testDto) throws Exception {
+		System.out.println("testDto:" + testDto);	
 		// 서비스로부터 가격 얻어오기(단가)
 		// 단가 * v
+		session.setAttribute("testDto", testDto);
 		UserVo userVo = (UserVo)session.getAttribute("userVo");
 		model.addAttribute("userVo" + userVo);
-		model.addAttribute("v", v);
+		model.addAttribute("v", testDto.getV());
 		return "/reservation/reservation_pay_page";
 	}
 	

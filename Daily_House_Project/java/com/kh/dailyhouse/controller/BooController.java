@@ -30,14 +30,24 @@ public class BooController {
 		//방을 선택시 room_num을 받아야됨
 		Map<String, Object> paramMap = booRoomDetailService.detail(room_num, reviewPagingDto);
 		RoomDto roomDto = (RoomDto)paramMap.get("dto");
+		
 		List<RoomPictureVo> roomPicInfoList = (List<RoomPictureVo>)paramMap.get("roomPicInfo");
+		RoomPictureVo OneAreaPic = (RoomPictureVo)paramMap.get("OneAreaPic");
+		List<RoomPictureVo> TwoAreaPic = (List<RoomPictureVo>)paramMap.get("TwoAreaPic");
+		List<RoomPictureVo> ThreeAreaPic = (List<RoomPictureVo>)paramMap.get("ThreeAreaPic");
+		
 		List<RoomReviewDto> reviewList = (List<RoomReviewDto>)paramMap.get("ReviewList");
 		String type = (String)paramMap.get("type");
 		List<String> OptionList = (List<String>)paramMap.get("OptionList");
 		List<String> OptionCode = (List<String>)paramMap.get("OptionCode");
 		
 		model.addAttribute("roomDto", roomDto);
+		
 		model.addAttribute("roomPicInfoList", roomPicInfoList);
+		model.addAttribute("OneAreaPic", OneAreaPic);
+		model.addAttribute("TwoAreaPic", TwoAreaPic);
+		model.addAttribute("ThreeAreaPic", ThreeAreaPic);
+		
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("reviewPagingDto", reviewPagingDto);
 		model.addAttribute("type", type);
