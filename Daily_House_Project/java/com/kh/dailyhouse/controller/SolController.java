@@ -2,7 +2,7 @@ package com.kh.dailyhouse.controller;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -77,23 +77,13 @@ public class SolController {
 			searchVo.setHigh_price(priceDto.getMax_high_price());
 		}
 		
-		//타입
-		String type = searchVo.getArrType();
-		System.out.println("타입이 널이 아닐때 실행!!!: "+type);
-		String[] typeSplit = searchVo.getTypeSplit();
-		typeSplit = type.split(",");
-		searchVo.setTypeSplit(typeSplit);
-		for(int i = 0; i < typeSplit.length; i++) {
-			System.out.println("타입의 "+i+"번째: "+typeSplit[i]);
+		//옵션
+		String option = searchVo.getArrOption();
+		System.out.println("옵션!!!: "+option);
+		if(option != null) {
+			List<String> listOption = Arrays.asList(option.split(","));
+	        searchVo.setListOption(listOption);
 		}
-		System.out.println("setTypeSplit 후 실행!!!: "+searchVo);
-		/* 굳이 리스트로 안해도 될 것 같아서 일단 막아둡니다.
-		 * ArrayList<String> TypeList = new ArrayList<>();
-        
-		for(String item : typeSplit) {
-			TypeList.add(item);
-		}*/
-//		여기하고 있었음!!!!!! 이제 mybatis foreach 하면 됨!
 		
 		List<RoomVo> list = service.getRoomList(searchVo);
 		int totalCount = service.getRoomCount(searchVo);
