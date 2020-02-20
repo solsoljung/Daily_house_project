@@ -46,7 +46,7 @@ $(function() {
 					    <li class="nav-item"><a href="/si/loginHost" class="nav-link">로그인</a></li>
 				   	</c:when>
 				   	<c:otherwise> 
-						<div class="dropdown" style="margin-top: 7px; margin-left: 15px">
+						<div class="dropdown" style="margin-top: 7px; margin-left: 15px;">
 				   	<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:15px;">내정보</button>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						   		<li class="nav-item"><a href="/si/userInformation">${userVo.user_name}님&nbsp;&nbsp;&nbsp;
