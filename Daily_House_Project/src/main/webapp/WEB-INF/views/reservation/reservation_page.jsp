@@ -233,9 +233,6 @@ ${userVo}
                   <input type="text" id="dateCheckOut" class="form-control">
                 </div>
               </div>
-              <div>
-              	<button type="button" id="btnTest">클릭</button>
-              </div>
 
               <div class="row">
                 <div class="col-md-6 form-group block-27">

@@ -30,11 +30,11 @@ $(document).ready(function() {
 <!-- section -->
 <br>
 <br>
-<br>
 <section class="section contact-section" id="next">
       <div class="container">
-      <div class="container">
         <div class="row">
+          <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+          </div>
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
             <form action="/si/login_run" method="post" role="form" class="bg-white p-md-5 p-4 mb-5 border">
                 <div class="col-md-6 form-group">
@@ -56,22 +56,20 @@ $(document).ready(function() {
                   placeholder="Password" required="required">
                 </div>
               </div>
-              
               <br>
-              <div class="col-md-8 text-left" data-aos="fade-up" data-aos-delay="200">
-            	<div class="row">
-		            <button type="submit" class="btn btn-primary text-white py-3 px-5">로그인</button>
-	         	</div>
-	          </div>
-	          <br>
-              <div class="col-md-8 text-left" data-aos="fade-up" data-aos-delay="500">
-            	<div class="row">
-		            <a href="/si/registerHost"><button type="button" class="btn btn-primary text-white py-2 px-4">회원가입</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
-		            <a href="/si/findPassword"><button type="button" class="btn btn-primary text-white py-2 px-4">비밀번호 찾기</button></a>
+              <div class="row">
+              	<div class="col-md-12 text-left" data-aos="fade-up" data-aos-delay="200">
+		            <button type="submit" class="btn btn-primary text-white py-3 px-5 pull-right">로그인</button>
+		            <br>
+		            <br>
+		            <br>
+		            <a href="/si/registerHost"><button type="button" style="margin-left: 15px" class="btn btn-primary text-white py-2 px-4 pull-right">회원가입</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+		            <a href="/si/findPassword"><button type="button" class="btn btn-primary text-white py-2 px-4 pull-right">비밀번호 찾기</button></a>
 	         	</div>
 	          </div>
             </form>
           </div>
+          <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
           </div>
         </div>
       </div>
