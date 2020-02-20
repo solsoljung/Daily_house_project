@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.dailyhouse.domain.ReviewPagingDto;
 import com.kh.dailyhouse.domain.RoomDto;
+import com.kh.dailyhouse.domain.RoomPictureVo;
 import com.kh.dailyhouse.domain.RoomReviewDto;
 import com.kh.dailyhouse.domain.RoomReviewVo;
 import com.kh.dailyhouse.persistence.BooRoomDetailDao;
@@ -47,6 +48,9 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 		//방 상세보기 정보 받기
 		RoomDto dto = booRoomDetailDao.getRoominfo(room_num);
 		
+		//방 사진 정보 얻기
+		List<RoomPictureVo> roomPicInfo = booRoomDetailDao.getRoomPicInfo(room_num);
+		
 		//방 옵션 코드 받기
 		String optionCode = "";
 		if (dto.getRoom_option_code() != null) {
@@ -58,6 +62,7 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 		
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("dto", dto);
+		paramMap.put("roomPicInfo", roomPicInfo);
 		paramMap.put("ReviewList", reviewList);
 		paramMap.put("type", type);
 		

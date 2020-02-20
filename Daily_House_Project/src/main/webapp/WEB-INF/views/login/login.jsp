@@ -24,6 +24,12 @@ $(document).ready(function() {
 	if (msg == "updatePassword") {
 		alert("비밀번호가 변경되었습니다 다시 로그인해주세요.");
 	}
+	if (msg == "notHost") {
+		alert("호스트만 이용가능합니다.\n호스트가 되어보세요!");
+	}
+	if (msg == "notLogin") {
+		alert("로그인 후 이용 가능합니다. 로그인하시겠습니까?");
+	}
 });
 </script>
 

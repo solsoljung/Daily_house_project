@@ -40,12 +40,12 @@ public class YOController {
 	
 	// 결제 페이지
 	@RequestMapping(value="/reservation_pay", method=RequestMethod.GET)
-	public String reservationPay(HttpSession session, Model model, int v) throws Exception {
-		System.out.println("v:" + v);
-		
+	public String reservationPay(HttpSession session, Model model, int v, testDto testdto) throws Exception {
+		System.out.println("v:" + v);	
 		// 서비스로부터 가격 얻어오기(단가)
 		// 단가 * v
-//		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		model.addAttribute("userVo" + userVo);
 		model.addAttribute("v", v);
 		return "/reservation/reservation_pay_page";
 	}

@@ -200,7 +200,8 @@ $(function() {
         </div>
       </a>
 </section>
-${userVo}
+${userVo}<br>
+${testDto}
    <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">
@@ -226,11 +227,11 @@ ${userVo}
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="checkin_date">입실날짜</label>
-                  <input type="text" id="dateCheckIn" class="form-control">
+                  <input type="text" id="dateCheckIn" class="form-control" value="${testDto.check_in}">
                 </div>
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="checkout_date">퇴실날짜</label>
-                  <input type="text" id="dateCheckOut" class="form-control">
+                  <input type="text" id="dateCheckOut" class="form-control" value="${testDto.check_out}">
                 </div>
               </div>
 
@@ -282,8 +283,8 @@ ${userVo}
           <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
             <div class="row">
               <div class="col-md-10 ml-auto contact-info">
+                <p><span class="d-block">숙소명:</span> <span style="font-size: 1em; font-family: 고딕;">숙소 이름</span></p>
                 <p><span class="d-block">주소:</span> <span style="font-size: 1em; font-family: 고딕;">해당 숙소 주소</span></p>
-                <p><span class="d-block">연락처:</span> <span style="font-size: 1em; font-family: 고딕;">해당 숙소 번호</span></p>
                 <p><span class="d-block">Email:</span> <span style="font-size: 1em; font-family: 고딕;">해당 숙소 이메일</span></p>
               </div>
             </div>
