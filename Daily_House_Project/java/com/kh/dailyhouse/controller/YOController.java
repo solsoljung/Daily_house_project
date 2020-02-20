@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.dailyhouse.domain.LikeVo;
 import com.kh.dailyhouse.domain.ReservationVo;
 import com.kh.dailyhouse.domain.UserVo;
+import com.kh.dailyhouse.domain.testDto;
 import com.kh.dailyhouse.service.YOLikeListService;
 import com.kh.dailyhouse.service.YOReservationListService;
 
@@ -30,9 +31,10 @@ public class YOController {
 
 	// 예약 페이지
 	@RequestMapping(value="/reservation", method=RequestMethod.GET)
-	public String reservation(HttpSession session, Model model) throws Exception {
+	public String reservation(HttpSession session, Model model, testDto testdto) throws Exception {
 		UserVo userVo = (UserVo)session.getAttribute("userVo");
 		model.addAttribute("userVo" + userVo);
+		System.out.println(testdto);
 		return "/reservation/reservation_page";
 	}
 	
