@@ -243,6 +243,8 @@ $(document).ready(function(){
 </script>
 
 <%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
+
+
 <form id="frmPage" action="/boo/detail" method="get">
 	<input type="hidden" name="room_num" value="${roomDto.room_num}">
 	<input type="hidden" name="page" value="${reviewPagingDto.page}">
