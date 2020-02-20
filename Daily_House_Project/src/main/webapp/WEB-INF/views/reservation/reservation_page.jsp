@@ -110,10 +110,12 @@ $(function() {
 		}
 		// 
 // 		v = 3;
-		
+		$("input[name=v]").val(v);
 		console.log("v:" + v);
-		location.href = "/yo/reservation_pay?v=" + v;
- 	});
+		
+		$("#reservation").submit();
+// 		location.href = "/yo/reservation_pay?v=" + v;
+ 	}); // reservationBtn click
 
 	
 	// 결제 페이지로 이동
@@ -200,13 +202,18 @@ $(function() {
         </div>
       </a>
 </section>
-${userVo}<br>
-${testDto}
+userVo: ${userVo}<br>
+testDTo: ${testDto}
    <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
-            <form action="/yo/reservation_pay" method="post" id="reservation" class="bg-white p-md-5 p-4 mb-5 border">
+            <form action="/yo/reservation_pay" id="reservation" class="bg-white p-md-5 p-4 mb-5 border">
+	          <input type="hidden" name="room_num" value="${testDto.room_num}">
+	          <input type="hidden" name="room_title" value="${testDto.room_title}">
+	          <input type="hidden" name="room_price" value="${testDto.room_price}">
+	          <input type="hidden" name="room_people" value="${testDto.room_people}">
+	          <input type="hidden" name="v" value="">
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="name">예약자</label>
@@ -283,9 +290,15 @@ ${testDto}
           <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
             <div class="row">
               <div class="col-md-10 ml-auto contact-info">
-                <p><span class="d-block">숙소명:</span> <span style="font-size: 1em; font-family: 고딕;">숙소 이름</span></p>
-                <p><span class="d-block">주소:</span> <span style="font-size: 1em; font-family: 고딕;">해당 숙소 주소</span></p>
-                <p><span class="d-block">Email:</span> <span style="font-size: 1em; font-family: 고딕;">해당 숙소 이메일</span></p>
+                <p><span class="d-block">숙소명:</span> 
+                	<span style="font-size: 1em; font-family: 고딕;">${testDto.room_title}</span>
+                </p>
+                <p><span class="d-block">주소:</span>
+                	<span style="font-size: 1em; font-family: 고딕;">${testDto.room_location}</span>
+                </p>
+                <p><span class="d-block">Email:</span> 
+                	<span style="font-size: 1em; font-family: 고딕;">${testDto.user_email}</span>
+                </p>
               </div>
             </div>
           </div>

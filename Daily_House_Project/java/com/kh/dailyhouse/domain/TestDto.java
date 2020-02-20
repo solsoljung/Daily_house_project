@@ -1,6 +1,6 @@
 package com.kh.dailyhouse.domain;
 
-public class testDto {
+public class TestDto {
 	private int room_num;
 	private String check_in;
 	private String check_out;
@@ -9,9 +9,10 @@ public class testDto {
 	private String  room_title;
 	private String  user_email;
 	private String  room_location;
+	private int v;
 	
 	
-	public testDto() {
+	public TestDto() {
 		super();
 	}
 	
@@ -64,12 +65,21 @@ public class testDto {
 	public void setRoom_location(String room_location) {
 		this.room_location = room_location;
 	}
-	
-	
+	public int getV() {
+		return v;
+	}
+	public void setV(int v) {
+		this.v = v;
+	}
+
+
 	@Override
 	public String toString() {
-		return "testDto [room_num=" + room_num + ", check_in=" + check_in + ", check_out=" + check_out + ", room_price="
+		return "TestDto [room_num=" + room_num + ", check_in=" + check_in + ", check_out=" + check_out + ", room_price="
 				+ room_price + ", room_people=" + room_people + ", room_title=" + room_title + ", user_email="
-				+ user_email + ", room_location=" + room_location + "]";
+				+ user_email + ", room_location=" + room_location + ", v=" + v + "]";
 	}
+	
+	
+	
 }
