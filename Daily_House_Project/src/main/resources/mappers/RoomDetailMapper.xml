@@ -53,10 +53,4 @@
 		where room_option_code = #{room_option_code}
 	</select>
 	
-<!-- 	room_num에 해당하는 reservation내역 정보 보여주기 -->
-	<select id="getReservation" resultType="ReservationVo">
-		select * from tbl_reservation
-		where room_num = #{room_num}
-	</select>
-	
 </mapper>

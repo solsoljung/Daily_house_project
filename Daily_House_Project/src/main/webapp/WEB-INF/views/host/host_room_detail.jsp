@@ -196,6 +196,8 @@ $(function(){
 		}); // $.ajax()
 	});
 	
+	var listNum = "";
+	
 	
 	// 첨부파일 START ===================================================================================
 	getAttachList();
@@ -204,6 +206,9 @@ $(function(){
 	function getAttachList() {
 		var url = "/cy/getAttach/${roomDetailDto.room_num}";
 		$.getJSON(url, function(list) {
+			
+			listNum = list.length;
+			console.log("listNum: " + listNum);
 			
 			if(list.length == null || list.length < 1){
 				$("#lblUploadList").text("* 첨부파일이 없습니다.");

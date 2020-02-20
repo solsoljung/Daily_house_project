@@ -28,7 +28,4 @@ public interface BooRoomDetailDao {
 	
 	//room option 코드판별
 	public String getRoomOption(String room_option_code) throws Exception;
-	
-	//room_num에 해당하는 reservation정보 얻기
-	public List<ReservationVo> getReservation(int room_num) throws Exception;
 }

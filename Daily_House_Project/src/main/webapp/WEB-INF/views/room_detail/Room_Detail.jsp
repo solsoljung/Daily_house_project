@@ -41,7 +41,7 @@ $(function() {
 	
 });
 
-// 예약 창 이동
+// 예약 창 따라다니기
 $(window).scroll(function() {
 	var footHeight = $("#footHeight").outerHeight(true);
 	var mainImg = $("#mainImg").outerHeight(true);
@@ -49,10 +49,7 @@ $(window).scroll(function() {
 	var sideHeight = $("#sidebox").outerHeight(true);
 	var ftcoHeight = $("#ftco-navbar").outerHeight(true);
 	
-	
 	var v = bodyHeight - footHeight - sideHeight - ftcoHeight;
-	
-	
 	
 	var position = $(window).scrollTop();
 	if (position < mainImg) {
@@ -200,8 +197,7 @@ $(document).ready(function(){
         $("input[name=str_start_date]").val(date);
 
         $("#endDate").datepicker("setStartDate", newDate); //이것 처럼 setEndDate값을 넘겨 줘야 됨
-        $(this).hide();
-        $('#endDate').show().datepicker("show");
+        $('#endDate').datepicker("show");
 	});
 	}
 	//체크아웃
@@ -228,9 +224,8 @@ $(document).ready(function(){
 		console.log(checkout);
 		
 		$("input[name=str_end_date]").val(checkout);
-		$('#startDate').show();
 	});
-
+	
 	//날짜 포멧 함수
 	function formatDate(date) { 
 		var d = new Date(date),
@@ -335,7 +330,7 @@ $(document).ready(function(){
 			<div class="container">
 	       		<div class="row">
 	       			<c:forEach var="OptionCode" items="${OptionCode}" varStatus="status">
-			        	<div class="col-md-4">
+			        	<div class="col-md-6">
 			        		<div class="room-wrap ftco-animate">
 			        			<img src="/images/${OptionCode}.png"  width="35px">
           						${OptionList[status.index]}
@@ -522,13 +517,9 @@ $(document).ready(function(){
         <div class="col-lg-4 sidebar ftco-animate">
         	<div id="sidebox" style="position: absolute;">
 	         	<div class="sidebar-box subs-wrap">
-	         	${startList}
-	         	${endList}
 	         		<div class="row">
-						<div class="dropdown">
-							<input type="button" value="체크인" class="btn btn-primary py-3 px-5" style="font-size:20px;" id= "startDate">
-							<input type="button" value="체크아웃" class="btn btn-primary py-3 px-5" style="font-size:20px;display:none;" id= "endDate">
-						</div>
+						<input type="button" value="Check-In" class="mt-2 btn btn-white" style="font-size:20px; margin-left: 15px;" id= "startDate">
+						<input type="button" value="Check-Out" class="mt-2 btn btn-white" style="font-size:20px; margin-left: 15px;" id= "endDate">
 					</div>
 								<h3>Subcribe to our Newsletter</h3>
 								<p>Far far away, behind the word mountains, far from the countries Vokalia</p>
