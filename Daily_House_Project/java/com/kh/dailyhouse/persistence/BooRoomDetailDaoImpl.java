@@ -82,11 +82,4 @@ public class BooRoomDetailDaoImpl implements BooRoomDetailDao {
 		return room_option_explain;
 	}
 	
-	//room_num에 해당하는 reservation정보 얻기
-	@Override
-	public List<ReservationVo> getReservation(int room_num) throws Exception {
-		List<ReservationVo> reservationList = sqlSession.selectList(NAMESPACE+".getReservation", room_num);
-		return reservationList;
-	}
-	
 }

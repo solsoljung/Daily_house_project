@@ -115,9 +115,9 @@
 			where r.room_people &gt;= #{room_people} and (r.room_price &gt;= #{low_price} and r.room_price &lt;= #{high_price})
 			방타입
 			and regexp_like(r.room_type_num,
-								<foreach collection="typeSplit" item="item" index="index" separator="|" open="'" >#{item}</foreach>
-								
-							)
+			'<foreach collection="typeSplit" item="item" index="index" separator="|">
+				<trim suffixOverrides=" ">#{item}</trim>
+			</foreach>')
 			order by r.room_num asc) a)
 		where rnum &gt;= #{startRow} and rnum &lt;= #{endRow}
 	</select> -->
