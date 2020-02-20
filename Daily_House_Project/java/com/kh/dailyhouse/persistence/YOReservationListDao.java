@@ -5,7 +5,7 @@ import java.util.List;
 import com.kh.dailyhouse.domain.ReservationVo;
 
 public interface YOReservationListDao {
-	
+
 	// (예약)결제하기
 	public void insertReservation(ReservationVo vo) throws Exception;
 	
