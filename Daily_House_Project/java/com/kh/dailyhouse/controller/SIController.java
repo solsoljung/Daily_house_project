@@ -65,7 +65,8 @@ public class SIController {
 		UserVo userVo1 = siUserService.login_run(userVo);
 //		System.out.println("userVo1 : "+userVo1);
 		// DB 에 넣기 - Service - Dao - Mybatis - Oracle
-
+//		if ()
+		
 		if(userVo1 == null) {
 			rttr.addFlashAttribute("msg", "fail");
 			return "redirect:/si/loginHost";
@@ -90,12 +91,16 @@ public class SIController {
 	// 내정보 수정 처리
 	@RequestMapping(value = "/userUpdate", method = RequestMethod.POST)
 	public String userUpdate(HttpSession session, UserVo userVo, MultipartFile file) throws Exception {
+		
 		String originalFilename = file.getOriginalFilename();
 		String dirPath = FileUploadUtil.uploadFile(uploadPath, originalFilename, file.getBytes());
 		String path = dirPath.replace("\\", "/");
+		String checkPath = path.substring(path.length() - 3);
 		
-		
-		userVo.setUser_pic(path); 	// pic에 파일 이름 넣음
+		if(checkPath.equals("jpg") || checkPath.equals("png") || checkPath.equals("jpeg")) {
+			System.out.println("실행함");
+			userVo.setUser_pic(path); 	// pic에 파일 이름 넣음
+		}
 		siUserService.userUpdate(userVo);		// pic에 파일 이름이 들어간채로 데이터 베이스로 감
 		System.out.println("userVo입니다!!"+userVo);
 		session.setAttribute("userVo", userVo);

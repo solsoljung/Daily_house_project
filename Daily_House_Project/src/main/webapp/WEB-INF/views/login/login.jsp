@@ -30,7 +30,9 @@ $(document).ready(function() {
 <!-- section -->
 <br>
 <br>
+<br>
 <section class="section contact-section" id="next">
+      <div class="container">
       <div class="container">
         <div class="row">
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
@@ -41,13 +43,17 @@ $(document).ready(function() {
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="email">Email</label>
-                  <input type="email" id="email" name="user_email" class="form-control" placeholder="Email" required="required">
+                  <input type="email" id="email" name="user_email" 
+                     value="test@naver.com"
+                  class="form-control" placeholder="Email" required="required">
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="password">Password</label>
-                  <input type="password" id="pw" name="user_pw" class="form-control" placeholder="Password" required="required">
+                  <input type="password" id="pw" name="user_pw" class="form-control" 
+                     value="1"
+                  placeholder="Password" required="required">
                 </div>
               </div>
               
@@ -58,7 +64,7 @@ $(document).ready(function() {
 	         	</div>
 	          </div>
 	          <br>
-              <div class="col-md-8 text-left" data-aos="fade-up" data-aos-delay="200">
+              <div class="col-md-8 text-left" data-aos="fade-up" data-aos-delay="500">
             	<div class="row">
 		            <a href="/si/registerHost"><button type="button" class="btn btn-primary text-white py-2 px-4">회원가입</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
 		            <a href="/si/findPassword"><button type="button" class="btn btn-primary text-white py-2 px-4">비밀번호 찾기</button></a>
@@ -66,15 +72,6 @@ $(document).ready(function() {
 	          </div>
             </form>
           </div>
-          
-          <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
-            <div class="row">
-              <div class="col-md-10 ml-auto contact-info">
-                <p><span class="d-block">Address:</span> <span> 446-77 울산광역시 남구 삼산로35번길 19 (신정동)</span></p>
-                <p><span class="d-block">Phone:</span> <span> (+02) 052 - 000 - 0000</span></p>
-                <p><span class="d-block">Email:</span> <span> ooooo@oooo.ooo</span></p>
-              </div>
-            </div>
           </div>
         </div>
       </div>

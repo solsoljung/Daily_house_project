@@ -99,4 +99,7 @@ $(function(){
 </div><br><br><br>
 <!-- host_register_page1 END -->
 
+<%@ include file = "../../views/casahotel/casahotel_script2.jsp" %>			
+<%@ include file = "../../views/islagrande/islagrande_script2.jsp" %>	
+
 <%@ include file = "../../views/end.jsp"%> <!-- </body> -->
