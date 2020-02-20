@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.dailyhouse.domain.ReservationVo;
 import com.kh.dailyhouse.domain.ReviewPagingDto;
 import com.kh.dailyhouse.domain.RoomDto;
+import com.kh.dailyhouse.domain.RoomReviewDto;
 import com.kh.dailyhouse.domain.RoomReviewVo;
 
 @Repository
@@ -31,12 +32,12 @@ public class BooRoomDetailDaoImpl implements BooRoomDetailDao {
 	
 	//roomDetail review 목록 정보 얻기
 	@Override
-	public List<RoomReviewVo> getReviewinfo(int room_num, ReviewPagingDto reviewPagingDto) throws Exception {	
+	public List<RoomReviewDto> getReviewinfo(int room_num, ReviewPagingDto reviewPagingDto) throws Exception {	
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("room_num", room_num);
 		paramMap.put("reviewPagingDto", reviewPagingDto);
 		
-		List<RoomReviewVo> ReviewList = sqlSession.selectList(NAMESPACE+".getRoomDetailReview", paramMap);
+		List<RoomReviewDto> ReviewList = sqlSession.selectList(NAMESPACE+".getRoomDetailReview", paramMap);
 		return ReviewList;
 	}
 	

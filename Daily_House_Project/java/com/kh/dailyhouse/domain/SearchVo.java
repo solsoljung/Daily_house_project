@@ -2,12 +2,20 @@ package com.kh.dailyhouse.domain;
 
 import java.sql.Timestamp;
 import java.util.Arrays;
+import java.util.List;
 
 public class SearchVo {
+	
+	//욕실, 침대
+	private int room_bathroom = 1;
+	private int room_bed = 1;
+	
+	//방옵션
+	private List<String> listOption = null;
+	private String arrOption;
 
 	//방타입
-	private String arrType = "R1,R2,R3";
-	private String[] typeSplit;
+	private String joinType = "R1|R2|R3";
 	
 	//인원
 	private int room_people = 1;
@@ -218,31 +226,56 @@ public class SearchVo {
 		this.high_price = high_price;
 	}
 
-	public String getArrType() {
-		return arrType;
+	public String getJoinType() {
+		return joinType;
 	}
 
-	public void setArrType(String arrType) {
-		this.arrType = arrType;
+	public void setJoinType(String joinType) {
+		this.joinType = joinType;
 	}
 
-	public String[] getTypeSplit() {
-		return typeSplit;
+	public int getRoom_bathroom() {
+		return room_bathroom;
 	}
 
-	public void setTypeSplit(String[] typeSplit) {
-		this.typeSplit = typeSplit;
+	public void setRoom_bathroom(int room_bathroom) {
+		this.room_bathroom = room_bathroom;
+	}
+
+	public int getRoom_bed() {
+		return room_bed;
+	}
+
+	public void setRoom_bed(int room_bed) {
+		this.room_bed = room_bed;
+	}
+
+	public List<String> getListOption() {
+		return listOption;
+	}
+
+	public void setListOption(List<String> listOption) {
+		this.listOption = listOption;
+	}
+
+	public String getArrOption() {
+		return arrOption;
+	}
+
+	public void setArrOption(String arrOption) {
+		this.arrOption = arrOption;
 	}
 
 	@Override
 	public String toString() {
-		return "SearchVo [arrType=" + arrType + ", typeSplit=" + Arrays.toString(typeSplit) + ", room_people="
-				+ room_people + ", low_price=" + low_price + ", high_price=" + high_price + ", str_start_date="
-				+ str_start_date + ", str_end_date=" + str_end_date + ", room_reserv_start_date="
-				+ room_reserv_start_date + ", room_reserv_end_date=" + room_reserv_end_date + ", page=" + page
-				+ ", startRow=" + startRow + ", endRow=" + endRow + ", startPage=" + startPage + ", endPage=" + endPage
-				+ ", totalCount=" + totalCount + ", hasPrev=" + hasPrev + ", hasNext=" + hasNext + ", perPage="
-				+ perPage + ", totalPage=" + totalPage + ", searchType=" + searchType + ", keyword=" + keyword + "]";
+		return "SearchVo [room_bathroom=" + room_bathroom + ", room_bed=" + room_bed + ", listOption=" + listOption
+				+ ", arrOption=" + arrOption + ", joinType=" + joinType + ", room_people=" + room_people
+				+ ", low_price=" + low_price + ", high_price=" + high_price + ", str_start_date=" + str_start_date
+				+ ", str_end_date=" + str_end_date + ", room_reserv_start_date=" + room_reserv_start_date
+				+ ", room_reserv_end_date=" + room_reserv_end_date + ", page=" + page + ", startRow=" + startRow
+				+ ", endRow=" + endRow + ", startPage=" + startPage + ", endPage=" + endPage + ", totalCount="
+				+ totalCount + ", hasPrev=" + hasPrev + ", hasNext=" + hasNext + ", perPage=" + perPage + ", totalPage="
+				+ totalPage + ", searchType=" + searchType + ", keyword=" + keyword + "]";
 	}
-	
+
 }

@@ -201,6 +201,7 @@ $(function() {
       </a>
 </section>
 ${userVo}
+${testDto}
    <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">
@@ -226,15 +227,12 @@ ${userVo}
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="checkin_date">입실날짜</label>
-                  <input type="text" id="dateCheckIn" class="form-control">
+                  <input type="text" id="dateCheckIn" class="form-control" value="${testDto.check_in}">
                 </div>
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="checkout_date">퇴실날짜</label>
-                  <input type="text" id="dateCheckOut" class="form-control">
+                  <input type="text" id="dateCheckOut" class="form-control" value="${testDto.check_out}">
                 </div>
-              </div>
-              <div>
-              	<button type="button" id="btnTest">클릭</button>
               </div>
 
               <div class="row">

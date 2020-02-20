@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.dailyhouse.domain.ReviewPagingDto;
 import com.kh.dailyhouse.domain.RoomDto;
+import com.kh.dailyhouse.domain.RoomReviewDto;
 import com.kh.dailyhouse.domain.RoomReviewVo;
 import com.kh.dailyhouse.service.BooRoomDetailService;
 
@@ -28,7 +29,7 @@ public class BooController {
 		//방을 선택시 room_num을 받아야됨
 		Map<String, Object> paramMap = booRoomDetailService.detail(room_num, reviewPagingDto);
 		RoomDto roomDto = (RoomDto)paramMap.get("dto");
-		List<RoomReviewVo> reviewList = (List<RoomReviewVo>)paramMap.get("ReviewList");
+		List<RoomReviewDto> reviewList = (List<RoomReviewDto>)paramMap.get("ReviewList");
 		String type = (String)paramMap.get("type");
 		List<String> OptionList = (List<String>)paramMap.get("OptionList");
 		List<String> OptionCode = (List<String>)paramMap.get("OptionCode");

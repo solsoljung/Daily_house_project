@@ -195,6 +195,7 @@ $(document).ready(function(){
         //setEndDate값 받아오기 끝
         
         $("input[name=str_start_date]").val(date);
+        $("#check_in").val(date);
 
         $("#endDate").datepicker("setStartDate", newDate); //이것 처럼 setEndDate값을 넘겨 줘야 됨
         $('#endDate').datepicker("show");
@@ -219,11 +220,11 @@ $(document).ready(function(){
 	    language : "ko"
 		    
 	}).on("changeDate", function(e) {
-		
 		var checkout = formatDate(e.date);
 		console.log(checkout);
 		
 		$("input[name=str_end_date]").val(checkout);
+		$("#check_out").val(checkout);
 	});
 	
 	//날짜 포멧 함수
@@ -277,7 +278,7 @@ $(document).ready(function(){
          		<tr>
          			<th colspan="3" class="padding"><h1 style="font-family: inherit;">${roomDto.room_title}</h1></th>
          			<th class="padding">
-         			<h2>호스트 사진</h2>
+         			<img src="/si/displayFile?fileName=/${roomDto.user_pic}" height="50">
          			<p>${roomDto.user_name}</p>
          			</th>
          		</tr>
@@ -348,20 +349,20 @@ $(document).ready(function(){
           	<div>
           	<h2 style="font-family: inherit;">후기</h2>
           	
-       		<c:forEach items="${reviewList}" var="RoomReviewVo">  			
+       		<c:forEach items="${reviewList}" var="RoomReviewDto">  			
    			<div class="block-21 mb-4 d-flex">
-               <a class="blog-img mr-4" style="background-image: url(/islagrande/images/image_1.jpg);">${RommReviewVo.user_pic}사용자 사진</a>  
+               <img src="/si/displayFile?fileName=/${RoomReviewDto.user_pic}" height="50">  
                 <div class="text">
                  <table>
                   <tr>
                    <td width=500 style="word-break:break-all">
-                    <h3 class="heading">${RoomReviewVo.room_review_text}</h3>
+                    <h3 class="heading">${RoomReviewDto.room_review_text}</h3>
                    </td>
                   </tr>
                  </table>
                   <div class="meta">
-                    <div><span class="icon-person"></span>${RoomReviewVo.user_email}</div>
-                    <div><span class="icon-calendar"></span>${RoomReviewVo.room_review_write_date}</div>
+                    <div><span class="icon-person"></span>${RoomReviewDto.user_email}</div>
+                    <div><span class="icon-calendar"></span>${RoomReviewDto.room_review_write_date}</div>
                     <hr>
                   </div>
                 </div>
@@ -516,16 +517,19 @@ $(document).ready(function(){
 <!-- 메뉴 좌측쪽 -->
         <div class="col-lg-4 sidebar ftco-animate">
         	<div id="sidebox" style="position: absolute;">
-	         	<div class="sidebar-box subs-wrap">
+	         	<div class="sidebar-box subs-wrap">		 
 	         		<div class="row">
 						<input type="button" value="Check-In" class="mt-2 btn btn-white" style="font-size:20px; margin-left: 15px;" id= "startDate">
 						<input type="button" value="Check-Out" class="mt-2 btn btn-white" style="font-size:20px; margin-left: 15px;" id= "endDate">
 					</div>
-								<h3>Subcribe to our Newsletter</h3>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia</p>
-	              <form action="#" class="subscribe-form">
+<!-- 								<h3>Subcribe to our Newsletter</h3> -->
+<!-- 								<p>Far far away, behind the word mountains, far from the countries Vokalia</p> -->
+	             <form action="/yo/reservation" class="subscribe-form">
 	                <div class="form-group">
-	                  <input type="text" class="form-control" placeholder="Email Address">
+<!-- 	                  <input type="text" class="form-control" placeholder="Email Address"> -->
+					  <input type="hidden" name="room_num" value="${roomDto.room_num}">
+	         		  <input type="hidden" name ="check_in" id="check_in">
+	         		  <input type="hidden" name ="check_out" id="check_out">
 	                  <input type="submit" value="Subscribe" class="mt-2 btn btn-white submit">
 	                </div>
 	              </form>
