@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%@ include file = "../../views/title.jsp"%> <!-- <head> -->
-
-<%@ include file = "../../views/casahotel/casahotel_link.jsp" %>
-<%@ include file = "../../views/islagrande/islagrande_link.jsp" %>
-
+<%@ include file = "../../views/title2.jsp"%> <!-- <head> -->					
+					
+<%@ include file = "../../views/casahotel/casahotel_link2.jsp" %>					
+<%@ include file = "../../views/islagrande/islagrande_link.jsp" %>					
+					
 <%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
 
 <!-- reservation page section -->
@@ -18,6 +18,10 @@ $(function() {
 		// 결제내역 페이지로 이동
 		location.href = "/yo/reservation_list";
 	});
+});
+
+$(function() {
+	$("#pay").val(v);
 });
 
 </script>
@@ -69,7 +73,7 @@ ${userVo}
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="name">총 결제금액</label>
-                  <input type="text" id="pay" class="form-control" value="${roomVo.room_price}">
+                  <input type="text" id="pay" class="form-control" value="${v}">
                 </div>
               </div>
               
@@ -115,9 +119,9 @@ ${userVo}
 
 <!-- end section -->
 
-<%@ include file = "../../views/casahotel/casahotel_footer.jsp" %>
-
-<%@ include file = "../../views/casahotel/casahotel_script.jsp" %>
-<%@ include file = "../../views/islagrande/islagrande_script.jsp" %>
-
-<%@ include file = "../../views/end.jsp"%> <!-- </body> -->
+<%@ include file = "../../views/casahotel/casahotel_footer.jsp" %>				
+				
+<%@ include file = "../../views/casahotel/casahotel_script2.jsp" %>				
+<%@ include file = "../../views/islagrande/islagrande_script2.jsp" %>				
+				
+<%@ include file = "../../views/end.jsp"%> <!-- </body> -->				
