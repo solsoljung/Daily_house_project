@@ -9,9 +9,9 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.kh.dailyhouse.domain.ReservationVo;
 import com.kh.dailyhouse.domain.ReviewPagingDto;
 import com.kh.dailyhouse.domain.RoomDto;
+import com.kh.dailyhouse.domain.RoomPictureVo;
 import com.kh.dailyhouse.domain.RoomReviewDto;
 import com.kh.dailyhouse.domain.RoomReviewVo;
 
@@ -81,6 +81,12 @@ public class BooRoomDetailDaoImpl implements BooRoomDetailDao {
 		}
 				
 		return room_option_explain;
+	}
+
+	@Override
+	public List<RoomPictureVo> getRoomPicInfo(int room_num) throws Exception {
+		List<RoomPictureVo> roomPicInfo = sqlSession.selectList(NAMESPACE+".getRoomPicInfo", room_num);
+		return roomPicInfo;
 	}
 	
 }

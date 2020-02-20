@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.dailyhouse.domain.ReviewPagingDto;
 import com.kh.dailyhouse.domain.RoomDto;
+import com.kh.dailyhouse.domain.RoomPictureVo;
 import com.kh.dailyhouse.domain.RoomReviewDto;
 import com.kh.dailyhouse.domain.RoomReviewVo;
 
@@ -28,4 +29,7 @@ public interface BooRoomDetailDao {
 	
 	//room option 코드판별
 	public String getRoomOption(String room_option_code) throws Exception;
+	
+	//room_pic 정보 얻기
+	public List<RoomPictureVo> getRoomPicInfo(int room_num) throws Exception;
 }

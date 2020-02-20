@@ -80,9 +80,10 @@ $(function(){
 	
 	// 수정하기
 	$("#btnModify").click(function(){
-		$("#btnAddress").show(600); // 주소검색 버튼 보이기
-		$(this).hide(600); 			// 수정하기 버튼 숨기기
-		$("#btnConplete").show(); 	// 수정완료 버튼 보이기
+		$("#btnAddress").show(600); 				  // 주소검색 버튼 보이기
+		$(this).hide(600); 							  // 수정하기 버튼 숨기기
+		$("#btnConplete").show(); 					  // 수정완료 버튼 보이기
+		$("#btnDelete").attr("disabled","disabled");  // 삭제하기 버튼 비활성화
 		
 		$("input[name=room_title]").prop("readonly", false);
 		$("textarea[name=room_explain]").prop("readonly", false);
@@ -115,6 +116,12 @@ $(function(){
 	// 수정완료
 	$("#btnConplete").click(function(e){
 		e.preventDefault();
+		
+		if(listNum < 1){
+			alert("한 장 이상의 숙소 사진을 등록해주세요!");
+			return;
+		}
+		
 		room_location = $("#roadAddrPart1").val();
 		room_location_detail = $("#addrDetail").val();
 		if(room_location == null || room_location == ""){
@@ -200,7 +207,6 @@ $(function(){
 	
 	var listNum = "";
 	
-	
 	// 첨부파일 START ===================================================================================
 	getAttachList();
 	
@@ -253,10 +259,70 @@ $(function(){
 		$.get(url, sendData, function(rData) {
 			console.log(rData);
 			if (rData == "success") {
+				listNum--;
 				that.parent().remove();
 			}
 		});
 	});
+	
+	
+	
+	
+	// 파일 업로드 드래그
+	$("#fileDrop").on("dragenter dragover", function(e) {
+		e.preventDefault();
+	});
+	
+	// 파일 업로드 드롭
+	$("#fileDrop").on("drop", function(e) {
+		e.preventDefault(); // 브라우저로 파일 열기 안하기
+		file = e.originalEvent.dataTransfer.files[0];
+		console.log(file);
+		
+		var formData = new FormData(); // <form>
+		formData.append("file", file); // <input name="file"/>
+		
+		var url = "/upload/uploadAjax"; // UploadController.java
+		// <form enctype="multipart/form-data"
+		// -> enctyp의 기본값: application/x-www-form-urlencoded
+		// "processData":false, "contentType":false
+		
+		$.ajax({
+			"type" : "post",
+			"url" : url,
+			"processData" : false,
+			"contentType" : false,
+			"data" : formData,
+			"success" : function(fullName) {
+				listNum++;
+				console.log("listNum+: " + listNum);
+				console.log(fullName); 
+				// 파일명 얻기
+				var underScoreIndex = fullName.indexOf("_");
+				var fileName = fullName.substring(underScoreIndex + 1); // Penguins.jpg
+				// 썸네일 이미지의 이름 얻기
+				var thumbnailName = getThumbnailName(fullName); // myscript.js
+				console.log("thumbnailName:	" + thumbnailName);
+				var isImage = checkImage(thumbnailName);
+				console.log("isImage:" + isImage);
+				var html = "<div data-filename='"+fullName+"' style='display: inline;'>";
+				if (isImage == true) {
+					html +=
+	"<img class='img-thumbnail' src='/upload/displayFile?fileName=" + thumbnailName + "'/><br>";
+				} else {
+					html += 
+	"<img class='img-thumbnail' src='/resources/images/file_image.png'/><br>";
+				}
+// 				html += "<span>" + fileName + "</span>";
+				html += "<a href='"+fullName+"' class='attach-del' ><span class='right' float='right'>x</span></a>";
+				html += "</div><br>";
+				$("#uploadedList").append(html);
+			}
+		}); // $.ajax()
+	}); // $("#fileDrop").on("drop",
+	
+	
+	
 	// 첨부파일 END ====================================================================================
 	
 	// room_price는 숫자만 입력할 수 있도록 설정
@@ -534,7 +600,7 @@ ${roomDetailDto.room_explain}</textarea><br><br>
 						<label class="lblTitle2" ><input type="checkbox" class="chb" disabled="disabled" 
 						data-option="${roomOptionVo.room_option_code}"/> ${roomOptionVo.room_option_explain}</label><br>
 					</c:forEach>
-					</div><br> 
+					</div><br><br> 
 				
 				<!-- 숙소 공개, 비공개 여부	-->
 				<div class="form-group">

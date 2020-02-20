@@ -69,9 +69,7 @@ $(document).ready(function(){
 		var num = $("#numBox").text();
 		$("input[name=room_people]").val(num);
 		console.log(num);
-		console.log($(this).next().eq(0).text());
-		//여기하는중
-		//$("#frmPage").submit();
+		$("#frmPage").submit();
   	});
 	
 	//가격
@@ -91,17 +89,22 @@ $(document).ready(function(){
 	//룸타입
 	$('.roomtype').on('hidden.bs.dropdown', function(e){
 		e.stopPropagation();
-		console.log("널이 아니다라라라랄");
 		var arrType = [];
+		var arrTypeName = [];
 		$("input:checkbox[name=typeChb]:checked").each(function(){
 			arrType.push($(this).val());
+			arrTypeName.push($(this).next().text());
 		});
 		var joinType = arrType.join("|");
 		if(joinType == ""){
 			joinType = "R1|R2|R3";
 		}
+		var joinTypeName = arrTypeName.join(",");
 		console.log(joinType);
+		console.log(joinTypeName);
 		$("input[name=joinType]").val(joinType);
+		$("input[name=joinTypeName]").val(joinTypeName);
+		//console.log($("input:checkbox[name=typeChb]:checked").next().text());
 		$("#frmPage").submit();
   	});
 	
@@ -258,6 +261,7 @@ ${priceDto}
 	<input type="hidden" name="room_bathroom" value="${searchVo.room_bathroom}"/>
 	<input type="hidden" name="room_bed" value="${searchVo.room_bed}"/>
 	<input type="hidden" name="arrOption" value="${searchVo.arrOption}"/>
+	<input type="hidden" name="joinTypeName" value="${searchVo.joinTypeName}"/>
 </form>
 <!-- 히든 폼 끝 -->
 
@@ -294,7 +298,16 @@ ${priceDto}
 
 <!-- 인원 -->
 <div class="dropdown people" id="d1">
-<button class="btn btn-primary py-3 px-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:20px;margin-bottom:10px;">인원</button>
+<button class="btn btn-primary py-3 px-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:20px;margin-bottom:10px;">
+		<c:choose>
+			<c:when test="${searchVo.room_people > 1}">
+				${searchVo.room_people}명
+			</c:when>
+			<c:otherwise>
+				인원
+			</c:otherwise>
+		</c:choose>
+</button>
 	<div class="dropdown-menu block-27" aria-labelledby="dropdownMenuButton" style="text-align:center;">
 		<ul style="padding:0px;">
 			<li class="nav-item" style="list-style:none;padding-left:0px;"><label style="font-weight:200;">인원 수</label></li>
@@ -308,7 +321,16 @@ ${priceDto}
 </div>
 <!-- 숙소 유형 -->
 <div class="dropdown roomtype">
-<button class="btn btn-primary py-3 px-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:20px;margin-bottom:10px;">숙소 유형</button>
+<button class="btn btn-primary py-3 px-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:20px;margin-bottom:10px;">
+		<c:choose>
+			<c:when test="${searchVo.joinType != 'R1|R2|R3'}">
+				${searchVo.joinTypeName}
+			</c:when>
+			<c:otherwise>
+				숙소 유형
+			</c:otherwise>
+		</c:choose>
+</button>
 	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="text-align:left;">
 		<ul style="padding:0px;">
 			<c:forEach items="${typeList}" var="typeVo">
@@ -321,7 +343,16 @@ ${priceDto}
 
 <!-- 요금 -->
 <div class="dropdown price">
-<button class="btn btn-primary py-3 px-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:20px;margin-bottom:10px;">요금</button>
+<button class="btn btn-primary py-3 px-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:20px;margin-bottom:10px;">
+		<c:choose>
+			<c:when test="${searchVo.low_price != priceDto.min_low_price || searchVo.high_price != priceDto.max_high_price}">
+				${searchVo.low_price} ~ ${searchVo.high_price}
+			</c:when>
+			<c:otherwise>
+				요금
+			</c:otherwise>
+		</c:choose>
+</button>
 	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="text-align:center;">
 		<ul style="padding:0px;">
 			<li class="nav-item" style="list-style:none;padding-left:0px;width:430px;" id="target">
@@ -337,14 +368,19 @@ ${priceDto}
 					<input type="number" id="highPrice" value="${priceDto.max_high_price}" style="font-size:20px;font-weight:200;width:150px;height:40px;margin-left:10px;margin-right:10px;text-align:center;"/>원
 				</c:otherwise>
 			</c:choose>
-			
 			</li>
 		</ul>
 	</div>
 </div>
 <!-- 필터 -->
 <div class="dropdown roomOption">
-<button class="btn btn-primary py-3 px-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:20px;margin-bottom:10px;">필터</button>
+<button class="btn btn-primary py-3 px-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:20px;margin-bottom:10px;
+		<c:choose>
+			<c:when test="${searchVo.room_bathroom != 1 || searchVo.room_bed != 1 || not empty arrOption}">
+				background:#204d74;
+			</c:when>
+		</c:choose>
+">필터</button>
 	<div class="dropdown-menu block-27" aria-labelledby="dropdownMenuButton" style="text-align:left;">
 		<ul style="padding:0px;">
 			<li class="nav-item" style="text-align:center;list-style:none;padding-left:0px;width:300px;"><label style="margin-left:10px;font-weight:200;">침대와 욕실</label></li>
