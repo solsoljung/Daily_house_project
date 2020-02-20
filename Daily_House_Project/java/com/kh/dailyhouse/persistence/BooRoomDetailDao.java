@@ -32,4 +32,14 @@ public interface BooRoomDetailDao {
 	
 	//room_pic 정보 얻기
 	public List<RoomPictureVo> getRoomPicInfo(int room_num) throws Exception;
+	
+	//1구역 사진 정보 얻기
+	public RoomPictureVo getOneAreaPic(int room_num) throws Exception;
+	
+	//2구역 사진 정보 얻기
+	public List<RoomPictureVo> getTwoAreaPic(int room_num) throws Exception;
+	
+	//3구역 사진 정보 얻기
+	public List<RoomPictureVo> getThreeAreapic(int room_num) throws Exception;
+	
 }
