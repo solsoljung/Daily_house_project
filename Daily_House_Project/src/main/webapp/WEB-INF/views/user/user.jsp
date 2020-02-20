@@ -57,6 +57,70 @@ $(function(){
 		$("#btnSubmit").css("display", "none");
 		$("#btnBack").css("display", "none");
 	});
+	$("#fileDrop").on("drop", function(e) {
+		e.preventDefault(); // 브라우저로 파일 열기 안하기
+		file = e.originalEvent.dataTransfer.files[0];
+		console.log(file);
+		
+		var formData = new FormData(); // <form>
+		formData.append("file", file); // <input name="file"/>
+		
+		var url = "/upload/uploadAjax"; // UploadController.java
+		// <form enctype="multipart/form-data"
+		// -> enctyp의 기본값: application/x-www-form-urlencoded
+		// "processData":false, "contentType":false
+		$.ajax({
+			"type" : "post",
+			"url" : url,
+			"processData" : false,
+			"contentType" : false,
+			"data" : formData,
+			"success" : function(fullName) {
+				v++;
+				console.log("v+: " + v);
+				console.log(fullName); 
+				// 파일명 얻기
+				var underScoreIndex = fullName.indexOf("_");
+				var fileName = fullName.substring(underScoreIndex + 1); // Penguins.jpg
+				// 썸네일 이미지의 이름 얻기
+				var thumbnailName = getThumbnailName(fullName); // myscript.js
+				console.log("thumbnailName:	" + thumbnailName);
+				var isImage = checkImage(thumbnailName);
+				console.log("isImage:" + isImage);
+				var html = "<div data-filename='"+fullName+"' style='display: inline;'>";
+				if (isImage == true) {
+					html +=
+	"<img class='img-thumbnail' src='/upload/displayFile?fileName=" + thumbnailName + "'/><br>";
+				} else {
+					html += 
+	"<img class='img-thumbnail' src='/resources/images/file_image.png'/><br>";
+				}
+	//				html += "<span>" + fileName + "</span>";
+				html += "<a href='"+fullName+"' class='attach-del' ><span class='right' float='right'>x</span></a>";
+				html += "</div><br>";
+				$("#uploadedList").append(html);
+			}
+		}); // $.ajax()
+	}); // $("#fileDrop").on("drop",
+		
+		
+// 첨부 파일 삭제 링크
+$("#uploadedList").on("click", ".attach-del", function(e) {
+	e.preventDefault();
+	var that = $(this);
+	var fullName = that.attr("href");
+	console.log("fullName:" + fullName);
+	var url = "/upload/deleteFile";
+	var sendData = {"fileName" : fullName};
+	$.get(url, sendData, function(rData) {
+		console.log(rData);
+		if (rData == "success") {
+			v--;
+			console.log("v-: " + v);
+			that.parent().remove();
+		}
+	});
+});
 });
 </script>
 <br>
