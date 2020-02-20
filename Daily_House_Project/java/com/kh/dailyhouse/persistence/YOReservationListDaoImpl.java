@@ -31,7 +31,7 @@ public class YOReservationListDaoImpl implements YOReservationListDao {
 	}
 
 	@Override
-	public void getPrice() throws Exception {
+	public void getHostInfo() throws Exception {
 		// TODO Auto-generated method stub
 		
 	}

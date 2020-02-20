@@ -6,7 +6,7 @@ import com.kh.dailyhouse.domain.ReservationVo;
 
 public interface YOReservationListService {
 	
-	public void getPrice() throws Exception;
+	public void getHostInfo() throws Exception;
 	
 	public void insertReservation(ReservationVo vo) throws Exception;
 	

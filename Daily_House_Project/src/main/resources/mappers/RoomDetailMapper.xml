@@ -53,4 +53,10 @@
 		where room_option_code = #{room_option_code}
 	</select>
 	
+<!-- 	방의 사진 정보 얻기 -->
+	<select id="getRoomPicInfo" resultType="RoomPictureVo">
+		select * from tbl_room_picture
+		where room_num = #{room_num}
+	</select>
+	
 </mapper>
