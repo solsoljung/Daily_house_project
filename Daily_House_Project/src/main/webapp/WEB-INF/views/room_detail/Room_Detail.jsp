@@ -284,7 +284,7 @@ $(document).ready(function() {
 			<!-- 버튼 모양 -->
             <div class="site-menu-toggle js-site-menu-toggle"  data-aos="fade">
               <span></span>
-              <span></span>
+              <span><br><img src="/images/picture1.png" width="50px"></span>
               <span></span>
             </div>
 
