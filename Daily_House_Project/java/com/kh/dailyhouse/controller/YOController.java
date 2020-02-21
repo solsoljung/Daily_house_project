@@ -33,9 +33,8 @@ public class YOController {
 	@RequestMapping(value="/reservation", method=RequestMethod.GET)
 	public String reservation(HttpSession session, Model model, TestDto testDto) throws Exception {
 		UserVo userVo = (UserVo)session.getAttribute("userVo");
-		
 		model.addAttribute("userVo" + userVo);
-		System.out.println(testDto);
+//		System.out.println(testDto);
 		return "/reservation/reservation_page";
 	}
 	
@@ -54,17 +53,22 @@ public class YOController {
 	
 	// 결제하기
 	@RequestMapping(value="/reservation_insert", method=RequestMethod.POST)
-	public String payment(ReservationVo vo) throws Exception {
-		System.out.println("service:" + service);
-		service.insertReservation(vo);
-		return "/reservation/reservation_list_page";
+	public String payment(TestDto testDto) throws Exception {
+//		System.out.println("service:" + service);
+//		System.out.println("YoController, payment, testDto:"+ testDto);
+		service.insertReservation(testDto);
+		return "redirect:/yo/reservation_list";
 	}
 	
 	// 예약 및 결제내역
 	@RequestMapping(value="/reservation_list", method=RequestMethod.GET)
-	public String reservationList(HttpSession session, Model model) throws Exception {
+	public String reservationList(HttpSession session, Model model, TestDto testDto) throws Exception {
+//		System.out.println("YOController, reservationList, testDto:	" + testDto);
 		UserVo userVo = (UserVo)session.getAttribute("userVo");
-		model.addAttribute("userVo" + userVo);
+		if (userVo == null) {
+			return "redirect:/si/loginHost";
+		}
+//		model.addAttribute("userVo" + userVo);
 //		System.out.println("service:" + service);
 		String user_email = userVo.getUser_email();
 		List<ReservationVo> list = service.getReservationList(user_email);
@@ -84,6 +88,7 @@ public class YOController {
 		}
 		String user_email = userVo.getUser_email();
 		List<LikeVo> likeList = likeService.getLikeList(user_email);
+//		System.out.println("likeList : "+ likeList);
 		model.addAttribute("likeList", likeList);
 		return "/like/like_list_page";
 	}
@@ -93,7 +98,7 @@ public class YOController {
 	@RequestMapping(value="/like_delete/{like_num}", method=RequestMethod.DELETE)
 	@ResponseBody
 	public String deleteLike(@PathVariable("like_num") int like_num) throws Exception {
-		System.out.println("like_num:" + like_num);
+//		System.out.println("like_num:" + like_num);
 		likeService.deleteLike(like_num);
 		return "success";
 	}
