@@ -34,12 +34,13 @@
 		where user_email = #{user_email}
 	</update>
 	
-	<select id="getHomeReview" resultType="RoomReviewVo">
+	<select id="getHomeReview" resultType="HomeReviewDto">
 		select * from
 		(select rownum rnum, a.* from
-		(select * from tbl_room_review
-		order by room_review_num desc) a)
-		where rnum &gt;= 1 and rnum &lt;= 5;
+		(select r.room_title, u.user_name, v.room_review_text, u.user_pic, r.room_num from tbl_user u, tbl_room r, tbl_room_review v
+		where v.user_email = u.user_email and v.room_num = r.room_num
+		order by v.room_review_write_date desc)a)
+		where rnum &gt;= 1 and rnum &lt;= 5
 	</select>
 	
 </mapper>

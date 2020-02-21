@@ -2,7 +2,7 @@ package com.kh.dailyhouse.service;
 
 import java.util.List;
 
-import com.kh.dailyhouse.domain.RoomReviewVo;
+import com.kh.dailyhouse.domain.HomeReviewDto;
 import com.kh.dailyhouse.domain.UserVo;
 
 public interface SiUserService {
@@ -17,6 +17,6 @@ public interface SiUserService {
 	// 유저 비밀번호 수정
 	public void updatePassword(UserVo userVo) throws Exception;
 	
-	public List<RoomReviewVo> getHomeReview() throws Exception;
+	public List<HomeReviewDto> getHomeReview() throws Exception;
 	
 }

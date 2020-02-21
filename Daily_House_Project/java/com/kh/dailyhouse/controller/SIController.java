@@ -33,7 +33,8 @@ public class SIController {
 	@RequestMapping(value = "/displayFile", method =  RequestMethod.GET)
 	@ResponseBody
 	public byte[] displayFile(@RequestParam("fileName") String fileName) throws Exception {
-		String realPath = uploadPath + File.separator + fileName.replace("/", "\\");
+		String realPath = (uploadPath + File.separator + fileName).replace("/", "\\");
+//		String realPath = "\\\\192.168.0.34\\upload\\team3\\2020\\2\\11\\903c87c4-3f26-4924-b9e1-18de123633ca_Jellyfish.jpg";
 		System.out.println("realPath:"+ realPath);
 		FileInputStream is = new FileInputStream(realPath);
 		byte[] bytes = IOUtils.toByteArray(is);

@@ -49,7 +49,7 @@
               <div class="item">
                 <div class="testimony-wrap p-4 pb-5 text-center">
                   <div class="user-img mb-5" style="background-image: url(/islagrande/images/person_3.jpg)">
-                <img src="/si/displayFile?fileName=/${RoomReviewDto.user_pic}" height="100">
+                <img src="/si/displayFile?fileName=/${list.user_pic}" height="100">
                     <span class="quote d-flex align-items-center justify-content-center">
                       <i class="icon-quote-left"></i>
                     </span>

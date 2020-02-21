@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.kh.dailyhouse.domain.RoomReviewVo;
+import com.kh.dailyhouse.domain.HomeReviewDto;
 import com.kh.dailyhouse.domain.UserVo;
 import com.kh.dailyhouse.persistence.SiUserDaoImpl;
 
@@ -42,8 +42,8 @@ public class SiUserServiceImpl implements SiUserService {
 	}
 
 	@Override
-	public List<RoomReviewVo> getHomeReview() throws Exception {
-		List<RoomReviewVo> list = siUserDao.getHomeReview();
+	public List<HomeReviewDto> getHomeReview() throws Exception {
+		List<HomeReviewDto> list = siUserDao.getHomeReview();
 		return list;
 	}
 
