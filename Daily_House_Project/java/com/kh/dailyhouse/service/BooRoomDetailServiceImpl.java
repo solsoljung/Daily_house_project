@@ -50,6 +50,12 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 		
 		//방 사진 정보 얻기
 		List<RoomPictureVo> roomPicInfo = booRoomDetailDao.getRoomPicInfo(room_num);
+		//1구역 사진 정보 얻기
+		RoomPictureVo OneAreaPic = booRoomDetailDao.getOneAreaPic(room_num);
+		//2구역 사진 정보 얻기
+		List<RoomPictureVo> TwoAreaPic = booRoomDetailDao.getTwoAreaPic(room_num);
+		//3구역 사진 정보 얻기
+		List<RoomPictureVo> ThreeAreaPic = booRoomDetailDao.getThreeAreapic(room_num);
 		
 		//방 옵션 코드 받기
 		String optionCode = "";
@@ -63,6 +69,9 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("dto", dto);
 		paramMap.put("roomPicInfo", roomPicInfo);
+		paramMap.put("OneAreaPic", OneAreaPic);
+		paramMap.put("TwoAreaPic", TwoAreaPic);
+		paramMap.put("ThreeAreaPic", ThreeAreaPic);
 		paramMap.put("ReviewList", reviewList);
 		paramMap.put("type", type);
 		

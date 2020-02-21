@@ -49,7 +49,8 @@ $(function() {
         </div>
       </a>
 </section>
-${userVo}
+auserVo: ${userVo}<br>
+testDto: ${testDto}
   <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">
@@ -73,7 +74,7 @@ ${userVo}
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="name">총 결제금액</label>
-                  <input type="text" id="pay" class="form-control" value="${v}">
+                  <input type="text" id="pay" class="form-control" value="${testDto.v * testDto.room_price}원">
                 </div>
               </div>
               
@@ -103,8 +104,12 @@ ${userVo}
           <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
             <div class="row">
               <div class="col-md-10 ml-auto contact-info">
-                <p><span class="d-block">최대인원:</span> <span style="font-size: 1em; font-family: 고딕;">인원</span></p>
-                <p><span class="d-block">금액/1박:</span> <span style="font-size: 1em; font-family: 고딕;">해당 숙소 금액</span></p>
+                <p><span class="d-block">최대인원:</span>
+                	<span style="font-size: 1em; font-family: 고딕;">${testDto.room_people}명</span>
+                </p>
+                <p><span class="d-block">금액/1박:</span>
+                	<span style="font-size: 1em; font-family: 고딕;">${testDto.room_price}원</span>
+                </p>
               </div>
             </div>
           </div>
