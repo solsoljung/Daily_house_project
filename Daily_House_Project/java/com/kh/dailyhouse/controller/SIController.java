@@ -29,7 +29,17 @@ public class SIController {
 	
 	@Inject
 	private SiUserService siUserService;
-	
+	// 업로드 관련 컨트롤러
+	@RequestMapping(value = "/displayFile", method =  RequestMethod.GET)
+	@ResponseBody
+	public byte[] displayFile(@RequestParam("fileName") String fileName) throws Exception {
+		String realPath = uploadPath + File.separator + fileName.replace("/", "\\");
+		System.out.println("realPath:"+ realPath);
+		FileInputStream is = new FileInputStream(realPath);
+		byte[] bytes = IOUtils.toByteArray(is);
+		is.close();
+		return bytes;
+	}
 	//홈으로 가는 컨트롤러
 	@RequestMapping(value = "/goHome", method = RequestMethod.GET)
 	public String goHome() throws Exception {
@@ -131,17 +141,6 @@ public class SIController {
 		rttr.addFlashAttribute("msg", "updatePassword");
 		session.invalidate();
 		return "redirect:/si/loginHost";
-	}
-	
-	@RequestMapping(value = "/displayFile", method =  RequestMethod.GET)
-	@ResponseBody
-	public byte[] displayFile(@RequestParam("fileName") String fileName) throws Exception {
-		String realPath = uploadPath + File.separator + fileName.replace("/", "\\");
-		System.out.println("realPath:"+ realPath);
-		FileInputStream is = new FileInputStream(realPath);
-		byte[] bytes = IOUtils.toByteArray(is);
-		is.close();
-		return bytes;
 	}
 	
 }

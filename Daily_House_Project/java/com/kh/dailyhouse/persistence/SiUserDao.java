@@ -1,5 +1,8 @@
 package com.kh.dailyhouse.persistence;
 
+import java.util.List;
+
+import com.kh.dailyhouse.domain.RoomReviewVo;
 import com.kh.dailyhouse.domain.UserVo;
 
 public interface SiUserDao {
@@ -13,5 +16,7 @@ public interface SiUserDao {
 	public String foundPassword(String user_email) throws Exception;
 	// 유저 비밀번호 수정
 	public void updatePassword(UserVo userVo) throws Exception;
+	// 홈에 넣을 리뷰 얻어오기
+	public List<RoomReviewVo> getHomeReview() throws Exception;
 	
 }
