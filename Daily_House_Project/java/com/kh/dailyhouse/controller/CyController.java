@@ -242,7 +242,7 @@ public class CyController {
 	}
 	
 	// 예약이 있는지 없는지 알아내기
-	@RequestMapping(value="/isReserved/{room_num}", method=RequestMethod.POST)
+	@RequestMapping(value="/isReserved/{room_num}", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public int isReserved(@PathVariable("room_num") int room_num) throws Exception {
 		System.out.println("room_num:" + room_num);

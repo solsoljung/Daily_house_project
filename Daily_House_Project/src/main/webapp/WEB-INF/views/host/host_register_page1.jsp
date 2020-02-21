@@ -109,7 +109,7 @@ $(function(){
 					</div>
 					<div class="col-md-10">
 						<input type="text" id="roadFullAddr" name="roadFullAddr" style="width:100%;" placeholder="Enter Addr" required readonly
-						value="울산광역시 남구 삼산로 143번길 35, 1(달동)"
+						value=""
 						/><br>
 					</div></div>	
 				<div class="row">
@@ -118,7 +118,7 @@ $(function(){
 					</div>
 					<div class="col-md-10">
 						<input type="text" id="roadAddrPart1" name="roadAddrPart1" style="width:100%;" placeholder="Enter Addr" required readonly
-						value="울산광역시 남구 삼산로 143번길 35"
+						value=""
 						/><br>
 					</div></div>
 				<div class="row">
@@ -127,7 +127,7 @@ $(function(){
 					</div>
 					<div class="col-md-10">
 						<input type="text" id="addrDetail" name="addrDetail" style="width:100%;" placeholder="Enter Addr" required readonly
-						value="1"
+						value=""
 						/><br>
 					</div></div>
 				<div class="row">

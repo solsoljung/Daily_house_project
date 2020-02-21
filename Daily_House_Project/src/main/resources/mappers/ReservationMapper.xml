@@ -4,12 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.kh.mappers.ReservationMapper">
-	
-	<!-- 총 결제금액 -->
-	<select id="getHostInfo" resultType="testDto">
-		select room_price * 3 from tbl_room
-		where room_num= #{room_num}
-	</select>
+
 
 	<!-- 예약 목록 보기 테스트-->
 	<select id="getReservationList" resultType="ReservationVo">
@@ -26,8 +21,8 @@
 	
 	<!-- 예약 등록하기 테스트 -->
 	<insert id="insertReservation">
-		insert into tbl_reservation(reserv_num, room_num, user_email, room_reserv_start_date, room_reserv_end_date, room_score)
-		values(#{reserv_num}, #{room_num}, #{user_email}, #{room_reserv_start_date}, #{room_reserv_end_date}, #{room_score})
+		insert into tbl_reservation(reserv_num, room_num, user_email, room_reserv_start_date, room_reserv_end_date, reserv_price)
+		values(seq_reserv_num.nextval, #{room_num}, #{user_email}, #{check_in}, #{check_out}, #{room_price_v})
 	</insert>
   
 </mapper>

@@ -98,6 +98,7 @@ public class SIController {
 		}
 		siUserService.userUpdate(userVo);		// pic에 파일 이름이 들어간채로 데이터 베이스로 감
 		System.out.println("userVo입니다!!"+userVo);
+		System.out.println("");
 		session.setAttribute("userVo", userVo);
 		return "/user/user";
 	}
