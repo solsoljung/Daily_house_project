@@ -153,5 +153,10 @@
 	<select id="getRoomPrice" resultType="RoomLowHighPriceDto">
 		select max(room_price) max_high_price, min(room_price) min_low_price from tbl_room
 	</select>
+	
+	<!-- 검색 목록 ajax -->
+	<select id="getKeywordList" resultType="SearchKeywordDto">
+		select * from tbl_search_location where location_text like '%'|| #{search_keyword} ||'%'
+	</select>
   
 </mapper>

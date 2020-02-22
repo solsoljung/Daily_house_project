@@ -10,13 +10,17 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.dailyhouse.domain.RoomLowHighPriceDto;
 import com.kh.dailyhouse.domain.RoomOptionVo;
 import com.kh.dailyhouse.domain.RoomTypeVo;
 import com.kh.dailyhouse.domain.RoomVo;
+import com.kh.dailyhouse.domain.SearchKeywordDto;
 import com.kh.dailyhouse.domain.SearchVo;
 import com.kh.dailyhouse.service.SolRoomService;
 
@@ -26,6 +30,12 @@ public class SolController {
 
 	@Inject
 	private SolRoomService service;
+	
+	@RequestMapping(value = "/keywordList", method = RequestMethod.GET)
+	public List<SearchKeywordDto> getKeywordList(@RequestBody SearchKeywordDto dto) throws Exception {
+		System.out.println("SearchKeywordDto: "+ dto);
+		return service.getKeywordList(dto);
+	}
 
 	@RequestMapping(value = "/room", method = RequestMethod.GET)
 	public String showRoom(Model model, SearchVo searchVo) throws Exception {

@@ -8,6 +8,7 @@ import com.kh.dailyhouse.domain.RoomLowHighPriceDto;
 import com.kh.dailyhouse.domain.RoomOptionVo;
 import com.kh.dailyhouse.domain.RoomTypeVo;
 import com.kh.dailyhouse.domain.RoomVo;
+import com.kh.dailyhouse.domain.SearchKeywordDto;
 import com.kh.dailyhouse.domain.SearchVo;
 
 public interface SolRoomService {
@@ -23,4 +24,6 @@ public interface SolRoomService {
 	public List<RoomOptionVo> getRoomOption() throws Exception;
 	//룸 최저, 최고가
 	public RoomLowHighPriceDto getRoomPrice() throws Exception;
+	//검색 목록
+	public List<SearchKeywordDto> getKeywordList(SearchKeywordDto dto) throws Exception;
 }

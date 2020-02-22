@@ -37,6 +37,30 @@ input[type="number"]::-webkit-inner-spin-button {
 
 <script>
 $(document).ready(function(){
+	
+	//검색어 리스트
+	$("#searchTarget").keyup(function(){
+		var search_keyword = $(this).val();
+		console.log(search_keyword);
+		var sendData = {
+				"search_keyword" : search_keyword
+		};
+		var url = "/sol/keywordList";
+		$.ajax({
+			"type" : "get",
+			"url" : url,
+			"headers" : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Medtod-Override" : "get"
+			},
+			"dataType" : "text",
+			"data" : JSON.stringify(sendData),
+			"success" : function(rData){
+				console.log(rData);
+			}
+		});
+	});
+	
 	//페이징
 	$(".solge").click(function(e) {
 		e.preventDefault(); 
