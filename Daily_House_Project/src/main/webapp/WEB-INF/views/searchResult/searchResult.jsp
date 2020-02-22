@@ -124,6 +124,49 @@ $(document).ready(function(){
 		$("#frmPage").submit();
   	});
 	
+	//체크된 상태로 가져오기
+	var room_option_code = "${searchVo.arrOption}";	//룸 옵션 선택 된 것 ex> a1,p1...
+	var room_type_code = "${searchVo.joinType}";
+	
+	splitOption();
+	splitType();
+	
+	function splitType() {
+		var myType = room_type_code.split("|"); //선택한 것
+		
+		var data_types = []; //모든 옵션
+		$(".typeChb").each(function(){
+			data_types.push($(this).val());
+		});
+		console.log(data_types);
+		
+		for(var i=0; i<myType.length; i++){
+			for(var v=0; v<data_types.length; v++){
+				if(myType[i] == data_types[v]){
+					$(".typeChb").eq(v).prop("checked", true);
+				}
+			}
+		}
+	};
+	
+	function splitOption() {			
+		var myOption = room_option_code.split(","); //선택한 것
+		console.log(myOption); //["A1", "W1", "B1"]
+		
+		var data_options = []; //모든 옵션
+		$(".optionChb").each(function(){
+			data_options.push($(this).val());
+		});
+		console.log(data_options);
+		
+		for(var i=0; i<myOption.length; i++){
+			for(var v=0; v<data_options.length; v++){
+				if(myOption[i] == data_options[v]){
+					$(".optionChb").eq(v).prop("checked", true);
+				}
+			}
+		}
+	};
 	
 	//체크인
 	$('#startDate').datepicker({
@@ -376,7 +419,7 @@ ${priceDto}
 <div class="dropdown roomOption">
 <button class="btn btn-primary py-3 px-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:20px;margin-bottom:10px;
 		<c:choose>
-			<c:when test="${searchVo.room_bathroom != 1 || searchVo.room_bed != 1 || not empty arrOption}">
+			<c:when test="${searchVo.room_bathroom != 1 || searchVo.room_bed != 1 || not empty searchVo.arrOption}">
 				background:#204d74;
 			</c:when>
 		</c:choose>
@@ -398,7 +441,7 @@ ${priceDto}
 			
 			<li class="nav-item" style="text-align:center;list-style:none;padding-left:0px;width:240px;"><label style="margin-left:10px;font-weight:200;">편의시설</label></li>
 			<c:forEach items="${optionList}" var="optionVo">
-				<li class="nav-item" style="list-style:none;padding-left:0px;width:240px;"><input type="checkbox" class="chb" style="width:20px;height:20px;" value="${optionVo.room_option_code}" name="optionChb"/><label style="margin-left:10px;font-weight:200;">${optionVo.room_option_explain}</label></li>
+				<li class="nav-item" style="list-style:none;padding-left:0px;width:240px;"><input type="checkbox" class="optionChb" style="width:20px;height:20px;" value="${optionVo.room_option_code}" name="optionChb"/><label style="margin-left:10px;font-weight:200;">${optionVo.room_option_explain}</label></li>
 			</c:forEach>
 			
 		</ul>
