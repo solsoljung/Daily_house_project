@@ -42,10 +42,9 @@ $(document).ready(function(){
 	$("#searchTarget").keyup(function(){
 		var search_keyword = $(this).val();
 		console.log(search_keyword);
-		var sendData = {
-				"search_keyword" : search_keyword
-		};
-		var url = "/sol/keywordList";
+		var enkeyword = encodeURI(search_keyword);
+		console.log(enkeyword);
+		var url = "/sol/keywordList/" + encodeURI(search_keyword);
 		$.ajax({
 			"type" : "get",
 			"url" : url,
@@ -54,9 +53,17 @@ $(document).ready(function(){
 				"X-HTTP-Medtod-Override" : "get"
 			},
 			"dataType" : "text",
-			"data" : JSON.stringify(sendData),
 			"success" : function(rData){
-				console.log(rData);
+				$.getJSON(url, function(rData){
+					$("#list").empty();
+					console.log(rData);
+					var strHtml = "";
+					$(rData).each(function(){
+						strHtml += "<a class='list-group-item' href='#'>" + this.location_text + "</a>";
+						
+					});
+					$("#list").append(strHtml);
+				});
 			}
 		});
 	});
@@ -312,8 +319,9 @@ $(document).ready(function(){
 
 <section class="ftco-section ftco-room">
 <div class="container">
-${searchVo}
-${priceDto}
+<%-- ${searchVo}
+${priceDto} --%>
+<span id="targetAjax"></span>
 <!-- 히든 폼 -->
 <form id="frmPage" action="/sol/room" method="get">
 	<input type="hidden" name="room_num" />
@@ -340,7 +348,12 @@ ${priceDto}
 	                <div class="form-group">
 	                  <span class="icon icon-search"></span>
 	                  <input type="text" id="searchTarget" class="form-control" value="${searchVo.keyword}" 
-	                  placeholder="모든 위치" style="font-size:25px;">
+	                  placeholder="모든 위치" style="font-size:25px;" autocomplete="off">
+<!-- 검색결과 -->
+<div id="list">
+	<div class="list-group"></div>
+</div>
+<!-- 검색결과 끝 -->
 	                </div>
 	              </form>
 	        </div>
