@@ -135,6 +135,8 @@
         		r.room_option_code LIKE '%'|| #{option} ||'%'
     		</foreach>
     	</if>
+    		<!-- 공개 여부 -->
+    		 and room_status = 'Y' 
 	</sql>
 	
 	<!-- 방 type -->
