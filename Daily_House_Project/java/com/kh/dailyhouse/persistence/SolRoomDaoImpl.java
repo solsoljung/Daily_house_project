@@ -11,6 +11,7 @@ import com.kh.dailyhouse.domain.RoomLowHighPriceDto;
 import com.kh.dailyhouse.domain.RoomOptionVo;
 import com.kh.dailyhouse.domain.RoomTypeVo;
 import com.kh.dailyhouse.domain.RoomVo;
+import com.kh.dailyhouse.domain.SearchKeywordDto;
 import com.kh.dailyhouse.domain.SearchVo;
 
 @Repository
@@ -50,5 +51,12 @@ public class SolRoomDaoImpl implements SolRoomDao {
 		
 		return sqlSession.selectOne(NAMESPACE + ".getRoomPrice");
 	}
+
+	@Override
+	public List<SearchKeywordDto> getKeywordList(SearchKeywordDto dto) throws Exception {
+		
+		return sqlSession.selectList(NAMESPACE + ".getKeywordList", dto);
+	}
+
 
 }

@@ -20,7 +20,7 @@
 	
 	#fileDrop {
 	width: 100%;
-	height: 100px;
+	height: 200px;
 	border: 1px dashed #fb929e;
 	background-color: #F2F2F2;
 	margin: auto;
@@ -117,11 +117,6 @@ $(function(){
 	$("#btnConplete").click(function(e){
 		e.preventDefault();
 		
-		if(listNum < 1){
-			alert("한 장 이상의 숙소 사진을 등록해주세요!");
-			return;
-		}
-		
 		room_location = $("#roadAddrPart1").val();
 		room_location_detail = $("#addrDetail").val();
 		if(room_location == null || room_location == ""){
@@ -169,13 +164,36 @@ $(function(){
 // 		console.log("room_bed: " + $("input[name=room_bed]").val());	
 // 		console.log("room_bathroom: " + $("input[name=room_bathroom]").val());	
 		
-// 		console.log("room_status: " + $("input[name=room_status]").val());	
+// 		console.log("room_status: " + $("input[name=room_status]").val());
+
+
+		if(listNum < 1){
+			alert("한 장 이상의 숙소 사진을 등록해주세요!");
+			return;
+		}
+		
+		var upDiv = $("#newUploadedList > div");
+		var pics = [];
+		console.log("newUploadedList: " + upDiv);
+		
+		upDiv.each(function(index) {
+			var pic_uri = $(this).attr("data-filename");
+			console.log(pic_uri);
+			pics.push(pic_uri);
+			
+		});
+		console.log("pics: " + pics);
+		
+		$("input[name=pics]").val(pics);
+		console.log("input[name=pics]: " + $("input[name=pics]").val());
+		
 		
 		$("#form").attr("action", "/cy/HostModifyRoom"); 
 		$("#form").submit();
 	}); // btnConplete
 	
 	
+	// 숙소 삭제하기
 	$("#btnDelete").click(function(e){
 		e.preventDefault();
 		var status = "${roomDetailDto.room_status}";
@@ -230,7 +248,7 @@ $(function(){
 				var file_name = full_name.substring(underScoreIndex + 1);
 				var el = $("#attach_template").clone();
 				el.removeAttr("id");
-				el.find("span:first").text(file_name);
+// 				el.find("span:first").text(file_name);
 				var imgEl = el.find("img");
 				if (checkImage(file_name) == true) {
 					var thumbnailName = getThumbnailName(full_name); // myscript.js
@@ -248,7 +266,7 @@ $(function(){
 		});
 	} // function getAttachList()
 	
-	// 첨부 파일과 데이터 삭제 링크
+	// 첨부 파일과 데이터 삭제 링크 uploadedList
 	$("#uploadedList").on("click", ".attach-del", function(e) {
 		e.preventDefault();
 		var that = $(this);
@@ -265,7 +283,22 @@ $(function(){
 		});
 	});
 	
-	
+	// 첨부 파일과 데이터 삭제 링크 newUploadedList
+	$("#newUploadedList").on("click", ".attach-del", function(e) {
+		e.preventDefault();
+		var that = $(this);
+		var fullName = that.attr("href");
+		console.log("fullName:" + fullName);
+		var url = "/upload/deleteFileAndData";
+		var sendData = {"fileName" : fullName};
+		$.get(url, sendData, function(rData) {
+			console.log(rData);
+			if (rData == "success") {
+				listNum--;
+				that.parent().remove();
+			}
+		});
+	});
 	
 	
 	// 파일 업로드 드래그
@@ -316,7 +349,7 @@ $(function(){
 // 				html += "<span>" + fileName + "</span>";
 				html += "<a href='"+fullName+"' class='attach-del' ><span class='right' float='right'>x</span></a>";
 				html += "</div><br>";
-				$("#uploadedList").append(html);
+				$("#newUploadedList").append(html);
 			}
 		}); // $.ajax()
 	}); // $("#fileDrop").on("drop",
@@ -493,7 +526,6 @@ ${roomDetailDto.room_explain}</textarea><br><br>
 					<br><br>
 					
 					<!-- 첨부 파일 목록 템플릿 : clone해서 사용 -->
-					
 					<div id="attach_template" style="display:none;" data-filename="">
 						<img class="img-thumbnail"><br>
 						<span></span>
@@ -504,6 +536,13 @@ ${roomDetailDto.room_explain}</textarea><br><br>
 					<div class="form-group">
 						<label for="uploadedList" class="lblTitle2" id="lblUploadList">* 첨부파일</label>
 						<div id="uploadedList">
+						
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="newUploadedList" class="lblTitle2"></label>
+						<div id="newUploadedList">
 						
 						</div>
 					</div>

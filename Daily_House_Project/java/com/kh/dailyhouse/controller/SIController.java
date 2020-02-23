@@ -29,7 +29,18 @@ public class SIController {
 	
 	@Inject
 	private SiUserService siUserService;
-	
+	// 업로드 관련 컨트롤러
+	@RequestMapping(value = "/displayFile", method =  RequestMethod.GET)
+	@ResponseBody
+	public byte[] displayFile(@RequestParam("fileName") String fileName) throws Exception {
+		String realPath = (uploadPath + File.separator + fileName).replace("/", "\\");
+//		String realPath = "\\\\192.168.0.34\\upload\\team3\\2020\\2\\11\\903c87c4-3f26-4924-b9e1-18de123633ca_Jellyfish.jpg";
+		System.out.println("realPath:"+ realPath);
+		FileInputStream is = new FileInputStream(realPath);
+		byte[] bytes = IOUtils.toByteArray(is);
+		is.close();
+		return bytes;
+	}
 	//홈으로 가는 컨트롤러
 	@RequestMapping(value = "/goHome", method = RequestMethod.GET)
 	public String goHome() throws Exception {
@@ -63,17 +74,13 @@ public class SIController {
 	public String login_run(HttpSession session, RedirectAttributes rttr, UserVo userVo) throws Exception{
 		// 요청정보 얻어서
 		UserVo userVo1 = siUserService.login_run(userVo);
-//		System.out.println("userVo1 : "+userVo1);
 		// DB 에 넣기 - Service - Dao - Mybatis - Oracle
-//		if ()
 		
 		if(userVo1 == null) {
 			rttr.addFlashAttribute("msg", "fail");
 			return "redirect:/si/loginHost";
 		}
 		session.setAttribute("userVo", userVo1);
-		
-//		System.out.println(session.getAttribute("userVo"));
 		rttr.addFlashAttribute("msg", "success");
 		return "redirect:/";
 	}
@@ -98,11 +105,11 @@ public class SIController {
 		String checkPath = path.substring(path.length() - 3);
 		
 		if(checkPath.equals("jpg") || checkPath.equals("png") || checkPath.equals("jpeg")) {
-			System.out.println("실행함");
 			userVo.setUser_pic(path); 	// pic에 파일 이름 넣음
 		}
 		siUserService.userUpdate(userVo);		// pic에 파일 이름이 들어간채로 데이터 베이스로 감
 		System.out.println("userVo입니다!!"+userVo);
+		System.out.println("");
 		session.setAttribute("userVo", userVo);
 		return "/user/user";
 	}
@@ -135,17 +142,6 @@ public class SIController {
 		rttr.addFlashAttribute("msg", "updatePassword");
 		session.invalidate();
 		return "redirect:/si/loginHost";
-	}
-	
-	@RequestMapping(value = "/displayFile", method =  RequestMethod.GET)
-	@ResponseBody
-	public byte[] displayFile(@RequestParam("fileName") String fileName) throws Exception {
-		String realPath = uploadPath + File.separator + fileName.replace("/", "\\");
-		System.out.println("realPath:"+ realPath);
-		FileInputStream is = new FileInputStream(realPath);
-		byte[] bytes = IOUtils.toByteArray(is);
-		is.close();
-		return bytes;
 	}
 	
 }

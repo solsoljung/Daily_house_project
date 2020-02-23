@@ -16,48 +16,6 @@ $(function() {
 	
 	var v = 0;
 	
-// 	// 데이트 피커
-// 	//달력
-// 	// 체크인 start
-// 	$('#datePickerStart').datepicker({
-// 		format: "yyyy-mm-dd",
-// 	    startDate: '1d',
-// 	    autoclose : true,
-// 	    datesDisabled : [],	//'2020-02-18','2020-02-20'이런 형식
-// 	    multidateSeparator :",",
-// 	    templates : {
-// 	        leftArrow: '&laquo;',
-// 	        rightArrow: '&raquo;'
-// 	    },
-// 	    showWeekDays : true ,
-// 	    title: "체크인 날짜 선택",
-// 	    todayHighlight : true ,
-// 	    toggleActive : true,
-// 	    weekStart : 0 ,
-// 	    language : "ko"
-// 	});
-// 	// 체크인 end
-
-// 	// 체크아웃 start
-// 	$('#datePickerEnd').datepicker({
-// 		format: "yyyy-mm-dd",
-// 		startDate: '1d',
-// 		autoclose : true,
-// 		datesDisabled : [],
-// 		multidateSeparator :",",
-// 		templates : {
-// 		    leftArrow: '&laquo;',
-// 		    rightArrow: '&raquo;'
-// 		 },
-// 		showWeekDays : true ,
-// 		title: "체크아웃 날짜 선택",
-// 		todayHighlight : true ,
-// 		toggleActive : true,
-// 		weekStart : 0 ,
-// 		language : "ko"
-// 	});
-// 	// 체크아웃 end
-	
 	// 날짜 사이 세기
 	$("#reservationBtn").click(function() {
 		var date1_val = $("#dateCheckIn").val();
@@ -110,17 +68,13 @@ $(function() {
 		}
 		// 
 // 		v = 3;
-		
+		$("input[name=v]").val(v);
 		console.log("v:" + v);
-		location.href = "/yo/reservation_pay?v=" + v;
- 	});
-
-	
-	// 결제 페이지로 이동
-// 	$("#reservationBtn").click(function() {
-// 		console.log("v:" + v);
+		
+		$("#reservation").submit();
 // 		location.href = "/yo/reservation_pay?v=" + v;
-// 	});
+ 	}); // reservationBtn click
+
 
 	
 	// 인원수 빼고 더하기
@@ -200,13 +154,20 @@ $(function() {
         </div>
       </a>
 </section>
-${userVo}<br>
-${testDto}
+userVo: ${userVo}<br>
+testDTo: ${testDto}
    <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
-            <form action="/yo/reservation_pay" method="post" id="reservation" class="bg-white p-md-5 p-4 mb-5 border">
+            <form action="/yo/reservation_pay" id="reservation" class="bg-white p-md-5 p-4 mb-5 border">
+	          <input type="hidden" name="room_num" value="${testDto.room_num}">
+	          <input type="hidden" name ="check_in" value="${testDto.check_in}">
+	          <input type="hidden" name ="check_out" value="${testDto.check_out}">
+	          <input type="hidden" name="room_title" value="${testDto.room_title}">
+	          <input type="hidden" name="room_price" value="${testDto.room_price}">
+	          <input type="hidden" name="room_people" value="${testDto.room_people}">
+	          <input type="hidden" name="v" value="">
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="name">예약자</label>
@@ -283,9 +244,15 @@ ${testDto}
           <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
             <div class="row">
               <div class="col-md-10 ml-auto contact-info">
-                <p><span class="d-block">숙소명:</span> <span style="font-size: 1em; font-family: 고딕;">숙소 이름</span></p>
-                <p><span class="d-block">주소:</span> <span style="font-size: 1em; font-family: 고딕;">해당 숙소 주소</span></p>
-                <p><span class="d-block">Email:</span> <span style="font-size: 1em; font-family: 고딕;">해당 숙소 이메일</span></p>
+                <p><span class="d-block">숙소명:</span> 
+                	<span style="font-size: 1em; font-family: 고딕;">${testDto.room_title}</span>
+                </p>
+                <p><span class="d-block">주소:</span>
+                	<span style="font-size: 1em; font-family: 고딕;">${testDto.room_location}</span>
+                </p>
+                <p><span class="d-block">Email:</span> 
+                	<span style="font-size: 1em; font-family: 고딕;">${testDto.user_email}</span>
+                </p>
               </div>
             </div>
           </div>

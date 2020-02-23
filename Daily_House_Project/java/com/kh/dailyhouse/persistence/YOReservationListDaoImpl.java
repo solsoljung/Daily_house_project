@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.dailyhouse.domain.ReservationVo;
+import com.kh.dailyhouse.domain.TestDto;
 
 @Repository
 public class YOReservationListDaoImpl implements YOReservationListDao {
@@ -26,13 +27,10 @@ public class YOReservationListDaoImpl implements YOReservationListDao {
 	}
 
 	@Override
-	public void insertReservation(ReservationVo vo) throws Exception {
-		sqlSession.insert(NAMESPACE + ".insertReservation", vo);
+	public void insertReservation(TestDto testDto) throws Exception {
+		testDto.setRoom_price_v(testDto.getRoom_price() * testDto.getV());
+		sqlSession.insert(NAMESPACE + ".insertReservation", testDto);
 	}
 
-	@Override
-	public void getHostInfo() throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
+
 }

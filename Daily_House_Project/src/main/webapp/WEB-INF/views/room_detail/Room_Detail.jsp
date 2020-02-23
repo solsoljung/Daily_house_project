@@ -237,6 +237,33 @@ $(document).ready(function(){
 });
 </script>
 
+<!-- 이미지 사진첩 -->
+<script>
+$(document).ready(function() {
+	var index = 0;
+	var pics = $("#roomPic > img");
+	var len = pics.length;
+	pics.eq(index).show();
+	
+	$("#btn_pic_prev").click(function() {
+		pics.eq(index).hide();
+		index--;
+		if (index < 0) {
+			index = len - 1;
+		}
+		pics.eq(index).show();
+	});
+	$("#btn_pic_next").click(function() {
+		pics.eq(index).hide();
+		index++;
+		if (index > len-1) {
+			index = 0;
+		}
+		pics.eq(index).show();
+	});
+});
+</script>
+
 <%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
 
 
@@ -247,32 +274,60 @@ $(document).ready(function(){
 <!-- section -->
 <!-- 이미지 뷰 -->
 <div id="mainImg">
-<section class="home-slider js-fullheight owl-carousel">
-      <div class="slider-item js-fullheight" style="background-image:url(/islagrande/images/bg_3.jpg);">
-      	<div class="overlay"></div>
-        <div class="container">
-          <div class="row slider-text justify-content-center align-items-center">
+	<header class="site-header">
+	<br>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-4 site-logo" data-aos="fade"></div>
+          <div class="col-8">
 
-            <div class="col-md-7 col-sm-12 text-center ftco-animate">
-            	<h1 class="mb-3 mt-2 bread">Blog</h1>
-	            <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span class="mr-2"><a href="blog.html">Blog</a></span> <span>Blog Single</span></p>
+			<!-- 버튼 모양 -->
+            <div class="site-menu-toggle js-site-menu-toggle"  data-aos="fade">
+              <span></span>
+              <span><br><img src="/images/picture1.png" width="50px"></span>
+              <span></span>
             </div>
 
+            <!-- 화면 전환이 되면서 흰색 배경이 됨  -->
+            <div class="site-navbar js-site-navbar">
+              <nav role="navigation">
+                <div class="container">
+                  <div class="row full-height align-items-center">
+                  
+                      <!-- 사진 넣는 부분 -->
+                      <div id="roomPic">
+	                      <c:forEach items="${roomPicInfoList}" var="RoomPictureVo">
+							<img src="/si/displayFile?fileName=/${RoomPictureVo.pic_uri}" width="100%" style="display: none;">
+						  </c:forEach>
+						  <button id="btn_pic_prev" class="btn btn-primary py-3 px-5">&lt;</button>
+						  <button id="btn_pic_next" class="btn btn-primary py-3 px-5">&gt;</button>
+					  </div>
+					  
+                  </div>
+                </div>
+              </nav>
+            </div>
           </div>
         </div>
       </div>
-</section>
-</div>
+    </header>
 
+    <section class="site-hero inner-page overlay" style="background-image: url(/si/displayFile?fileName=/${OneAreaPic.pic_uri})" data-stellar-background-ratio="0.5">
+      <div class="container">
+        <div class="row site-hero-inner justify-content-center align-items-center text-center">
+          <div class="col-md-10 text-center" data-aos="fade-up">
+          </div>
+        </div>
+      </div>
+    </section>	
+    
+</div>
 <!-- /이미지 뷰 -->
 		<section class="ftco-section">
       <div class="container">
         <div class="row">
 <!-- 내용 센터쪽 -->
           <div class="col-lg-8 ftco-animate">
-				<c:forEach items="${roomPicInfoList}" var="RoomPictureVo">
-					${RoomPictureVo.pic_uri}
-				</c:forEach>
 <!--          	 방의 기본정보 -->
          	<table>
          		<tr>
@@ -535,7 +590,7 @@ $(document).ready(function(){
 	         		  <input type="hidden" name="room_title" value="${roomDto.room_title}">
 	         		  <input type="hidden" name="room_price" value="${roomDto.room_price}">
 	         		  <input type="hidden" name="room_people" value="${roomDto.room_people}">
-	                  <input type="submit" value="Subscribe" class="mt-2 btn btn-white submit">
+	                  <input type="submit" value="예약 하기" class="mt-2 btn btn-white submit">
 	                </div>
 	              </form>
 	            </div>

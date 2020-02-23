@@ -54,9 +54,13 @@ public class CyRoomServiceImpl implements CyRoomService {
 	@Transactional
 	@Override
 	public void registerRoom(RoomVo roomVo) throws Exception {
+		// 다음 시퀸스 번호(seq_room_num) 알아내기
 		int room_num = roomDao.getNextRoomNum();
 		roomVo.setRoom_num(room_num);
+		
+		// 숙소 등록
 		roomDao.registerRoom(roomVo);
+		
 		// 사진파일 업로드
 		String[] pics = roomVo.getPics();
 		if(pics != null && pics.length != 0) {
@@ -73,9 +77,19 @@ public class CyRoomServiceImpl implements CyRoomService {
 	}
 
 	// 숙소 정보 수정하기
+	// 사진파일 업로드
 	@Override
 	public void updateHostRoom(RoomVo roomVo) throws Exception {
+		// 숙소 정보 수정
 		roomDao.updateHostRoom(roomVo);
+		
+		// 파일 업로드
+		String[] pics = roomVo.getPics();
+		if(pics != null && pics.length != 0) {
+			for(String pic_uri : pics) {
+				roomDao.attach(pic_uri, roomVo.getRoom_num());
+			}
+		}
 		// 사진파일도 수정
 	}
 	

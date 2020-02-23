@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.kh.dailyhouse.domain.ReservationVo;
+import com.kh.dailyhouse.domain.TestDto;
 import com.kh.dailyhouse.persistence.YOReservationListDao;
 
 @Service
@@ -23,14 +24,10 @@ public class YOReservationListServiceImpl implements YOReservationListService {
 	}
 
 	@Override
-	public void insertReservation(ReservationVo vo) throws Exception {
-		dao.insertReservation(vo);
+	public void insertReservation(TestDto testDto) throws Exception {
+		dao.insertReservation(testDto);
 	}
 
-	@Override
-	public void getHostInfo() throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 }

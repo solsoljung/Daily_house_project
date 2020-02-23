@@ -54,6 +54,8 @@
 	</div>
 </section>
 <section>
+userVo: ${userVo}<br>
+testDto: ${testDto}
 <div class="container-fluid">
 	<div class="row">
 	<div class="col-md-2">
@@ -78,7 +80,7 @@
 							<td>${reservationVo.user_email}</td>
 							<td>${reservationVo.room_reserv_start_date}</td>
 							<td>${reservationVo.room_reserv_end_date}</td>
-							<td>200,000</td>
+							<td>${reservationVo.reserv_price}</td>
 						</tr>
 					</c:forEach>
 				</tbody>

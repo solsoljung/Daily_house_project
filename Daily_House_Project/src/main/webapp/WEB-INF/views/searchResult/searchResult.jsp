@@ -37,6 +37,66 @@ input[type="number"]::-webkit-inner-spin-button {
 
 <script>
 $(document).ready(function(){
+	
+	var which = 0;
+	
+	//검색어 리스트
+	$("#searchTarget").keyup(function(e){
+		if(e.keyCode == 40){
+			//이상하게 첫번째에 누르면 왜 이상한게 실행되지
+			console.log("아래");
+			console.log(which);
+			if(which > 0){
+				console.log("remove");
+				$("#list").children().removeClass("active");
+			}
+			$("#list").children().eq(which).addClass("active");
+			which++;
+		} else if(e.keyCode == 38){
+			console.log("위");
+			console.log(which);
+			$("#list").children().removeClass("active");
+			$("#list").children().eq(which).addClass("active");
+			which--;
+		} else if(e.keyCode == 13){
+			console.log("enter");
+			var keyword = $("#list").children().eq(which).text();
+			console.log(keyword);
+			$(this).val(keyword);
+			$("input[name=keyword]").val(keyword);
+			$("#frmPage").submit();
+			//여기
+		} else if(e.keyCode != 40 && e.keyCode != 38 && e.keyCode != 13){
+			console.log("무엇도 아님");
+			var search_keyword = $(this).val();
+			console.log(search_keyword);
+			var enkeyword = encodeURI(search_keyword);
+			console.log(enkeyword);
+			var url = "/sol/keywordList/" + encodeURI(search_keyword);
+			$.ajax({
+				"type" : "get",
+				"url" : url,
+				"headers" : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Medtod-Override" : "get"
+				},
+				"dataType" : "text",
+				"success" : function(rData){
+					$.getJSON(url, function(rData){
+						$("#list").empty();
+						console.log(rData);
+						var strHtml = "";
+						$(rData).each(function(){
+							strHtml += "<a class='list-group-item' data-keyword='"+ this.location_text +"'>" + this.location_text + "</a>";
+						});
+						$("#list").append(strHtml);
+						which = 0;
+					});
+				}
+			});
+		}
+	});
+	
 	//페이징
 	$(".solge").click(function(e) {
 		e.preventDefault(); 
@@ -56,12 +116,12 @@ $(document).ready(function(){
 	
 	//검색
 	$("#searchTarget").keyup(function(e){
-		if(e.keyCode == 13){
+		/* if(e.keyCode == 13){
 			var keyword = $(this).val();
 			console.log(keyword);
 			$("input[name=keyword]").val(keyword);
 			$("#frmPage").submit();
-		}
+		} */
 	});
 	
 	//인원
@@ -124,6 +184,49 @@ $(document).ready(function(){
 		$("#frmPage").submit();
   	});
 	
+	//체크된 상태로 가져오기
+	var room_option_code = "${searchVo.arrOption}";	//룸 옵션 선택 된 것 ex> a1,p1...
+	var room_type_code = "${searchVo.joinType}";
+	
+	splitOption();
+	splitType();
+	
+	function splitType() {
+		var myType = room_type_code.split("|"); //선택한 것
+		
+		var data_types = []; //모든 옵션
+		$(".typeChb").each(function(){
+			data_types.push($(this).val());
+		});
+		console.log(data_types);
+		
+		for(var i=0; i<myType.length; i++){
+			for(var v=0; v<data_types.length; v++){
+				if(myType[i] == data_types[v]){
+					$(".typeChb").eq(v).prop("checked", true);
+				}
+			}
+		}
+	};
+	
+	function splitOption() {			
+		var myOption = room_option_code.split(","); //선택한 것
+		console.log(myOption); //["A1", "W1", "B1"]
+		
+		var data_options = []; //모든 옵션
+		$(".optionChb").each(function(){
+			data_options.push($(this).val());
+		});
+		console.log(data_options);
+		
+		for(var i=0; i<myOption.length; i++){
+			for(var v=0; v<data_options.length; v++){
+				if(myOption[i] == data_options[v]){
+					$(".optionChb").eq(v).prop("checked", true);
+				}
+			}
+		}
+	};
 	
 	//체크인
 	$('#startDate').datepicker({
@@ -247,8 +350,9 @@ $(document).ready(function(){
 <div class="container">
 ${searchVo}
 ${priceDto}
+<span id="targetAjax"></span>
 <!-- 히든 폼 -->
-<form id="frmPage" action="/sol/room" method="get">
+<form id="frmPage" action="/sol/room" method="post">
 	<input type="hidden" name="room_num" />
 	<input type="hidden" name="page" value="${searchVo.page}"/>
 	<input type="hidden" name="keyword" value="${searchVo.keyword}"/>
@@ -273,7 +377,12 @@ ${priceDto}
 	                <div class="form-group">
 	                  <span class="icon icon-search"></span>
 	                  <input type="text" id="searchTarget" class="form-control" value="${searchVo.keyword}" 
-	                  placeholder="모든 위치" style="font-size:25px;">
+	                  placeholder="모든 위치" style="font-size:25px;" autocomplete="off">
+<!-- 검색결과 -->
+<div id="list">
+	<div class="list-group"></div>
+</div>
+<!-- 검색결과 끝 -->
 	                </div>
 	              </form>
 	        </div>
@@ -376,7 +485,7 @@ ${priceDto}
 <div class="dropdown roomOption">
 <button class="btn btn-primary py-3 px-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:20px;margin-bottom:10px;
 		<c:choose>
-			<c:when test="${searchVo.room_bathroom != 1 || searchVo.room_bed != 1 || not empty arrOption}">
+			<c:when test="${searchVo.room_bathroom != 1 || searchVo.room_bed != 1 || not empty searchVo.arrOption}">
 				background:#204d74;
 			</c:when>
 		</c:choose>
@@ -398,7 +507,7 @@ ${priceDto}
 			
 			<li class="nav-item" style="text-align:center;list-style:none;padding-left:0px;width:240px;"><label style="margin-left:10px;font-weight:200;">편의시설</label></li>
 			<c:forEach items="${optionList}" var="optionVo">
-				<li class="nav-item" style="list-style:none;padding-left:0px;width:240px;"><input type="checkbox" class="chb" style="width:20px;height:20px;" value="${optionVo.room_option_code}" name="optionChb"/><label style="margin-left:10px;font-weight:200;">${optionVo.room_option_explain}</label></li>
+				<li class="nav-item" style="list-style:none;padding-left:0px;width:240px;"><input type="checkbox" class="optionChb" style="width:20px;height:20px;" value="${optionVo.room_option_code}" name="optionChb"/><label style="margin-left:10px;font-weight:200;">${optionVo.room_option_explain}</label></li>
 			</c:forEach>
 			
 		</ul>

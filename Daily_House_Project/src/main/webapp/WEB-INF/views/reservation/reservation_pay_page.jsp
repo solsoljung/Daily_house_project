@@ -14,9 +14,7 @@
 $(function() {
 	$("#payBtn").click(function() {
 		// 결제금액 포인트가 차감되어야 하므로 tbl_user의 포인트 업데이트
-		// 결제내역 페이지에 저장된 정보를 insert 하기
-		// 결제내역 페이지로 이동
-		location.href = "/yo/reservation_list";
+		$("#reservation_pay").submit();
 	});
 });
 
@@ -49,13 +47,20 @@ $(function() {
         </div>
       </a>
 </section>
-${userVo}
+userVo: ${userVo}<br>
+testDto: ${testDto}
   <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
             
-            <form action="#" method="post" class="bg-white p-md-5 p-4 mb-5 border">
+            <form action="/yo/reservation_insert" id="reservation_pay" method="post" class="bg-white p-md-5 p-4 mb-5 border">
+              <input type="hidden" name="user_email" value="${userVo.user_email}">
+              <input type="hidden" name="room_num" value="${testDto.room_num}">
+	          <input type="hidden" name ="check_in" value="${testDto.check_in}">
+	          <input type="hidden" name ="check_out" value="${testDto.check_out}">
+	          <input type="hidden" name ="room_price" value="${testDto.room_price}">
+	          <input type="hidden" name="v" value="${testDto.v}">
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="name">예약자</label>
@@ -73,7 +78,7 @@ ${userVo}
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="name">총 결제금액</label>
-                  <input type="text" id="pay" class="form-control" value="${v}">
+                  <input type="text" id="pay" class="form-control" value="${testDto.v * testDto.room_price}원">
                 </div>
               </div>
               
@@ -103,8 +108,12 @@ ${userVo}
           <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
             <div class="row">
               <div class="col-md-10 ml-auto contact-info">
-                <p><span class="d-block">최대인원:</span> <span style="font-size: 1em; font-family: 고딕;">인원</span></p>
-                <p><span class="d-block">금액/1박:</span> <span style="font-size: 1em; font-family: 고딕;">해당 숙소 금액</span></p>
+                <p><span class="d-block">최대인원:</span>
+                	<span style="font-size: 1em; font-family: 고딕;">${testDto.room_people}명</span>
+                </p>
+                <p><span class="d-block">금액/1박:</span>
+                	<span style="font-size: 1em; font-family: 고딕;">${testDto.room_price}원</span>
+                </p>
               </div>
             </div>
           </div>
