@@ -42,7 +42,7 @@ public class SolController {
 		return service.getKeywordList(dto);
 	}
 
-	@RequestMapping(value = "/room", method = RequestMethod.GET)
+	@RequestMapping(value = "/room", method = {RequestMethod.GET, RequestMethod.POST})
 	public String showRoom(Model model, SearchVo searchVo) throws Exception {
 		System.out.println("room get 실행됨");
 		System.out.println("searchVo:" + searchVo);
