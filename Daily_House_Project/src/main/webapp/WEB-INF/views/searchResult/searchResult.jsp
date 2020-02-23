@@ -42,26 +42,32 @@ $(document).ready(function(){
 	
 	//검색어 리스트
 	$("#searchTarget").keyup(function(e){
-		
-		if(e.which == 40){
+		if(e.keyCode == 40){
+			//이상하게 첫번째에 누르면 왜 이상한게 실행되지
 			console.log("아래");
 			console.log(which);
 			if(which > 0){
 				console.log("remove");
-				$("#list").children().eq(which - 1).removeClass("active");
+				$("#list").children().removeClass("active");
 			}
 			$("#list").children().eq(which).addClass("active");
 			which++;
-		} else if(e.which == 38){
+		} else if(e.keyCode == 38){
 			console.log("위");
-		} else if(e.which == 13){
-			e.preventDefault();
+			console.log(which);
+			$("#list").children().removeClass("active");
+			$("#list").children().eq(which).addClass("active");
+			which--;
+		} else if(e.keyCode == 13){
 			console.log("enter");
 			var keyword = $("#list").children().eq(which).text();
 			console.log(keyword);
-			$("#searchTarget").val(keyword);
+			$(this).val(keyword);
+			$("input[name=keyword]").val(keyword);
+			$("#frmPage").submit();
 			//여기
-		} else {
+		} else if(e.keyCode != 40 && e.keyCode != 38 && e.keyCode != 13){
+			console.log("무엇도 아님");
 			var search_keyword = $(this).val();
 			console.log(search_keyword);
 			var enkeyword = encodeURI(search_keyword);
@@ -342,8 +348,8 @@ $(document).ready(function(){
 
 <section class="ftco-section ftco-room">
 <div class="container">
-<%-- ${searchVo}
-${priceDto} --%>
+${searchVo}
+${priceDto}
 <span id="targetAjax"></span>
 <!-- 히든 폼 -->
 <form id="frmPage" action="/sol/room" method="get">
