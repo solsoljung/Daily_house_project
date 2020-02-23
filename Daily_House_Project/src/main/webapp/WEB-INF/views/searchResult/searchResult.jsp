@@ -38,34 +38,57 @@ input[type="number"]::-webkit-inner-spin-button {
 <script>
 $(document).ready(function(){
 	
+	var which = 0;
+	
 	//검색어 리스트
-	$("#searchTarget").keyup(function(){
-		var search_keyword = $(this).val();
-		console.log(search_keyword);
-		var enkeyword = encodeURI(search_keyword);
-		console.log(enkeyword);
-		var url = "/sol/keywordList/" + encodeURI(search_keyword);
-		$.ajax({
-			"type" : "get",
-			"url" : url,
-			"headers" : {
-				"Content-Type" : "application/json",
-				"X-HTTP-Medtod-Override" : "get"
-			},
-			"dataType" : "text",
-			"success" : function(rData){
-				$.getJSON(url, function(rData){
-					$("#list").empty();
-					console.log(rData);
-					var strHtml = "";
-					$(rData).each(function(){
-						strHtml += "<a class='list-group-item' href='#'>" + this.location_text + "</a>";
-						
-					});
-					$("#list").append(strHtml);
-				});
+	$("#searchTarget").keyup(function(e){
+		
+		if(e.which == 40){
+			console.log("아래");
+			console.log(which);
+			if(which > 0){
+				console.log("remove");
+				$("#list").children().eq(which - 1).removeClass("active");
 			}
-		});
+			$("#list").children().eq(which).addClass("active");
+			which++;
+		} else if(e.which == 38){
+			console.log("위");
+		} else if(e.which == 13){
+			e.preventDefault();
+			console.log("enter");
+			var keyword = $("#list").children().eq(which).text();
+			console.log(keyword);
+			$("#searchTarget").val(keyword);
+			//여기
+		} else {
+			var search_keyword = $(this).val();
+			console.log(search_keyword);
+			var enkeyword = encodeURI(search_keyword);
+			console.log(enkeyword);
+			var url = "/sol/keywordList/" + encodeURI(search_keyword);
+			$.ajax({
+				"type" : "get",
+				"url" : url,
+				"headers" : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Medtod-Override" : "get"
+				},
+				"dataType" : "text",
+				"success" : function(rData){
+					$.getJSON(url, function(rData){
+						$("#list").empty();
+						console.log(rData);
+						var strHtml = "";
+						$(rData).each(function(){
+							strHtml += "<a class='list-group-item' data-keyword='"+ this.location_text +"'>" + this.location_text + "</a>";
+						});
+						$("#list").append(strHtml);
+						which = 0;
+					});
+				}
+			});
+		}
 	});
 	
 	//페이징
@@ -87,12 +110,12 @@ $(document).ready(function(){
 	
 	//검색
 	$("#searchTarget").keyup(function(e){
-		if(e.keyCode == 13){
+		/* if(e.keyCode == 13){
 			var keyword = $(this).val();
 			console.log(keyword);
 			$("input[name=keyword]").val(keyword);
 			$("#frmPage").submit();
-		}
+		} */
 	});
 	
 	//인원
