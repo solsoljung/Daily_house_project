@@ -28,4 +28,11 @@ public class BooDatepickerController {
 		List<String> CheckInList = booDatepickerService.getCheckInIndex(room_num);
 		return CheckInList;
 	}
+	
+	@RequestMapping(value="/status/{room_num}", method= RequestMethod.GET)
+	public String getRoomStatus(@PathVariable("room_num") int room_num) throws Exception {
+		System.out.println("확인용 : " + room_num);
+		String status = booDatepickerService.getRoomStatus(room_num);
+		return status;
+	}
 }

@@ -36,5 +36,11 @@ public class BooDatepickerServiceImpl implements BooDatepickerService {
 		}
 		return CheckInList;
 	}
+
+	@Override
+	public String getRoomStatus(int room_num) throws Exception {
+		String status = booDatepickerDao.getRoomStatus(room_num);
+		return status;
+	}
 	
 }
