@@ -33,5 +33,11 @@
 		where reserv_num = #{reserv_num}
 	</select>
 	
+<!-- 	공개, 비공개 확인용 -->
+	<select id="getRoomStatus" resultType="String">
+		select room_status from tbl_room
+		where room_num = #{room_num}
+	</select>
+	
 	
 </mapper>

@@ -52,5 +52,12 @@ public class BooDatepickerDaoImpl implements BooDatepickerDao {
 		String CheckInIndex = sqlSession.selectOne(NAMESPACE+".getCheckInIndex", paramMap);
 		return CheckInIndex;
 	}
+	
+	//공개, 비공개 확인용
+	@Override
+	public String getRoomStatus(int room_num) throws Exception {
+		String status = sqlSession.selectOne(NAMESPACE+".getRoomStatus", room_num);
+		return status;
+	}
 
 }
