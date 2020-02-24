@@ -14,6 +14,7 @@
 <br>
 <br>
 <br>
+${pointList}
 <h1>여기 옴</h1>
 <!-- end section -->
 
