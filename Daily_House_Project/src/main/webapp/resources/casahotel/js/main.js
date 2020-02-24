@@ -153,7 +153,7 @@
   }
   smoothScroll();
 
-  var dateAndTime = function() {
+  /*var dateAndTime = function() {
     $('#m_date').datepicker({
       'format': 'm/d/yyyy',
       'autoclose': true
@@ -162,9 +162,9 @@
       'format': 'd MM, yyyy',
       'autoclose': true
     });
-    /*$('#m_time').timepicker();*/
+    $('#m_time').timepicker();
   };
-  dateAndTime();
+  dateAndTime();*/
 
   var siteMagnificPopup = function() {
     $('.image-popup').magnificPopup({

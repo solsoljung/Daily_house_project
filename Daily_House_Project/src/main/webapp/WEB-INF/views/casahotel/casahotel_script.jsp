@@ -17,4 +17,4 @@
 
     
 
-    <script src="/casahotel/js/main.js"></script>
+    <script src="/casahotel/js/main.js?ver=1"></script>
