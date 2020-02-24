@@ -9,7 +9,7 @@
 	<!-- 예약 목록 보기 테스트-->
 	<select id="getReservationList" resultType="ReservationVo">
 		select * from tbl_reservation
-		where user_email = #{user_email}
+		where user_email = #{user_email} order by reserv_num desc
 	</select>
 	
 	<!-- 시퀀스 값 얻기 -->
@@ -30,5 +30,21 @@
 		delete from tbl_reservation
 		where reserv_num = #{reserv_num}
 	</delete>
+	
+	<!-- 예약가능한지 알아보기 -->
+	<select id="availableReserv" resultType="int"  parameterType="TestDto">
+		select count(*) from tbl_room r where r.room_num = #{room_num} and r.room_num not in(
+    		select v.room_num from tbl_reservation v where
+				(room_reserv_start_date &gt; #{room_reserv_start_date} and room_reserv_end_date &lt;= #{room_reserv_end_date}) or
+				(room_reserv_start_date &gt; #{room_reserv_start_date} and room_reserv_start_date &lt;= #{room_reserv_end_date}) or
+				(room_reserv_end_date &gt; #{room_reserv_start_date} and room_reserv_end_date &lt;= #{room_reserv_end_date})
+		)
+		
+	</select>
+	
+	<!-- 예약취소 가능한지 -->
+	<select id="reservCancleAvailable" resultType="ReservationVo">
+		select reserv_num from tbl_reservation where room_reserv_start_date &gt; sysdate and user_email = #{user_email}
+	</select>
   
 </mapper>

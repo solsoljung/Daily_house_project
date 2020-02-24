@@ -352,7 +352,7 @@ ${searchVo}
 ${priceDto}
 <span id="targetAjax"></span>
 <!-- 히든 폼 -->
-<form id="frmPage" action="/sol/room" method="post">
+<form id="frmPage" action="/sol/room" method="get">
 	<input type="hidden" name="room_num" />
 	<input type="hidden" name="page" value="${searchVo.page}"/>
 	<input type="hidden" name="keyword" value="${searchVo.keyword}"/>
