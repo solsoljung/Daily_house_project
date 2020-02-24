@@ -137,8 +137,10 @@ $(window).scroll(function() {
 $(document).ready(function(){
 	if ($("#startDate").val() == null || $("#startDate").val("Check-In")) {
 		$("#reservation").val("날짜를 입력해주세요");
-		$("#reservation").click(function(e) {
+		$("#reservation").removeClass();
+		$("#reservation").ready(function(e) {
 			e.preventDefault();
+			e.stopPropagation();
 		});
 	}
 	
@@ -204,14 +206,19 @@ $(document).ready(function(){
         
         if (e.dates.length == 1) {
     		$("#reservation").val("체크 아웃 날짜 설정을 해주세요");
-    		$("#reservation").click(function(e) {
+    		$("#reservation").removeClass();
+    		$("#reservation").ready(function(e) {
     			e.preventDefault();
+    			e.stopPropagation();
     		});
     		$('#endDate').datepicker("show");
     	}else if(e.dates.length == 0) {
     		$("#reservation").val("체크 인 날짜 설정을 해주세요");
-            $("#reservation").click(function() {
+    		$("#reservation").removeClass();
+            $("#reservation").ready(function(e) {
+            	console.log("작동됨");
             	e.preventDefault();
+            	e.stopPropagation();
             });
     	}
 	});
@@ -237,32 +244,41 @@ $(document).ready(function(){
 	}).on("changeDate", function(e) {
 		var checkout = formatDate(e.date);
 		console.log(checkout);
-		
 		$("input[name=str_end_date]").val(checkout);
 		$("#check_out").val(checkout);
-		
 		if (e.dates.length == 1) {
+			console.log("1이 작동");
+			
 			var room_num = ${roomDto.room_num};
 	        var url = "/datepicker/status/"+room_num;
 	        $.get(url, function(rDate){
 	        	var status = rDate.trim();
 	        	if (status == "Y") {
 	        		$("#reservation").val("예약 하기");
+	        		$("#reservation").addClass("mt-2 btn btn-white submit");
 	        		$("#reservation").click(function(e) {
 	        			$("#reservationForm").submit();
+	        			e.stopPropagation();
 	        		});
 	        	} else if (status == "N") {
 	        		$("#reservation").val("비공개 설정된 방입니다");
-	        		$("#reservation").click(function(e) {
+	        		$("#reservation").removeClass();
+	        		$("#reservation").ready(function(e) {
+	        			console.log("작동됨");
 	        			e.preventDefault();
+	        			e.stopPropagation();
 	        		});
 	        	}
 	        });
 			
     	} else if (e.dates.length == 0) {
+    		console.log("0이 작동");
     		$("#reservation").val("체크아웃 날짜 설정을 해주세요");
-    		$("#reservation").click(function(e) {
+    		$("#reservation").removeClass();
+    		$("#reservation").ready(function(e) {
+    			console.log("체크 아웃 날짜 설정 제거 작동됨");
     			e.preventDefault();
+    			e.stopPropagation();
     		});
     	}
 	});
@@ -309,6 +325,50 @@ $(document).ready(function() {
 });
 </script>
 
+<!-- 찜 하기 기능 -->
+<script>
+$(document).ready(function() {
+// 	//찜 Y,N 판별
+	var userVo = "${userVo.user_email}";
+	console.log(userVo);
+	if (userVo != null || userVo != "") {
+		console.log("로그인을 안해도 작동 되는 신기한 현상");
+		var room_num = "${roomDto.room_num}";
+		var url = "/datepicker/like/"+room_num;
+		$.get(url, function(rDate){
+			var result = rDate.trim();
+			if (result == "Y") {
+				$("#btn_like").val("찜 하기");
+			}else if (result == "N") {
+				$("#btn_like").val("찜 취소");
+			}
+		});
+	}
+	
+	$("#btn_like").click(function() {
+		var room_num = "${roomDto.room_num}";
+		var url = "/datepicker/like/"+room_num;
+		$.get(url, function(rDate){
+			var result = rDate.trim();
+			console.log(result);
+			if (result == "Y") {
+				$("#btn_like").val("찜 취소");
+				var url2 = "/datepicker/insertLike/"+room_num;
+				$.get(url2, function(rDate){
+					console.log(rDate);
+				});
+				
+			}else if (result == "N") {
+				$("#btn_like").val("찜 하기");
+				var url3 = "/datepicker/deleteLike/"+room_num;
+				$.get(url3, function(rDate){
+					console.log(rDate);
+				});
+			}
+		});
+	});
+});
+</script>
 
 <%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
 
@@ -621,6 +681,9 @@ $(document).ready(function() {
         <div class="col-lg-4 sidebar ftco-animate">
         	<div id="sidebox" style="position: absolute;">
 	         	<div class="sidebar-box subs-wrap">
+	         		<c:if test="${not empty userVo}">
+	         			<input type="button" id="btn_like" value="찜 하기" class="mt-2 btn btn-white" style="font-weight: bold; font-size: 20px;">
+	         		</c:if>
 	         		<label for="startDate" style="font-size: 18px; font-family: 맑은 고딕;">예약 가능한 날을 확인해 보세요</label>
 	         		<div class="row">
 						<input type="text" value="Check-In" class="form-control" style="font-size:20px; margin: 15px;" id= "startDate">
@@ -628,7 +691,12 @@ $(document).ready(function() {
 					</div>
 <!-- 								<h3>Subcribe to our Newsletter</h3> -->
 <!-- 								<p>Far far away, behind the word mountains, far from the countries Vokalia</p> -->
-	             <form id="reservationForm" action="/yo/reservation" class="subscribe-form">
+	             <form id="reservationForm" action=
+	             <c:choose>
+	             	<c:when test="${not empty userVo}">"/yo/reservation"</c:when>
+	             	<c:otherwise>"/si/loginHost"</c:otherwise>
+	             </c:choose>
+	              class="subscribe-form" method="get">
 	                <div class="form-group">
 <!-- 	                  <input type="text" class="form-control" placeholder="Email Address"> -->
 					  <input type="hidden" name="room_num" value="${roomDto.room_num}">
@@ -639,8 +707,7 @@ $(document).ready(function() {
 	         		  <input type="hidden" name="room_title" value="${roomDto.room_title}">
 	         		  <input type="hidden" name="room_price" value="${roomDto.room_price}">
 	         		  <input type="hidden" name="room_people" value="${roomDto.room_people}">
-	                  <input type="button" value="찜 하기" style="font-weight: bold; font-size: 20px;">
-	                  <input type="submit" id="reservation" value="예약 하기" style="font-weight: bold; font-size: 20px;">
+	                  <input type="button" id="reservation" value="예약 하기" style="font-weight: bold; font-size: 20px;">
 	                </div>
 	              </form>
 	            </div>

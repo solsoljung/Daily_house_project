@@ -72,4 +72,11 @@ public class BooController {
 		return "redirect:/boo/detail?room_num="+num;
 
 	}
+	
+	//포인트 이용 내역 보여주기
+	@RequestMapping(value="/pointlist", method = RequestMethod.GET)
+	public String pointUseList() throws Exception {
+		
+		return "/pointuselist/PointUseList";
+	}
 }

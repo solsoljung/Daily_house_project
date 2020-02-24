@@ -59,5 +59,36 @@ public class BooDatepickerDaoImpl implements BooDatepickerDao {
 		String status = sqlSession.selectOne(NAMESPACE+".getRoomStatus", room_num);
 		return status;
 	}
+	
+	//찜목록에 있는지 판별 (getLikeNum)
+	@Override
+	public int getCount(int room_num, String user_email) throws Exception {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("room_num", room_num);
+		paramMap.put("user_email", user_email);
+		
+		int count = sqlSession.selectOne(NAMESPACE+".getLikeNum", paramMap);
+		return count;
+	}
+	
+	//찜목록에 추가하기
+	@Override
+	public void insertLike(int room_num, String user_email) throws Exception {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("room_num", room_num);
+		paramMap.put("user_email", user_email);
+		
+		sqlSession.insert(NAMESPACE+".insertLike", paramMap);
+	}
+	
+	//찜목록에서 제거하기
+	@Override
+	public void deleteLike(int room_num, String user_email) throws Exception {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("room_num", room_num);
+		paramMap.put("user_email", user_email);
+		
+		sqlSession.delete(NAMESPACE+".deleteLike", paramMap);
+	}
 
 }

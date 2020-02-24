@@ -17,4 +17,13 @@ public interface BooDatepickerDao {
 	
 	//공개, 비공개 확인용
 	public String getRoomStatus(int room_num) throws Exception;
+	
+	//찜목록에 있는지 판별 (getLikeNum)
+	public int getCount(int room_num, String user_email) throws Exception;
+	
+	//찜목록에 추가하기
+	public void insertLike(int room_num, String user_email) throws Exception;
+	
+	//찜목록에서 제거 하기
+	public void deleteLike(int room_num, String user_email) throws Exception;
 }

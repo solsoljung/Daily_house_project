@@ -42,5 +42,24 @@ public class BooDatepickerServiceImpl implements BooDatepickerService {
 		String status = booDatepickerDao.getRoomStatus(room_num);
 		return status;
 	}
+
+	@Override
+	public String getCount(int room_num, String user_email) throws Exception {
+		int count = booDatepickerDao.getCount(room_num, user_email);
+		if (count != 0) {
+			return "N";
+		}
+		return "Y";
+	}
+
+	@Override
+	public void insertLike(int room_num, String user_email) throws Exception {
+		booDatepickerDao.insertLike(room_num, user_email);
+	}
+
+	@Override
+	public void deleteLike(int room_num, String user_email) throws Exception {
+		booDatepickerDao.deleteLike(room_num, user_email);
+	}
 	
 }
