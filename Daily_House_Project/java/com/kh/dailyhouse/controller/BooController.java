@@ -25,7 +25,7 @@ public class BooController {
 	@Inject
 	private BooRoomDetailService booRoomDetailService;
 	
-	@RequestMapping(value = "/detail", method = RequestMethod.GET)
+	@RequestMapping(value = "/detail", method = {RequestMethod.GET, RequestMethod.POST})
 	public String getRoomDetail(@RequestParam("room_num") int room_num, Model model, ReviewPagingDto reviewPagingDto) throws Exception{
 		//방을 선택시 room_num을 받아야됨
 		Map<String, Object> paramMap = booRoomDetailService.detail(room_num, reviewPagingDto);
