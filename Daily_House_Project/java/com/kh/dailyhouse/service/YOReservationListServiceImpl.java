@@ -28,6 +28,11 @@ public class YOReservationListServiceImpl implements YOReservationListService {
 		dao.insertReservation(testDto);
 	}
 
+	@Override
+	public void cancelReservation(int reserv_num) throws Exception {
+		dao.cancelReservation(reserv_num);
+	}
+
 
 
 }

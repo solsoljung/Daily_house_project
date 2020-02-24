@@ -10,6 +10,56 @@
 <%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->
 
 <!-- reservation page section -->
+<script>
+$(document).ready(function() {
+	$(".cancelBtn").click(function(e) {
+		if (confirm("정말로 취소하시겠습니까?") == true){
+		e.preventDefault();
+		console.log("예약내역 삭제 버튼");
+		var reserv_num = $(this).attr("data-reserv_num");
+		var url = "/yo/reservation_delete/" + reserv_num;
+		var that = $(this);
+		console.log("that:" , that);
+		$.ajax({
+			"type" : "delete",
+			"url" : url,
+			"headers" : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "delete"
+			},
+			"success" : function(rData) {
+				console.log("rData:" + rData);
+				reservationList();
+			}
+		}); // ajax
+		} else {
+			return;
+		}
+	}); // 내역 삭제 버튼
+	
+	function reservationList() {
+		$("#reservationList").empty();
+		var url = "/yo/reservation_list";
+		$.getJSON(url, function(rData) {
+			console.log(rData);
+			var strHtml = "";
+			$(rData).each(function() {
+				strHtml += "<tr>";
+				strHtml += "<td>" + this.reserv_num +"</td>";
+				strHtml += "<td>" + this.room_num +"</td>";
+				strHtml += "<td>" + this.user_email +"</td>";
+				strHtml += "<td>" + this.room_reserv_start_date +"</td>";
+				strHtml += "<td>" + this.room_reserv_end_date +"</td>";
+				strHtml += "<td>" + this.reserv_price +"</td>";
+				strHtml += "<td><button type='button' class='cancelBtn'";
+				strHtml += " data-reserv_num='" + this.reserv_num + "'>삭제</button></td>";
+				strHtml += "</tr>";
+			});
+			$("#reservationList").append(strHtml);
+		});
+	}
+});
+</script>
 <section class="site-hero inner-page overlay" style="background-image: url(/casahotel/img/slider-3.jpg)" data-stellar-background-ratio="0.5">
       <div class="container">
         <div class="row site-hero-inner justify-content-center align-items-center text-center">
@@ -74,13 +124,16 @@ testDto: ${testDto}
 				</thead>
 				<tbody>
 					<c:forEach items="${list}" var="reservationVo">
-						<tr>
+						<tr id="reservationList">
 							<td>${reservationVo.reserv_num}</td>
 							<td>${reservationVo.room_num}</td>
 							<td>${reservationVo.user_email}</td>
 							<td>${reservationVo.room_reserv_start_date}</td>
 							<td>${reservationVo.room_reserv_end_date}</td>
 							<td>${reservationVo.reserv_price}</td>
+							<td><input type="button" class="cancelBtn" 
+								data-reserv_num="${reservationVo.reserv_num}" value="예약취소">
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>

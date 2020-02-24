@@ -32,5 +32,11 @@ public class YOReservationListDaoImpl implements YOReservationListDao {
 		sqlSession.insert(NAMESPACE + ".insertReservation", testDto);
 	}
 
+	@Override
+	public void cancelReservation(int reserv_num) throws Exception {
+		sqlSession.delete(NAMESPACE + ".cancelReservation", reserv_num);
+		
+	}
+
 
 }
