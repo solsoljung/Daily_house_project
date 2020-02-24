@@ -106,6 +106,7 @@ $(document).ready(function() {
 <section>
 userVo: ${userVo}<br>
 testDto: ${testDto}
+cancleList: ${cancleList}
 <div class="container-fluid">
 	<div class="row">
 	<div class="col-md-2">
@@ -123,6 +124,8 @@ testDto: ${testDto}
 					</tr>
 				</thead>
 				<tbody>
+				<c:set target="${cancleList}" property="cancle">
+				<%-- <c:forEach items="${cancleList}" var="cancle"> --%>
 					<c:forEach items="${list}" var="reservationVo">
 						<tr id="reservationList">
 							<td>${reservationVo.reserv_num}</td>
@@ -131,11 +134,15 @@ testDto: ${testDto}
 							<td>${reservationVo.room_reserv_start_date}</td>
 							<td>${reservationVo.room_reserv_end_date}</td>
 							<td>${reservationVo.reserv_price}</td>
-							<td><input type="button" class="cancelBtn" 
-								data-reserv_num="${reservationVo.reserv_num}" value="예약취소">
-							</td>
+							<c:if test="${cancle.reserv_num == reservationVo.reserv_num}">
+								<td>
+									<input type="button" class="cancelBtn" data-reserv_num="${reservationVo.reserv_num}" value="예약취소">
+								</td>
+							</c:if>
 						</tr>
 					</c:forEach>
+				<%-- </c:forEach> --%>
+				</c:set>
 				</tbody>
 			</table>
 		</div>

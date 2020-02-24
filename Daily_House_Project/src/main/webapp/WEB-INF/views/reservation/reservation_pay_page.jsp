@@ -16,6 +16,11 @@ $(function() {
 		// 결제금액 포인트가 차감되어야 하므로 tbl_user의 포인트 업데이트
 		$("#reservation_pay").submit();
 	});
+	
+	if("${result}" == "fail"){
+		alert("예약 불가능한 날짜입니다");
+		location.href="/yo/reservation_list";
+	}
 });
 
 $(function() {
@@ -48,7 +53,7 @@ $(function() {
       </a>
 </section>
 userVo: ${userVo}<br>
-testDto: ${testDto}
+testDto: ${testDto}<br>
   <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">

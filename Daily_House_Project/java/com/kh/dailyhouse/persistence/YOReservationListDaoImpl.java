@@ -11,7 +11,7 @@ import com.kh.dailyhouse.domain.ReservationVo;
 import com.kh.dailyhouse.domain.TestDto;
 
 @Repository
-public class YOReservationListDaoImpl implements YOReservationListDao {
+public  class YOReservationListDaoImpl implements YOReservationListDao {
 	
 	private static final String NAMESPACE = "com.kh.mappers.ReservationMapper";
 	
@@ -36,6 +36,17 @@ public class YOReservationListDaoImpl implements YOReservationListDao {
 	public void cancelReservation(int reserv_num) throws Exception {
 		sqlSession.delete(NAMESPACE + ".cancelReservation", reserv_num);
 		
+	}
+
+	@Override
+	public int availableReserv(TestDto testDto) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".availableReserv", testDto);
+		
+	}
+
+	@Override
+	public List<ReservationVo> reservCancleAvailable(String user_email) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".reservCancleAvailable", user_email);
 	}
 
 
