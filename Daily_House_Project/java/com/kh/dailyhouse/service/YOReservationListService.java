@@ -11,5 +11,7 @@ public interface YOReservationListService {
 	public void insertReservation(TestDto testDto) throws Exception;
 	
 	public List<ReservationVo> getReservationList(String user_email) throws Exception;
+	
+	public void cancelReservation(int reserv_num) throws Exception;
 
 }

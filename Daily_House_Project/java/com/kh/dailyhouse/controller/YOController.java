@@ -77,6 +77,15 @@ public class YOController {
 		return "/reservation/reservation_list_page";
 	}
 	
+	// 예약 취소하기
+	@RequestMapping(value="/reservation_delete/{reserv_num}", method=RequestMethod.DELETE)
+	@ResponseBody
+	public String cancelReservation(@PathVariable("reserv_num") int reserv_num) throws Exception {
+		System.out.println("reserv_num:" + reserv_num);
+		service.cancelReservation(reserv_num);
+		return "success";
+	}
+	
 	
 	// 찜목록 가져오기
 	@RequestMapping(value="/like_list", method=RequestMethod.GET)
