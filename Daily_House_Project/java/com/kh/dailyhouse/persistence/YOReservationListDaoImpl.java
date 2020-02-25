@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.dailyhouse.domain.PointVo;
 import com.kh.dailyhouse.domain.ReservationVo;
 import com.kh.dailyhouse.domain.TestDto;
+import com.kh.dailyhouse.domain.UserPointDto;
 
 @Repository
 public  class YOReservationListDaoImpl implements YOReservationListDao {
@@ -56,13 +57,13 @@ public  class YOReservationListDaoImpl implements YOReservationListDao {
 	}
 
 	@Override
-	public void user_update_reserv_point(PointVo pointVo) throws Exception {
-		sqlSession.update(NAMESPACE + ".user_update_reserv_point", pointVo);
+	public void user_update_reserv_point(UserPointDto userPointDto) throws Exception {
+		sqlSession.update(NAMESPACE + ".user_update_reserv_point", userPointDto);
 	}
 
 	@Override
-	public void host_update_reserv_point(PointVo pointVo) throws Exception {
-		sqlSession.update(NAMESPACE + ".host_update_reserv_point", pointVo);
+	public void host_update_reserv_point(UserPointDto userPointDto) throws Exception {
+		sqlSession.update(NAMESPACE + ".host_update_reserv_point", userPointDto);
 	}
 
 	@Override
