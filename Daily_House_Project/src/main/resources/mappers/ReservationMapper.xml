@@ -45,8 +45,8 @@
 	
 	<!-- 예약 등록하기 테스트 -->
 	<insert id="insertReservation">
-		insert into tbl_reservation(reserv_num, room_num, user_email, room_reserv_start_date, room_reserv_end_date, reserv_price)
-		values(seq_reserv_num.nextval, #{room_num}, #{user_email}, #{check_in}, #{check_out}, #{room_price_v})
+		insert into tbl_reservation(reserv_num, room_num, user_email, room_reserv_start_date, room_reserv_end_date, reserv_price, reserv_state)
+		values(seq_reserv_num.nextval, #{room_num}, #{user_email}, #{check_in}, #{check_out}, #{room_price_v}, "Y")
 	</insert>
 	
 	<!-- 예약취소하기 -->

@@ -6,5 +6,5 @@ import com.kh.dailyhouse.domain.PointDto;
 
 public interface BooPointListDao {
 	//포인트 사용 내역 리스트 받기
-	public List<PointDto> getPointList() throws Exception;
+	public List<PointDto> getPointList(String user_email) throws Exception;
 }

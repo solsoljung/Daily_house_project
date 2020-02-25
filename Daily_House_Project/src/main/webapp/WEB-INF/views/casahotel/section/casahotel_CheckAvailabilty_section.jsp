@@ -101,6 +101,67 @@ $(document).ready(function(){
 	//검색
 	$("#btnSearch").click(function(){
 		$("#frmPage").submit();
+
+	});
+	
+	//검색 ajax
+	var which = 0;
+	
+	//검색어 리스트
+	$("#searchTarget").keyup(function(e){
+		if(e.keyCode == 40){
+			//이상하게 첫번째에 누르면 왜 이상한게 실행되지
+			console.log("아래");
+			if(which > 0){
+				console.log("remove");
+				$("#list").children().removeClass("active");
+			}
+			$("#list").children().eq(which).addClass("active");
+			which++;
+			console.log(which);
+		} else if(e.keyCode == 38){
+			which--;
+			console.log("위");
+			console.log(which);
+			$("#list").children().removeClass("active");
+			$("#list").children().eq(which -1).addClass("active");
+		} else if(e.keyCode == 13){
+			e.preventDefault();
+			console.log("enter");
+			var keyword = $("#list").children().eq(which - 1).text();
+			console.log(keyword);
+			$(this).val(keyword);
+			$("input[name=keyword]").val(keyword);
+			$("#list").empty();
+		} else if(e.keyCode != 40 && e.keyCode != 38 && e.keyCode != 13){
+			which = 0;
+			console.log("무엇도 아님");
+			var search_keyword = $(this).val();
+			console.log(search_keyword);
+			var enkeyword = encodeURI(search_keyword);
+			console.log(enkeyword);
+			var url = "/sol/keywordList/" + encodeURI(search_keyword);
+			$.ajax({
+				"type" : "get",
+				"url" : url,
+				"headers" : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Medtod-Override" : "get"
+				},
+				"dataType" : "text",
+				"success" : function(rData){
+					$.getJSON(url, function(rData){
+						$("#list").empty();
+						console.log(rData);
+						var strHtml = "";
+						$(rData).each(function(){
+							strHtml += "<a class='list-group-item' data-keyword='"+ this.location_text +"'>" + this.location_text + "</a>";
+						});
+						$("#list").append(strHtml);
+					});
+				}
+			});
+		}
 	});
 });
 </script>
@@ -121,7 +182,7 @@ $(document).ready(function(){
         <div class="row">
           <div class="block-32">
 
-            <form action="#">
+            <!-- <form> --> <!-- action="#" -->
               <div class="row">
               	<div class="col-md-6 mb-3 mb-lg-0 col-lg-3"><!-- 111111111111111111111111111111111111111111111111111111111111 -->
                   <label class="font-weight-bold text-black">지역 찾기</label>
@@ -131,8 +192,11 @@ $(document).ready(function(){
 <!--                     <span class="icon-calendar"></span> -->
 						<!-- 여기 -->
                     </div>
-                     	<input type="text" class="form-control">
-						
+                     	<input type="text" id="searchTarget" class="form-control" value="${searchVo.keyword}" 
+	                  placeholder="모든 위치" style="font-size:25px;" autocomplete="off">
+						<div id="list">
+							<div class="list-group"></div>
+						</div>
                   </div>
                 </div>
                 <!-- 체크인 -->
@@ -175,13 +239,11 @@ $(document).ready(function(){
                 <br>
                 <br>
                 <br>
-                <br>
-                <br>
                 <div class="col-md-12" align="right"> <!-- 55555555555555555555555555555555555555555555555555555555555555555 -->
-                  <button class="btn btn-primary py-3 px-5" id="btnSearch">Check Availabilty</button>
+                  <button class="btn btn-primary py-3 px-5" id="btnSearch" style="font-size:20px;">Check Availabilty</button>
                 </div>
               </div>
-            </form>
+            <!-- </form> -->
             
           </div>
         </div>

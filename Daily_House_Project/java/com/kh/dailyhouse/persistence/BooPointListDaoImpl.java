@@ -18,8 +18,8 @@ public class BooPointListDaoImpl implements BooPointListDao {
 	public SqlSession sqlSession;
 	
 	@Override
-	public List<PointDto> getPointList() throws Exception {
-		List<PointDto> pointList = sqlSession.selectList(NAMESPACE+".getPointList");
+	public List<PointDto> getPointList(String user_email) throws Exception {
+		List<PointDto> pointList = sqlSession.selectList(NAMESPACE+".getPointList", user_email);
 		return pointList;
 	}
 

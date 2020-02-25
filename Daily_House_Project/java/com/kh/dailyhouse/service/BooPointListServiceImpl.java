@@ -16,8 +16,8 @@ public class BooPointListServiceImpl implements BooPointListService {
 	private BooPointListDao booPointListDao;
 	
 	@Override
-	public List<PointDto> getPointList() throws Exception {
-		List<PointDto> pointList = booPointListDao.getPointList();
+	public List<PointDto> getPointList(String user_email) throws Exception {
+		List<PointDto> pointList = booPointListDao.getPointList(user_email);
 		return pointList;
 	}
 
