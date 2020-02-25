@@ -27,20 +27,23 @@ $(function() {
 	
 	function isCheckInOut() {
 		var checks = $(".check");
-		$.each(checks, function() {
-			var c = $(this).val();
+		for (var i = 0; i < checks.length; i++) {
+			var c = checks.eq(i).val();
 			if (c == "" || c == "Check-In" || c == "Check-Out") {
 				$("#reservation").val("날짜를 입력해주세요");
 				return false;
-			} else {
-				return true;
 			}
-		});
+		}
+		return true;
 		
 	}
 	
 	$("#reservation").click(function() {
-		if (isCheckInOut() == true) {
+		var result = isCheckInOut();
+		console.log("result", result);
+		if (result == true) {
+			$("#reservation").val("예약 하기");
+    		$("#reservation").addClass("mt-2 btn btn-white submit");
 			$("#reservationForm").submit();
 		}
 	});
@@ -255,7 +258,6 @@ $(document).ready(function(){
 		$("input[name=str_end_date]").val(checkout);
 		$("#check_out").val(checkout);
 		if (e.dates.length == 1) {
-			console.log("1이 작동");
 			
 			var room_num = "${roomDto.room_num}";
 	        var url = "/datepicker/status/"+room_num;
@@ -264,7 +266,6 @@ $(document).ready(function(){
 	        	if (status == "Y") {
 	        		$("#reservation").val("예약 하기");
 	        		$("#reservation").addClass("mt-2 btn btn-white submit");
-// 	        		});
 	        	} else if (status == "N") {
 	        		$("#reservation").val("비공개 설정된 방입니다");
 	        		$("#reservation").removeClass();
@@ -272,7 +273,6 @@ $(document).ready(function(){
 	        });
 			
     	} else if (e.dates.length == 0) {
-    		console.log("0이 작동");
     		$("#reservation").val("체크아웃 날짜 설정을 해주세요");
     		$("#reservation").removeClass();
     	}

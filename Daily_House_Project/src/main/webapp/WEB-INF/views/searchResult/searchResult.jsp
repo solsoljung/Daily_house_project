@@ -32,11 +32,23 @@ input[type="number"]::-webkit-inner-spin-button {
     box-shadow: 0 0 10px #555;
     /* line-height: 3; */
 }
-
+.heartDiv {
+	margin-left: 210px;
+	font-size: 60px;
+	color: gray;
+}
 </style>
 
 <script>
 $(document).ready(function(){
+	
+	//좋아요
+	$(".heartDiv").click(function(e){
+// 		e.preventDefault();
+		$(this).attr("style", "color: #fb929e;");
+		e.stopPropagation();
+	});
+	
 	//검색 ajax
 	var which = 0;
 	
@@ -335,7 +347,6 @@ $(document).ready(function(){
 		}
 	});
 	
-	
 	//날짜 포멧 함수
 	function formatDate(date) { 
 		var d = new Date(date),
@@ -348,8 +359,6 @@ $(document).ready(function(){
 
 		return [year, month, day].join('-'); 
 	}
-	
-
 });
 </script>
 
@@ -535,7 +544,8 @@ ${priceDto} --%>
         <c:forEach var="vo" items="${list}">
         	<div class="col-md-3">
         		<div class="room-wrap ftco-animate">
-        			<a data-num="${vo.room_num}" class="img room-image" style="background-image: url(/si/displayFile?fileName=/${vo.pic_uri});cursor:pointer;"></a>
+        			<a data-num="${vo.room_num}" class="img room-image" style="background-image: url(/si/displayFile?fileName=/${vo.pic_uri});cursor:pointer;">
+        			<span class="heartDiv">♥</span></a>
         			<!-- <img src="" width="100%" style="display: none;"> -->
         			<div class="text pt-4 pl-lg-5">
         				<h2><a data-num="${vo.room_num}" class="room-title" id="room-title" style="cursor:pointer;font-family:Arial;">${vo.room_title}</a></h2>

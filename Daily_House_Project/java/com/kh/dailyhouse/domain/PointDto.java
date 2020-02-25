@@ -9,12 +9,15 @@ public class PointDto {
 	private int point_score;
 	private String point_code_explain;
 	private String room_title;
+	private int room_num;
+	
 	public PointDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	public PointDto(int point_num, String user_email, Timestamp point_date, int point_score, String point_code_explain,
-			String room_title) {
+			String room_title, int room_num) {
 		super();
 		this.point_num = point_num;
 		this.user_email = user_email;
@@ -22,7 +25,9 @@ public class PointDto {
 		this.point_score = point_score;
 		this.point_code_explain = point_code_explain;
 		this.room_title = room_title;
+		this.room_num = room_num;
 	}
+	
 	public int getPoint_num() {
 		return point_num;
 	}
@@ -59,12 +64,17 @@ public class PointDto {
 	public void setRoom_title(String room_title) {
 		this.room_title = room_title;
 	}
+	public int getRoom_num() {
+		return room_num;
+	}
+	public void setRoom_num(int room_num) {
+		this.room_num = room_num;
+	}
+	
 	@Override
 	public String toString() {
 		return "PointDto [point_num=" + point_num + ", user_email=" + user_email + ", point_date=" + point_date
 				+ ", point_score=" + point_score + ", point_code_explain=" + point_code_explain + ", room_title="
-				+ room_title + "]";
+				+ room_title + ", room_num=" + room_num + "]";
 	}
-	
-	
 }
