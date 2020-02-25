@@ -65,5 +65,14 @@
 		)
 		
 	</select>
+	
+	<!-- 예약 정보, 룸 정보 보기 -->
+	<select id="getReservData" resultType="TestDto">
+		select m.*, r.user_email, r.room_reserv_start_date, 
+		r.room_reserv_end_date, r.reserv_price from tbl_room m, 
+			(select room_num, user_email, room_reserv_start_date, room_reserv_end_date, 
+			reserv_price from tbl_reservation where reserv_num = #{reserv_num}) r
+		where m.room_num = r.room_num
+	</select>
   
 </mapper>

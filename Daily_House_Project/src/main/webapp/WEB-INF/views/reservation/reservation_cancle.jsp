@@ -43,63 +43,57 @@ $(function() {
         </div>
       </a>
 </section>
-<%-- userVo: ${userVo}<br>
-testDTo: ${testDto}
+<%-- ${dto} --%>
    <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">
-          <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-md-12" data-aos="fade-up" data-aos-delay="100">
             <form action="/yo/reservation_pay" id="reservation" method="post" class="bg-white p-md-5 p-4 mb-5 border">
-	          <input type="hidden" name="room_num" value="${testDto.room_num}">
-	          <input type="hidden" name ="check_in" value="${testDto.check_in}">
-	          <input type="hidden" name ="check_out" value="${testDto.check_out}">
-	          <input type="hidden" name="room_title" value="${testDto.room_title}">
-	          <input type="hidden" name="room_price" value="${testDto.room_price}">
-	          <input type="hidden" name="room_people" value="${testDto.room_people}">
-	          <input type="hidden" name="v" value="">
-              <div class="row">
-                <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="name">예약자</label>
-                  <input type="text" id="name" class="form-control" value="${userVo.user_name}">
-                </div>
-                <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="phone">연락처</label>
-                  <input type="text" id="phone" class="form-control" value="${userVo.user_phone}">
-                </div>
-              </div>
+              <!-- 이메일 -->
               <div class="row">
                 <div class="col-md-12 form-group">
-                  <label class="text-black font-weight-bold" for="email">Email</label>
-                  <input type="email" id="email" class="form-control" value="${userVo.user_email}">
+                  <label class="text-black font-weight-bold">이메일</label>
+                  <input type="email" id="email" class="form-control" value="${dto.user_email}" readonly="readonly">
                 </div>
               </div>
-
+              <!-- 숙소명 -->
               <div class="row">
-                <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="checkin_date">입실날짜</label>
-                  <input type="text" id="dateCheckIn" class="form-control" value="${testDto.check_in}" readonly>
-                </div>
-                <div class="col-md-6 form-group">
-                  <label class="text-black font-weight-bold" for="checkout_date">퇴실날짜</label>
-                  <input type="text" id="dateCheckOut" class="form-control" value="${testDto.check_out}" readonly>
+                <div class="col-md-12 form-group">
+                  <label class="text-black font-weight-bold">숙소명</label>
+                  <input type="email" id="email" class="form-control" value="${dto.room_title}" readonly="readonly">
                 </div>
               </div>
-
-              <div class="row">
-                <div class="col-md-6 form-group block-27">
-                  <label for="adults" class="font-weight-bold text-black">어른</label>
-                  <div class="field-icon-wrap">																				
-				  </div>  
-					<ul>					
-						<li>				
-							<a class="minus">-</a>
-							<input type="number" data-num="1" class="numBox" min="1" max="20" value="1" readonly="readonly" style="text-align:center;text-size:20px;"/>
-							<a class="plus">+</a>			
-						</li>				
-					</ul>	          
-					 
+				<div class="row">
+				<!-- 체크인 -->
+                <div class="col-md-6 form-group">
+                  <label class="text-black font-weight-bold">체크인</label>
+                  <input type="text" id="name" class="form-control" value="${dto.room_reserv_start_date}" readonly="readonly">
                 </div>
-			</div>
+               <!-- 체크아웃 -->
+                <div class="col-md-6 form-group">
+                  <label class="text-black font-weight-bold">체크아웃</label>
+                  <input type="text" id="phone" class="form-control" value="${dto.room_reserv_end_date}" readonly="readonly">
+                </div>
+              </div>
+				<!-- 주소 -->
+              <div class="row">
+                <div class="col-md-12 form-group">
+                  <label class="text-black font-weight-bold">주소</label>
+                  <input type="email" id="email" class="form-control" value="${dto.room_location}" readonly="readonly">
+                </div>
+              </div>
+				<!-- 가격 -->
+              <div class="row">
+                <div class="col-md-6 form-group">
+                <br>
+                  <label class="text-black" style="font-size:30px;">환불 예정 금액 : ${dto.reserv_price} 원</label>
+                  <%-- <input type="email" id="email" class="form-control" value="${dto.reserv_price}" readonly="readonly"> --%>
+                </div>
+                <div class="col-md-6 form-group" align="right">
+                <br>
+                  <input id="reservationBtn" type="button" value="예약취소하기" class="btn btn-primary py-3 px-5" style="font-size:20px;">
+                </div>
+              </div>
   
               <div class="col-md-6 form-group">
               	
@@ -111,14 +105,12 @@ testDTo: ${testDto}
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-6 form-group">
-                  <input id="reservationBtn" type="button" value="예약하기" class="btn btn-primary py-3 px-5" style="font-size:20px;">
-                </div>
+                
               </div>
             </form>
 
           </div>
-          <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
+          <%-- <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
             <div class="row">
               <div class="col-md-10 ml-auto contact-info">
                 <p><span class="d-block">숙소명:</span> 
@@ -132,9 +124,9 @@ testDTo: ${testDto}
                 </p>
               </div>
             </div>
-          </div>
+          </div> --%>
         </div>
-      </div> --%>
+      </div>
 </section>
 <!-- end section -->
 

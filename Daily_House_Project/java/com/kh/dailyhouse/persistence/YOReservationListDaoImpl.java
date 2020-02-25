@@ -66,5 +66,11 @@ public  class YOReservationListDaoImpl implements YOReservationListDao {
 		sqlSession.insert(NAMESPACE + ".insertPoint", pointVo);
 	}
 
+	@Override
+	public TestDto getReservRoomData(int reserv_num) throws Exception {
+
+		return sqlSession.selectOne(NAMESPACE + ".getReservData", reserv_num);
+	}
+
 
 }

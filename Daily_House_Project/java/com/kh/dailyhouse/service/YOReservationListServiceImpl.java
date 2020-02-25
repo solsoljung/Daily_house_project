@@ -64,6 +64,11 @@ public class YOReservationListServiceImpl implements YOReservationListService {
 		return dao.getUserPoint(user_email);
 	}
 
+	@Override
+	public TestDto getReservRoomData(int reserv_num) throws Exception {
+		return dao.getReservRoomData(reserv_num);
+	}
+
 	
 
 

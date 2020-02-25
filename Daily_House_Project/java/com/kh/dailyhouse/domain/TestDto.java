@@ -16,6 +16,7 @@ public class TestDto {
 	private int v;
 	private int room_price_v;
 	private String reserv_state = "Y";
+	private int reserv_price;
 
 	public TestDto() {
 		super();
@@ -125,13 +126,22 @@ public class TestDto {
 		this.reserv_state = reserv_state;
 	}
 
+	public int getReserv_price() {
+		return reserv_price;
+	}
+
+	public void setReserv_price(int reserv_price) {
+		this.reserv_price = reserv_price;
+	}
+
 	@Override
 	public String toString() {
 		return "TestDto [room_num=" + room_num + ", check_in=" + check_in + ", check_out=" + check_out
 				+ ", room_reserv_start_date=" + room_reserv_start_date + ", room_reserv_end_date="
 				+ room_reserv_end_date + ", room_price=" + room_price + ", room_people=" + room_people + ", room_title="
 				+ room_title + ", user_email=" + user_email + ", room_location=" + room_location + ", v=" + v
-				+ ", room_price_v=" + room_price_v + ", reserv_state=" + reserv_state + "]";
+				+ ", room_price_v=" + room_price_v + ", reserv_state=" + reserv_state + ", reserv_price=" + reserv_price
+				+ "]";
 	}
 
 }

@@ -36,8 +36,8 @@ $(document).ready(function() {
 		} else {
 			return;
 		} */
-		
-		location.href = "/yo/reserv_cancle_page";
+		var reserv_num = $(this).parent().parent().eq(0).children().eq(0).attr("data-num");
+		location.href = "/yo/reserv_cancle_page/" + reserv_num;
 	}); // 내역 삭제 버튼
 	
 	function reservationList() {
@@ -130,7 +130,7 @@ testDto: ${testDto}<br>
 				<fmt:formatDate value="${toDay}" pattern="yyyy-MM-dd" var="toDay"/>
 				<c:forEach items="${list}" var="reservationVo">
 						<tr id="reservationList">
-							<td>${reservationVo.reserv_num}</td>
+							<td data-num="${reservationVo.reserv_num}">${reservationVo.reserv_num}</td>
 							<td>${reservationVo.room_num}</td>
 							<td>${reservationVo.user_email}</td>
 							<td>${reservationVo.room_reserv_start_date}</td>
