@@ -89,4 +89,17 @@
 		where rnum &gt;= 4 and rnum &lt;= 5
 	</select>
 	
+<!-- 	포인트 이용 내역에 작성 -->
+	<insert id="setPointList">
+		insert into tbl_point (point_num, user_email, point_code, point_score)
+		values (seq_point_num.nextval, #{user_email}, 'R3', 500)
+	</insert>
+
+<!-- 	리뷰 작성후 유저에게 포인트 주기 -->
+	<update id="setUserPoint">
+		update tbl_user set
+		user_point = user_point+500
+		where user_email = #{user_email}
+	</update>
+	
 </mapper>
