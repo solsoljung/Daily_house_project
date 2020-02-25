@@ -60,6 +60,7 @@ $(function() {
 						   		</a></li>
 						   		<li class="nav-item" id="host_room_list"><a href="/cy/HostRoomList">숙소관리</a></li>
 						   		<li class="nav-item" id="host_room_list"><a href="/yo/reservation_list">예약내역</a></li>
+						   		<li class="nav-item" id="host_room_list"><a href="/boo/pointlist">포인트 이용 내역</a></li>
 						   		<li class="nav-item"><a href="/si/logout">로그아웃</a></li>
 				   		</div>
 				   		</div>

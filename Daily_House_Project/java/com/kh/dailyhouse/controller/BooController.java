@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import com.kh.dailyhouse.domain.RoomDto;
 import com.kh.dailyhouse.domain.RoomPictureVo;
 import com.kh.dailyhouse.domain.RoomReviewDto;
 import com.kh.dailyhouse.domain.RoomReviewVo;
+import com.kh.dailyhouse.domain.UserVo;
 import com.kh.dailyhouse.service.BooPointListService;
 import com.kh.dailyhouse.service.BooRoomDetailService;
 
@@ -80,8 +82,10 @@ public class BooController {
 	
 	//포인트 이용 내역 보여주기
 	@RequestMapping(value="/pointlist", method = RequestMethod.GET)
-	public String pointUseList(Model model) throws Exception {
-		List<PointDto> pointList = booPointListService.getPointList();
+	public String pointUseList(Model model, HttpSession session) throws Exception {
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		String user_email = userVo.getUser_email();
+		List<PointDto> pointList = booPointListService.getPointList(user_email);
 		model.addAttribute("pointList", pointList);
 		
 		return "/pointuselist/PointUseList";

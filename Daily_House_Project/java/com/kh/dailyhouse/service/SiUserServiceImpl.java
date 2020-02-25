@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.kh.dailyhouse.domain.HomeHomesDto;
 import com.kh.dailyhouse.domain.HomeReviewDto;
 import com.kh.dailyhouse.domain.UserVo;
 import com.kh.dailyhouse.persistence.SiUserDaoImpl;
@@ -43,8 +44,14 @@ public class SiUserServiceImpl implements SiUserService {
 
 	@Override
 	public List<HomeReviewDto> getHomeReview() throws Exception {
-		List<HomeReviewDto> list = siUserDao.getHomeReview();
-		return list;
+		List<HomeReviewDto> listReview = siUserDao.getHomeReview();
+		return listReview;
+	}
+
+	@Override
+	public List<HomeHomesDto> getHomeHomes() throws Exception {
+		List<HomeHomesDto> listHome = siUserDao.getHomeHomes();
+		return listHome;
 	}
 	//포인트 이용 내역 테이블에 저장
 	@Override
