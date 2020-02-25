@@ -37,6 +37,9 @@ $(function() {
 			}
 		});
 		
+		// 0.05프로 계산
+		
+		
 		// 결제금액 포인트가 차감되어야 하므로 tbl_user의 포인트 업데이트
 // 		$("#reservation_pay").submit();
 	});
@@ -90,6 +93,8 @@ testDto: ${testDto}<br>
 	          <input type="hidden" name ="check_out" value="${testDto.check_out}">
 	          <input type="hidden" name ="room_price" value="${testDto.room_price}">
 	          <input type="hidden" name="v" value="${testDto.v}">
+	          
+	          
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="name">예약자</label>

@@ -13,17 +13,17 @@
 	<!-- 결제시 사용자 포인트 차감, 호스트에게 포인트 부여 -->
 	<update id="user_update_reserv_point">
 		update tbl_user
-		set user_point = #{user_point}
+		set user_point = user_point + #{user_point}
 		where user_email = #{user_email}
 	</update>
 	
 	<update id="host_update_reserv_point">
 		update tbl_user
-		set user_point = #{user_point}
+		set user_point = user_point + #{user_point}
 		where user_email = #{user_email}
 	</update>
 	
-	<!-- 결제한 사용자에게 예약 포인트(R1) 부여 -->
+	<!-- 포인트 내역 추가 -->
 	<insert id="insertPoint">
 		insert into tbl_point(point_num, user_email, point_code, point_score, room_num) 
 		values(seq_point_num.nextval, #{user_email}, #{point_code}, #{point_score}, #{room_num})
@@ -45,8 +45,8 @@
 	
 	<!-- 예약 등록하기 테스트 -->
 	<insert id="insertReservation">
-		insert into tbl_reservation(reserv_num, room_num, user_email, room_reserv_start_date, room_reserv_end_date, reserv_price)
-		values(seq_reserv_num.nextval, #{room_num}, #{user_email}, #{check_in}, #{check_out}, #{room_price_v})
+		insert into tbl_reservation(reserv_num, room_num, user_email, room_reserv_start_date, room_reserv_end_date, reserv_price, reserv_state)
+		values(seq_reserv_num.nextval, #{room_num}, #{user_email}, #{check_in}, #{check_out}, #{room_price_v}, "Y")
 	</insert>
 	
 	<!-- 예약취소하기 -->

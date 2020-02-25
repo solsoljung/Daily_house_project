@@ -7,8 +7,10 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dailyhouse.domain.PointVo;
 import com.kh.dailyhouse.domain.ReservationVo;
 import com.kh.dailyhouse.domain.TestDto;
+import com.kh.dailyhouse.domain.UserPointDto;
 
 @Repository
 public  class YOReservationListDaoImpl implements YOReservationListDao {
@@ -52,6 +54,21 @@ public  class YOReservationListDaoImpl implements YOReservationListDao {
 	@Override
 	public int getUserPoint(String user_email) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".getUserPoint", user_email);
+	}
+
+	@Override
+	public void user_update_reserv_point(UserPointDto userPointDto) throws Exception {
+		sqlSession.update(NAMESPACE + ".user_update_reserv_point", userPointDto);
+	}
+
+	@Override
+	public void host_update_reserv_point(UserPointDto userPointDto) throws Exception {
+		sqlSession.update(NAMESPACE + ".host_update_reserv_point", userPointDto);
+	}
+
+	@Override
+	public void insertPoint(PointVo pointVo) throws Exception {
+		sqlSession.insert(NAMESPACE + ".insertPoint", pointVo);
 	}
 
 
