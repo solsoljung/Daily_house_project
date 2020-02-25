@@ -7,6 +7,9 @@ import com.kh.dailyhouse.domain.TestDto;
 
 public interface YOReservationListService {
 
+	// 결제 전 사용자 포인트 조회
+	public int getUserPoint(String user_email) throws Exception;
+	
 	
 	public void insertReservation(TestDto testDto) throws Exception;
 	

@@ -49,5 +49,10 @@ public  class YOReservationListDaoImpl implements YOReservationListDao {
 		return sqlSession.selectList(NAMESPACE + ".reservCancleAvailable", user_email);
 	}
 
+	@Override
+	public int getUserPoint(String user_email) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getUserPoint", user_email);
+	}
+
 
 }
