@@ -43,4 +43,9 @@
 		where rnum &gt;= 1 and rnum &lt;= 5
 	</select>
 	
+	<insert id="setPointList">
+		insert into tbl_point (point_num, user_email, point_code, point_score)
+		values (seq_point_num.nextval, #{user_email}, 'R4', 1000000)
+	</insert>
+	
 </mapper>
