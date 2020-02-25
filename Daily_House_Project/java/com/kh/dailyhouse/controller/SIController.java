@@ -144,6 +144,11 @@ public class SIController {
 		session.invalidate();
 		return "redirect:/si/loginHost";
 	}
+	// 비밀번호 수정으로 가는 컨트롤러
+	@RequestMapping(value = "/about", method = RequestMethod.GET)
+	public String about() throws Exception {
+		return "/about/about";
+	}
 	
 }
 	
