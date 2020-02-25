@@ -5,6 +5,11 @@
   
 <mapper namespace="com.kh.mappers.ReservationMapper">
 
+	<!-- 결제 전 사용자 포인트 보기 -->
+	<select id="getUserPoint" resultType="int">
+		select user_point from tbl_user where user_email = #{user_email}
+	</select>
+
 
 	<!-- 예약 목록 보기 테스트-->
 	<select id="getReservationList" resultType="ReservationVo">

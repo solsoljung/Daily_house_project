@@ -128,5 +128,13 @@ public class YOController {
 		likeService.deleteLike(like_num);
 		return "success";
 	}
+	
+	// 사용자 돈 얼마있는지 확인
+//	user_reservation_pay
+	@RequestMapping(value="/check_user_pay", method=RequestMethod.GET)
+	@ResponseBody
+	public int check_user_pay(String user_email) throws Exception {
+		return service.getUserPoint(user_email);
+	}
 
 }
