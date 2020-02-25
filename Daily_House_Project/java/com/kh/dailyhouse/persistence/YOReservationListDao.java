@@ -33,6 +33,6 @@ public interface YOReservationListDao {
 	//예약 가능한지 확인
 	public int availableReserv(TestDto testDto) throws Exception;
 	
-	//예약 취소 가능한지 확인
-	public List<ReservationVo> reservCancleAvailable(String user_email) throws Exception;
+	//예약, 방 정보 불러오기
+	public TestDto getReservRoomData(int reserv_num) throws Exception;
 }

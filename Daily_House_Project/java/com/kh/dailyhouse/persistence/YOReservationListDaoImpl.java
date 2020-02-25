@@ -47,11 +47,6 @@ public  class YOReservationListDaoImpl implements YOReservationListDao {
 	}
 
 	@Override
-	public List<ReservationVo> reservCancleAvailable(String user_email) throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".reservCancleAvailable", user_email);
-	}
-
-	@Override
 	public int getUserPoint(String user_email) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".getUserPoint", user_email);
 	}
@@ -69,6 +64,12 @@ public  class YOReservationListDaoImpl implements YOReservationListDao {
 	@Override
 	public void insertPoint(PointVo pointVo) throws Exception {
 		sqlSession.insert(NAMESPACE + ".insertPoint", pointVo);
+	}
+
+	@Override
+	public TestDto getReservRoomData(int reserv_num) throws Exception {
+
+		return sqlSession.selectOne(NAMESPACE + ".getReservData", reserv_num);
 	}
 
 

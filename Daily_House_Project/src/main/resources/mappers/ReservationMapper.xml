@@ -46,7 +46,7 @@
 	<!-- 예약 등록하기 테스트 -->
 	<insert id="insertReservation">
 		insert into tbl_reservation(reserv_num, room_num, user_email, room_reserv_start_date, room_reserv_end_date, reserv_price, reserv_state)
-		values(seq_reserv_num.nextval, #{room_num}, #{user_email}, #{check_in}, #{check_out}, #{room_price_v}, "Y")
+		values(seq_reserv_num.nextval, #{room_num}, #{user_email}, #{check_in}, #{check_out}, #{room_price_v}, #{reserv_state})
 	</insert>
 	
 	<!-- 예약취소하기 -->
@@ -66,9 +66,13 @@
 		
 	</select>
 	
-	<!-- 예약취소 가능한지 -->
-	<select id="reservCancleAvailable" resultType="ReservationVo">
-		select reserv_num from tbl_reservation where room_reserv_start_date &gt; sysdate and user_email = #{user_email}
+	<!-- 예약 정보, 룸 정보 보기 -->
+	<select id="getReservData" resultType="TestDto">
+		select m.*, r.user_email, r.room_reserv_start_date, 
+		r.room_reserv_end_date, r.reserv_price from tbl_room m, 
+			(select room_num, user_email, room_reserv_start_date, room_reserv_end_date, 
+			reserv_price from tbl_reservation where reserv_num = #{reserv_num}) r
+		where m.room_num = r.room_num
 	</select>
   
 </mapper>

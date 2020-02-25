@@ -87,10 +87,7 @@ public class YOController {
 		}
 		String user_email = userVo.getUser_email();
 		List<ReservationVo> list = service.getReservationList(user_email);
-		List<ReservationVo> cancleList = service.reservCancleAvailable(user_email);
-		System.out.println("cancleList: "+cancleList);
 		model.addAttribute("list", list);
-		model.addAttribute("cancleList", cancleList);
 		return "/reservation/reservation_list_page";
 	}
 	
@@ -101,6 +98,16 @@ public class YOController {
 		System.out.println("reserv_num:" + reserv_num);
 		service.cancelReservation(reserv_num);
 		return "success";
+	}
+	
+	//예약 취소 페이지
+	@RequestMapping(value="/reserv_cancle_page/{reserv_num}", method=RequestMethod.GET)
+	public String reservCanclePage(@PathVariable("reserv_num") int reserv_num, Model model) throws Exception {
+		System.out.println("예약 취소를 하신다고요?!");
+		System.out.println("reserv_num:" + reserv_num);
+		TestDto dto = service.getReservRoomData(reserv_num);
+		model.addAttribute("dto", dto);
+		return "/reservation/reservation_cancle";
 	}
 	
 	

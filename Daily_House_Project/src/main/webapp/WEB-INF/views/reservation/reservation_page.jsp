@@ -171,28 +171,28 @@ testDTo: ${testDto}
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="name">예약자</label>
-                  <input type="text" id="name" class="form-control" value="${userVo.user_name}">
+                  <input type="text" id="name" class="form-control" value="${userVo.user_name}" readonly="readonly">
                 </div>
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="phone">연락처</label>
-                  <input type="text" id="phone" class="form-control" value="${userVo.user_phone}">
+                  <input type="text" id="phone" class="form-control" value="${userVo.user_phone}" readonly="readonly">
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="email">Email</label>
-                  <input type="email" id="email" class="form-control" value="${userVo.user_email}">
+                  <input type="email" id="email" class="form-control" value="${userVo.user_email}" readonly="readonly">
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="checkin_date">입실날짜</label>
-                  <input type="text" id="dateCheckIn" class="form-control" value="${testDto.check_in}" readonly>
+                  <input type="text" id="dateCheckIn" class="form-control" value="${testDto.check_in}"  readonly="readonly">
                 </div>
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="checkout_date">퇴실날짜</label>
-                  <input type="text" id="dateCheckOut" class="form-control" value="${testDto.check_out}" readonly>
+                  <input type="text" id="dateCheckOut" class="form-control" value="${testDto.check_out}"  readonly="readonly">
                 </div>
               </div>
 
