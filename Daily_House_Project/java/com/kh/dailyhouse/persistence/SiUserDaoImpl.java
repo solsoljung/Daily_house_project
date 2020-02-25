@@ -56,5 +56,11 @@ public class SiUserDaoImpl implements SiUserDao {
 		List<HomeHomesDto> HomeList = sqlSession.selectList(NAMESPACE+".getHomeHomes");
 		return HomeList;
 	}
+	@Override
+	public void setPointList(UserVo userVo) throws Exception {
+		String user_email = userVo.getUser_email();
+		sqlSession.insert(NAMESPACE+".setPointList", user_email);
+		
+	}
 	
 }

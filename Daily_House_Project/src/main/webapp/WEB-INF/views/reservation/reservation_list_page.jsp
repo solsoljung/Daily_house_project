@@ -124,7 +124,7 @@ cancleList: ${cancleList}
 					</tr>
 				</thead>
 				<tbody>
-				<c:set target="${cancleList}" property="cancle">
+				<%-- <c:set target="${cancleList}" property="cancle"> --%>
 				<%-- <c:forEach items="${cancleList}" var="cancle"> --%>
 					<c:forEach items="${list}" var="reservationVo">
 						<tr id="reservationList">
@@ -134,15 +134,15 @@ cancleList: ${cancleList}
 							<td>${reservationVo.room_reserv_start_date}</td>
 							<td>${reservationVo.room_reserv_end_date}</td>
 							<td>${reservationVo.reserv_price}</td>
-							<c:if test="${cancle.reserv_num == reservationVo.reserv_num}">
+							<%-- <c:if test="${cancle.reserv_num == reservationVo.reserv_num}"> --%>
 								<td>
 									<input type="button" class="cancelBtn" data-reserv_num="${reservationVo.reserv_num}" value="예약취소">
 								</td>
-							</c:if>
+							<%-- </c:if> --%>
 						</tr>
 					</c:forEach>
 				<%-- </c:forEach> --%>
-				</c:set>
+				<%-- </c:set> --%>
 				</tbody>
 			</table>
 		</div>

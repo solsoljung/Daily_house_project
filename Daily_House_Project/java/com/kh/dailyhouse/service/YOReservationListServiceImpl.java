@@ -43,6 +43,11 @@ public class YOReservationListServiceImpl implements YOReservationListService {
 		return dao.reservCancleAvailable(user_email);
 	}
 
+	@Override
+	public int getUserPoint(String user_email) throws Exception {
+		return dao.getUserPoint(user_email);
+	}
+
 
 
 }

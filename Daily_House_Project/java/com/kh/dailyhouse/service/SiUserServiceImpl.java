@@ -53,5 +53,10 @@ public class SiUserServiceImpl implements SiUserService {
 		List<HomeHomesDto> listHome = siUserDao.getHomeHomes();
 		return listHome;
 	}
+	//포인트 이용 내역 테이블에 저장
+	@Override
+	public void setPointList(UserVo userVo) throws Exception {
+		siUserDao.setPointList(userVo);
+	}
 
 }

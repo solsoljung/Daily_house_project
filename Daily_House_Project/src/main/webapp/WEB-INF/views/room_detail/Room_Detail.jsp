@@ -23,6 +23,28 @@
 
 <script>
 $(function() {
+	
+	
+	function isCheckInOut() {
+		var checks = $(".check");
+		$.each(checks, function() {
+			var c = $(this).val();
+			if (c == "" || c == "Check-In" || c == "Check-Out") {
+				$("#reservation").val("날짜를 입력해주세요");
+				return false;
+			} else {
+				return true;
+			}
+		});
+		
+	}
+	
+	$("#reservation").click(function() {
+		if (isCheckInOut() == true) {
+			$("#reservationForm").submit();
+		}
+	});
+	
 // 	별점 보여주기
 	var rateAppend = "";
 	var i = 0;
@@ -135,13 +157,10 @@ $(window).scroll(function() {
 <!-- check in,out -->
 <script>
 $(document).ready(function(){
-	if ($("#startDate").val() == null || $("#startDate").val("Check-In")) {
-		$("#reservation").val("날짜를 입력해주세요");
+
+	function setCheckInOutText(str) {
+		$("#reservation").val(str + " 날짜 설정을 해주세요");
 		$("#reservation").removeClass();
-		$("#reservation").ready(function(e) {
-			e.preventDefault();
-			e.stopPropagation();
-		});
 	}
 	
 	var rDate2 = [];
@@ -190,7 +209,7 @@ $(document).ready(function(){
         console.log(date);
         
         //setEndDate값 받아오기
-        var room_num = ${roomDto.room_num};
+        var room_num = "${roomDto.room_num}";
         var url = "/datepicker/end/"+room_num+"/"+date;
         $.get(url, function(rDate){
         	console.log(rDate);
@@ -205,21 +224,10 @@ $(document).ready(function(){
         $("#endDate").datepicker("setStartDate", newDate); //이것 처럼 setEndDate값을 넘겨 줘야 됨
         
         if (e.dates.length == 1) {
-    		$("#reservation").val("체크 아웃 날짜 설정을 해주세요");
-    		$("#reservation").removeClass();
-    		$("#reservation").ready(function(e) {
-    			e.preventDefault();
-    			e.stopPropagation();
-    		});
+        	setCheckInOutText("체크 아웃");
     		$('#endDate').datepicker("show");
     	}else if(e.dates.length == 0) {
-    		$("#reservation").val("체크 인 날짜 설정을 해주세요");
-    		$("#reservation").removeClass();
-            $("#reservation").ready(function(e) {
-            	console.log("작동됨");
-            	e.preventDefault();
-            	e.stopPropagation();
-            });
+    		setCheckInOutText("체크 인");
     	}
 	});
 	}
@@ -249,25 +257,17 @@ $(document).ready(function(){
 		if (e.dates.length == 1) {
 			console.log("1이 작동");
 			
-			var room_num = ${roomDto.room_num};
+			var room_num = "${roomDto.room_num}";
 	        var url = "/datepicker/status/"+room_num;
 	        $.get(url, function(rDate){
 	        	var status = rDate.trim();
 	        	if (status == "Y") {
 	        		$("#reservation").val("예약 하기");
 	        		$("#reservation").addClass("mt-2 btn btn-white submit");
-	        		$("#reservation").click(function(e) {
-	        			$("#reservationForm").submit();
-	        			e.stopPropagation();
-	        		});
+// 	        		});
 	        	} else if (status == "N") {
 	        		$("#reservation").val("비공개 설정된 방입니다");
 	        		$("#reservation").removeClass();
-	        		$("#reservation").ready(function(e) {
-	        			console.log("작동됨");
-	        			e.preventDefault();
-	        			e.stopPropagation();
-	        		});
 	        	}
 	        });
 			
@@ -275,11 +275,6 @@ $(document).ready(function(){
     		console.log("0이 작동");
     		$("#reservation").val("체크아웃 날짜 설정을 해주세요");
     		$("#reservation").removeClass();
-    		$("#reservation").ready(function(e) {
-    			console.log("체크 아웃 날짜 설정 제거 작동됨");
-    			e.preventDefault();
-    			e.stopPropagation();
-    		});
     	}
 	});
 	
@@ -330,9 +325,8 @@ $(document).ready(function() {
 $(document).ready(function() {
 // 	//찜 Y,N 판별
 	var userVo = "${userVo.user_email}";
-	console.log(userVo);
-	if (userVo != null || userVo != "") {
-		console.log("로그인을 안해도 작동 되는 신기한 현상");
+	console.log("userVo:---" + userVo + "---");
+	if (userVo != "") {
 		var room_num = "${roomDto.room_num}";
 		var url = "/datepicker/like/"+room_num;
 		$.get(url, function(rDate){
@@ -439,7 +433,14 @@ $(document).ready(function() {
          		<tr>
          			<th colspan="3" class="padding"><h1 style="font-family: inherit;">${roomDto.room_title}</h1></th>
          			<th class="padding">
-         			<img src="/si/displayFile?fileName=/${roomDto.user_pic}" height="50">
+         			<c:choose>
+   						<c:when test="${roomDto.user_pic == null}">
+   							<img src="/images/profile/user.jpg" height="50">
+   						</c:when>
+   						<c:otherwise>
+               				<img src="/si/displayFile?fileName=/${roomDto.user_pic}" height="50">  
+   						</c:otherwise>
+   					</c:choose>
          			<p>${roomDto.user_name}</p>
          			</th>
          		</tr>
@@ -513,7 +514,14 @@ $(document).ready(function() {
           	
        		<c:forEach items="${reviewList}" var="RoomReviewDto">  			
    			<div class="block-21 mb-4 d-flex">
-               <img src="/si/displayFile?fileName=/${RoomReviewDto.user_pic}" height="50">  
+   				<c:choose>
+   					<c:when test="${RoomReviewDto.user_pic == null}">
+   						<img src="/images/profile/user.jpg" height="50">
+   					</c:when>
+   					<c:otherwise>
+               			<img src="/si/displayFile?fileName=/${RoomReviewDto.user_pic}" height="50">  
+   					</c:otherwise>
+   				</c:choose>
                 <div class="text">
                  <table>
                   <tr>
@@ -686,8 +694,8 @@ $(document).ready(function() {
 	         		</c:if>
 	         		<label for="startDate" style="font-size: 18px; font-family: 맑은 고딕;">예약 가능한 날을 확인해 보세요</label>
 	         		<div class="row">
-						<input type="text" value="Check-In" class="form-control" style="font-size:20px; margin: 15px;" id= "startDate">
-						<input type="text" value="Check-Out" class="form-control" style="font-size:20px; margin: 15px;" id= "endDate">
+						<input type="text" value="Check-In" class="form-control check" style="font-size:20px; margin: 15px;" id= "startDate">
+						<input type="text" value="Check-Out" class="form-control check" style="font-size:20px; margin: 15px;" id= "endDate">
 					</div>
 <!-- 								<h3>Subcribe to our Newsletter</h3> -->
 <!-- 								<p>Far far away, behind the word mountains, far from the countries Vokalia</p> -->
@@ -707,7 +715,7 @@ $(document).ready(function() {
 	         		  <input type="hidden" name="room_title" value="${roomDto.room_title}">
 	         		  <input type="hidden" name="room_price" value="${roomDto.room_price}">
 	         		  <input type="hidden" name="room_people" value="${roomDto.room_people}">
-	                  <input type="button" id="reservation" value="예약 하기" style="font-weight: bold; font-size: 20px;">
+	                  <input type="button" id="reservation" value="날짜를 선택해주세요" style="font-weight: bold; font-size: 20px;">
 	                </div>
 	              </form>
 	            </div>

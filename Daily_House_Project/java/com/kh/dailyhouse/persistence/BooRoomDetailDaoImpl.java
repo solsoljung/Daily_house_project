@@ -111,4 +111,18 @@ public class BooRoomDetailDaoImpl implements BooRoomDetailDao {
 		return ThreeAreaPic;
 	}
 	
+	//포인트 이용 내역 테이블에 추가
+	@Override
+	public void setPointList(RoomReviewVo roomReviewVo) throws Exception {
+		String user_email = roomReviewVo.getUser_email();
+		sqlSession.insert(NAMESPACE+".setPointList", user_email);
+	}
+	
+	//리뷰 작성후 유저에게 포인트 주기
+	@Override
+	public void setUserPoint(RoomReviewVo roomReviewVo) throws Exception {
+		String user_email = roomReviewVo.getUser_email();
+		sqlSession.update(NAMESPACE+".setUserPoint", user_email);
+	}
+	
 }

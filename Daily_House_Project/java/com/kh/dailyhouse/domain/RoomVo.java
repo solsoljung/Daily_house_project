@@ -2,7 +2,11 @@ package com.kh.dailyhouse.domain;
 
 import java.util.Arrays;
 
-public class RoomVo { 
+public class RoomVo {
+
+	//사진
+	private String pic_uri;
+	
 	private int room_num;
 	private String room_type_num;
 	private String user_email;
@@ -17,7 +21,7 @@ public class RoomVo {
 	private String room_title;
 	private String room_option_code;
 	private String[] pics; 
-	private String room_status; 
+	private String room_status;
 	
 	public int getRoom_num() {
 		return room_num;
@@ -109,14 +113,19 @@ public class RoomVo {
 	public void setRoom_status(String room_status) {
 		this.room_status = room_status;
 	}
-	
+	public String getPic_uri() {
+		return pic_uri;
+	}
+	public void setPic_uri(String pic_uri) {
+		this.pic_uri = pic_uri;
+	}
 	@Override
 	public String toString() {
-		return "RoomVo [room_num=" + room_num + ", room_type_num=" + room_type_num + ", user_email=" + user_email
-				+ ", room_location=" + room_location + ", room_location_detail=" + room_location_detail
-				+ ", room_score=" + room_score + ", room_price=" + room_price + ", room_explain=" + room_explain
-				+ ", room_people=" + room_people + ", room_bed=" + room_bed + ", room_bathroom=" + room_bathroom
-				+ ", room_title=" + room_title + ", room_option_code=" + room_option_code + ", pics="
+		return "RoomVo [pic_uri=" + pic_uri + ", room_num=" + room_num + ", room_type_num=" + room_type_num
+				+ ", user_email=" + user_email + ", room_location=" + room_location + ", room_location_detail="
+				+ room_location_detail + ", room_score=" + room_score + ", room_price=" + room_price + ", room_explain="
+				+ room_explain + ", room_people=" + room_people + ", room_bed=" + room_bed + ", room_bathroom="
+				+ room_bathroom + ", room_title=" + room_title + ", room_option_code=" + room_option_code + ", pics="
 				+ Arrays.toString(pics) + ", room_status=" + room_status + "]";
 	}
 }

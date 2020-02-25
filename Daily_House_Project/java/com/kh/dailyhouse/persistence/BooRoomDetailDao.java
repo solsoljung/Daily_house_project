@@ -42,4 +42,9 @@ public interface BooRoomDetailDao {
 	//3구역 사진 정보 얻기
 	public List<RoomPictureVo> getThreeAreapic(int room_num) throws Exception;
 	
+	//포인트 이용 내역 테이블에 추가
+	public void setPointList(RoomReviewVo roomReviewVo) throws Exception;
+	
+	//리뷰 작성후 유저에게 포인트 주기
+	public void setUserPoint(RoomReviewVo roomReviewVo) throws Exception;
 }

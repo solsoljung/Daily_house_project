@@ -43,26 +43,23 @@
 		where rnum &gt;= 1 and rnum &lt;= 5
 	</select>
 	
-<!-- 	<select id="getHomeHomes" resultType="HomeHomesDto"> -->
-<!-- 		select * from -->
-<!-- 		(select rownum rnum, a.* from -->
-<!-- 		(select r.room_price, r.room_title, r.room_explain, r.room_num, rp.pic_uri from tbl_room r, tbl_room_picture rp -->
-<!-- 		where r.room_num = rp.room_num -->
-<!-- 		order by r.room_num desc)a) -->
-<!-- 		where rnum &gt;= 1 and rnum &lt;= 2 -->
-<!-- 	</select> -->
-		<select id="getHomeHomes" resultType="HomeHomesDto">
-		select * from (select rownum rnum, a.* 
-		               from (select * 
-		                     from (select room_num room_num2, pic_uri
-		                           from (select room_num, pic_uri, row_number() over(partition by room_num order by room_num desc) as rn
-		                                 from tbl_room_picture
-		                                 )       
-		                           where rn = 1) r,
-		                    (select * from tbl_room) rp
-		                where r.room_num2 = rp.room_num
-		                order by room_num desc) a)
-		where rnum &gt;=1 and rnum &lt;= 2
+	<select id="getHomeHomes" resultType="HomeHomesDto">
+	select * from (select rownum rnum, a.* 
+	               from (select * 
+	                     from (select room_num room_num2, pic_uri
+	                           from (select room_num, pic_uri, row_number() over(partition by room_num order by room_num desc) as rn
+	                                 from tbl_room_picture
+	                                 )       
+	                           where rn = 1) r,
+	                    (select * from tbl_room) rp
+	                where r.room_num2 = rp.room_num
+	                order by room_num desc) a)
+	where rnum &gt;=1 and rnum &lt;= 2
+	</select>
 		
-		</select>
+	<insert id="setPointList">
+		insert into tbl_point (point_num, user_email, point_code, point_score)
+		values (seq_point_num.nextval, #{user_email}, 'R4', 1000000)
+	</insert>
+	
 </mapper>

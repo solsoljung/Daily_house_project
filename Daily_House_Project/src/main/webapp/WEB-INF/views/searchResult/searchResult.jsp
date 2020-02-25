@@ -37,7 +37,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 <script>
 $(document).ready(function(){
-	
+	//검색 ajax
 	var which = 0;
 	
 	//검색어 리스트
@@ -45,28 +45,29 @@ $(document).ready(function(){
 		if(e.keyCode == 40){
 			//이상하게 첫번째에 누르면 왜 이상한게 실행되지
 			console.log("아래");
-			console.log(which);
 			if(which > 0){
 				console.log("remove");
 				$("#list").children().removeClass("active");
 			}
 			$("#list").children().eq(which).addClass("active");
 			which++;
+			console.log(which);
 		} else if(e.keyCode == 38){
+			which--;
 			console.log("위");
 			console.log(which);
 			$("#list").children().removeClass("active");
-			$("#list").children().eq(which).addClass("active");
-			which--;
+			$("#list").children().eq(which -1).addClass("active");
 		} else if(e.keyCode == 13){
 			console.log("enter");
-			var keyword = $("#list").children().eq(which).text();
+			var keyword = $("#list").children().eq(which - 1).text();
 			console.log(keyword);
 			$(this).val(keyword);
 			$("input[name=keyword]").val(keyword);
 			$("#frmPage").submit();
 			//여기
 		} else if(e.keyCode != 40 && e.keyCode != 38 && e.keyCode != 13){
+			which = 0;
 			console.log("무엇도 아님");
 			var search_keyword = $(this).val();
 			console.log(search_keyword);
@@ -90,7 +91,6 @@ $(document).ready(function(){
 							strHtml += "<a class='list-group-item' data-keyword='"+ this.location_text +"'>" + this.location_text + "</a>";
 						});
 						$("#list").append(strHtml);
-						which = 0;
 					});
 				}
 			});
@@ -107,6 +107,15 @@ $(document).ready(function(){
 
 	//상세 페이지로 이동
 	$(".room-title").click(function(e) {
+		e.preventDefault();
+		var room_num = $(this).parent().parent().children().eq(0).children().attr("data-num");
+		$("input[name=room_num]").val(room_num);
+		$("#frmPage").attr("action", "/boo/detail");
+		$("#frmPage").submit();
+	});
+
+	//상세 페이지로 이동
+	$(".room-image").click(function(e) {
 		e.preventDefault();
 		var room_num = $(this).attr("data-num");
 		$("input[name=room_num]").val(room_num);
@@ -348,8 +357,8 @@ $(document).ready(function(){
 
 <section class="ftco-section ftco-room">
 <div class="container">
-${searchVo}
-${priceDto}
+<%-- ${searchVo}
+${priceDto} --%>
 <span id="targetAjax"></span>
 <!-- 히든 폼 -->
 <form id="frmPage" action="/sol/room" method="get">
@@ -494,7 +503,7 @@ ${priceDto}
 		<ul style="padding:0px;">
 			<li class="nav-item" style="text-align:center;list-style:none;padding-left:0px;width:300px;"><label style="margin-left:10px;font-weight:200;">침대와 욕실</label></li>
 			<li class="nav-item" style="list-style:none;padding-left:0px;width:240px;"><label style="margin-left:10px;margin-right:25px;font-weight:200;">침대</label>
-			<a class="minus" style="cursor:pointer">-</a>
+			<a class="minus" style="cursor:pointer;">-</a>
 			<label id="room_bed" style="font-weight:200;width:50px;height:40px;margin-left:10px;margin-right:10px;text-align:center;">${searchVo.room_bed}</label>
 			<a class="plus" style="cursor:pointer">+</a></li>
 			
@@ -526,21 +535,24 @@ ${priceDto}
         <c:forEach var="vo" items="${list}">
         	<div class="col-md-3">
         		<div class="room-wrap ftco-animate">
-        			<a href="room.html" class="img" style="background-image: url(/islagrande/images/room-1.jpg);"></a>
+        			<a data-num="${vo.room_num}" class="img room-image" style="background-image: url(/si/displayFile?fileName=/${vo.pic_uri});cursor:pointer;"></a>
+        			<!-- <img src="" width="100%" style="display: none;"> -->
         			<div class="text pt-4 pl-lg-5">
-        				<h2><a data-num="${vo.room_num}" class="room-title">${vo.room_title}</a></h2>
+        				<h2><a data-num="${vo.room_num}" class="room-title" id="room-title" style="cursor:pointer;font-family:Arial;">${vo.room_title}</a></h2>
         				<p class="rate">
-        					<span class="icon-star"></span>
-        					<span class="icon-star"></span>
-        					<span class="icon-star"></span>
-        					<span class="icon-star"></span>
-        					<span class="icon-star-half-full"></span>
+        					<c:choose>
+        						<c:when test="${(vo.room_score+(1-(vo.room_score%1))%1) > 4}"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span></c:when>
+        						<c:when test="${(vo.room_score+(1-(vo.room_score%1))%1) > 3}"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span></c:when>
+        						<c:when test="${(vo.room_score+(1-(vo.room_score%1))%1) > 2}"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span></c:when>
+        						<c:when test="${(vo.room_score+(1-(vo.room_score%1))%1) > 1}"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span></c:when>
+        						<c:otherwise><span class="icon-star-half-full"></span></c:otherwise>
+        					</c:choose>
         				</p>
         				<p class="d-flex price-details align-items-center pt-3">
         					<!-- <span>Starting From</span> -->
         			 		<span class="price">￦${vo.room_price}<small>&nbsp;/&nbsp;&nbsp;&nbsp;1박</small></span>
         				</p>
-        				<p><a data-num="${vo.room_num}" class="room-title btn-customize">지금 예약하기</a></p>
+        				<p><a data-num="${vo.room_num}" class="room-title btn-customize" style="cursor:pointer;">지금 예약하기</a></p>
         			</div>
         		</div>
         	</div>
@@ -556,7 +568,7 @@ ${priceDto}
 			<ul>
 			<c:if test="${searchVo.hasPrev == true}">
 						<li>
-							<a class="solge" data-page="${searchVo.startPage - 1}">&lt;</a>
+							<a class="solge" data-page="${searchVo.startPage - 1}" style="cursor:pointer">&lt;</a>
 						</li>
 					</c:if>
 					<c:forEach begin="${searchVo.startPage}" end="${searchVo.endPage}" var="v">
@@ -570,12 +582,12 @@ ${priceDto}
 								</c:otherwise>
 							</c:choose>
 						>
-							<a class="solge" data-page="${v}">${v}</a>
+							<a class="solge" data-page="${v}" style="cursor:pointer">${v}</a>
 						</li>
 					</c:forEach>
 					<c:if test="${searchVo.hasNext == true}">
 						<li>
-							<a class="solge" data-page="${searchVo.endPage + 1}">&gt;</a>
+							<a class="solge" data-page="${searchVo.endPage + 1}" style="cursor:pointer">&gt;</a>
 						</li>
 					</c:if>
 			</ul>
