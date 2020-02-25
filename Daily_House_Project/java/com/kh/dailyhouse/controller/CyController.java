@@ -236,7 +236,7 @@ public class CyController {
 	@RequestMapping(value="/isHost", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public int isHost(String user_email) throws Exception {
-		System.out.println("user_email:" + user_email);
+//		System.out.println("user_email:" + user_email);
 		int result = roomService.isHost(user_email);
 		return result;
 	}

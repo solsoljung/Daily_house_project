@@ -58,6 +58,14 @@ public class SolController {
 		if(str_start_date == "") {
 			str_start_date = null;
 			str_end_date = null;
+			searchVo.setStr_start_date(null);
+			searchVo.setStr_end_date(null);
+		}
+		
+		if(searchVo.getJoinTypeName() != null) {
+			if(searchVo.getJoinTypeName() == "") {
+				searchVo.setJoinTypeName("null");
+			}
 		}
 
 		//날짜
@@ -95,6 +103,12 @@ public class SolController {
 		//옵션
 		String option = searchVo.getArrOption();
 		System.out.println("옵션!!!: "+option);
+
+		if(option == "") {
+			searchVo.setArrOption("null");
+			option = null;
+		}
+		
 		if(option != null) {
 			List<String> listOption = Arrays.asList(option.split(","));
 	        searchVo.setListOption(listOption);

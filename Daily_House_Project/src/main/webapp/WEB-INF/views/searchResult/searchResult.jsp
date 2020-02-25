@@ -37,7 +37,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 <script>
 $(document).ready(function(){
-	
+	//검색 ajax
 	var which = 0;
 	
 	//검색어 리스트
@@ -108,7 +108,7 @@ $(document).ready(function(){
 	//상세 페이지로 이동
 	$(".room-title").click(function(e) {
 		e.preventDefault();
-		var room_num = $(this).attr("data-num");
+		var room_num = $("#room-title").attr("data-num");
 		$("input[name=room_num]").val(room_num);
 		$("#frmPage").attr("action", "/boo/detail");
 		$("#frmPage").submit();
@@ -352,7 +352,7 @@ ${searchVo}
 ${priceDto}
 <span id="targetAjax"></span>
 <!-- 히든 폼 -->
-<form id="frmPage" action="/sol/room" method="get">
+<form id="frmPage" action="/sol/room" method="post">
 	<input type="hidden" name="room_num" />
 	<input type="hidden" name="page" value="${searchVo.page}"/>
 	<input type="hidden" name="keyword" value="${searchVo.keyword}"/>
@@ -494,7 +494,7 @@ ${priceDto}
 		<ul style="padding:0px;">
 			<li class="nav-item" style="text-align:center;list-style:none;padding-left:0px;width:300px;"><label style="margin-left:10px;font-weight:200;">침대와 욕실</label></li>
 			<li class="nav-item" style="list-style:none;padding-left:0px;width:240px;"><label style="margin-left:10px;margin-right:25px;font-weight:200;">침대</label>
-			<a class="minus" style="cursor:pointer">-</a>
+			<a class="minus" style="cursor:pointer;">-</a>
 			<label id="room_bed" style="font-weight:200;width:50px;height:40px;margin-left:10px;margin-right:10px;text-align:center;">${searchVo.room_bed}</label>
 			<a class="plus" style="cursor:pointer">+</a></li>
 			
@@ -526,10 +526,11 @@ ${priceDto}
         <c:forEach var="vo" items="${list}">
         	<div class="col-md-3">
         		<div class="room-wrap ftco-animate">
-        			<a href="room.html" class="img" style="background-image: url(/islagrande/images/room-1.jpg);"></a>
+        			<a class="img room-title" style="background-image: url(/islagrande/images/room-1.jpg);cursor:pointer;"></a>
         			<div class="text pt-4 pl-lg-5">
-        				<h2><a data-num="${vo.room_num}" class="room-title">${vo.room_title}</a></h2>
+        				<h2><a data-num="${vo.room_num}" class="room-title" id="room-title" style="cursor:pointer;">${vo.room_title}</a></h2>
         				<p class="rate">
+        				
         					<span class="icon-star"></span>
         					<span class="icon-star"></span>
         					<span class="icon-star"></span>
@@ -540,7 +541,7 @@ ${priceDto}
         					<!-- <span>Starting From</span> -->
         			 		<span class="price">￦${vo.room_price}<small>&nbsp;/&nbsp;&nbsp;&nbsp;1박</small></span>
         				</p>
-        				<p><a data-num="${vo.room_num}" class="room-title btn-customize">지금 예약하기</a></p>
+        				<p><a data-num="${vo.room_num}" class="room-title btn-customize" style="cursor:pointer;">지금 예약하기</a></p>
         			</div>
         		</div>
         	</div>
@@ -556,7 +557,7 @@ ${priceDto}
 			<ul>
 			<c:if test="${searchVo.hasPrev == true}">
 						<li>
-							<a class="solge" data-page="${searchVo.startPage - 1}">&lt;</a>
+							<a class="solge" data-page="${searchVo.startPage - 1}" style="cursor:pointer">&lt;</a>
 						</li>
 					</c:if>
 					<c:forEach begin="${searchVo.startPage}" end="${searchVo.endPage}" var="v">
@@ -570,12 +571,12 @@ ${priceDto}
 								</c:otherwise>
 							</c:choose>
 						>
-							<a class="solge" data-page="${v}">${v}</a>
+							<a class="solge" data-page="${v}" style="cursor:pointer">${v}</a>
 						</li>
 					</c:forEach>
 					<c:if test="${searchVo.hasNext == true}">
 						<li>
-							<a class="solge" data-page="${searchVo.endPage + 1}">&gt;</a>
+							<a class="solge" data-page="${searchVo.endPage + 1}" style="cursor:pointer">&gt;</a>
 						</li>
 					</c:if>
 			</ul>

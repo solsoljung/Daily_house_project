@@ -6,6 +6,9 @@ import com.kh.dailyhouse.domain.ReservationVo;
 import com.kh.dailyhouse.domain.TestDto;
 
 public interface YOReservationListDao {
+	
+	// 결제 전 사용자 포인트 보기
+	public int getUserPoint(String user_email) throws Exception;
 
 	// (예약)결제하기
 	public void insertReservation(TestDto testDto) throws Exception;
