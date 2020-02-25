@@ -98,6 +98,7 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 	@Override
 	public void insertReview(RoomReviewVo roomReviewVo) throws Exception {
 		booRoomDetailDao.setReview(roomReviewVo);
+		
 	}
 	
 }
