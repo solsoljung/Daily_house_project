@@ -18,5 +18,6 @@ public interface SiUserService {
 	public void updatePassword(UserVo userVo) throws Exception;
 	
 	public List<HomeReviewDto> getHomeReview() throws Exception;
-	
+	// 포인트 이용 내역 테이블에 저장
+	public void setPointList(UserVo userVo) throws Exception;
 }
