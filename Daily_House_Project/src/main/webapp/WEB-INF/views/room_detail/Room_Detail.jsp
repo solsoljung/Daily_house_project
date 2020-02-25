@@ -433,7 +433,14 @@ $(document).ready(function() {
          		<tr>
          			<th colspan="3" class="padding"><h1 style="font-family: inherit;">${roomDto.room_title}</h1></th>
          			<th class="padding">
-         			<img src="/si/displayFile?fileName=/${roomDto.user_pic}" height="50">
+         			<c:choose>
+   						<c:when test="${roomDto.user_pic == null}">
+   							<img src="/images/profile/user.jpg" height="50">
+   						</c:when>
+   						<c:otherwise>
+               				<img src="/si/displayFile?fileName=/${roomDto.user_pic}" height="50">  
+   						</c:otherwise>
+   					</c:choose>
          			<p>${roomDto.user_name}</p>
          			</th>
          		</tr>
@@ -507,7 +514,14 @@ $(document).ready(function() {
           	
        		<c:forEach items="${reviewList}" var="RoomReviewDto">  			
    			<div class="block-21 mb-4 d-flex">
-               <img src="/si/displayFile?fileName=/${RoomReviewDto.user_pic}" height="50">  
+   				<c:choose>
+   					<c:when test="${RoomReviewDto.user_pic == null}">
+   						<img src="/images/profile/user.jpg" height="50">
+   					</c:when>
+   					<c:otherwise>
+               			<img src="/si/displayFile?fileName=/${RoomReviewDto.user_pic}" height="50">  
+   					</c:otherwise>
+   				</c:choose>
                 <div class="text">
                  <table>
                   <tr>
