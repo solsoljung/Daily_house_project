@@ -5,14 +5,15 @@ import java.util.List;
 import com.kh.dailyhouse.domain.PointVo;
 import com.kh.dailyhouse.domain.ReservationVo;
 import com.kh.dailyhouse.domain.TestDto;
+import com.kh.dailyhouse.domain.UserPointDto;
 
 public interface YOReservationListDao {
 	
 	// 결제시 사용자 포인트 차감
-	public void user_update_reserv_point(PointVo pointVo) throws Exception;
+	public void user_update_reserv_point(UserPointDto userPointDto) throws Exception;
 	
 	// 결제시 호스트에게 포인트 부여
-	public void host_update_reserv_point(PointVo pointVo) throws Exception;
+	public void host_update_reserv_point(UserPointDto userPointDto) throws Exception;
 	
 	// 포인트 테이블 
 	public void insertPoint(PointVo pointVo) throws Exception;

@@ -70,7 +70,7 @@ public class YOController {
 		System.out.println("예약결과는? "+result);
 		if(result > 0) {
 			rttr.addFlashAttribute("result", "success");
-			service.insertReservation(testDto);
+//			service.insertReservation(testDto);
 			return "redirect:/yo/reservation_list";
 		}
 		rttr.addFlashAttribute("result", "fail");
