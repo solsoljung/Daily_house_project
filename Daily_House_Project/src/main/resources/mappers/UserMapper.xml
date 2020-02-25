@@ -37,7 +37,7 @@
 	<select id="getHomeReview" resultType="HomeReviewDto">
 		select * from
 		(select rownum rnum, a.* from
-		(select r.room_title, u.user_name, v.room_review_text, u.user_pic, r.room_num from tbl_user u, tbl_room r, tbl_room_review v
+		(select r.room_titl, u.user_name, v.room_review_text, u.user_pic, r.room_num from tbl_user u, tbl_room r, tbl_room_review v
 		where v.user_email = u.user_email and v.room_num = r.room_num
 		order by v.room_review_write_date desc)a)
 		where rnum &gt;= 1 and rnum &lt;= 5
