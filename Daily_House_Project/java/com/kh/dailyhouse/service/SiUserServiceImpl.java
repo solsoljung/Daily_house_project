@@ -1,9 +1,12 @@
 package com.kh.dailyhouse.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.kh.dailyhouse.domain.HomeReviewDto;
 import com.kh.dailyhouse.domain.UserVo;
 import com.kh.dailyhouse.persistence.SiUserDaoImpl;
 
@@ -38,5 +41,10 @@ public class SiUserServiceImpl implements SiUserService {
 		siUserDao.updatePassword(userVo);
 	}
 
+	@Override
+	public List<HomeReviewDto> getHomeReview() throws Exception {
+		List<HomeReviewDto> list = siUserDao.getHomeReview();
+		return list;
+	}
 
 }

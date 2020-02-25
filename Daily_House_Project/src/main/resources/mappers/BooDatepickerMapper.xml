@@ -33,5 +33,28 @@
 		where reserv_num = #{reserv_num}
 	</select>
 	
+<!-- 	공개, 비공개 확인용 -->
+	<select id="getRoomStatus" resultType="String">
+		select room_status from tbl_room
+		where room_num = #{room_num}
+	</select>
+	
+<!-- 	찜목록에 있는지 판별 -->
+	<select id="getLikeNum" resultType="int">
+		select count(*) from tbl_like
+		where room_num = #{room_num} and user_email = #{user_email}
+	</select>
+	
+<!-- 	찜목록에 추가 하기 -->
+	<insert id="insertLike">
+		insert into tbl_like (like_num, room_num, user_email)
+		values (seq_like_num.nextval, #{room_num}, #{user_email})
+	</insert>
+	
+<!-- 	찜목록에서 삭제 하기 -->
+	<delete id="deleteLike">
+		delete from tbl_like
+		where room_num = #{room_num} and user_email = #{user_email}
+	</delete>
 	
 </mapper>

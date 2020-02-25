@@ -10,6 +10,7 @@ import com.kh.dailyhouse.domain.RoomLowHighPriceDto;
 import com.kh.dailyhouse.domain.RoomOptionVo;
 import com.kh.dailyhouse.domain.RoomTypeVo;
 import com.kh.dailyhouse.domain.RoomVo;
+import com.kh.dailyhouse.domain.SearchKeywordDto;
 import com.kh.dailyhouse.domain.SearchVo;
 import com.kh.dailyhouse.persistence.SolRoomDao;
 
@@ -47,6 +48,12 @@ public class SolRoomServiceImpl implements SolRoomService {
 	public RoomLowHighPriceDto getRoomPrice() throws Exception {
 		
 		return dao.getRoomPrice();
+	}
+
+	@Override
+	public List<SearchKeywordDto> getKeywordList(SearchKeywordDto dto) throws Exception {
+		
+		return dao.getKeywordList(dto);
 	}
 
 }

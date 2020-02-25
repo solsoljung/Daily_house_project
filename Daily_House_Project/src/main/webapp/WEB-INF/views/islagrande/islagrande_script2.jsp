@@ -21,4 +21,4 @@
   <script src="/islagrande/js/scrollax.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="/islagrande/js/google-map.js"></script>
-  <script src="/islagrande/js/main.js"></script>
+  <script src="/islagrande/js/main.js?ver=1"></script>

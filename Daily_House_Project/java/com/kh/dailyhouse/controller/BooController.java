@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.dailyhouse.domain.PointDto;
 import com.kh.dailyhouse.domain.ReviewPagingDto;
 import com.kh.dailyhouse.domain.RoomDto;
 import com.kh.dailyhouse.domain.RoomPictureVo;
 import com.kh.dailyhouse.domain.RoomReviewDto;
 import com.kh.dailyhouse.domain.RoomReviewVo;
+import com.kh.dailyhouse.service.BooPointListService;
 import com.kh.dailyhouse.service.BooRoomDetailService;
 
 @Controller
@@ -25,7 +27,10 @@ public class BooController {
 	@Inject
 	private BooRoomDetailService booRoomDetailService;
 	
-	@RequestMapping(value = "/detail", method = RequestMethod.GET)
+	@Inject
+	private BooPointListService booPointListService;
+	
+	@RequestMapping(value = "/detail", method = {RequestMethod.GET, RequestMethod.POST})
 	public String getRoomDetail(@RequestParam("room_num") int room_num, Model model, ReviewPagingDto reviewPagingDto) throws Exception{
 		//방을 선택시 room_num을 받아야됨
 		Map<String, Object> paramMap = booRoomDetailService.detail(room_num, reviewPagingDto);
@@ -71,5 +76,14 @@ public class BooController {
 		int num = roomReviewVo.getRoom_num();
 		return "redirect:/boo/detail?room_num="+num;
 
+	}
+	
+	//포인트 이용 내역 보여주기
+	@RequestMapping(value="/pointlist", method = RequestMethod.GET)
+	public String pointUseList(Model model) throws Exception {
+		List<PointDto> pointList = booPointListService.getPointList();
+		model.addAttribute("pointList", pointList);
+		
+		return "/pointuselist/PointUseList";
 	}
 }

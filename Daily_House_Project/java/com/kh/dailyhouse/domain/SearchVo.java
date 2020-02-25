@@ -1,7 +1,6 @@
 package com.kh.dailyhouse.domain;
 
 import java.sql.Timestamp;
-import java.util.Arrays;
 import java.util.List;
 
 public class SearchVo {

@@ -10,13 +10,18 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.dailyhouse.domain.RoomLowHighPriceDto;
 import com.kh.dailyhouse.domain.RoomOptionVo;
 import com.kh.dailyhouse.domain.RoomTypeVo;
 import com.kh.dailyhouse.domain.RoomVo;
+import com.kh.dailyhouse.domain.SearchKeywordDto;
 import com.kh.dailyhouse.domain.SearchVo;
 import com.kh.dailyhouse.service.SolRoomService;
 
@@ -26,8 +31,18 @@ public class SolController {
 
 	@Inject
 	private SolRoomService service;
+	
+	@RequestMapping(value = "/keywordList/{search_keyword}", method = RequestMethod.GET)
+	@ResponseBody
+	public List<SearchKeywordDto> getKeywordList(@PathVariable("search_keyword") String search_keyword) throws Exception {
+		System.out.println("keywordList 실행됨");
+		System.out.println("SearchKeywordDto: "+ search_keyword);
+		SearchKeywordDto dto = new SearchKeywordDto();
+		dto.setSearch_keyword(search_keyword);
+		return service.getKeywordList(dto);
+	}
 
-	@RequestMapping(value = "/room", method = RequestMethod.GET)
+	@RequestMapping(value = "/room", method = {RequestMethod.GET, RequestMethod.POST})
 	public String showRoom(Model model, SearchVo searchVo) throws Exception {
 		System.out.println("room get 실행됨");
 		System.out.println("searchVo:" + searchVo);
@@ -43,6 +58,14 @@ public class SolController {
 		if(str_start_date == "") {
 			str_start_date = null;
 			str_end_date = null;
+			searchVo.setStr_start_date(null);
+			searchVo.setStr_end_date(null);
+		}
+		
+		if(searchVo.getJoinTypeName() != null) {
+			if(searchVo.getJoinTypeName() == "") {
+				searchVo.setJoinTypeName("null");
+			}
 		}
 
 		//날짜
@@ -80,6 +103,12 @@ public class SolController {
 		//옵션
 		String option = searchVo.getArrOption();
 		System.out.println("옵션!!!: "+option);
+
+		if(option == "") {
+			searchVo.setArrOption("null");
+			option = null;
+		}
+		
 		if(option != null) {
 			List<String> listOption = Arrays.asList(option.split(","));
 	        searchVo.setListOption(listOption);

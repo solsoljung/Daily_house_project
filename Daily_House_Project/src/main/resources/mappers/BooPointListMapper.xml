@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kh.mappers.BooPointListMapper">
+	
+<!-- 	포인트 사용 내역 테이블 보여주기 -->
+	<select id="getPointList" resultType="PointDto">
+		select p.point_num, p.user_email, p.point_date, c.point_code, c.point_code_explain, p.reserv_num, p.point_score 
+		from tbl_point p, tbl_point_code c
+		where p.point_code = c.point_code
+		order by point_num desc
+	</select>
+	
+</mapper>
