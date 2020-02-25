@@ -86,7 +86,6 @@ $(function(){
 				alert("인증번호가 발송되었습니다.\n확인 후 인증번호를 입력바랍니다.");
 				console.log("=================btn_certification=================");
 				dice = rData;
-				console.log("dice: " + dice);
 			}
 		}); // $.ajax()
 	}); //$("#btn_certification1").click
