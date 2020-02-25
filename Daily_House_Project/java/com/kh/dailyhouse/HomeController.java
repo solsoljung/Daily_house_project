@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.kh.dailyhouse.domain.HomeHomesDto;
 import com.kh.dailyhouse.domain.HomeReviewDto;
 import com.kh.dailyhouse.service.SiUserService;
  
@@ -23,8 +24,11 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home( Model model) throws Exception {
 		
-		List<HomeReviewDto> list = siUserService.getHomeReview();
-		model.addAttribute("list", list);
+		List<HomeReviewDto> listReview = siUserService.getHomeReview();
+		model.addAttribute("listReview", listReview);
+		
+		List<HomeHomesDto> listHome = siUserService.getHomeHomes();
+		model.addAttribute("listHome", listHome);
 		
 		return "home";
 	}
