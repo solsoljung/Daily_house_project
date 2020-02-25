@@ -37,7 +37,7 @@ $(function() {
 				   	</c:otherwise>
 				  </c:choose>
 	        	<li class="nav-item"><a href="/sol/room" class="nav-link">Rooms</a></li>
-	        	<li class="nav-item"><a href="blog.html" class="nav-link">About</a></li>
+	        	<li class="nav-item"><a href="/si/about" class="nav-link">About</a></li>
 	        	<li class="nav-item"><a href="/yo/reservation" class="nav-link">예약하기</a></li>
 	        	<li class="nav-item"><a href="/cy/registerHost1" class="nav-link">호스팅하기</a></li>
 				  <c:choose>
