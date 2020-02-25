@@ -2,8 +2,10 @@ package com.kh.dailyhouse.service;
 
 import java.util.List;
 
+import com.kh.dailyhouse.domain.PointVo;
 import com.kh.dailyhouse.domain.ReservationVo;
 import com.kh.dailyhouse.domain.TestDto;
+import com.kh.dailyhouse.domain.UserPointDto;
 
 public interface YOReservationListService {
 
@@ -11,7 +13,7 @@ public interface YOReservationListService {
 	public int getUserPoint(String user_email) throws Exception;
 	
 	
-	public void insertReservation(TestDto testDto) throws Exception;
+	public void insertReservation(TestDto testDto, UserPointDto userPointDto, PointVo pointVo) throws Exception;
 	
 	public List<ReservationVo> getReservationList(String user_email) throws Exception;
 	
@@ -19,7 +21,4 @@ public interface YOReservationListService {
 
 	//예약 가능한지 확인
 	public int availableReserv(TestDto testDto) throws Exception;
-	
-	//예약 취소 가능한지 확인
-	public List<ReservationVo> reservCancleAvailable(String user_email) throws Exception;
 }

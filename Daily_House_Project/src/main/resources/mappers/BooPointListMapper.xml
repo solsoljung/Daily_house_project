@@ -7,9 +7,9 @@
 	
 <!-- 	포인트 사용 내역 테이블 보여주기 -->
 	<select id="getPointList" resultType="PointDto">
-		select poi.point_num, poi.user_email, poi.point_date, poi.point_score, code.point_code_explain, room.room_title, poi.room_num
+		select poi.point_num, poi.point_date, poi.point_score, code.point_code_explain, code.point_code, room.*
 		from tbl_point poi, tbl_point_code code, tbl_room room
-		where poi.point_code = code.point_code and poi.room_num = room.room_num and poi.user_email = #{user_email}
+		where poi.point_code = code.point_code and poi.room_num = room.room_num and poi.user_email = 'test@naver.com'
 		order by point_num desc
 	</select>
 	
