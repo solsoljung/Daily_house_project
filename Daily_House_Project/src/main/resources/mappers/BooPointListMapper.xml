@@ -9,7 +9,7 @@
 	<select id="getPointList" resultType="PointDto">
 		select poi.point_num, poi.user_email, poi.point_date, poi.point_score, code.point_code_explain, room.room_title
 		from tbl_point poi, tbl_point_code code, tbl_room room
-		where poi.point_code = code.point_code and poi.room_num = room.room_num
+		where poi.point_code = code.point_code and poi.room_num = room.room_num and poi.user_email = #{user_email}
 		order by point_num desc
 	</select>
 	
