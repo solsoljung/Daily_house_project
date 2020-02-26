@@ -31,7 +31,7 @@
 	
 	<!-- 예약 취소 시 방상태를 바꾸기 -->
 	<update id="updateRoomState">
-		update tbl_reservation SET reserv_state = #{reserv_num} where reserv_num = #{reserv_num}
+		update tbl_reservation SET reserv_state = #{reserv_state} where reserv_num = #{reserv_num}
 	</update>
 
 	<!-- 예약 목록 보기 테스트-->

@@ -91,13 +91,15 @@ public class YOController {
 		return "/reservation/reservation_list_page";
 	}
 	
-	// 예약 취소하기
-	@RequestMapping(value="/reservation_delete/{reserv_num}", method=RequestMethod.DELETE)
-	@ResponseBody
+	// 예약 취소하기 (예약 상태 N 변경)
+	@RequestMapping(value="/reservation_delete/{reserv_num}", method=RequestMethod.GET)
 	public String cancelReservation(@PathVariable("reserv_num") int reserv_num) throws Exception {
-		System.out.println("reserv_num:" + reserv_num);
-		
-		return "success";
+		System.out.println("예약상태를 바꾸는 중입닞다:" + reserv_num);
+		ReservationVo reservationVo = new ReservationVo();
+		reservationVo.setReserv_num(reserv_num);
+		reservationVo.setReserv_state("N");
+		service.updateRoomState(reservationVo);
+		return "redirect:/yo/reservation_list";
 	}
 	
 	//예약 취소 페이지 이동
@@ -106,6 +108,7 @@ public class YOController {
 		System.out.println("reserv_cancle_page:" + reserv_num);
 		TestDto dto = service.getReservRoomData(reserv_num);
 		model.addAttribute("dto", dto);
+		model.addAttribute("reserv_num", reserv_num);
 		return "/reservation/reservation_cancle";
 	}
 	
