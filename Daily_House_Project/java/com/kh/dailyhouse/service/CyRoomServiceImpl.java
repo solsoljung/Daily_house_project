@@ -35,6 +35,29 @@ public class CyRoomServiceImpl implements CyRoomService {
 	}
 
 	
+	// 관리자 START
+	@Override
+	public List<RoomDetailDto> getRoomAdminCheckNList() throws Exception {
+		return roomDao.getRoomAdminCheckNList();
+	}
+
+	@Override
+	public List<RoomDetailDto> getRoomAdminCheckYList() throws Exception {
+		return roomDao.getRoomAdminCheckYList();
+	}
+
+	@Override
+	public void updateRoomAdminCheckY(int room_num) throws Exception {
+		roomDao.updateRoomAdminCheckY(room_num);
+	}
+
+	@Override
+	public void updateRoomAdminCheckN(int room_num) throws Exception {
+		roomDao.updateRoomAdminCheckN(room_num);
+	}
+	// 관리자 END
+	
+	
 	
 	// 호스트가 등록한 숙소 리스트 불러오기
 	@Override
@@ -120,7 +143,7 @@ public class CyRoomServiceImpl implements CyRoomService {
 		roomDao.deleteAttach(pic_uri);
 	}
 
-
+	
 	
 
 }

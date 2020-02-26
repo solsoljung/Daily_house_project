@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.dailyhouse.domain.PointDto;
+import com.kh.dailyhouse.domain.ReservationVo;
 import com.kh.dailyhouse.domain.ReviewPagingDto;
 import com.kh.dailyhouse.domain.RoomDto;
 import com.kh.dailyhouse.domain.RoomPictureVo;
 import com.kh.dailyhouse.domain.RoomReviewDto;
 import com.kh.dailyhouse.domain.RoomReviewVo;
 import com.kh.dailyhouse.domain.UserVo;
+import com.kh.dailyhouse.service.BooAdminService;
 import com.kh.dailyhouse.service.BooPointListService;
 import com.kh.dailyhouse.service.BooRoomDetailService;
 
@@ -31,6 +33,9 @@ public class BooController {
 	
 	@Inject
 	private BooPointListService booPointListService;
+	
+	@Inject
+	private BooAdminService booAdminService;
 	
 	@RequestMapping(value = "/detail", method = {RequestMethod.GET, RequestMethod.POST})
 	public String getRoomDetail(@RequestParam("room_num") int room_num, Model model, ReviewPagingDto reviewPagingDto) throws Exception{
@@ -93,5 +98,23 @@ public class BooController {
 		model.addAttribute("reviewPagingDto", reviewPagingDto);
 		
 		return "/pointuselist/PointUseList";
+	}
+	
+	//관리자 페이지 - 손님들이 예약한 리스트들 보여주기
+	@RequestMapping(value="/adminReservList", method = RequestMethod.GET)
+	public String adminReservList(Model model) throws Exception {
+		List<ReservationVo> adminReservaionList = booAdminService.adminReservationList();
+		
+		model.addAttribute("adminReservaionList", adminReservaionList);
+		
+		return "/admin/admin_reservation_list";
+	}
+	
+	//관리자 페이지 - 손님들 체크아웃 기간이 넘어 호스트에게 돈을 입금시켜줘야 되는 부분
+	@RequestMapping(value="/adminCheckOutList", method = RequestMethod.GET)
+	public String adminCheckOutList(Model model) throws Exception {
+		
+		
+		return "/admin/admin_check_out_list.jsp";
 	}
 }

@@ -64,13 +64,13 @@ public class YOController {
 		check_out += " 00:00:00.0";
 		testDto.setRoom_reserv_start_date(java.sql.Timestamp.valueOf(check_id));
 		testDto.setRoom_reserv_end_date(java.sql.Timestamp.valueOf(check_out));
-		System.out.println("두번째 testDto" +testDto);
+		System.out.println("솔 예약 테스트 testDto" +testDto);
 		
 		int result = service.availableReserv(testDto);
 		System.out.println("예약결과는? "+result);
 		if(result > 0) {
 			rttr.addFlashAttribute("result", "success");
-//			service.insertReservation(testDto);
+			service.insertReservation(testDto);
 			return "redirect:/yo/reservation_list";
 		}
 		rttr.addFlashAttribute("result", "fail");
@@ -96,15 +96,14 @@ public class YOController {
 	@ResponseBody
 	public String cancelReservation(@PathVariable("reserv_num") int reserv_num) throws Exception {
 		System.out.println("reserv_num:" + reserv_num);
-		service.cancelReservation(reserv_num);
+		
 		return "success";
 	}
 	
-	//예약 취소 페이지
+	//예약 취소 페이지 이동
 	@RequestMapping(value="/reserv_cancle_page/{reserv_num}", method=RequestMethod.GET)
 	public String reservCanclePage(@PathVariable("reserv_num") int reserv_num, Model model) throws Exception {
-		System.out.println("예약 취소를 하신다고요?!");
-		System.out.println("reserv_num:" + reserv_num);
+		System.out.println("reserv_cancle_page:" + reserv_num);
 		TestDto dto = service.getReservRoomData(reserv_num);
 		model.addAttribute("dto", dto);
 		return "/reservation/reservation_cancle";

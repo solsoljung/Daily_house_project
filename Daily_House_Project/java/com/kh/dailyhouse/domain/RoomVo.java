@@ -23,6 +23,8 @@ public class RoomVo {
 	private String[] pics; 
 	private String room_status;
 	
+	private String room_admin_check;
+	
 	public int getRoom_num() {
 		return room_num;
 	}
@@ -119,6 +121,13 @@ public class RoomVo {
 	public void setPic_uri(String pic_uri) {
 		this.pic_uri = pic_uri;
 	}
+	public String getRoom_admin_check() {
+		return room_admin_check;
+	}
+	public void setRoom_admin_check(String room_admin_check) {
+		this.room_admin_check = room_admin_check;
+	}
+	
 	@Override
 	public String toString() {
 		return "RoomVo [pic_uri=" + pic_uri + ", room_num=" + room_num + ", room_type_num=" + room_type_num
@@ -126,6 +135,7 @@ public class RoomVo {
 				+ room_location_detail + ", room_score=" + room_score + ", room_price=" + room_price + ", room_explain="
 				+ room_explain + ", room_people=" + room_people + ", room_bed=" + room_bed + ", room_bathroom="
 				+ room_bathroom + ", room_title=" + room_title + ", room_option_code=" + room_option_code + ", pics="
-				+ Arrays.toString(pics) + ", room_status=" + room_status + "]";
+				+ Arrays.toString(pics) + ", room_status=" + room_status + ", room_admin_check=" + room_admin_check
+				+ "]";
 	}
 }

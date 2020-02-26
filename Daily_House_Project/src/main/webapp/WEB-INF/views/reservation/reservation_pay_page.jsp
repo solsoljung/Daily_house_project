@@ -18,15 +18,19 @@ $(function() {
 	var wonIndex = total_pay_won.lastIndexOf("원");
 	var total_pay = Number(total_pay_won.substring(0, wonIndex)); 
 	
-	// 사용자 이메일을 저장할 공간
+	// 사용자와 호스트 이메일을 저장할 공간
 	var user_email = "${userVo.user_email}";
-	
+	var host_email = "${testDto.host_email}";
+	var room_num = "${testDto.room_num}";
+		
 	// 결제하기 버튼
 	$("#payBtn").click(function(e) {
 		e.preventDefault();
 		
 		console.log("total_pay: " + total_pay);
 		console.log("user_email: " + user_email);
+		console.log("host_email: " + host_email);
+		console.log("room_num: " + room_num);
 		
 		// 결제 전 사용자의 포인트가 충분한지 확인
 		var url = "/yo/check_user_pay?user_email=" + user_email;
@@ -37,11 +41,8 @@ $(function() {
 			}
 		});
 		
-		// 0.05프로 계산
-		
-		
 		// 결제금액 포인트가 차감되어야 하므로 tbl_user의 포인트 업데이트
- 		$("#reservation_pay").submit();
+  		$("#reservation_pay").submit();
 	});
 	
 	if("${result}" == "fail"){
@@ -92,6 +93,7 @@ testDto: ${testDto}<br>
 	          <input type="hidden" name ="check_in" value="${testDto.check_in}">
 	          <input type="hidden" name ="check_out" value="${testDto.check_out}">
 	          <input type="hidden" name ="room_price" value="${testDto.room_price}">
+	          <input type="hidden" name ="reserv_price" value="${testDto.v * testDto.room_price}">
 	          <input type="hidden" name="v" value="${testDto.v}">
 	          
 	          
