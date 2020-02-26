@@ -60,6 +60,22 @@ public class CyController {
 		return userVo.getUser_email();
 	}
 	
+	// help
+	@RequestMapping(value = "/help", method = {RequestMethod.GET, RequestMethod.POST})
+	public String help(HttpSession session, Model model, RedirectAttributes rttr) throws Exception{
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		// 로그인 안 했을 경우 return
+//		if(userVo == null) {	
+//			rttr.addFlashAttribute("msg", "notAdmin");
+//			return "redirect:/si/loginHost";
+//		}
+		
+//		List<RoomDetailDto> list = roomService.getRoomAdminCheckNList();
+//		model.addAttribute("list", list);
+		
+		return "/help/help_list";
+	}
+	
 	// 관리자 room_admin_check가 N인 방들 보기
 	@RequestMapping(value = "/AdminRoomListN", method = {RequestMethod.GET, RequestMethod.POST})
 	public String AdminRoomListN(HttpSession session, Model model, RedirectAttributes rttr) throws Exception{

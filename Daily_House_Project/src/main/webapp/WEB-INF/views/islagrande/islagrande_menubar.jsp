@@ -33,7 +33,7 @@ $(function() {
 	        	<li class="nav-item"><a href="/yo/like_list" class="nav-link">찜목록</a></li>
 	        	<li class="nav-item"><a href="/sol/room" class="nav-link">Rooms</a></li>
 	        	<li class="nav-item"><a href="/si/about" class="nav-link">About</a></li>
-	        	<li class="nav-item"><a href="/yo/reservation" class="nav-link">예약하기</a></li>
+	        	<li class="nav-item"><a href="/cy/help" class="nav-link">도움말</a></li>
 	        	<li class="nav-item"><a href="/cy/registerHost1" class="nav-link">호스팅하기</a></li>
 				  <c:choose>
 				   	<c:when test="${empty userVo}">
