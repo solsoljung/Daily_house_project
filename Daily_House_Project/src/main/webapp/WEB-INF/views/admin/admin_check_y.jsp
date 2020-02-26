@@ -32,6 +32,14 @@ $(function(){
 	// 현재 클릭된 메뉴를 활성화
 	$(".nav-item:eq(0)").attr("class", "nav-item");
 	
+	// room_title_a
+	$(".room_title_a").on("click", function(e){
+		var that = $(this);
+		var room_num = that.attr("data-room-num");
+		console.log("room_num: " + room_num);
+		location.href = "/cy/AdminRoomDetail?room_num=" + room_num;
+	});
+	
 	// 승인클릭시 숙소를 미승인으로 변경
 	$(".btnAdminCheckN").on("click", function(e){
 		var that = $(this);

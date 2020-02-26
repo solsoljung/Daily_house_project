@@ -30,6 +30,9 @@ $(document).ready(function() {
 	if (msg == "notLogin") {
 		alert("로그인 후 이용 가능합니다. 로그인하시겠습니까?");
 	}
+	if (msg == "notAdmin") {
+		alert("관리자만 접근 가능합니다.");
+	}
 });
 </script>
 
