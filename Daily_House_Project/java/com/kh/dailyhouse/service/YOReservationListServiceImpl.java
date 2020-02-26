@@ -57,7 +57,7 @@ public class YOReservationListServiceImpl implements YOReservationListService {
 		
 		//포인트 결제 내역 추가
 		testDto.setPoint_code(MyConstants.USER_PAYMENT); // R1
-		dao.insertPoint(testDto);
+		dao.insertPointHost(testDto);
 		
 		//결제
 		int reserv_price = -testDto.getReserv_price();
@@ -83,6 +83,42 @@ public class YOReservationListServiceImpl implements YOReservationListService {
 	@Override
 	public void updateRoomState(ReservationVo reservationVo) throws Exception {
 		dao.updateRoomState(reservationVo);
+	}
+
+	@Override
+	public List<TestDto> getAvailableCheckout() throws Exception {
+		
+		return dao.getAvailableCheckout();
+	}
+
+	@Override
+	public void adminCheckOut(TestDto testDto) throws Exception {
+		//호스트에게 돈 보내주기 - host_email, reserv_price
+		dao.host_update_reserv_point(testDto);
+		
+		//포인트 내역에 기록 R7 insert - host_email, point_code(R7), reserv_price, room_num
+		testDto.setPoint_code(MyConstants.HOST_PAYMENT_REVENUE);
+		int reserv_price = testDto.getReserv_price();
+		System.out.println("금액을 포인트로 전환 전!"+ reserv_price);
+		reserv_price = (int) Math.ceil((double) reserv_price * 0.05);
+		System.out.println("금액을 포인트로 전환!"+ reserv_price);
+		testDto.setReserv_price(reserv_price);
+		dao.insertPointHost(testDto);
+				
+		//유저에게 마일리지 지급 tbl_user update - user_email, point_score
+		//user_email.set(user_email)하기
+		//금액의 0.05%
+		dao.user_update_reserv_point(testDto);
+				
+		//포인트 내역에 기록 R5 insert - user_email, point_code(R5), point_score, room_num
+		//금액의 0.05%
+		testDto.setPoint_code(MyConstants.USER_RESERVATION_POINT);
+		dao.insertPointUser(testDto);
+				
+		//tbl_reservation reserv_ing N으로 update - reserv_num
+		testDto.setReserv_ing("N");
+		dao.updateReservIng(testDto);
+		
 	}
 
 }
