@@ -58,6 +58,44 @@ public class CyController {
 		return userVo.getUser_email();
 	}
 	
+	// 관리자 room_admin_check가 N인 방들 보기
+	@RequestMapping(value = "/AdminRoomListN", method = {RequestMethod.GET, RequestMethod.POST})
+	public String AdminRoomListN(HttpSession session, Model model, RedirectAttributes rttr) throws Exception{
+		// 관리자 check N인 숙소 리스트 
+		List<RoomDetailDto> list = roomService.getRoomAdminCheckNList();
+		model.addAttribute("list", list);
+		
+		return "/admin/admin_check_n";
+	}
+	
+	// 관리자 room_admin_check가 Y인 방들 보기
+	@RequestMapping(value = "/AdminRoomListY", method = {RequestMethod.GET, RequestMethod.POST})
+	public String AdminRoomListY(HttpSession session, Model model, RedirectAttributes rttr) throws Exception{
+		// 관리자 check Y인 숙소 리스트 
+		List<RoomDetailDto> list = roomService.getRoomAdminCheckYList();
+		model.addAttribute("list", list);
+		
+		return "/admin/admin_check_y";
+	}
+	
+	// room_num에 해당하는 room_admin_check를 Y로 변경하기
+	@RequestMapping(value = "/updateRoomAdminCheckY/{room_num}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public String updateRoomAdminCheckY(@PathVariable("room_num") int room_num) throws Exception {
+		roomService.updateRoomAdminCheckY(room_num);
+		return "success";
+	}
+	
+	// room_num에 해당하는 room_admin_check를 N으로 변경하기
+	@RequestMapping(value = "/updateRoomAdminCheckN/{room_num}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public String updateRoomAdminCheckN(@PathVariable("room_num") int room_num) throws Exception {
+		roomService.updateRoomAdminCheckN(room_num);
+		return "success";
+	}
+	
+	
+	
 	// 호스트의 방 리스트 보기
 	@RequestMapping(value = "/HostRoomList", method = {RequestMethod.GET, RequestMethod.POST})
 	public String HostRoomList(HttpSession session, Model model, RedirectAttributes rttr) throws Exception{

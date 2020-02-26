@@ -71,6 +71,9 @@ $(function() {
 		$("input[name=v]").val(v);
 		console.log("v:" + v);
 		
+		var host_email = $("input[name=host_email]").val();
+		console.log("host_email: " + host_email);
+		
 		$("#reservation").submit();
 // 		location.href = "/yo/reservation_pay?v=" + v;
  	}); // reservationBtn click
@@ -167,6 +170,7 @@ testDTo: ${testDto}
 	          <input type="hidden" name="room_title" value="${testDto.room_title}">
 	          <input type="hidden" name="room_price" value="${testDto.room_price}">
 	          <input type="hidden" name="room_people" value="${testDto.room_people}">
+	          <input type="hidden" name="host_email" value="${testDto.user_email}">
 	          <input type="hidden" name="v" value="">
               <div class="row">
                 <div class="col-md-6 form-group">

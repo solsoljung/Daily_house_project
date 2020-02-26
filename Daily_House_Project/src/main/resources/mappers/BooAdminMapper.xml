@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kh.mappers.BooAdminMapper">
+	
+<!-- 	관리자 예약한 사람들 목록 보여주기 -->
+	<select id="getAdminReservationList" resultType="ReservationVo">
+		select * from tbl_reservation
+		where reserv_ing = 'Y'
+	</select>
+	
+</mapper>

@@ -9,7 +9,8 @@ public class ReservationVo {
 	private Timestamp room_reserv_start_date;
 	private Timestamp room_reserv_end_date;
 	private int reserv_price;
-	
+	private String reserv_state;
+	private String reserv_ing;
 	
 	public int getReserv_num() {
 		return reserv_num;
@@ -47,13 +48,24 @@ public class ReservationVo {
 	public void setReserv_price(int reserv_price) {
 		this.reserv_price = reserv_price;
 	}
-	
-	
+	public String getReserv_state() {
+		return reserv_state;
+	}
+	public void setReserv_state(String reserv_state) {
+		this.reserv_state = reserv_state;
+	}
+	public String getReserv_ing() {
+		return reserv_ing;
+	}
+	public void setReserv_ing(String reserv_ing) {
+		this.reserv_ing = reserv_ing;
+	}
 	@Override
 	public String toString() {
 		return "ReservationVo [reserv_num=" + reserv_num + ", room_num=" + room_num + ", user_email=" + user_email
 				+ ", room_reserv_start_date=" + room_reserv_start_date + ", room_reserv_end_date="
-				+ room_reserv_end_date + ", reserv_price=" + reserv_price + "]";
+				+ room_reserv_end_date + ", reserv_price=" + reserv_price + ", reserv_state=" + reserv_state
+				+ ", reserv_ing=" + reserv_ing + "]";
 	}
 	
 	

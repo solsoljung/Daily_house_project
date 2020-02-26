@@ -12,11 +12,13 @@ public class TestDto {
 	private int room_people;
 	private String room_title;
 	private String user_email;
+	private String host_email;
 	private String room_location;
 	private int v;
 	private int room_price_v;
 	private String reserv_state = "Y";
 	private int reserv_price;
+	private String point_code;
 
 	public TestDto() {
 		super();
@@ -134,14 +136,30 @@ public class TestDto {
 		this.reserv_price = reserv_price;
 	}
 
+	public String getHost_email() {
+		return host_email;
+	}
+
+	public void setHost_email(String host_email) {
+		this.host_email = host_email;
+	}
+
+	public String getPoint_code() {
+		return point_code;
+	}
+
+	public void setPoint_code(String point_code) {
+		this.point_code = point_code;
+	}
+
 	@Override
 	public String toString() {
 		return "TestDto [room_num=" + room_num + ", check_in=" + check_in + ", check_out=" + check_out
 				+ ", room_reserv_start_date=" + room_reserv_start_date + ", room_reserv_end_date="
 				+ room_reserv_end_date + ", room_price=" + room_price + ", room_people=" + room_people + ", room_title="
-				+ room_title + ", user_email=" + user_email + ", room_location=" + room_location + ", v=" + v
-				+ ", room_price_v=" + room_price_v + ", reserv_state=" + reserv_state + ", reserv_price=" + reserv_price
-				+ "]";
+				+ room_title + ", user_email=" + user_email + ", host_email=" + host_email + ", room_location="
+				+ room_location + ", v=" + v + ", room_price_v=" + room_price_v + ", reserv_state=" + reserv_state
+				+ ", reserv_price=" + reserv_price + ", point_code=" + point_code + "]";
 	}
 
 }

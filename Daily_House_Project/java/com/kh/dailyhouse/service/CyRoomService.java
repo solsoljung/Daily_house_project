@@ -7,6 +7,20 @@ import com.kh.dailyhouse.domain.RoomDetailDto;
 import com.kh.dailyhouse.domain.RoomVo;
 
 public interface CyRoomService {
+	
+	// 관리자용 숙소 room_admin_check가 N인 값 리스트 가져오기
+	public List<RoomDetailDto> getRoomAdminCheckNList() throws Exception;
+		
+	// 관리자용 숙소 room_admin_check가 Y인 값 리스트 가져오기
+	public List<RoomDetailDto> getRoomAdminCheckYList() throws Exception;
+		
+	// 관리자용 숙소 room_admin_check값을 Y로 업데이트
+	public void updateRoomAdminCheckY(int room_num) throws Exception;
+		
+	// 관리자용 숙소 room_admin_check값을 N으로 업데이트
+	public void updateRoomAdminCheckN(int room_num) throws Exception;
+	
+	
 	// 호스트 정보 검색
 	public HostVo getHostInfo(String user_email) throws Exception;
 	

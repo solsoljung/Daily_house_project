@@ -6,10 +6,24 @@ import com.kh.dailyhouse.domain.RoomDetailDto;
 import com.kh.dailyhouse.domain.RoomVo;
 
 public interface CyRoomDao {
-	// 숙소 검색하기
+	
+	// 관리자용 숙소 room_admin_check가 N인 값 리스트 가져오기
+	public List<RoomDetailDto> getRoomAdminCheckNList() throws Exception;
+	
+	// 관리자용 숙소 room_admin_check가 Y인 값 리스트 가져오기
+	public List<RoomDetailDto> getRoomAdminCheckYList() throws Exception;
+	
+	// 관리자용 숙소 room_admin_check값을 Y로 업데이트
+	public void updateRoomAdminCheckY(int room_num) throws Exception;
+	
+	// 관리자용 숙소 room_admin_check값을 N으로 업데이트
+	public void updateRoomAdminCheckN(int room_num) throws Exception;
+	
+	
+	// 숙소 리스트 가져오기
 	public List<RoomDetailDto> getHostRoomList(String user_email) throws Exception;
 	
-	// 숙소 1개 검색
+	// 숙소 1개 가져오기
 	public RoomDetailDto getHostRoomDetail(int room_num) throws Exception;
 	
 	// 숙소등록을 위한 다음 시퀸스 값 얻어내기

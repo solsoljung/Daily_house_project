@@ -23,7 +23,9 @@
 
 <script>
 $(function() {
-	
+	// 현재 클릭된 메뉴를 활성화
+	$(".nav-item:eq(0)").attr("class", "nav-item");
+	$(".nav-item:eq(2)").attr("class", "nav-item active");
 	
 	function isCheckInOut() {
 		var checks = $(".check");
