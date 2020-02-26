@@ -31,196 +31,43 @@
 $(function(){
 	// 현재 클릭된 메뉴를 활성화
 	$(".nav-item:eq(0)").attr("class", "nav-item");
-	$(".nav-item:eq(6)").attr("class", "nav-item active");
 	
 	// 수정완료 버튼 숨기기
 	$("#btnConplete").hide();
-	$("#btnAddress").hide();
-	$(".addFile").hide();
-	
-	// room_location을 저장할 공간
-	var room_location_full = "${roomDetailDto.room_location}" + " " + "${roomDetailDto.room_location_detail}";
-	$("#roadFullAddr").val(room_location_full);
-	
-	// input[name]의 값을 체크하기 위한 변수들
-	var room_location = "";
-	var room_location_detail = "";
-	
-	var room_type_num = "";
-	
-	var script_data_options = [];
-	
-	// room_option_code
-	var room_option_code = "${roomDetailDto.room_option_code}";
-	
-	split();
-	function split() {			
-		var res = room_option_code.split(",");	
-// 		console.log("==============================res==============================");
-// 		console.log(res);
-		
-		var data_options = [];
-		$(".chb").each(function(){
-			data_options.push($(this).attr("data-option"));
-		});
-// 		console.log("==========================data_options==========================");
-// 		console.log(data_options);
-		
-		for(var i=0; i<res.length; i++){
-// 			console.log("i"+i+ ": " + res[i]);
-			for(var v=0; v<data_options.length; v++){
-// 				console.log("v"+v+ ": " + data_options[v]);
-				if(res[i] == data_options[v]){
-					$(".chb").eq(v).prop("checked", true);
-				}
-			}
-		}
-	};	//function split()	
-	
 	
 	// 수정하기
 	$("#btnModify").click(function(){
-		$("#btnAddress").show(600); 				  // 주소검색 버튼 보이기
 		$(this).hide(600); 							  // 수정하기 버튼 숨기기
 		$("#btnConplete").show(); 					  // 수정완료 버튼 보이기
-		$("#btnDelete").attr("disabled","disabled");  // 삭제하기 버튼 비활성화
 		
-		$("input[name=room_title]").prop("readonly", false);
-		$("textarea[name=room_explain]").prop("readonly", false);
-		$("input[name=room_price]").prop("readonly", false);
-		
-		$(".romm_type_nums").prop("disabled", false);
-		$(".plus").prop("disabled", false);
-		$(".minus").prop("disabled", false);
-		
-		$(".chb").prop("disabled", false);		
-		
-		$(".room_states").prop("disabled", false);
-		
-		$(".pull").fadeIn(1000);    // 첨부파일 삭제링크(x) 나타내기
-		$(".addFile").fadeIn(1000); // 파일첨부 나타내기
+		$(".room_admin").prop("disabled", false);
 	});
 	
-	// select room_type_num
-	$("#room_type_num").change(function() {
-		$("input[name=room_type_num]").val($(this).val());
-// 		console.log($("input[name=room_type_num]").val());
-	});
-	
-	// select room_status
-	$("#room_status").change(function() {
-		$("input[name=room_status]").val($(this).val());
-// 		console.log($("input[name=room_status]").val());
+	// select room_admin_check
+	$("#room_admin_check").change(function() {
+		$("input[name=room_admin_check]").val($(this).val());
+		console.log($("input[name=room_admin_check]").val());
 	});
 	
 	// 수정완료
 	$("#btnConplete").click(function(e){
 		e.preventDefault();
 		
-		room_location = $("#roadAddrPart1").val();
-		room_location_detail = $("#addrDetail").val();
-		if(room_location == null || room_location == ""){
-			alert("주소를 입력해주세요.");
-			return;
-		}
-		
-		if($("input[name=room_title]").val() == null || $("input[name=room_title]").val() == ""){
-			alert("숙소이름을 입력해주세요.");
-			return;
-		}
-		if($("textarea[name=room_explain]").val() == null || $("textarea[name=room_explain]").val() == ""){
-			alert("숙소이름을 입력해주세요.");
-			return;
-		}
-		if($("input[name=room_price]").val() == null || $("input[name=room_price]").val() == ""){
-			alert("숙소이름을 입력해주세요.");
-			return;
-		}
-		
-		$(".chb:checked").each(function() { 
-			script_data_options.push($(this).attr("data-option"));
-	    });
-// 		console.log("script_data_options: " + script_data_options);
-		$("input[name=room_option_code]").val(script_data_options);
-		
-		$("input[name=room_location]").val(room_location);
-		$("input[name=room_location_detail]").val(room_location_detail);
-		
-		$("input[name=room_people]").val($("#room_people").val());
-		$("input[name=room_bed]").val($("#room_bed").val());
-		$("input[name=room_bathroom]").val($("#room_bathroom").val());
-		
-// 		console.log("room_location: " + $("input[name=room_location]").val());
-// 		console.log("room_location_detail: " + $("input[name=room_location_detail]").val());
-		
-// 		console.log("room_title: " + $("input[name=room_title]").val());	
-// 		console.log("room_explain: " + $("textarea[name=room_explain]").val());	
-// 		console.log("room_price: " + $("input[name=room_price]").val());	
-		
-// 		console.log("room_option_code: " + $("input[name=room_option_code]").val());
-		
-// 		console.log("room_type_num: " + $("input[name=room_type_num]").val());
-// 		console.log("room_people: " + $("input[name=room_people]").val());	
-// 		console.log("room_bed: " + $("input[name=room_bed]").val());	
-// 		console.log("room_bathroom: " + $("input[name=room_bathroom]").val());	
-		
-// 		console.log("room_status: " + $("input[name=room_status]").val());
-
-
-		if(listNum < 1){
-			alert("한 장 이상의 숙소 사진을 등록해주세요!");
-			return;
-		}
-		
-		var upDiv = $("#newUploadedList > div");
-		var pics = [];
-		console.log("newUploadedList: " + upDiv);
-		
-		upDiv.each(function(index) {
-			var pic_uri = $(this).attr("data-filename");
-			console.log(pic_uri);
-			pics.push(pic_uri);
-			
-		});
-		console.log("pics: " + pics);
-		
-		$("input[name=pics]").val(pics);
-		console.log("input[name=pics]: " + $("input[name=pics]").val());
-		
-		
-		$("#form").attr("action", "/cy/HostModifyRoom"); 
+		$("#form").attr("action", "/cy/AdminRoomDetailUpdate"); 
 		$("#form").submit();
 	}); // btnConplete
 	
 	
-	// 숙소 삭제하기
-	$("#btnDelete").click(function(e){
+	// 목륵으로 이동
+	$("#btnList").click(function(e){
 		e.preventDefault();
-		var status = "${roomDetailDto.room_status}";
-		if(status == "Y"){
-			alert("숙소 공개여부가 공개일 경우 삭제할 수 없습니다.");
-			return;
-		}
 		
-		// 예약이 있는지 없는지 알아낸 후 없다면 삭제
-		var room_num = "${roomDetailDto.room_num}";
-		var url = "/cy/isReserved/" + room_num;
-		$.ajax({
-			"type" : "get",
-			"url" : url,
-			"headers" : {
-				"Content-Type" : "application/json",
-				"X-HTTP-Method-Override" : "get"
-			},
-			"success" : function(rData) {
-				console.log("rData: " + rData);
-				if(rData > 0){
-					alert("현재 예약된 숙소는 삭제할 수 없습니다.");
-				}else{
-					location.href = "/cy/deleteRoom?room_num=" + room_num;
-				}
-			}
-		}); // $.ajax()
+		var now_admin_check = "${roomDetailDto.room_admin_check}";
+		if(now_admin_check == 'N'){
+			location.href = "/cy/AdminRoomListN";
+		}else if(now_admin_check == 'Y'){
+			location.href = "/cy/AdminRoomListY";
+		}
 	});
 	
 	var listNum = "";
@@ -266,159 +113,9 @@ $(function(){
 		});
 	} // function getAttachList()
 	
-	// 첨부 파일과 데이터 삭제 링크 uploadedList
-	$("#uploadedList").on("click", ".attach-del", function(e) {
-		e.preventDefault();
-		var that = $(this);
-		var fullName = that.attr("href");
-		console.log("fullName:" + fullName);
-		var url = "/upload/deleteFileAndData";
-		var sendData = {"fileName" : fullName};
-		$.get(url, sendData, function(rData) {
-			console.log(rData);
-			if (rData == "success") {
-				listNum--;
-				that.parent().remove();
-			}
-		});
-	});
-	
-	// 첨부 파일과 데이터 삭제 링크 newUploadedList
-	$("#newUploadedList").on("click", ".attach-del", function(e) {
-		e.preventDefault();
-		var that = $(this);
-		var fullName = that.attr("href");
-		console.log("fullName:" + fullName);
-		var url = "/upload/deleteFileAndData";
-		var sendData = {"fileName" : fullName};
-		$.get(url, sendData, function(rData) {
-			console.log(rData);
-			if (rData == "success") {
-				listNum--;
-				that.parent().remove();
-			}
-		});
-	});
-	
-	
-	// 파일 업로드 드래그
-	$("#fileDrop").on("dragenter dragover", function(e) {
-		e.preventDefault();
-	});
-	
-	// 파일 업로드 드롭
-	$("#fileDrop").on("drop", function(e) {
-		e.preventDefault(); // 브라우저로 파일 열기 안하기
-		file = e.originalEvent.dataTransfer.files[0];
-		console.log(file);
-		
-		var formData = new FormData(); // <form>
-		formData.append("file", file); // <input name="file"/>
-		
-		var url = "/upload/uploadAjax"; // UploadController.java
-		// <form enctype="multipart/form-data"
-		// -> enctyp의 기본값: application/x-www-form-urlencoded
-		// "processData":false, "contentType":false
-		
-		$.ajax({
-			"type" : "post",
-			"url" : url,
-			"processData" : false,
-			"contentType" : false,
-			"data" : formData,
-			"success" : function(fullName) {
-				listNum++;
-				console.log("listNum+: " + listNum);
-				console.log(fullName); 
-				// 파일명 얻기
-				var underScoreIndex = fullName.indexOf("_");
-				var fileName = fullName.substring(underScoreIndex + 1); // Penguins.jpg
-				// 썸네일 이미지의 이름 얻기
-				var thumbnailName = getThumbnailName(fullName); // myscript.js
-				console.log("thumbnailName:	" + thumbnailName);
-				var isImage = checkImage(thumbnailName);
-				console.log("isImage:" + isImage);
-				var html = "<div data-filename='"+fullName+"' style='display: inline;'>";
-				if (isImage == true) {
-					html +=
-	"<img class='img-thumbnail' src='/upload/displayFile?fileName=" + thumbnailName + "'/><br>";
-				} else {
-					html += 
-	"<img class='img-thumbnail' src='/resources/images/file_image.png'/><br>";
-				}
-// 				html += "<span>" + fileName + "</span>";
-				html += "<a href='"+fullName+"' class='attach-del' ><span class='right' float='right'>x</span></a>";
-				html += "</div><br>";
-				$("#newUploadedList").append(html);
-			}
-		}); // $.ajax()
-	}); // $("#fileDrop").on("drop",
-	
-	
-	
-	// 첨부파일 END ====================================================================================
-	
-	// room_price는 숫자만 입력할 수 있도록 설정
-	$("input[name=room_price]").on("keyup", function() {
-	    $(this).val($(this).val().replace(/[^0-9]/g,""));
-	});
-	
-	// 수량 버튼 SRATR
-	// .plus
-	$(".plus").on("click", function(e){
-		var num = $(this).parent().find(".numBox").val();
-		var plusNum = Number(num) + 1;
-		var max = 50;
-		
-		var target = $(this).parent().find(".numBox");
-		if(plusNum > max) {
-			target.val(num);
-		} else {
-		    target.val(plusNum);          
-		}
-	});
-	
-	// .minus
-	$(".minus").on("click", function(e){
-		var num = $(this).parent().find(".numBox").val();
-		var minusNum = Number(num) - 1;
-		   
-		var target = $(this).parent().find(".numBox");
-		if(minusNum <= 0) {
-			target.val(num);
-		} else {
-			target.val(minusNum);          
-		}
-	});
-	// 수량 버튼 END
-
 });
 </script>
 
-<!-- 주소 api -->
-<script language="javascript">
-	function goPopup() {
-		var pop = window.open("/popup/jusoPopup.jsp","pop","width=570, height=420, scrollbars=yes, resizable=yes");
-	}
-	function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr,jibunAddr,zipNo,admCd,
-			rnMgtSn,bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,
-			buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo) {
-		
-		document.form.roadFullAddr.value = roadFullAddr;
-		document.form.roadAddrPart1.value = roadAddrPart1;
-		document.form.roadAddrPart2.value = roadAddrPart2;
-		document.form.addrDetail.value = addrDetail;
-		document.form.zipNo.value = zipNo;
-	}
-</script>
-
-<% 
-	request.setCharacterEncoding("UTF-8");  //한글깨지면 주석제거
-	//request.setCharacterEncoding("EUC-KR");  //해당시스템의 인코딩타입이 EUC-KR일경우에
-	String inputYn = request.getParameter("inputYn"); 
-	String roadFullAddr = request.getParameter("roadFullAddr"); 
-%>
-<!-- host_register_page1 START -->
 <br><br><br><br>
 
 <%-- roomDetailDto: ${roomDetailDto} --%>
@@ -431,35 +128,8 @@ $(function(){
 			<label class="lblTitle2">* 숙소의 위치</label><br>
 				<!-- 위치등록 -->
 				<form id="form" name="form" method="post">
-				<input type="hidden" id="confmKey" name="confmKey" value=""/>
-				<input type="hidden" id="returnUrl" name="returnUrl" value=""/>
-				<input type="hidden" id="resultType" name="resultType" value=""/>
-				<!-- 해당시스템의 인코딩타입이 EUC-KR일경우에만 추가 START-->
-				<!-- <input type="hidden" id="encodingType" name="encodingType" value="EUC-KR"/> -->
-				
-				<input type="hidden" name="room_num" value="${roomDetailDto.room_num}"/>
-				
-				<input type="hidden" name="room_location" value="${roomDetailDto.room_location}"/>
-				<input type="hidden" name="room_location_detail"  value="${roomDetailDto.room_location_detail}"/>
-				
-				<input type="hidden" name="room_type_num" value="${roomDetailDto.room_type_num}"/>
-				<input type="hidden" name="room_people" value="${roomDetailDto.room_people}"/>
-				<input type="hidden" name="room_bed" value="${roomDetailDto.room_bed}"/>
-				<input type="hidden" name="room_bathroom" value="${roomDetailDto.room_bathroom}"/>
-				
-				<input type="hidden" name="room_option_code" value="${roomDetailDto.room_option_code}"/>
-				
-				<input type="hidden" name="room_status" value="${roomDetailDto.room_status}"/>
-				
-				<input type="hidden" name="pics" value="${roomDetailDto.pics}"/>
-				
-				<div class="row">
-					<div class="col-md-10"></div>
-					<div class="col-md-2">
-						<button type="button" class="btn btn-primary btn-block" onClick="goPopup();" 
-						style="font-size:15px;" id="btnAddress">주소검색</button>
-					</div>
-				</div><br>
+				<input type="hidden" name="room_num" value="${roomDetailDto.room_num}">
+				<input type="hidden" name="room_admin_check" >
 				
 				<div class="row">
 					<div class="col-md-2">
@@ -546,19 +216,6 @@ ${roomDetailDto.room_explain}</textarea><br><br>
 						
 						</div>
 					</div>
-					
-					
-					<!-- 파일 첨부 -->
-					<div class="form-group">
-						<label for="fileDrop" class="lblTitle2 addFile">첨부할 파일을 드래그, 드롭하세요</label>
-						<div id="fileDrop" class="addFile"></div>
-					</div>
-					
-					<!-- 썸네일 이미지 -->
-					<div class="form-group addFile" id="uploadedList" style="display: inline;" >
-					
-					</div>
-					
 					
 					</div><br><br>
 				
@@ -675,11 +332,11 @@ ${roomDetailDto.room_explain}</textarea><br><br>
 					</div>
 					<div class="col-md-2" align="right">
 						<button type="button" class="btn btn-primary btn-block py-3 px-4" style="font-size:15px; margin-top: 10px" id="btnConplete">완료</button>
-						<button type="button" class="btn btn-primary btn-block py-3 px-4" style="font-size:15px;" id="btnModify">수정</button>
+						<button type="button" class="btn btn-primary btn-block py-3 px-4" style="font-size:15px;" id="btnModify">승인 수정</button>
 					</div>
 					<div class="col-md-2" align="right">
 						<button type="button" class="btn btn-primary btn-block py-3 px-4"  
-							style="font-size:15px; margin-top: 9px" id="btnDelete">삭제</button>
+							style="font-size:15px; margin-top: 9px" id="btnList">목록</button>
 					</div>
 				</div>
 				

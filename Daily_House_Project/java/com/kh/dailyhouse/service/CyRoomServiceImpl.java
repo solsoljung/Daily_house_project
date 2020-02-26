@@ -55,6 +55,11 @@ public class CyRoomServiceImpl implements CyRoomService {
 	public void updateRoomAdminCheckN(int room_num) throws Exception {
 		roomDao.updateRoomAdminCheckN(room_num);
 	}
+	
+	@Override
+	public void updateRoomAdminCheckChange(RoomDetailDto roomDetailDto) throws Exception {
+		roomDao.updateRoomAdminCheckChange(roomDetailDto);
+	}
 	// 관리자 END
 	
 	
@@ -142,6 +147,8 @@ public class CyRoomServiceImpl implements CyRoomService {
 	public void deleteAttach(String pic_uri) throws Exception {
 		roomDao.deleteAttach(pic_uri);
 	}
+
+	
 
 	
 	

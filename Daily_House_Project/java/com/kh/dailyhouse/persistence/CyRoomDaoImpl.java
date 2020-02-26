@@ -41,7 +41,10 @@ public class CyRoomDaoImpl implements CyRoomDao {
 		sqlSession.update(NAMESPACE + ".updateRoomAdminCheckN", room_num);
 	}
 
-	
+	@Override
+	public void updateRoomAdminCheckChange(RoomDetailDto roomDetailDto) throws Exception {
+		sqlSession.update(NAMESPACE + ".updateRoomAdminCheckChange", roomDetailDto);
+	}
 	
 	
 	// 호스트가 등록한 숙소 리스트 불러오기
@@ -116,6 +119,7 @@ public class CyRoomDaoImpl implements CyRoomDao {
 	public void deleteAttachByRoomNum(int room_num) throws Exception {
 		sqlSession.delete(NAMESPACE + ".deleteAttachByRoomNum", room_num);
 	}
+
 
 	
 }

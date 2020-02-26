@@ -32,6 +32,14 @@ $(function(){
 	// 현재 클릭된 메뉴를 활성화
 	$(".nav-item:eq(0)").attr("class", "nav-item");
 	
+	// room_title_a
+	$(".room_title_a").on("click", function(e){
+		var that = $(this);
+		var room_num = that.attr("data-room-num");
+		console.log("room_num: " + room_num);
+		location.href = "/cy/AdminRoomDetail?room_num=" + room_num;
+	});
+	
 	// 승인클릭시 숙소를 승인으로 변경
 	$(".btnAdminCheckY").on("click", function(e){
 		var that = $(this);
@@ -50,6 +58,12 @@ $(function(){
 				console.log("rData:" + rData);
 				var target = that.parent().parent();
 				target.remove();
+				
+				if($("#tbl_room").find($(".btnAdminCheckY")).val() == null){
+					$("#tbl_room").remove();
+					$(".title").text("* 미승인 숙소가 없습니다.");
+				} //if
+				
 			}
 		}); // ajax
 	}); // btn
@@ -67,10 +81,10 @@ $(function(){
 				<div class="col-md-8">
 				<c:choose>
 					<c:when test="${empty list}">
-						<label class="lblTitle2">* 미승인 숙소가 없습니다.</label>
+						<label class="lblTitle2 title">* 미승인 숙소가 없습니다.</label>
 					</c:when>
 					<c:otherwise>
-						<label class="lblTitle2">* 미승인 숙소입니다.</label>
+						<label class="lblTitle2 title">* 미승인 숙소입니다.</label>
 					</c:otherwise>
 				</c:choose>
 					

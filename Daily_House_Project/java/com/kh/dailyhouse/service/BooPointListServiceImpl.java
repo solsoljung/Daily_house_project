@@ -22,6 +22,7 @@ public class BooPointListServiceImpl implements BooPointListService {
 		int totalCount = booPointListDao.getPointListTotalCount(user_email);
 		reviewPagingDto.setTotalCount(totalCount);
 		
+		//포인트 사용 내역 리스트
 		List<PointDto> pointList = booPointListDao.getPointList(user_email, reviewPagingDto);
 		return pointList;
 	}

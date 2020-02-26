@@ -114,8 +114,7 @@ public class BooRoomDetailDaoImpl implements BooRoomDetailDao {
 	//포인트 이용 내역 테이블에 추가
 	@Override
 	public void setPointList(RoomReviewVo roomReviewVo) throws Exception {
-		String user_email = roomReviewVo.getUser_email();
-		sqlSession.insert(NAMESPACE+".setPointList", user_email);
+		sqlSession.insert(NAMESPACE+".setPointList", roomReviewVo);
 	}
 	
 	//리뷰 작성후 유저에게 포인트 주기

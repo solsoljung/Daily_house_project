@@ -11,4 +11,30 @@
 		where reserv_ing = 'Y'
 	</select>
 	
+<!-- 	R로 바꿔주기 -->
+	<update id="updateReservState">
+		update tbl_reservation set
+		reserv_state = 'R'
+		where reserv_num = #{reserv_num}
+	</update>
+	
+<!-- 	마일리지 회수, 결제 취소 -->
+	<update id="updateUserPoint">
+		update tbl_user set
+		user_point = user_point + #{point}
+		where user_email = #{user_email}
+	</update>
+	
+<!-- 	포인트 이용 내역에 작성 (마일리지 회수부분) -->
+	<insert id="setPointListMile">
+		insert into tbl_point (point_num, user_email, point_code, point_score, room_num)
+		values (seq_point_num.nextval, #{user_email}, 'R6', #{reserv_mile}, #{room_num})
+	</insert>
+	
+<!-- 	포인트 이용 내역에 작성 (결제 취소 부분) -->
+	<insert id="setPointListPoint">
+		insert into tbl_point (point_num, user_email, point_code, point_score, room_num)
+		values (seq_point_num.nextval, #{user_email}, 'R2', #{reserv_price}, #{room_num})
+	</insert>
+	
 </mapper>

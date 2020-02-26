@@ -19,6 +19,9 @@ public interface CyRoomDao {
 	// 관리자용 숙소 room_admin_check값을 N으로 업데이트
 	public void updateRoomAdminCheckN(int room_num) throws Exception;
 	
+	// 관리자용 숙소 값 Y, N으로 업데이트
+	public void updateRoomAdminCheckChange(RoomDetailDto roomDetailDto) throws Exception;
+	
 	
 	// 숙소 리스트 가져오기
 	public List<RoomDetailDto> getHostRoomList(String user_email) throws Exception;
