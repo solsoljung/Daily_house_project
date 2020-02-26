@@ -28,14 +28,7 @@ $(function() {
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
 	        	<li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
-				  <c:choose>
-				   	<c:when test="${empty userVo}">
-	        			<li class="nav-item"><a href="/si/loginHost" class="nav-link">찜목록</a></li>
-				   	</c:when>
-				   	<c:otherwise> 
-	        			<li class="nav-item"><a href="/yo/like_list" class="nav-link">찜목록</a></li>
-				   	</c:otherwise>
-				  </c:choose>
+	        	<li class="nav-item"><a href="/yo/like_list" class="nav-link">찜목록</a></li>
 	        	<li class="nav-item"><a href="/sol/room" class="nav-link">Rooms</a></li>
 	        	<li class="nav-item"><a href="/si/about" class="nav-link">About</a></li>
 	        	<li class="nav-item"><a href="/yo/reservation" class="nav-link">예약하기</a></li>

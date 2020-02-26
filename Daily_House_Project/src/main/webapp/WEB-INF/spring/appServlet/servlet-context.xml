@@ -36,4 +36,15 @@
 <!-- 페이지 시작 위치 -->
 	<context:component-scan base-package="com.kh.dailyhouse" />
 	
+<!-- 	인터셉터 -->
+
+	<beans:bean id="loginInterceptor" class="com.kh.dailyhouse.interceptor.LoginInterceptor"></beans:bean>
+
+	<interceptors>
+		<interceptor>
+			<mapping path="/yo/like_list"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
 </beans:beans>
