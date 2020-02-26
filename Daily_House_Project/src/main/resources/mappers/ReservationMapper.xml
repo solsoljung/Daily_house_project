@@ -25,6 +25,13 @@
 		values(seq_reserv_num.nextval, #{room_num}, #{user_email}, #{check_in}, #{check_out}, #{room_price_v})
 	</insert>
 	
+	<!-- 예약취소 버튼 비활성화 -->
+	<select id="cancelBtnOpen" resultType="ReservationVo">
+		select * from tbl_reservation
+		where room_reserv_start_date &gt; sysdate
+	</select>
+	
+	
 	<!-- 예약취소하기 -->
 	<delete id="cancelReservation">
 		delete from tbl_reservation
