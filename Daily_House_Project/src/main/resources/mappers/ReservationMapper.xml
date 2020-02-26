@@ -19,14 +19,20 @@
 	
 	<update id="host_update_reserv_point">
 		update tbl_user
-		set user_point = user_point + #{user_point}
-		where user_email = #{user_email}
+		set user_point = user_point + #{reserv_price}
+		where user_email = #{host_email}
 	</update>
 	
-	<!-- 포인트 내역 추가 -->
-	<insert id="insertPoint">
+	<!-- 유저 포인트 내역 추가 -->
+	<insert id="insertPointUser">
 		insert into tbl_point(point_num, user_email, point_code, point_score, room_num) 
 		values(seq_point_num.nextval, #{user_email}, #{point_code}, #{reserv_price}, #{room_num})
+	</insert>
+	
+	<!-- 호스트 포인트 내역 추가 -->
+	<insert id="insertPointHost">
+		insert into tbl_point(point_num, user_email, point_code, point_score, room_num) 
+		values(seq_point_num.nextval, #{host_email}, #{point_code}, #{reserv_price}, #{room_num})
 	</insert>
 	
 	<!-- 예약 취소 시 방상태를 바꾸기 -->
@@ -37,7 +43,7 @@
 	<!-- 예약 목록 보기 테스트-->
 	<select id="getReservationList" resultType="ReservationVo">
 		select * from tbl_reservation
-		where user_email = #{user_email} order by reserv_num desc
+		where user_email = #{user_email} and reserv_state = 'Y' order by reserv_num desc
 	</select>
 	
 	<!-- 시퀀스 값 얻기 -->
@@ -73,5 +79,19 @@
 			reserv_price from tbl_reservation where reserv_num = #{reserv_num}) r
 		where m.room_num = r.room_num
 	</select>
+	
+	<!-- 체크아웃 승인 페이지 리스트 -->
+	<select id="getAvailableCheckout" resultType="TestDto">
+		select m.user_email host_email, m.room_num, r.user_email, r.room_reserv_start_date, 
+		r.room_reserv_end_date, r.reserv_price, r.reserv_num from tbl_room m, 
+			(select room_num, user_email, room_reserv_start_date, room_reserv_end_date, 
+			reserv_price, reserv_num from tbl_reservation where reserv_state = 'Y' and reserv_ing = 'Y') r
+		where m.room_num = r.room_num
+	</select>
+	
+	<!-- 방 예약 상태 바꾸기 -->
+	<update id="updateReservIng">
+		update tbl_reservation set reserv_ing = #{reserv_ing} where reserv_num = #{reserv_num}
+	</update>
   
 </mapper>

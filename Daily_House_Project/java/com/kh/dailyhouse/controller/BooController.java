@@ -109,12 +109,4 @@ public class BooController {
 		
 		return "/admin/admin_reservation_list";
 	}
-	
-	//관리자 페이지 - 손님들 체크아웃 기간이 넘어 호스트에게 돈을 입금시켜줘야 되는 부분
-	@RequestMapping(value="/adminCheckOutList", method = RequestMethod.GET)
-	public String adminCheckOutList(Model model) throws Exception {
-		
-		
-		return "/admin/admin_check_out_list.jsp";
-	}
 }
