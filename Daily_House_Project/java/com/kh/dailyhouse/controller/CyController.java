@@ -60,9 +60,36 @@ public class CyController {
 		return userVo.getUser_email();
 	}
 	
+	// help
+	@RequestMapping(value = "/help", method = {RequestMethod.GET, RequestMethod.POST})
+	public String help(HttpSession session, Model model, RedirectAttributes rttr) throws Exception{
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		// 로그인 안 했을 경우 return
+//		if(userVo == null) {	
+//			rttr.addFlashAttribute("msg", "notAdmin");
+//			return "redirect:/si/loginHost";
+//		}
+		
+//		List<RoomDetailDto> list = roomService.getRoomAdminCheckNList();
+//		model.addAttribute("list", list);
+		
+		return "/help/help_list";
+	}
+	
 	// 관리자 room_admin_check가 N인 방들 보기
 	@RequestMapping(value = "/AdminRoomListN", method = {RequestMethod.GET, RequestMethod.POST})
 	public String AdminRoomListN(HttpSession session, Model model, RedirectAttributes rttr) throws Exception{
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		// 로그인 안 했을 경우 return
+		if(userVo == null) {	
+			rttr.addFlashAttribute("msg", "notAdmin");
+			return "redirect:/si/loginHost";
+		}
+		// admin이 아닐 경우 return
+		if(!userVo.getUser_email().equals(ADMIN_EMAIL)) {
+			rttr.addFlashAttribute("msg", "notAdmin");
+			return "redirect:/si/loginHost";
+		}
 		// 관리자 check N인 숙소 리스트 
 		List<RoomDetailDto> list = roomService.getRoomAdminCheckNList();
 		model.addAttribute("list", list);
@@ -73,6 +100,17 @@ public class CyController {
 	// 관리자 room_admin_check가 Y인 방들 보기
 	@RequestMapping(value = "/AdminRoomListY", method = {RequestMethod.GET, RequestMethod.POST})
 	public String AdminRoomListY(HttpSession session, Model model, RedirectAttributes rttr) throws Exception{
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		// 로그인 안 했을 경우 return
+		if(userVo == null) {	
+			rttr.addFlashAttribute("msg", "notAdmin");
+			return "redirect:/si/loginHost";
+		}
+		// admin이 아닐 경우 return
+		if(!userVo.getUser_email().equals(ADMIN_EMAIL)) {
+			rttr.addFlashAttribute("msg", "notAdmin");
+			return "redirect:/si/loginHost";
+		}
 		// 관리자 check Y인 숙소 리스트 
 		List<RoomDetailDto> list = roomService.getRoomAdminCheckYList();
 		model.addAttribute("list", list);
@@ -111,7 +149,6 @@ public class CyController {
 			rttr.addFlashAttribute("msg", "notAdmin");
 			return "redirect:/si/loginHost";
 		}
-		System.out.println("AdminRoomDetailUpdate roomDetailDto: " + roomDetailDto);
 		roomService.updateRoomAdminCheckChange(roomDetailDto);
 		
 		return "redirect:/cy/AdminRoomDetail?room_num=" + roomDetailDto.getRoom_num();
