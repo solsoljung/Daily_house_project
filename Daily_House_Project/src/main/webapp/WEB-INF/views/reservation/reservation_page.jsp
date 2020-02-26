@@ -160,7 +160,7 @@ testDTo: ${testDto}
       <div class="container">
         <div class="row">
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
-            <form action="/yo/reservation_pay" id="reservation" class="bg-white p-md-5 p-4 mb-5 border">
+            <form action="/yo/reservation_pay" id="reservation" method="post" class="bg-white p-md-5 p-4 mb-5 border">
 	          <input type="hidden" name="room_num" value="${testDto.room_num}">
 	          <input type="hidden" name ="check_in" value="${testDto.check_in}">
 	          <input type="hidden" name ="check_out" value="${testDto.check_out}">
@@ -171,28 +171,28 @@ testDTo: ${testDto}
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="name">예약자</label>
-                  <input type="text" id="name" class="form-control" value="${userVo.user_name}">
+                  <input type="text" id="name" class="form-control" value="${userVo.user_name}" readonly="readonly">
                 </div>
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="phone">연락처</label>
-                  <input type="text" id="phone" class="form-control" value="${userVo.user_phone}">
+                  <input type="text" id="phone" class="form-control" value="${userVo.user_phone}" readonly="readonly">
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="email">Email</label>
-                  <input type="email" id="email" class="form-control" value="${userVo.user_email}">
+                  <input type="email" id="email" class="form-control" value="${userVo.user_email}" readonly="readonly">
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="checkin_date">입실날짜</label>
-                  <input type="text" id="dateCheckIn" class="form-control" value="${testDto.check_in}">
+                  <input type="text" id="dateCheckIn" class="form-control" value="${testDto.check_in}"  readonly="readonly">
                 </div>
                 <div class="col-md-6 form-group">
                   <label class="text-black font-weight-bold" for="checkout_date">퇴실날짜</label>
-                  <input type="text" id="dateCheckOut" class="form-control" value="${testDto.check_out}">
+                  <input type="text" id="dateCheckOut" class="form-control" value="${testDto.check_out}"  readonly="readonly">
                 </div>
               </div>
 
@@ -204,23 +204,11 @@ testDTo: ${testDto}
 					<ul>					
 						<li>				
 							<a class="minus">-</a>
-							<input type="number" data-num="1" class="numBox" min="1" max="20" value="1" readonly="readonly"/>
+							<input type="number" data-num="1" class="numBox" min="1" max="20" value="1" readonly="readonly" style="text-align:center;text-size:20px;"/>
 							<a class="plus">+</a>			
 						</li>				
 					</ul>	          
 					 
-                </div>
-                <div class="col-md-6 form-group block-27">
-                  <label for="adults" class="font-weight-bold text-black">아동</label>
-                  <div class="field-icon-wrap">																					
-                  </div>
-					<ul>					
-						<li>				
-							<a class="minus">-</a>
-							<input type="number" data-num="1" class="numBox" min="1" max="20" value="1" readonly="readonly"/>
-							<a class="plus">+</a>	
-						</li>				
-					</ul> 
                 </div>
 			</div>
   

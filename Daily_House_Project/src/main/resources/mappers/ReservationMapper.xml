@@ -5,11 +5,35 @@
   
 <mapper namespace="com.kh.mappers.ReservationMapper">
 
+	<!-- 결제 전 사용자 포인트 보기 -->
+	<select id="getUserPoint" resultType="int">
+		select user_point from tbl_user where user_email = #{user_email}
+	</select>
+
+	<!-- 결제시 사용자 포인트 차감, 호스트에게 포인트 부여 -->
+	<update id="user_update_reserv_point">
+		update tbl_user
+		set user_point = user_point + #{user_point}
+		where user_email = #{user_email}
+	</update>
+	
+	<update id="host_update_reserv_point">
+		update tbl_user
+		set user_point = user_point + #{user_point}
+		where user_email = #{user_email}
+	</update>
+	
+	<!-- 포인트 내역 추가 -->
+	<insert id="insertPoint">
+		insert into tbl_point(point_num, user_email, point_code, point_score, room_num) 
+		values(seq_point_num.nextval, #{user_email}, #{point_code}, #{point_score}, #{room_num})
+	</insert>
+
 
 	<!-- 예약 목록 보기 테스트-->
 	<select id="getReservationList" resultType="ReservationVo">
 		select * from tbl_reservation
-		where user_email = #{user_email}
+		where user_email = #{user_email} order by reserv_num desc
 	</select>
 	
 	<!-- 시퀀스 값 얻기 -->
@@ -21,21 +45,34 @@
 	
 	<!-- 예약 등록하기 테스트 -->
 	<insert id="insertReservation">
-		insert into tbl_reservation(reserv_num, room_num, user_email, room_reserv_start_date, room_reserv_end_date, reserv_price)
-		values(seq_reserv_num.nextval, #{room_num}, #{user_email}, #{check_in}, #{check_out}, #{room_price_v})
+		insert into tbl_reservation(reserv_num, room_num, user_email, room_reserv_start_date, room_reserv_end_date, reserv_price, reserv_state)
+		values(seq_reserv_num.nextval, #{room_num}, #{user_email}, #{check_in}, #{check_out}, #{room_price_v}, #{reserv_state})
 	</insert>
-	
-	<!-- 예약취소 버튼 비활성화 -->
-	<select id="cancelBtnOpen" resultType="ReservationVo">
-		select * from tbl_reservation
-		where room_reserv_start_date &gt; sysdate
-	</select>
-	
 	
 	<!-- 예약취소하기 -->
 	<delete id="cancelReservation">
 		delete from tbl_reservation
 		where reserv_num = #{reserv_num}
 	</delete>
+	
+	<!-- 예약가능한지 알아보기 -->
+	<select id="availableReserv" resultType="int"  parameterType="TestDto">
+		select count(*) from tbl_room r where r.room_num = #{room_num} and r.room_num not in(
+    		select v.room_num from tbl_reservation v where
+				(room_reserv_start_date &gt; #{room_reserv_start_date} and room_reserv_end_date &lt;= #{room_reserv_end_date}) or
+				(room_reserv_start_date &gt; #{room_reserv_start_date} and room_reserv_start_date &lt;= #{room_reserv_end_date}) or
+				(room_reserv_end_date &gt; #{room_reserv_start_date} and room_reserv_end_date &lt;= #{room_reserv_end_date})
+		)
+		
+	</select>
+	
+	<!-- 예약 정보, 룸 정보 보기 -->
+	<select id="getReservData" resultType="TestDto">
+		select m.*, r.user_email, r.room_reserv_start_date, 
+		r.room_reserv_end_date, r.reserv_price from tbl_room m, 
+			(select room_num, user_email, room_reserv_start_date, room_reserv_end_date, 
+			reserv_price from tbl_reservation where reserv_num = #{reserv_num}) r
+		where m.room_num = r.room_num
+	</select>
   
 </mapper>

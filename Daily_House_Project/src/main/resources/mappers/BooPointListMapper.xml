@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kh.mappers.BooPointListMapper">
+	
+<!-- 	사용자에 따른 포인트 사용 내역 테이블 보여주기 -->
+	<select id="getPointList" resultType="PointDto">
+		select * from
+		(select rownum rnum, a.* from
+		(select poi.point_num, poi.point_date, poi.point_score, code.point_code_explain, code.point_code, room.*
+		from tbl_point poi, tbl_point_code code, tbl_room room
+		where poi.point_code = code.point_code and poi.room_num = room.room_num and poi.user_email = #{user_email}
+		order by point_num desc) a)
+		where rnum &gt;= #{reviewPagingDto.startRow} and rnum &lt;= #{reviewPagingDto.endRow}
+	</select>
+	
+<!-- 	사용자에 따른 포인트 사용 내역 테이블 total갯수 구하기 -->
+	<select id="getPointListTotalCount" resultType="int">
+		select count(*)
+		from tbl_point poi, tbl_point_code code, tbl_room room
+		where poi.point_code = code.point_code and poi.room_num = room.room_num and poi.user_email = #{user_email}
+		order by point_num desc
+	</select>
+	
+</mapper>

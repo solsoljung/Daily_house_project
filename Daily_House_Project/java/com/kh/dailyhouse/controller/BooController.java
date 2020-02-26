@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,11 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.dailyhouse.domain.PointDto;
 import com.kh.dailyhouse.domain.ReviewPagingDto;
 import com.kh.dailyhouse.domain.RoomDto;
 import com.kh.dailyhouse.domain.RoomPictureVo;
 import com.kh.dailyhouse.domain.RoomReviewDto;
 import com.kh.dailyhouse.domain.RoomReviewVo;
+import com.kh.dailyhouse.domain.UserVo;
+import com.kh.dailyhouse.service.BooPointListService;
 import com.kh.dailyhouse.service.BooRoomDetailService;
 
 @Controller
@@ -24,6 +28,9 @@ public class BooController {
 	
 	@Inject
 	private BooRoomDetailService booRoomDetailService;
+	
+	@Inject
+	private BooPointListService booPointListService;
 	
 	@RequestMapping(value = "/detail", method = {RequestMethod.GET, RequestMethod.POST})
 	public String getRoomDetail(@RequestParam("room_num") int room_num, Model model, ReviewPagingDto reviewPagingDto) throws Exception{
@@ -57,6 +64,7 @@ public class BooController {
 		return "/room_detail/Room_Detail";
 	}
 	
+	//리뷰 작성
 	@RequestMapping(value="/review", method = RequestMethod.POST)
 	public String postInputReview(RoomReviewVo roomReviewVo) throws Exception{
 		
@@ -71,5 +79,19 @@ public class BooController {
 		int num = roomReviewVo.getRoom_num();
 		return "redirect:/boo/detail?room_num="+num;
 
+	}
+	
+	//포인트 이용 내역 보여주기
+	@RequestMapping(value="/pointlist", method = RequestMethod.GET)
+	public String pointUseList(Model model, HttpSession session, ReviewPagingDto reviewPagingDto) throws Exception {
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		String user_email = userVo.getUser_email();
+		
+		List<PointDto> pointList = booPointListService.getPointList(user_email, reviewPagingDto);
+		
+		model.addAttribute("pointList", pointList);
+		model.addAttribute("reviewPagingDto", reviewPagingDto);
+		
+		return "/pointuselist/PointUseList";
 	}
 }

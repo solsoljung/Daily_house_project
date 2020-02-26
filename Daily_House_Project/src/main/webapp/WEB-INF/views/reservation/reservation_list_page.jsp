@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ include file = "../../views/title2.jsp"%> <!-- <head> -->					
 					
@@ -14,7 +15,7 @@
 $(document).ready(function() {
 	// 예약 내역 삭제 버튼
 	$(".cancelBtn").click(function(e) {
-		if (confirm("정말로 취소하시겠습니까?") == true){
+		/* if (confirm("정말로 취소하시겠습니까?") == true){
 		e.preventDefault();
 		console.log("예약내역 삭제 버튼");
 		var reserv_num = $(this).attr("data-reserv_num");
@@ -35,7 +36,9 @@ $(document).ready(function() {
 		}); // ajax
 		} else {
 			return;
-		}
+		} */
+		var reserv_num = $(this).parent().parent().eq(0).children().eq(0).attr("data-num");
+		location.href = "/yo/reserv_cancle_page/" + reserv_num;
 	}); // 내역 삭제 버튼
 	
 	function reservationList() {
@@ -106,7 +109,7 @@ $(document).ready(function() {
 </section>
 <section>
 userVo: ${userVo}<br>
-testDto: ${testDto}
+testDto: ${testDto}<br>
 <div class="container-fluid">
 	<div class="row">
 	<div class="col-md-2">
@@ -124,19 +127,23 @@ testDto: ${testDto}
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${list}" var="reservationVo">
+				<jsp:useBean id="toDay" class="java.util.Date"></jsp:useBean>
+				<fmt:formatDate value="${toDay}" pattern="yyyy-MM-dd" var="toDay"/>
+				<c:forEach items="${list}" var="reservationVo">
 						<tr id="reservationList">
-							<td>${reservationVo.reserv_num}</td>
+							<td data-num="${reservationVo.reserv_num}">${reservationVo.reserv_num}</td>
 							<td>${reservationVo.room_num}</td>
 							<td>${reservationVo.user_email}</td>
 							<td>${reservationVo.room_reserv_start_date}</td>
 							<td>${reservationVo.room_reserv_end_date}</td>
 							<td>${reservationVo.reserv_price}</td>
-							<td><input type="button" class="cancelBtn" 
-								data-reserv_num="${reservationVo.reserv_num}" value="예약취소">
-							</td>
+							<c:if test="${toDay < reservationVo.room_reserv_start_date}">
+								<td>
+									<input type="button" class="cancelBtn" data-reserv_num="${reservationVo.reserv_num}" value="예약취소">
+								</td>
+							</c:if>
 						</tr>
-					</c:forEach>
+				</c:forEach>
 				</tbody>
 			</table>
 		</div>

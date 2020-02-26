@@ -57,6 +57,7 @@ public class SIController {
 		// 요청정보 얻어서
 		// DB 에 넣기 - Service - Dao - Mybatis - Oracle
 		siUserService.setUserData(userVo);
+		siUserService.setPointList(userVo);
 		return "/register/registerSuccess";
 	}
 	// 회원가입 완료창
@@ -142,6 +143,11 @@ public class SIController {
 		rttr.addFlashAttribute("msg", "updatePassword");
 		session.invalidate();
 		return "redirect:/si/loginHost";
+	}
+	// 비밀번호 수정으로 가는 컨트롤러
+	@RequestMapping(value = "/about", method = RequestMethod.GET)
+	public String about() throws Exception {
+		return "/about/about";
 	}
 	
 }

@@ -1,9 +1,13 @@
 package com.kh.dailyhouse.domain;
 
+import java.sql.Timestamp;
+
 public class TestDto {
 	private int room_num;
 	private String check_in;
 	private String check_out;
+	private Timestamp room_reserv_start_date = null;
+	private Timestamp room_reserv_end_date = null;
 	private int room_price;
 	private int room_people;
 	private String room_title;
@@ -11,6 +15,8 @@ public class TestDto {
 	private String room_location;
 	private int v;
 	private int room_price_v;
+	private String reserv_state = "Y";
+	private int reserv_price;
 
 	public TestDto() {
 		super();
@@ -96,11 +102,46 @@ public class TestDto {
 		this.room_price_v = room_price_v;
 	}
 
+	public Timestamp getRoom_reserv_start_date() {
+		return room_reserv_start_date;
+	}
+
+	public void setRoom_reserv_start_date(Timestamp room_reserv_start_date) {
+		this.room_reserv_start_date = room_reserv_start_date;
+	}
+
+	public Timestamp getRoom_reserv_end_date() {
+		return room_reserv_end_date;
+	}
+
+	public void setRoom_reserv_end_date(Timestamp room_reserv_end_date) {
+		this.room_reserv_end_date = room_reserv_end_date;
+	}
+
+	public String getReserv_state() {
+		return reserv_state;
+	}
+
+	public void setReserv_state(String reserv_state) {
+		this.reserv_state = reserv_state;
+	}
+
+	public int getReserv_price() {
+		return reserv_price;
+	}
+
+	public void setReserv_price(int reserv_price) {
+		this.reserv_price = reserv_price;
+	}
+
 	@Override
 	public String toString() {
-		return "TestDto [room_num=" + room_num + ", check_in=" + check_in + ", check_out=" + check_out + ", room_price="
-				+ room_price + ", room_people=" + room_people + ", room_title=" + room_title + ", user_email="
-				+ user_email + ", room_location=" + room_location + ", v=" + v + ", room_price_v=" + room_price_v + "]";
+		return "TestDto [room_num=" + room_num + ", check_in=" + check_in + ", check_out=" + check_out
+				+ ", room_reserv_start_date=" + room_reserv_start_date + ", room_reserv_end_date="
+				+ room_reserv_end_date + ", room_price=" + room_price + ", room_people=" + room_people + ", room_title="
+				+ room_title + ", user_email=" + user_email + ", room_location=" + room_location + ", v=" + v
+				+ ", room_price_v=" + room_price_v + ", reserv_state=" + reserv_state + ", reserv_price=" + reserv_price
+				+ "]";
 	}
 
 }

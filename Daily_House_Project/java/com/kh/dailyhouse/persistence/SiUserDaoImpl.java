@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dailyhouse.domain.HomeHomesDto;
 import com.kh.dailyhouse.domain.HomeReviewDto;
 import com.kh.dailyhouse.domain.UserVo;
 
@@ -48,6 +49,18 @@ public class SiUserDaoImpl implements SiUserDao {
 	public List<HomeReviewDto> getHomeReview() throws Exception {
 		List<HomeReviewDto> ReviewList = sqlSession.selectList(NAMESPACE+".getHomeReview");
 		return ReviewList;
+	}
+
+	@Override
+	public List<HomeHomesDto> getHomeHomes() throws Exception {
+		List<HomeHomesDto> HomeList = sqlSession.selectList(NAMESPACE+".getHomeHomes");
+		return HomeList;
+	}
+	@Override
+	public void setPointList(UserVo userVo) throws Exception {
+		String user_email = userVo.getUser_email();
+		sqlSession.insert(NAMESPACE+".setPointList", user_email);
+		
 	}
 	
 }
