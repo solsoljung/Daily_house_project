@@ -654,6 +654,19 @@ ${roomDetailDto.room_explain}</textarea><br><br>
 					        >비공개</option>
 				     </select>
 				</div><br><br>
+				
+				<!-- 관리자 승인여부	-->
+				<div class="form-group">
+					<label class="lblTitle2">* 관리자 승인여부</label>
+					<select class="browser-default custom-select" id="room_admin_check">
+					    <option value="Y" disabled="disabled" class="room_admin" 
+					       <c:if test="${roomDetailDto.room_admin_check eq 'Y'}">selected</c:if>
+					    >승인</option>
+					    <option value="N" disabled="disabled" class="room_admin" 
+					       <c:if test="${roomDetailDto.room_admin_check eq 'N'}">selected</c:if>
+					    >미승인</option>
+				     </select>
+				</div><br><br>
 
 				<!-- Button -->
 				<br>
