@@ -113,7 +113,7 @@ $(function() {
 													방 가격 : ${PointDto.room_price}
 								 				</c:when>
 								 				<c:when test="${PointDto.point_code == 'R3'}">
-								 					${PointDto.room_title} 곳에 리뷰를 남기셨습니다.
+								 					<a href="/boo/detail?room_num=${PointDto.room_num}">${PointDto.room_title}</a> 곳에 리뷰를 남기셨습니다.
 								 				</c:when>
 								 				<c:when test="${PointDto.point_code == 'R4'}">
 								 					회원 가입을 축하 드립니다 ^^
