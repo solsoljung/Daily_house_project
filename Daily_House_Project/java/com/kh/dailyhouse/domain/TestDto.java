@@ -12,6 +12,7 @@ public class TestDto {
 	private int room_people;
 	private String room_title;
 	private String user_email;
+	private String host_email;
 	private String room_location;
 	private int v;
 	private int room_price_v;
@@ -134,14 +135,23 @@ public class TestDto {
 		this.reserv_price = reserv_price;
 	}
 
+	public String getHost_email() {
+		return host_email;
+	}
+
+	public void setHost_email(String host_email) {
+		this.host_email = host_email;
+	}
+
 	@Override
 	public String toString() {
 		return "TestDto [room_num=" + room_num + ", check_in=" + check_in + ", check_out=" + check_out
 				+ ", room_reserv_start_date=" + room_reserv_start_date + ", room_reserv_end_date="
 				+ room_reserv_end_date + ", room_price=" + room_price + ", room_people=" + room_people + ", room_title="
-				+ room_title + ", user_email=" + user_email + ", room_location=" + room_location + ", v=" + v
-				+ ", room_price_v=" + room_price_v + ", reserv_state=" + reserv_state + ", reserv_price=" + reserv_price
-				+ "]";
+				+ room_title + ", user_email=" + user_email + ", host_email=" + host_email + ", room_location="
+				+ room_location + ", v=" + v + ", room_price_v=" + room_price_v + ", reserv_state=" + reserv_state
+				+ ", reserv_price=" + reserv_price + "]";
 	}
+
 
 }

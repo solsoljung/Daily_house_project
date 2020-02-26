@@ -16,12 +16,13 @@ public interface YOReservationListService {
 	public void insertReservation(TestDto testDto, UserPointDto userPointDto, PointVo pointVo) throws Exception;
 	
 	public List<ReservationVo> getReservationList(String user_email) throws Exception;
-	
-	public void cancelReservation(int reserv_num) throws Exception;
 
 	//예약 가능한지 확인
 	public int availableReserv(TestDto testDto) throws Exception;
 	
 	//예약, 방 정보 불러오기
 	public TestDto getReservRoomData(int reserv_num) throws Exception;
+	
+	//솔 예약 취소
+	public void cancelReservation(int reserv_num) throws Exception;
 }
