@@ -114,7 +114,6 @@ public class BooController {
 	//관리자 페이지 - 예약한 리스트들 중 확인 버튼을 눌렀을때
 	@RequestMapping(value="/adminReservResult", method = RequestMethod.GET)
 	public String adminReservResult(AdminReservResultDto adminReservResultDto) throws Exception {
-		System.out.println(adminReservResultDto);
 		//N을 R로 바꿔줌
 		booAdminService.updateReservState(adminReservResultDto);
 		//마일리지 회수, 결제 취소 user_point 수정
@@ -125,11 +124,4 @@ public class BooController {
 		return "redirect:/boo/adminReservList";
 	}
 	
-	//관리자 페이지 - 손님들 체크아웃 기간이 넘어 호스트에게 돈을 입금시켜줘야 되는 부분
-	@RequestMapping(value="/adminCheckOutList", method = RequestMethod.GET)
-	public String adminCheckOutList(Model model) throws Exception {
-		
-		
-		return "/admin/admin_check_out_list.jsp";
-	}
 }
