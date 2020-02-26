@@ -35,12 +35,6 @@ public  class YOReservationListDaoImpl implements YOReservationListDao {
 	}
 
 	@Override
-	public void cancelReservation(int reserv_num) throws Exception {
-		sqlSession.delete(NAMESPACE + ".cancelReservation", reserv_num);
-		
-	}
-
-	@Override
 	public int availableReserv(TestDto testDto) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".availableReserv", testDto);
 		

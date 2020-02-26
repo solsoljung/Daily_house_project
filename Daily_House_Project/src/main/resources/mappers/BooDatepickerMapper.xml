@@ -17,7 +17,7 @@
 <!-- 	방번호에 해당하는 reserv_num들을 받는다 -->
 	<select id="getReservNumList" resultType="int">
 		select reserv_num from tbl_reservation
-		where room_num = #{room_num}
+		where room_num = #{room_num} and reserv_state = 'Y'
 	</select>
 	
 <!-- 	reserv_num의 일수 차이를 구한다(반복문 이용에 사용함) -->

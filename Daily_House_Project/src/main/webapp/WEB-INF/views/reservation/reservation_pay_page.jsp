@@ -42,8 +42,8 @@ $(function() {
 		});
 		
 		// 0.05프로 계산, 소숫점 올림
-		var point = Math.ceil(total_pay * 0.05);
-		console.log("point: " + point);
+		/* var point = Math.ceil(total_pay * 0.05);
+		console.log("point: " + point); */
 		
 		// 결제금액 포인트가 차감되어야 하므로 tbl_user의 포인트 업데이트
 //  		$("#reservation_pay").submit();
