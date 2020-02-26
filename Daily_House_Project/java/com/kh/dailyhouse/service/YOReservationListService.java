@@ -12,8 +12,8 @@ public interface YOReservationListService {
 	// 결제 전 사용자 포인트 조회
 	public int getUserPoint(String user_email) throws Exception;
 	
-	
-	public void insertReservation(TestDto testDto, UserPointDto userPointDto, PointVo pointVo) throws Exception;
+	//, UserPointDto userPointDto, PointVo pointVo
+	public void insertReservation(TestDto testDto) throws Exception;
 	
 	public List<ReservationVo> getReservationList(String user_email) throws Exception;
 
