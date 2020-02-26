@@ -24,5 +24,5 @@ public interface YOReservationListService {
 	public TestDto getReservRoomData(int reserv_num) throws Exception;
 	
 	//솔 예약 취소
-	public void cancelReservation(int reserv_num) throws Exception;
+	public void updateRoomState(ReservationVo reservationVo) throws Exception;
 }

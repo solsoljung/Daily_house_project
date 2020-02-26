@@ -67,8 +67,8 @@ public  class YOReservationListDaoImpl implements YOReservationListDao {
 	}
 
 	@Override
-	public void updateRoomState(int reserv_num) throws Exception {
-		sqlSession.update(NAMESPACE + ".updateRoomState", reserv_num);
+	public void updateRoomState(ReservationVo reservationVo) throws Exception {
+		sqlSession.update(NAMESPACE + ".updateRoomState", reservationVo);
 	}
 
 

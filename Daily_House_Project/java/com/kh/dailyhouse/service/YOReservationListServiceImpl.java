@@ -81,26 +81,8 @@ public class YOReservationListServiceImpl implements YOReservationListService {
 	}
 
 	@Override
-	public void cancelReservation(int reserv_num) throws Exception {
-		// TODO Auto-generated method stub
-		//user
-		//1. 결제금액 반환
-				
-		//2. 예약 포인트 다시 차감
-				
-		//3. point 테이블에 insert R2
-				
-		//4. point 테이블에 insert R6
-				
-				
-		//host
-		//5. 수익 차감
-				
-		//6. point 테이블에 insert R8
-				
-				
-		//tbl_reservation
-		//7. reserv_state 상태 N
+	public void updateRoomState(ReservationVo reservationVo) throws Exception {
+		dao.updateRoomState(reservationVo);
 	}
 
 }

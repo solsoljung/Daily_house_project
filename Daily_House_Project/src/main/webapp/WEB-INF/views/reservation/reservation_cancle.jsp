@@ -14,11 +14,9 @@
 <script>
 $(function() {
 	$("#reservationBtn").click(function(){
-		//location.href = "/reservation_delete/${dto.reserv_num}";
+		location.href = "/yo/reservation_delete/" + ${reserv_num};
 	});
 });
-
-
 </script>
 
  <section class="site-hero inner-page overlay" style="background-image: url(/casahotel/img/slider-5.jpg)" data-stellar-background-ratio="0.5">
@@ -45,7 +43,7 @@ $(function() {
         </div>
       </a>
 </section>
-<%-- ${dto} --%>
+${dto}
    <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">
