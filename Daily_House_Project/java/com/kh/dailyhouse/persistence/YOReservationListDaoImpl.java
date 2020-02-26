@@ -51,13 +51,13 @@ public  class YOReservationListDaoImpl implements YOReservationListDao {
 	}
 
 	@Override
-	public void host_update_reserv_point(UserPointDto userPointDto) throws Exception {
-		sqlSession.update(NAMESPACE + ".host_update_reserv_point", userPointDto);
+	public void host_update_reserv_point(TestDto testDto) throws Exception {
+		sqlSession.update(NAMESPACE + ".host_update_reserv_point", testDto);
 	}
 
 	@Override
-	public void insertPoint(TestDto testDto) throws Exception {
-		sqlSession.insert(NAMESPACE + ".insertPoint", testDto);
+	public void insertPointUser(TestDto testDto) throws Exception {
+		sqlSession.insert(NAMESPACE + ".insertPointUser", testDto);
 	}
 
 	@Override
@@ -69,6 +69,23 @@ public  class YOReservationListDaoImpl implements YOReservationListDao {
 	@Override
 	public void updateRoomState(ReservationVo reservationVo) throws Exception {
 		sqlSession.update(NAMESPACE + ".updateRoomState", reservationVo);
+	}
+
+	@Override
+	public List<TestDto> getAvailableCheckout() throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".getAvailableCheckout");
+	}
+
+	@Override
+	public void insertPointHost(TestDto testDto) throws Exception {
+		sqlSession.insert(NAMESPACE + ".insertPointHost", testDto);
+		
+	}
+
+	@Override
+	public void updateReservIng(TestDto testDto) throws Exception {
+		sqlSession.update(NAMESPACE + ".updateReservIng", testDto);
+		
 	}
 
 

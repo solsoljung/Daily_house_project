@@ -109,6 +109,7 @@ public class BooController {
 		model.addAttribute("adminReservaionList", adminReservaionList);
 		
 		return "/admin/admin_reservation_list";
+
 	}
 	
 	//관리자 페이지 - 예약한 리스트들 중 확인 버튼을 눌렀을때

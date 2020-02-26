@@ -25,4 +25,10 @@ public interface YOReservationListService {
 	
 	//솔 예약 취소
 	public void updateRoomState(ReservationVo reservationVo) throws Exception;
+
+	//체크아웃 승인 페이지 리스트 솔
+	public List<TestDto> getAvailableCheckout() throws Exception;
+	
+	//체크아웃 승인 솔
+	public void adminCheckOut(TestDto testDto) throws Exception;
 }
