@@ -68,6 +68,7 @@ $(function() {
 				 	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						  <li class="nav-item" id="admin_room_list_n"><a href="/cy/AdminRoomListN">미승인 숙소</a></li>
 						  <li class="nav-item" id="admin_room_list_n"><a href="/cy/AdminRoomListY">승인 숙소</a></li>
+						  <li class="nav-item" id="admin_room_list_n"><a href="/yo/adminCheckOutList">체크아웃 승인</a></li>
 				   	</div>
 				 </div>
 				 </c:if>

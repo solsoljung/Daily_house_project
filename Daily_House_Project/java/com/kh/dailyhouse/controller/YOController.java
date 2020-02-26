@@ -130,7 +130,7 @@ public class YOController {
 	public String adminCheckOut(@RequestBody TestDto testDto) throws Exception {
 		System.out.println("테스트디티오가 잘 들어왔는지 테스트: "+testDto);
 		service.adminCheckOut(testDto);
-		return null;
+		return "success";
 	}
 	
 	// 찜목록 가져오기
