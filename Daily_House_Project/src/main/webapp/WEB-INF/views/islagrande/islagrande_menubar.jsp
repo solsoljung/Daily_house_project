@@ -67,8 +67,9 @@ $(function() {
 				 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" style="font-size:15px;">관리자</button>
 				 	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						  <li class="nav-item" id="admin_room_list_n"><a href="/cy/AdminRoomListN">미승인 숙소</a></li>
-						  <li class="nav-item" id="admin_room_list_n"><a href="/cy/AdminRoomListY">승인 숙소</a></li>
+						  <li class="nav-item" id="admin_room_list_y"><a href="/cy/AdminRoomListY">승인 숙소</a></li>
 						  <li class="nav-item" id="admin_room_list_n"><a href="/yo/adminCheckOutList">체크아웃 승인</a></li>
+						  <li class="nav-item" id="admin_room_list_n"><a href="/boo/adminReservList">예약 관리</a></li>
 				   	</div>
 				 </div>
 				 </c:if>

@@ -15,10 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.dailyhouse.domain.BoardVo;
 import com.kh.dailyhouse.domain.HostVo;
 import com.kh.dailyhouse.domain.RoomDetailDto;
 import com.kh.dailyhouse.domain.RoomVo;
 import com.kh.dailyhouse.domain.UserVo;
+import com.kh.dailyhouse.persistence.CyBoardDao;
+import com.kh.dailyhouse.service.CyBoardService;
 import com.kh.dailyhouse.service.CyRoomOptionService;
 import com.kh.dailyhouse.service.CyRoomService;
 import com.kh.dailyhouse.service.CyRoomTypeService;
@@ -37,6 +40,8 @@ public class CyController {
 	private CyRoomOptionService roomOptionService;
 	@Inject
 	private CyRoomService roomService;
+	@Inject
+	private CyBoardService boardService;
 	
 	private final String ADMIN_EMAIL = "admin@naver.com"; 
 	
@@ -70,8 +75,11 @@ public class CyController {
 //			return "redirect:/si/loginHost";
 //		}
 		
-//		List<RoomDetailDto> list = roomService.getRoomAdminCheckNList();
-//		model.addAttribute("list", list);
+		model.addAttribute("userVo", userVo);
+		
+		List<BoardVo> list = boardService.getBoardList();
+		model.addAttribute("list", list);
+		
 		
 		return "/help/help_list";
 	}
