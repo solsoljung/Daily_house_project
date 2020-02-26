@@ -5,7 +5,7 @@
 $(function() {
 	$("#host_room_list").hide();
 	
-	// 호스트인지 아닌지 검사해서 숙소관리 띄우기
+	// 호스트인지 아닌지 검사 후 숙소관리 띄우기
 	var user_email = "${userVo.user_email}"
 
 	var url = "/cy/isHost?user_email=" + user_email;
@@ -14,6 +14,8 @@ $(function() {
 			$("#host_room_list").show();
 		}
 	});
+	
+	// 관리자인지 아닌지 검사 후 숙소관리 띄우기
 });
 </script>
 
@@ -59,13 +61,23 @@ $(function() {
 								 </c:choose>
 						   		</a></li>
 						   		<li class="nav-item" id="host_room_list"><a href="/cy/HostRoomList">숙소관리</a></li>
-						   		<li class="nav-item" id="host_room_list"><a href="/yo/reservation_list">예약내역</a></li>
-						   		<li class="nav-item" id="host_room_list"><a href="/boo/pointlist">포인트 이용 내역</a></li>
+						   		<li class="nav-item" id="reservation_list"><a href="/yo/reservation_list">예약내역</a></li>
+						   		<li class="nav-item" id="point_list"><a href="/boo/pointlist">포인트 이용 내역</a></li>
 						   		<li class="nav-item"><a href="/si/logout">로그아웃</a></li>
 				   		</div>
 				   		</div>
 				   	</c:otherwise>
 				  </c:choose>
+				  
+				 <c:if test="${userVo.user_email eq 'admin@naver.com'}">
+				 <div class="dropdown" style="margin-top: 7px; margin-left: 15px;">
+				 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" style="font-size:15px;">관리자</button>
+				 	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						  <li class="nav-item" id="admin_room_list_n"><a href="/cy/AdminRoomListN">미승인 숙소</a></li>
+						  <li class="nav-item" id="admin_room_list_n"><a href="/cy/AdminRoomListY">승인 숙소</a></li>
+				   	</div>
+				 </div>
+				 </c:if>
 	        </ul>
 	      </div>
 	    </div>

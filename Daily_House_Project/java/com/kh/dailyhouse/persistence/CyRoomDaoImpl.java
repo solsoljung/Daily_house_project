@@ -20,6 +20,30 @@ public class CyRoomDaoImpl implements CyRoomDao {
 	@Inject
 	public SqlSession sqlSession;
 	
+	
+	@Override
+	public List<RoomDetailDto> getRoomAdminCheckNList() throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".getRoomAdminCheckNList");
+	}
+
+	@Override
+	public List<RoomDetailDto> getRoomAdminCheckYList() throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".getRoomAdminCheckYList");
+	}
+
+	@Override
+	public void updateRoomAdminCheckY(int room_num) throws Exception {
+		sqlSession.update(NAMESPACE + ".updateRoomAdminCheckY", room_num);
+	}
+
+	@Override
+	public void updateRoomAdminCheckN(int room_num) throws Exception {
+		sqlSession.update(NAMESPACE + ".updateRoomAdminCheckN", room_num);
+	}
+
+	
+	
+	
 	// 호스트가 등록한 숙소 리스트 불러오기
 	@Override
 	public List<RoomDetailDto> getHostRoomList(String user_email) throws Exception {
@@ -93,4 +117,5 @@ public class CyRoomDaoImpl implements CyRoomDao {
 		sqlSession.delete(NAMESPACE + ".deleteAttachByRoomNum", room_num);
 	}
 
+	
 }

@@ -22,6 +22,8 @@ public class RoomDetailDto {
 	private String room_type_explain;
 	private String room_status; 
 	
+	private String room_admin_check;
+	
 	public int getRoom_num() {
 		return room_num;
 	}
@@ -124,7 +126,12 @@ public class RoomDetailDto {
 	public void setRoom_status(String room_status) {
 		this.room_status = room_status;
 	}
-	
+	public String getRoom_admin_check() {
+		return room_admin_check;
+	}
+	public void setRoom_admin_check(String room_admin_check) {
+		this.room_admin_check = room_admin_check;
+	}
 	@Override
 	public String toString() {
 		return "RoomDetailDto [room_num=" + room_num + ", room_type_num=" + room_type_num + ", user_email=" + user_email
@@ -133,7 +140,7 @@ public class RoomDetailDto {
 				+ ", room_people=" + room_people + ", room_bed=" + room_bed + ", room_bathroom=" + room_bathroom
 				+ ", room_title=" + room_title + ", room_option_code=" + room_option_code + ", pics="
 				+ Arrays.toString(pics) + ", room_option_explain=" + room_option_explain + ", room_type_explain="
-				+ room_type_explain + ", room_status=" + room_status + "]";
+				+ room_type_explain + ", room_status=" + room_status + ", room_admin_check=" + room_admin_check + "]";
 	}
 	
 }

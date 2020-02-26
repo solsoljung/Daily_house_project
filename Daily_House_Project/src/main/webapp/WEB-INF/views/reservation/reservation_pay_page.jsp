@@ -41,12 +41,8 @@ $(function() {
 			}
 		});
 		
-		// 0.05프로 계산, 소숫점 올림
-		var point = Math.ceil(total_pay * 0.05);
-		console.log("point: " + point);
-		
 		// 결제금액 포인트가 차감되어야 하므로 tbl_user의 포인트 업데이트
-//  		$("#reservation_pay").submit();
+  		$("#reservation_pay").submit();
 	});
 	
 	if("${result}" == "fail"){
@@ -97,6 +93,7 @@ testDto: ${testDto}<br>
 	          <input type="hidden" name ="check_in" value="${testDto.check_in}">
 	          <input type="hidden" name ="check_out" value="${testDto.check_out}">
 	          <input type="hidden" name ="room_price" value="${testDto.room_price}">
+	          <input type="hidden" name ="reserv_price" value="${testDto.v * testDto.room_price}">
 	          <input type="hidden" name="v" value="${testDto.v}">
 	          
 	          

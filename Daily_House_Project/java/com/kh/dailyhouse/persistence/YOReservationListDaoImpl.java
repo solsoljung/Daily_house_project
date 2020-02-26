@@ -46,8 +46,8 @@ public  class YOReservationListDaoImpl implements YOReservationListDao {
 	}
 
 	@Override
-	public void user_update_reserv_point(UserPointDto userPointDto) throws Exception {
-		sqlSession.update(NAMESPACE + ".user_update_reserv_point", userPointDto);
+	public void user_update_reserv_point(TestDto testDto) throws Exception {
+		sqlSession.update(NAMESPACE + ".user_update_reserv_point", testDto);
 	}
 
 	@Override
@@ -56,14 +56,19 @@ public  class YOReservationListDaoImpl implements YOReservationListDao {
 	}
 
 	@Override
-	public void insertPoint(PointVo pointVo) throws Exception {
-		sqlSession.insert(NAMESPACE + ".insertPoint", pointVo);
+	public void insertPoint(TestDto testDto) throws Exception {
+		sqlSession.insert(NAMESPACE + ".insertPoint", testDto);
 	}
 
 	@Override
 	public TestDto getReservRoomData(int reserv_num) throws Exception {
 
 		return sqlSession.selectOne(NAMESPACE + ".getReservData", reserv_num);
+	}
+
+	@Override
+	public void updateRoomState(int reserv_num) throws Exception {
+		sqlSession.update(NAMESPACE + ".updateRoomState", reserv_num);
 	}
 
 
