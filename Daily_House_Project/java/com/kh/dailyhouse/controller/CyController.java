@@ -38,6 +38,8 @@ public class CyController {
 	@Inject
 	private CyRoomService roomService;
 	
+	private final String ADMIN_EMAIL = "admin@naver.com"; 
+	
 	public String isHostCheck(HttpSession session, RedirectAttributes rttr) {
 		// 세션이 비어있을 경우 notHost메세지를 저장 후 로그인 페이지로 리다이렉트
 		UserVo userVo = (UserVo)session.getAttribute("userVo");
@@ -71,12 +73,73 @@ public class CyController {
 	// 관리자 room_admin_check가 Y인 방들 보기
 	@RequestMapping(value = "/AdminRoomListY", method = {RequestMethod.GET, RequestMethod.POST})
 	public String AdminRoomListY(HttpSession session, Model model, RedirectAttributes rttr) throws Exception{
-		// 관리자 check N인 숙소 리스트 
+		// 관리자 check Y인 숙소 리스트 
 		List<RoomDetailDto> list = roomService.getRoomAdminCheckYList();
 		model.addAttribute("list", list);
 		
 		return "/admin/admin_check_y";
 	}
+	
+	// room_num에 해당하는 room_admin_check를 Y로 변경하기
+	@RequestMapping(value = "/updateRoomAdminCheckY/{room_num}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public String updateRoomAdminCheckY(@PathVariable("room_num") int room_num) throws Exception {
+		roomService.updateRoomAdminCheckY(room_num);
+		return "success";
+	}
+	
+	// room_num에 해당하는 room_admin_check를 N으로 변경하기
+	@RequestMapping(value = "/updateRoomAdminCheckN/{room_num}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public String updateRoomAdminCheckN(@PathVariable("room_num") int room_num) throws Exception {
+		roomService.updateRoomAdminCheckN(room_num);
+		return "success";
+	}
+	
+	// 관리자용 호스트가 등록한 방 1개 상세보기에서 room_admin_check 수정
+	@RequestMapping(value = "/AdminRoomDetailUpdate",  method = {RequestMethod.GET, RequestMethod.POST})
+	public String AdminRoomDetailUpdate(HttpSession session, Model model, RoomDetailDto roomDetailDto
+			 					,RedirectAttributes rttr) throws Exception{
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		// 로그인 안 했을 경우 return
+		if(userVo == null) {	
+			rttr.addFlashAttribute("msg", "notAdmin");
+			return "redirect:/si/loginHost";
+		}
+		// admin이 아닐 경우 return
+		if(!userVo.getUser_email().equals(ADMIN_EMAIL)) {
+			rttr.addFlashAttribute("msg", "notAdmin");
+			return "redirect:/si/loginHost";
+		}
+		System.out.println("AdminRoomDetailUpdate roomDetailDto: " + roomDetailDto);
+		roomService.updateRoomAdminCheckChange(roomDetailDto);
+		
+		return "redirect:/cy/AdminRoomDetail?room_num=" + roomDetailDto.getRoom_num();
+	}
+	
+	
+	// 관리자용 호스트가 등록한 방 1개 상세보기
+	@RequestMapping(value = "/AdminRoomDetail",  method = {RequestMethod.GET, RequestMethod.POST})
+	public String AdminRoomDetail(HttpSession session, Model model, @RequestParam("room_num") int room_num
+			 					,RedirectAttributes rttr) throws Exception{
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		// 로그인 안 했을 경우 return
+		if(userVo == null) {
+			rttr.addFlashAttribute("msg", "notAdmin");
+			return "redirect:/si/loginHost";
+		}
+		// admin이 아닐 경우 return
+		if(!userVo.getUser_email().equals(ADMIN_EMAIL)) {
+			rttr.addFlashAttribute("msg", "notAdmin");
+			return "redirect:/si/loginHost";
+		}
+		RoomDetailDto roomDetailDto = roomService.getHostRoomDetail(room_num);
+		model.addAttribute("roomDetailDto", roomDetailDto);
+		model.addAttribute("roomTypeList", roomTypeService.getRoomTypeList());
+		model.addAttribute("roomOptionList", roomOptionService.getRoomOptionList());
+		return "/admin/admin_room_detail";
+	}
+	
 	
 	// 호스트의 방 리스트 보기
 	@RequestMapping(value = "/HostRoomList", method = {RequestMethod.GET, RequestMethod.POST})

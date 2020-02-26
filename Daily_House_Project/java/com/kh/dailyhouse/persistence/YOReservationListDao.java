@@ -34,5 +34,5 @@ public interface YOReservationListDao {
 	public TestDto getReservRoomData(int reserv_num) throws Exception;
 	
 	//예약상태 N으로 바꾸기
-	public void updateRoomState(int reserv_num) throws Exception;
+	public void updateRoomState(ReservationVo reservationVo) throws Exception;
 }
