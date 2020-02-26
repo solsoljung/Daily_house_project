@@ -36,7 +36,8 @@ $(function() {
 <br>
 <section class="ftco-section ftco-room">
 	<div class="container">
-		<div class="row">
+		<h1>포인트 이용 내역</h1>
+		<div class="row bg-white p-md-5 p-4 mb-5 border">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-12">
@@ -180,6 +181,7 @@ $(function() {
 				</div>
           	</div>
           	<!-- 페이징 -->
+          	
 		</div>
 	</div>
 </section>
