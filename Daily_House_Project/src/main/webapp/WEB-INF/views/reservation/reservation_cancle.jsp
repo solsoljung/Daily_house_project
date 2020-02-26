@@ -13,7 +13,9 @@
 <!-- reservation page section -->
 <script>
 $(function() {
-	
+	$("#reservationBtn").click(function(){
+		//location.href = "/reservation_delete/${dto.reserv_num}";
+	});
 });
 
 

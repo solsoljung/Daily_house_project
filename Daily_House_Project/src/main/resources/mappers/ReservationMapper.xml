@@ -49,11 +49,6 @@
 		values(seq_reserv_num.nextval, #{room_num}, #{user_email}, #{check_in}, #{check_out}, #{room_price_v}, #{reserv_state})
 	</insert>
 	
-	<!-- 예약취소하기 -->
-	<delete id="cancelReservation">
-		delete from tbl_reservation
-		where reserv_num = #{reserv_num}
-	</delete>
 	
 	<!-- 예약가능한지 알아보기 -->
 	<select id="availableReserv" resultType="int"  parameterType="TestDto">
