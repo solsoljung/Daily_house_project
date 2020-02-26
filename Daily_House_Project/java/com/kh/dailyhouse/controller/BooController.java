@@ -64,6 +64,7 @@ public class BooController {
 		return "/room_detail/Room_Detail";
 	}
 	
+	//리뷰 작성
 	@RequestMapping(value="/review", method = RequestMethod.POST)
 	public String postInputReview(RoomReviewVo roomReviewVo) throws Exception{
 		
@@ -82,11 +83,14 @@ public class BooController {
 	
 	//포인트 이용 내역 보여주기
 	@RequestMapping(value="/pointlist", method = RequestMethod.GET)
-	public String pointUseList(Model model, HttpSession session) throws Exception {
+	public String pointUseList(Model model, HttpSession session, ReviewPagingDto reviewPagingDto) throws Exception {
 		UserVo userVo = (UserVo)session.getAttribute("userVo");
 		String user_email = userVo.getUser_email();
-		List<PointDto> pointList = booPointListService.getPointList(user_email);
+		
+		List<PointDto> pointList = booPointListService.getPointList(user_email, reviewPagingDto);
+		
 		model.addAttribute("pointList", pointList);
+		model.addAttribute("reviewPagingDto", reviewPagingDto);
 		
 		return "/pointuselist/PointUseList";
 	}
