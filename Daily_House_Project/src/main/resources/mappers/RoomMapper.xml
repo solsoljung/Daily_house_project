@@ -27,6 +27,14 @@
 		where room_num = #{room_num}
 	</update>
 
+	<!-- 관리자 방 승인, 미승인 상태변경하기 -->
+	<update id="updateRoomAdminCheckChange">
+		update tbl_room set room_admin_check = #{room_admin_check}
+		where room_num = #{room_num}
+	</update>
+	
+	
+
 	<!-- 첨부 파일 경로(위치+파일명) 추가 -->
 	<insert id="attach">
 		insert into tbl_room_picture(pic_uri, room_num)

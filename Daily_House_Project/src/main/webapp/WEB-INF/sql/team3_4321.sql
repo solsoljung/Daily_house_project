@@ -76,6 +76,21 @@ pic_reg_date TIMESTAMP DEFAULT SYSDATE
 --tbl_point==============================================================
 --tbl_like===============================================================
 		
+--tbl_board
+create table tbl_board(
+board_num NUMBER PRIMARY KEY,
+user_email VARCHAR2(200) REFERENCES tbl_user(user_email),
+board_title VARCHAR2(200) not null,
+board_content VARCHAR2(200) not null,
+board_reg_date TIMESTAMP DEFAULT SYSDATE,
+board_read_count NUMBER DEFAULT 0,
+board_ref NUMBER,
+board_re_step NUMBER DEFAULT 0,
+board_re_level number default 0,
+board_notice VARCHAR2(200) DEFAULT 'N'
+);
+
+create SEQUENCE seq_board_num;
         
 --dummy data=============================================================
 --=======================================================================

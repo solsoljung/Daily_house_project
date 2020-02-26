@@ -76,14 +76,23 @@ public class SIController {
 		// 요청정보 얻어서
 		UserVo userVo1 = siUserService.login_run(userVo);
 		// DB 에 넣기 - Service - Dao - Mybatis - Oracle
-		
+		System.out.println("userVo1:" + userVo1);
 		if(userVo1 == null) {
 			rttr.addFlashAttribute("msg", "fail");
 			return "redirect:/si/loginHost";
 		}
+		
+		String redirectUri = "/";
+		
+		String goUri = (String)session.getAttribute("goUri");
+		System.out.println("goUri:" + goUri);
+		if (goUri != null) {
+			redirectUri = goUri;
+		}
+		
 		session.setAttribute("userVo", userVo1);
 		rttr.addFlashAttribute("msg", "success");
-		return "redirect:/";
+		return "redirect:" + redirectUri;
 	}
 	// 로그아웃 처리
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)

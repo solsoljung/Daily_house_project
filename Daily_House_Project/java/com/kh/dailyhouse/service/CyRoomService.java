@@ -20,6 +20,9 @@ public interface CyRoomService {
 	// 관리자용 숙소 room_admin_check값을 N으로 업데이트
 	public void updateRoomAdminCheckN(int room_num) throws Exception;
 	
+	// 관리자용 숙소 값 Y, N으로 업데이트
+	public void updateRoomAdminCheckChange(RoomDetailDto roomDetailDto) throws Exception;
+	
 	
 	// 호스트 정보 검색
 	public HostVo getHostInfo(String user_email) throws Exception;
