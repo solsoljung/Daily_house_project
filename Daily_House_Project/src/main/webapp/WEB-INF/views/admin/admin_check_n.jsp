@@ -28,30 +28,35 @@
 
 <script>
 $(function(){
-	// msg
-// 	var msg = "${msg}";
-// 	if (msg == "room_delete_success") {
-// 		alert("삭제 되었습니다.");
-// 	}
 	
 	// 현재 클릭된 메뉴를 활성화
 	$(".nav-item:eq(0)").attr("class", "nav-item");
-
-// 	$("#btnAddRoom").click(function(){
-// 		location.href = "/cy/registerHost1";
-// 	});
 	
-// 	$(".room_title_a").on("click", function(){
-// 		var that = $(this);
-// 		var room_num = that.attr("data-room-num");
-// 		console.log("room_num: " + room_num);
-// 		location.href = "/cy/HostRoomDetail?room_num=" + room_num;
-// 	});
+	// 승인클릭시 숙소를 승인으로 변경
+	$(".btnAdminCheckY").on("click", function(e){
+		var that = $(this);
+		var room_num = that.attr("data-room-num");
+		console.log("room_num: " + room_num);
+		
+		var url = "/cy/updateRoomAdminCheckY/" + room_num;
+		$.ajax({
+			"type" : "delete",
+			"url" : url,
+			"headers" : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "delete"
+			},
+			"success" : function(rData) {
+				console.log("rData:" + rData);
+				var target = that.parent().parent();
+				target.remove();
+			}
+		}); // ajax
+	}); // btn
 	
 });
 </script>
 
-<!-- host_register_page1 START -->
 <br><br><br><br>
 
 <div class="container-fluid">
@@ -60,55 +65,56 @@ $(function(){
 		<div class="col-md-8"><br><br>
 			<div class="row">
 				<div class="col-md-8">
-					<label class="lblTitle1">관리자</label>
+				<c:choose>
+					<c:when test="${empty list}">
+						<label class="lblTitle2">* 미승인 숙소가 없습니다.</label>
+					</c:when>
+					<c:otherwise>
+						<label class="lblTitle2">* 미승인 숙소입니다.</label>
+					</c:otherwise>
+				</c:choose>
+					
 				</div>
 				<div class="col-md-4" align="right">
-					<button type="button" class="btn btn-primary  py-3 px-5" id="btnAddRoom" style="font-size:15px;" >숙소 추가하기</button>
 				</div>
 			</div><br><br>
 			
 	<!-- table START -->
-<!-- 		<div class="row" align="center"> -->
-<!-- 		<table class="table" id="tbl_room"> -->
-<!-- 			<thead align="center"> -->
-<!-- 				<tr align="center"> -->
-<!-- 					<th> </th> -->
-<!-- 					<th>숙소 위치</th> -->
-<!-- 					<th>이름</th> -->
-<!-- 					<th>건물 형식</th> -->
-<!-- 					<th>가격</th> -->
-<!-- 					<th>공개여부</th> -->
-<!-- <!-- 					<th>REMOVE</th> --> -->
-<!-- 				</tr> -->
-<!-- 			</thead> -->
+	<c:if test="${not empty list}">
+		<div class="row" align="center">
+		<table class="table" id="tbl_room">
+			<thead align="center">
+				<tr align="center">
+					<th> </th>
+					<th>숙소 위치</th>
+					<th>이름</th>
+					<th>가격</th>
+					<th>승인</th>
+				</tr>
+			</thead>
 				
-<!-- 			<tbody align="center"> -->
-<%-- 				<c:forEach items="${list}" var="RoomDetailDto"> --%>
-<!-- 				<tr align="center"> -->
-<%-- 					<td>${RoomDetailDto.room_num}</td> --%>
-<%-- 					<td>${RoomDetailDto.room_location}</td> --%>
-<%-- 					<td><a href="#" class="room_title_a" data-room-num="${RoomDetailDto.room_num}">${RoomDetailDto.room_title}</a></td> --%>
-<%-- 					<td>${RoomDetailDto.room_type_explain}</td> --%>
-<%-- 					<td>${RoomDetailDto.room_price}</td> --%>
-<%-- 					<c:choose> --%>
-<%-- 						<c:when test="${RoomDetailDto.room_status eq 'Y'}"><td>공개</td></c:when> --%>
-<%-- 						<c:otherwise><td>비공개</td></c:otherwise> --%>
-<%-- 					</c:choose> --%>
-<!-- <!-- 					<td align="center"><a href="#" class="remove_img" > --> -->
-<!-- <!-- 						<img alt="remove" src="../../islagrande/images/remove.png" width="30" height="30" /> --> -->
-<!-- <!-- 						</a></td> --> -->
-<!-- 				</tr> -->
-<%-- 				</c:forEach> --%>
-<!-- 			</tbody>	 -->
-<!-- 		</table> -->
-<!-- 		</div> -->
-<!-- 	<!-- table END -->		 -->
-<!-- 	</div> -->
+			<tbody align="center">
+				<c:forEach items="${list}" var="RoomDetailDto">
+				<tr align="center">
+					<td>${RoomDetailDto.room_num}</td>
+					<td>${RoomDetailDto.room_location}</td>
+					<td><a href="#" class="room_title_a" data-room-num="${RoomDetailDto.room_num}">${RoomDetailDto.room_title}</a></td>
+					<td>${RoomDetailDto.room_price}</td>
+					<td><button type="button" class="btn btn-primary btnAdminCheckY" 
+						data-room-num="${RoomDetailDto.room_num}"
+						style="font-size:15px;" >승인</button></td>
+				</tr>
+				</c:forEach>
+			</tbody>	
+		</table>
+		</div>
+	</c:if>
+	<!-- table END -->
+	</div>
 			
-<!-- 	<div class="col-md-2"></div> -->
-<!-- 	</div> -->
-<!-- </div><br><br><br> -->
-<!-- host_register_page1 END -->
+	<div class="col-md-2"></div>
+	</div>
+</div><br><br><br>
 
 <%@ include file = "../../views/casahotel/casahotel_script2.jsp" %>			
 <%@ include file = "../../views/islagrande/islagrande_script2.jsp" %>	
