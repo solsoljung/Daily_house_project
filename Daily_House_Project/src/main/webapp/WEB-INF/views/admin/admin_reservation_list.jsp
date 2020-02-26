@@ -10,8 +10,20 @@
 
 <script type="text/javascript">
 $(function() {
-	$(".btn_reserv_pay").click(function() {
+	$(".btn_reserv_pay").on("click",function() {
+		var reserv_num = $(this).attr("data-reserv_num");
+		var reserv_price = $(this).attr("data-reserv_price");
+		var reserv_mile = Math.ceil(parseInt(reserv_price) * 0.05);
+		var user_email = $(this).attr("data-user_email");
+		var room_num = $(this).attr("data-room_num");
 		
+		$("#reserv_num").val(reserv_num);
+		$("#reserv_price").val(reserv_price);
+		$("#reserv_mile").val(reserv_mile);
+		$("#user_email").val(user_email);
+		$("#room_num").val(room_num);
+		
+		$("#form_reserv_pay").submit();
 	});
 });
 </script>
@@ -29,6 +41,13 @@ $(function() {
 <p>ing가 Y인 애들만 보이는것이 기본</p>
 <p>페이지의 목적 : 손님들이 예약 취소를 해서 status가 N일때 버튼이 보이고</p>
 <p>버튼 클릭시 R로 바뀌면서 "마일리지 회수", "결제 취소(돈 돌려주기)" 작업이 되야 함</p>
+<form id="form_reserv_pay" action="/boo/adminReservResult" method="get">
+	<input type="hidden" name="reserv_num" id="reserv_num">
+	<input type="hidden" name="reserv_price" id="reserv_price">
+	<input type="hidden" name="reserv_mile" id="reserv_mile">
+	<input type="hidden" name="user_email" id="user_email">
+	<input type="hidden" name="room_num" id="room_num">
+</form>
 
 <table>
 	<tr>
@@ -49,9 +68,19 @@ $(function() {
 			<td>${adminReservaionList.room_reserv_end_date}</td>
 			<td>${adminReservaionList.reserv_price}</td>
 			<td>
-				${adminReservaionList.reserv_state}
+				<c:if test="${adminReservaionList.reserv_state == 'Y'}">
+					예약
+				</c:if>
 				<c:if test="${adminReservaionList.reserv_state == 'N'}">
-					<input type="button" value="확인" class="btn_reserv_pay">
+					예약 취소
+					<input type="button" value="확인" class="btn_reserv_pay" 
+						   data-reserv_num="${ adminReservaionList.reserv_num}"
+						   data-reserv_price="${adminReservaionList.reserv_price}"
+						   data-user_email="${adminReservaionList.user_email}"
+						   data-room_num="${adminReservaionList.room_num}">
+				</c:if>
+				<c:if test="${adminReservaionList.reserv_state == 'R'}">
+					처리 완료
 				</c:if>
 			</td>
 		</tr>
