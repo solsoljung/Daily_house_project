@@ -5,6 +5,28 @@
   
 <mapper namespace="com.kh.mappers.RoomMapper">
 
+	<!-- 관리자 미승인 방 리스트 보기 -->
+	<select id="getRoomAdminCheckNList" resultType="RoomDetailDto">
+		select * from tbl_room where room_admin_check = 'N' order by room_num desc
+	</select>
+	
+	<!-- 관리자 승인 방 리스트 보기 -->
+	<select id="getRoomAdminCheckYList" resultType="RoomDetailDto">
+		select * from tbl_room where room_admin_check = 'Y' order by room_num desc
+	</select>
+
+	<!-- 관리자 방 승인 상태변경하기 -->
+	<update id="updateRoomAdminCheckY">
+		update tbl_room set room_admin_check = 'Y' 
+		where room_num = #{room_num}
+	</update>
+
+	<!-- 관리자 방 미승인 상태변경하기 -->
+	<update id="updateRoomAdminCheckN">
+		update tbl_room set room_admin_check = 'N' 
+		where room_num = #{room_num}
+	</update>
+
 	<!-- 첨부 파일 경로(위치+파일명) 추가 -->
 	<insert id="attach">
 		insert into tbl_room_picture(pic_uri, room_num)
