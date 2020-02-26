@@ -91,8 +91,8 @@
 	
 <!-- 	포인트 이용 내역에 작성 -->
 	<insert id="setPointList">
-		insert into tbl_point (point_num, user_email, point_code, point_score)
-		values (seq_point_num.nextval, #{user_email}, 'R3', 500)
+		insert into tbl_point (point_num, user_email, point_code, point_score, room_num)
+		values (seq_point_num.nextval, #{user_email}, 'R3', 500, #{room_num})
 	</insert>
 
 <!-- 	리뷰 작성후 유저에게 포인트 주기 -->
