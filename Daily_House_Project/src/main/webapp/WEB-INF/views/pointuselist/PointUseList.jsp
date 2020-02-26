@@ -36,7 +36,7 @@ $(function() {
 <br>
 <section class="ftco-section ftco-room">
 	<div class="container">
-		<h1>포인트 이용 내역</h1>
+		<h1 style="font-family: 맑은 고딕;">포인트 이용 내역</h1>
 		<div class="row bg-white p-md-5 p-4 mb-5 border">
 			<div class="container-fluid">
 				<div class="row">
