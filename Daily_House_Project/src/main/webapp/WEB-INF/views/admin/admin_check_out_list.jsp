@@ -16,6 +16,7 @@
 $(function() {
 	
 	$(".btnApprove").click(function() {
+		var that = $(this);
 		var room_num = $(this).attr("data-room_num");
 		var reserv_num = $(this).attr("data-reserv_num");
 		var host_email = $(this).attr("data-host_email");
@@ -30,9 +31,6 @@ $(function() {
 		};
 		
 		var url = "/yo/approveCheckout";
-// 		$.post(url, JSON.stringify(sendData), function(rData) {
-// 			console.log(rData);
-// 		}); // 처리 안됨
 
 		$.ajax({
 			"type" : "post",
@@ -45,9 +43,12 @@ $(function() {
 			"data" : JSON.stringify(sendData),
 			"success" : function(rData) {
 				console.log(rData);
-				//replyList();
+				if(rData == "success"){
+					var deleteTarget = that.parent().parent();
+					deleteTarget.fadeOut('1000');
+				}
 			}
-		}); // $.ajax()
+		}); 
 	});
 });
 </script>
@@ -128,7 +129,7 @@ $(function() {
 							<td>${vo.reserv_price}</td>
 							<c:if test="${toDay > vo.room_reserv_end_date}">
 								<td>
-<input type="button" class="btnApprove" data-room_num="${vo.room_num}" data-host_email="${vo.host_email}" 
+<input type="button" class="btnApprove btn btn-primary" data-room_num="${vo.room_num}" data-host_email="${vo.host_email}" 
 data-reserv_num="${vo.reserv_num}" data-user_email="${vo.user_email}" data-reserv_price="${vo.reserv_price}" value="승인">
 								</td>
 							</c:if>

@@ -52,9 +52,6 @@ $(function(){
 					<label class="lblTitle2 title">데일리하우스 도움말 센터에 오신 것을 환영합니다.</label>
 				</div>
 				<div class="col-md-4" align="right">
-					<c:if test="${userVo.user_email eq 'admin@naver.com'}">
-						<button type="button" class="btn btn-primary" id="btnWrite" style="font-size:15px;" >글쓰기</button>
-					</c:if>
 				</div>
 			</div><br><br>
 			
