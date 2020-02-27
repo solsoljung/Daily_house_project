@@ -24,16 +24,16 @@ $(function() {
 	});
 });
 </script>
+
 <%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->					
 <!-- 데이터피커X -->
 
 <form id="frmPage" action="/boo/pointlist" method="get">
 	<input type="hidden" name="page" value="${reviewPagingDto.page}">
 </form>
-<br>
-<br>
-<br>
-<br>
+
+<br><br><br><br>
+
 <section class="ftco-section ftco-room">
 	<div class="container">
 		<h1 style="font-family: 맑은 고딕;">포인트 이용 내역</h1>

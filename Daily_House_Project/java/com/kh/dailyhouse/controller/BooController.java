@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.dailyhouse.domain.AdminReservResultDto;
 import com.kh.dailyhouse.domain.PointDto;
 import com.kh.dailyhouse.domain.ReservationVo;
 import com.kh.dailyhouse.domain.ReviewPagingDto;
@@ -108,13 +109,20 @@ public class BooController {
 		model.addAttribute("adminReservaionList", adminReservaionList);
 		
 		return "/admin/admin_reservation_list";
+
 	}
 	
-	//관리자 페이지 - 손님들 체크아웃 기간이 넘어 호스트에게 돈을 입금시켜줘야 되는 부분
-	@RequestMapping(value="/adminCheckOutList", method = RequestMethod.GET)
-	public String adminCheckOutList(Model model) throws Exception {
+	//관리자 페이지 - 예약한 리스트들 중 확인 버튼을 눌렀을때
+	@RequestMapping(value="/adminReservResult", method = RequestMethod.GET)
+	public String adminReservResult(AdminReservResultDto adminReservResultDto) throws Exception {
+		//N을 R로 바꿔줌
+		booAdminService.updateReservState(adminReservResultDto);
+		//마일리지 회수, 결제 취소 user_point 수정
+		booAdminService.updateUserPoint(adminReservResultDto);
+		//포인트 이용 내역에 작성
+		booAdminService.setPointList(adminReservResultDto);
 		
-		
-		return "/admin/admin_check_out_list.jsp";
+		return "redirect:/boo/adminReservList";
 	}
+	
 }
