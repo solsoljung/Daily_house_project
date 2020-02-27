@@ -15,7 +15,7 @@
 <%@ include file = "../views/casahotel/section/casahotel_Main_section.jsp" %>
 <%@ include file = "../views/casahotel/section/casahotel_CheckAvailabilty_section.jsp" %>
 
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
 <script >
 $(function() {
 	$("#requestBtn").on("click", function() {
@@ -30,6 +30,8 @@ $(function() {
 			alert("요청 완료");
 		});
 	});
+	
+
 });
 </script>
 
@@ -107,10 +109,10 @@ $(function() {
                 <div class="testimony-wrap p-4 pb-5 text-center">
                 <c:choose>
 				   	<c:when test="${null == HomeReviewDto.user_pic}">
-				   	<div class="user-img mb-5" style="background-image: url(/images/profile/user.jpg)">
+				   	<div class="user-img mb-5" style="background-image: url(/images/profile/user.jpg)"></div>
 				   	</c:when>
 				   	<c:otherwise>
-				   	<div class="user-img mb-5" style="background-image: url(/si/displayFile?fileName=/${HomeReviewDto.user_pic})">
+				   	<div class="user-img mb-5" style="background-image: url(/si/displayFile?fileName=/${HomeReviewDto.user_pic})"></div>
 				   	</c:otherwise>
 				</c:choose>
                     <span class="quote d-flex align-items-center justify-content-center">
@@ -124,8 +126,8 @@ $(function() {
                     <span class="position">${HomeReviewDto.room_title}</span>
                   </div>
                 </div>
-              </div>
             </c:forEach>
+              </div>
             </div>
           </div>
         </div>

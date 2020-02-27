@@ -16,6 +16,13 @@ $(function() {
 	});
 	
 	// 관리자인지 아닌지 검사 후 숙소관리 띄우기
+
+	
+	//쪽지함으로 이동
+	$("#message").click(function(){
+		console.log("message");
+		location.href = "/sol/message_list";
+	});
 });
 </script>
 
@@ -42,6 +49,9 @@ $(function() {
 				   	<c:otherwise> 
 						<div class="dropdown" style="margin-top: 7px; margin-left: 15px;">
 				   	<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="font-size:15px;">내정보</button>
+					<!-- 쪽지 알림 -->
+					<span class="badge badge-light badge-pill" id="message" style="cursor:pointer">${message_count}</span>
+					<!-- 쪽지 알림 끝 -->
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						   		<li class="nav-item"><a href="/si/userInformation">${userVo.user_name}님&nbsp;&nbsp;&nbsp;
 						   		<c:choose>
@@ -57,6 +67,7 @@ $(function() {
 						   		<li class="nav-item" id="reservation_list"><a href="/yo/reservation_list">예약내역</a></li>
 						   		<li class="nav-item" id="point_list"><a href="/boo/pointlist">포인트 이용 내역</a></li>
 						   		<li class="nav-item"><a href="/si/logout">로그아웃</a></li>
+						   		<li class="nav-item"><a href="/sol/message_list">메세지</a></li>
 				   		</div>
 				   		</div>
 				   	</c:otherwise>

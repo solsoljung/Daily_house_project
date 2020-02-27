@@ -112,7 +112,7 @@ ${likeDto}
 					<span class="heartDiv" data-like_num="${LikeDto.like_num}">♥</span>
 				</a>
 				<div class="text pt-4 pl-lg-5">
-				<h2><span data-num="${LikeDto.room_num}" class="room_title">${LikeDto.room_title}</span></h2>
+				<h2><span data-num="${LikeDto.room_num}" class="room_title" style="cursor:pointer; font-family:Arial;">${LikeDto.room_title}</span></h2>
 				<p class="d-flex price-details align-items-center pt-3">
 					<span class="price">￦${LikeDto.room_price}<small>&nbsp;/&nbsp;&nbsp;&nbsp;1박</small></span>
 				</p>

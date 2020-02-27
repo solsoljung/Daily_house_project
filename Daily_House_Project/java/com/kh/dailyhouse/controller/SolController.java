@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,14 +16,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
+import com.kh.dailyhouse.domain.MessageVo;
 import com.kh.dailyhouse.domain.RoomLowHighPriceDto;
 import com.kh.dailyhouse.domain.RoomOptionVo;
 import com.kh.dailyhouse.domain.RoomTypeVo;
 import com.kh.dailyhouse.domain.RoomVo;
 import com.kh.dailyhouse.domain.SearchKeywordDto;
 import com.kh.dailyhouse.domain.SearchVo;
+import com.kh.dailyhouse.domain.UserVo;
+import com.kh.dailyhouse.service.SolMessageService;
 import com.kh.dailyhouse.service.SolRoomService;
 
 @Controller
@@ -31,6 +34,9 @@ public class SolController {
 
 	@Inject
 	private SolRoomService service;
+	
+	@Inject
+	private SolMessageService messageService;
 	
 	@RequestMapping(value = "/keywordList/{search_keyword}", method = RequestMethod.GET)
 	@ResponseBody
@@ -124,6 +130,29 @@ public class SolController {
 		model.addAttribute("priceDto", priceDto);
 		
 		return "searchResult/searchResult";
+	}
+
+	//메세지 리스트 페이지로 이동
+	@RequestMapping(value = "/message_list", method = RequestMethod.GET)
+	public String message_list(HttpSession session, Model model) throws Exception {
+		
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		String user_email = userVo.getUser_email();
+		
+		List<MessageVo> messageList = messageService.getMessageList(user_email);
+		model.addAttribute("messageList", messageList);
+		
+		return "/message/message_list";
+	}
+	
+	//메세지 오픈날짜 업데이트
+	@RequestMapping(value = "/openDateUpdate/{message_num}", method = RequestMethod.PUT)
+	@ResponseBody
+	public String openDateUpdate(@PathVariable("message_num") int message_num) throws Exception {
+		System.out.println("controller의 메세지 번호: "+message_num);
+		messageService.openDateUpdate(message_num);
+		
+		return "success";
 	}
 
 }
