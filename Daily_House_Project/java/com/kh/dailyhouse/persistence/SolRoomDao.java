@@ -25,4 +25,5 @@ public interface SolRoomDao {
 	public RoomLowHighPriceDto getRoomPrice() throws Exception;
 	//검색 목록
 	public List<SearchKeywordDto> getKeywordList(SearchKeywordDto dto) throws Exception;
+	
 }
