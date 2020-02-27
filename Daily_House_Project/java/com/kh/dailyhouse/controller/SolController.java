@@ -45,15 +45,13 @@ public class SolController {
 	@RequestMapping(value = "/room", method = {RequestMethod.GET, RequestMethod.POST})
 	public String showRoom(Model model, SearchVo searchVo) throws Exception {
 		System.out.println("room get 실행됨");
-		System.out.println("searchVo:" + searchVo);
 		String str_start_date = searchVo.getStr_start_date();
 		String str_end_date = searchVo.getStr_end_date();
-
-		System.out.println("str_start_date: " + str_start_date);
-		System.out.println("str_end_date: " + str_end_date);
 		
 		Timestamp start_date;
 		Timestamp end_date;
+		
+		System.out.println("첫번째 searchVo: "+searchVo);
 		
 		if(str_start_date == "") {
 			str_start_date = null;
@@ -71,7 +69,7 @@ public class SolController {
 		//날짜
 		if (str_start_date != null) {
 			if(str_start_date.equals("NaN-NaN-NaN")) {
-				System.out.println("nan이 나타났다!!!!!!!!!!!!!!!!!!!");
+				System.out.println("str_start_date nan이 나타났다!!!!!!!!!!!!!!!!!!!");
 				SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
 				Calendar time = Calendar.getInstance();
 				String format_time1 = format1.format(time.getTime());
@@ -79,20 +77,17 @@ public class SolController {
 				System.out.println(arr[0]);
 				return null;
 			}
+			
 			str_start_date += " 00:00:00.0";
 			str_end_date += " 00:00:00.0";
 			start_date = java.sql.Timestamp.valueOf(str_start_date);
 			searchVo.setRoom_reserv_start_date(start_date);
 			end_date = java.sql.Timestamp.valueOf(str_end_date);
 			searchVo.setRoom_reserv_end_date(end_date);
-
-			System.out.println("start_date: " + start_date);
-			System.out.println("end_date: " + end_date);
+			
 		}
 		
 		RoomLowHighPriceDto priceDto = service.getRoomPrice();
-		System.out.println("searchVo222222222: " + searchVo);
-		System.out.println("priceDto7777777: " + priceDto);
 		
 		//가격
 		if(searchVo.getLow_price() == 0 && searchVo.getLow_price() == 0) {
@@ -105,14 +100,16 @@ public class SolController {
 		System.out.println("옵션!!!: "+option);
 
 		if(option == "") {
-			searchVo.setArrOption("null");
+			searchVo.setArrOption(null);
 			option = null;
 		}
 		
-		if(option != null) {
+		if(option != null && !option.equals(null)) {
 			List<String> listOption = Arrays.asList(option.split(","));
 	        searchVo.setListOption(listOption);
 		}
+		
+		System.out.println("두번째 searchVo: "+searchVo);
 		
 		List<RoomVo> list = service.getRoomList(searchVo);
 		int totalCount = service.getRoomCount(searchVo);

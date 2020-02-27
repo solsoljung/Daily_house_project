@@ -17,12 +17,7 @@
 	.lblTitle2{ font-size: 20px;}
 	.lblTitle3{ font-size: 15px; font-weight: bold;}
 	
-	#fileDrop {
-	width: 100%;
-	height: 100px;
-	border: 1px dashed #fb929e;
-	background-color: #F2F2F2;
-	margin: auto;
+	a{ color: black; }
 }
 </style>
 
@@ -33,6 +28,18 @@ $(function(){
 	$(".nav-item:eq(0)").attr("class", "nav-item");
 	$(".nav-item:eq(4)").attr("class", "nav-item active");
 	
+	// 글작성 버튼 클릭
+	$("#btnWrite").click(function(){
+		location.href = "/cy/helpWrite";
+	});
+	
+	// board_title_a
+	$(".board_title_a").on("click", function(){
+		var that = $(this);
+		var board_num = that.attr("data-board-num");
+		console.log("board_num: " + board_num);
+		location.href = "/cy/helpDetail?board_num=" + board_num;
+	});
 	
 });
 </script>
@@ -45,16 +52,18 @@ $(function(){
 		<div class="col-md-8"><br><br>
 			<div class="row">
 				<div class="col-md-8">
-					<label class="lblTitle2 title">HELP</label>
-					
+					<label class="lblTitle1">데일리하우스 도움말 센터에 오신 것을 환영합니다. </label>
 				</div>
 				<div class="col-md-4" align="right">
+					<c:if test="${userVo.user_email eq 'admin@naver.com'}">
+						<button type="button" class="btn btn-primary" id="btnWrite" style="font-size:15px;" >글쓰기</button>
+					</c:if>
 				</div>
 			</div><br><br>
 			
 	<!-- table START -->
 	<div class="row" align="center">
-		<table class="table" id="tbl_room">
+		<table class="table" id="tbl_board">
 			<thead align="center">
 				<tr align="center">
 					<th> </th>
@@ -66,17 +75,24 @@ $(function(){
 			</thead>
 				
 			<tbody align="center">
-<%-- 				<c:forEach items="${list}" var="RoomDetailDto"> --%>
-				<tr align="center">
-<%-- 					<td>${RoomDetailDto.room_num}</td> --%>
-<%-- 					<td>${RoomDetailDto.room_location}</td> --%>
-<%-- 					<td><a href="#" class="room_title_a" data-room-num="${RoomDetailDto.room_num}">${RoomDetailDto.room_title}</a></td> --%>
-<%-- 					<td>${RoomDetailDto.room_price}</td> --%>
-<!-- 					<td><button type="button" class="btn btn-primary btnAdminCheckY"  -->
-<%-- 						data-room-num="${RoomDetailDto.room_num}" --%>
-<!-- 						style="font-size:15px;" >승인</button></td> -->
+				<c:forEach items="${list}" var="BoardVo">
+				<tr align="center" 
+					<c:if test="${BoardVo.board_notice eq 'Y'}"> style="font-weight: bold;" </c:if>
+				>
+					<c:choose>
+						<c:when test="${BoardVo.board_notice eq 'Y'}">
+							<td>공지</td>
+						</c:when>
+						<c:otherwise>
+							<td>${BoardVo.board_num}</td>
+						</c:otherwise>
+					</c:choose>
+					<td><a href="#" class="board_title_a" data-board-num="${BoardVo.board_num}">${BoardVo.board_title}</a></td>
+					<td>${BoardVo.user_name}</td>
+					<td>${BoardVo.board_reg_date}</td>
+					<td>${BoardVo.board_read_count}</td>
 				</tr>
-<%-- 				</c:forEach> --%>
+				</c:forEach>
 			</tbody>	
 		</table>
 	</div>

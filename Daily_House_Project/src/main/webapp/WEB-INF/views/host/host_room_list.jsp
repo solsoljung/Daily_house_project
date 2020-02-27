@@ -17,12 +17,9 @@
 	.lblTitle2{ font-size: 20px;}
 	.lblTitle3{ font-size: 15px; font-weight: bold;}
 	
-	#fileDrop {
-	width: 100%;
-	height: 100px;
-	border: 1px dashed #fb929e;
-	background-color: #F2F2F2;
-	margin: auto;
+	a{ color: black; }
+	
+	.room_title_a{ font-weight: bold; }
 }
 </style>
 

@@ -13,10 +13,13 @@ public interface YOReservationListDao {
 	public void user_update_reserv_point(TestDto testDto) throws Exception;
 	
 	// 결제시 호스트에게 포인트 부여
-	public void host_update_reserv_point(UserPointDto userPointDto) throws Exception;
+	public void host_update_reserv_point(TestDto testDto) throws Exception;
 	
-	// 포인트 테이블 insert 솔
-	public void insertPoint(TestDto testDto) throws Exception;
+	// 유저 포인트 테이블 insert 솔
+	public void insertPointUser(TestDto testDto) throws Exception;
+	
+	// 호스트 포인트 테이블 insert 솔
+	public void insertPointHost(TestDto testDto) throws Exception;
 	
 	// 결제 전 사용자 포인트 보기
 	public int getUserPoint(String user_email) throws Exception;
@@ -35,4 +38,11 @@ public interface YOReservationListDao {
 	
 	//예약상태 N으로 바꾸기
 	public void updateRoomState(ReservationVo reservationVo) throws Exception;
+	
+	//체크아웃 승인 페이지 리스트 솔
+	public List<TestDto> getAvailableCheckout() throws Exception;
+	
+	//체크아웃 승인 예약 상태 바꾸기
+	public void updateReservIng(TestDto testDto) throws Exception;
+	
 }

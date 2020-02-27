@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -113,6 +114,25 @@ public class YOController {
 		return "/reservation/reservation_cancle";
 	}
 	
+	
+	//체크아웃 관리자 승인 페이지 이동
+	@RequestMapping(value="/adminCheckOutList", method = RequestMethod.GET)
+	public String adminCheckOutList(Model model) throws Exception {
+		
+		List<TestDto> list = service.getAvailableCheckout();
+		model.addAttribute("list", list);
+		
+		return "/admin/admin_check_out_list";
+	}
+	
+	//관리자 페이지 - 손님들 체크아웃 기간이 넘어 호스트에게 돈을 입금시켜줘야 되는 부분
+	@RequestMapping(value="/approveCheckout", method = RequestMethod.POST)
+	@ResponseBody
+	public String adminCheckOut(@RequestBody TestDto testDto) throws Exception {
+		System.out.println("테스트디티오가 잘 들어왔는지 테스트: "+testDto);
+		service.adminCheckOut(testDto);
+		return "success";
+	}
 	
 	// 찜목록 가져오기
 	@RequestMapping(value="/like_list", method=RequestMethod.GET)
