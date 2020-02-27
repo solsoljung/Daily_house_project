@@ -101,14 +101,10 @@ $(document).ready(function() {
 					</div>
 					<div id="card-element-${vo.message_num}" class="collapse">
 						<div class="card-body">
-						<table>
-							<tr>
-							<td>${vo.sender}</td>
-							<td>${vo.message_text}</td>
-							<td>${vo.send_date}</td>
-							<td>${vo.open_date}</td>
-						</tr>
-						</table>
+							보낸 사람 : ${vo.sender}<br>
+							내용&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ${vo.message_text}<br>
+							보낸 날짜 : ${vo.send_date}<br>
+							읽은 날짜 : ${vo.open_date}<br>
 						</div>
 					</div>
 				</div>
