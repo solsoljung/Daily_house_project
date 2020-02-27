@@ -15,6 +15,8 @@
 <%@ include file = "../views/casahotel/section/casahotel_Main_section.jsp" %>
 <%@ include file = "../views/casahotel/section/casahotel_CheckAvailabilty_section.jsp" %>
 
+
+
 <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
 <script >
 $(document).ready(function() {
@@ -102,8 +104,6 @@ $(document).ready(function() {
           	<span class="subheading">T O D A Y</span>
             <p class="lead" style="font-size: 30px">최근 후기</p>
             <p>숙소에 직접 다녀간 게스트의 후기</p>
-            
-            
           </div>
         </div>
         <div class="row ftco-animate">
