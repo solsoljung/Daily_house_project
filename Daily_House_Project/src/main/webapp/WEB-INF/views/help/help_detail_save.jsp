@@ -34,7 +34,6 @@ $(function(){
 	});
 	
 	// 글 수정완료 버튼 숨기기
-	$("#tbl_board").hide();
 	$("#btnConfirm").hide();
 	
 	// 글 수정버튼 클릭
@@ -42,9 +41,6 @@ $(function(){
 		$(this).hide(); 							 // 수정 버튼 숨김
 		$("#btnConfirm").show(); 					 // 완료 버튼 보이기
 		$("#btnDelete").attr("disabled","disabled"); // 삭제 버튼 비활성화
-		
-		$("#tbl_board").show();
-		$("#lblTitleContent").hide();
 		
 		$("input[name=board_title]").prop("readonly", false);
 		$("textarea[name=board_content]").prop("readonly", false);
@@ -93,21 +89,14 @@ $(function(){
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
-		<div class="col-md-8"><br><br><br><br>
+		<div class="col-md-8"><br><br>
 <!-- 			<div style="font-size: 30px">도움말을 작성해보세요!</div><br><br> -->
 	<!-- table START -->
 	<div class="row" align="center"  style="height: 100%; width: 100%">
 	<form method="post" id="board_form" style="height: 100%; width: 100%">
 	<input type="hidden" name="board_num" value="${boardVo.board_num}"/>
 	<input type="hidden" name="board_notice" value="${boardVo.board_notice}"/>
-	
-	<div align="left" id="lblTitleContent" style="width: 100%;">
-		<label class="lblTitle1">${boardVo.board_title}</label><br><br>
-		<label class="lblTitle2" style=" width: 100% "><textarea rows="10" cols="50" name="board_content_lbl" style="width:100%; border:none" maxlength="350"  readonly="readonly">
-${boardVo.board_content}</textarea></label>
-	</div>
-	
-		<table class="table" id="tbl_board" style="height: 100%; width: 100%">
+		<table class="table" id="tbl_board" style="height: 100%; width: 100%" >
 			<tr>
 				<th>* 제목</th>
 				<td><input type="text" style="width:100%;" name="board_title" value="${boardVo.board_title}" readonly="readonly"/></td>
@@ -133,10 +122,13 @@ ${boardVo.board_content}</textarea></td>
 			</tr>
 			</c:if>
 		</table>
-		
-		<br>
-		<!-- Button -->
-		<div class="row">
+	</form>
+	</div>
+	<!-- table END -->
+	
+	<!-- Button -->
+	<br>
+	<div class="row">
 		<div class="col-md-2" align="left">
 			<c:if test="${userVo.user_email eq 'admin@naver.com'}">
 				<button type="button" class="btn btn-primary py-3 px-5" id="btnConfirm" style="font-size:15px;" >완료</button>
@@ -154,20 +146,14 @@ ${boardVo.board_content}</textarea></td>
 		<div class="col-md-2" align="right">
 			<button type="button" class="btn btn-primary py-3 px-5" id="btnList" style="font-size:15px;" >목록</button>
 		</div>
-		</div>
-		
-		
-	</form>
 	</div>
-	<!-- table END -->
+	
 	
 	</div>
 			
 	<div class="col-md-2"></div>
 	</div>
 </div><br><br><br>
-
-<%@ include file = "../../views/casahotel/casahotel_footer.jsp" %>			
 
 <%@ include file = "../../views/casahotel/casahotel_script2.jsp" %>			
 <%@ include file = "../../views/islagrande/islagrande_script2.jsp" %>	
