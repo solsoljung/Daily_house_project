@@ -334,9 +334,9 @@ $(document).ready(function() {
 		$.get(url, function(rDate){
 			var result = rDate.trim();
 			if (result == "Y") {
-				$("#btn_like").val("찜 하기");
+				$("#btn_like").attr("style", "font-size: 40px; color: gray;");
 			}else if (result == "N") {
-				$("#btn_like").val("찜 취소");
+				$("#btn_like").attr("style", "font-size: 40px; color: #fb929e;");
 			}
 		});
 	}
@@ -348,14 +348,14 @@ $(document).ready(function() {
 			var result = rDate.trim();
 			console.log(result);
 			if (result == "Y") {
-				$("#btn_like").val("찜 취소");
+				$("#btn_like").attr("style", "font-size: 40px; color: #fb929e;");
 				var url2 = "/datepicker/insertLike/"+room_num;
 				$.get(url2, function(rDate){
 					console.log(rDate);
 				});
 				
 			}else if (result == "N") {
-				$("#btn_like").val("찜 하기");
+				$("#btn_like").attr("style", "font-size: 40px; color: gray;");
 				var url3 = "/datepicker/deleteLike/"+room_num;
 				$.get(url3, function(rDate){
 					console.log(rDate);
@@ -425,7 +425,7 @@ $(document).ready(function() {
     
 </div>
 <!-- /이미지 뷰 -->
-		<section class="ftco-section">
+<section class="ftco-section">
       <div class="container">
         <div class="row">
 <!-- 내용 센터쪽 -->
@@ -435,15 +435,26 @@ $(document).ready(function() {
          		<tr>
          			<th colspan="3" class="padding"><h1 style="font-family: inherit;">${roomDto.room_title}</h1></th>
          			<th class="padding">
-         			<c:choose>
-   						<c:when test="${roomDto.user_pic == null}">
-   							<img src="/images/profile/user.jpg" height="50">
-   						</c:when>
-   						<c:otherwise>
-               				<img src="/si/displayFile?fileName=/${roomDto.user_pic}" height="50">  
-   						</c:otherwise>
-   					</c:choose>
-         			<p>${roomDto.user_name}</p>
+         			<table style="width: 100%;">
+         				<tr>
+         					<th>
+         						<c:choose>
+			   						<c:when test="${roomDto.user_pic == null}">
+			   							<img src="/images/profile/user.jpg" height="50">
+			   						</c:when>
+			   						<c:otherwise>
+			               				<img src="/si/displayFile?fileName=/${roomDto.user_pic}" height="50">  
+			   						</c:otherwise>
+			   					</c:choose>
+			         			<p>${roomDto.user_name}</p>
+         					</th>
+         					<th>
+         						<c:if test="${not empty userVo}">
+			         				<input type="button" id="btn_like" value="♥" class="mt-2 btn btn-white" style="font-size: 40px; color: #fb929e; ">
+			         			</c:if>
+         					</th>
+         				</tr>
+         			</table>
          			</th>
          		</tr>
          		<tr>
@@ -573,19 +584,18 @@ $(document).ready(function() {
           	</div>
 <!-- 후기 작성란 구역 -->
 			<c:if test="${not empty userVo}">
-			<label for="review_text" >☆후기 쓰기★</label>
           	<div>
           		<form action="/boo/review" method="post">
           		<input type="hidden" name="room_num" value="${roomDto.room_num}">
           		<input type="hidden" name="user_email" value="${userVo.user_email}">
           		<input type="hidden" name="user_pic" value="${userVo.user_pic}">
-				  <table>
+				  <table style="width: 100%;">
 				   <tr>
 				    <td>지역</td>
 				    <td>
 				     <table>
 				      <tr>
-				       <td><input type="text" name="review_score_location" value="0" id="loc"  size='1' readonly><td>
+				       <td><input type="text" name="review_score_location" value="5" id="loc"  size='1' readonly><td>
 				       <td>
 				        <a class="mousePointer" onclick="locUp()">▲</a><br>
 				       	<a class="mousePointer" onclick="locDown()">▼</a>
@@ -597,7 +607,7 @@ $(document).ready(function() {
 				    <td>
 				     <table>
 				      <tr>
-				       <td><input type="text" name="review_score_cleanliness" value="0" id="cle"  size='1' readonly><td>
+				       <td><input type="text" name="review_score_cleanliness" value="5" id="cle"  size='1' readonly><td>
 				       <td>
 				        <a class="mousePointer" onclick="cleUp()">▲</a><br>
 				       	<a class="mousePointer" onclick="cleDown()">▼</a>
@@ -609,7 +619,7 @@ $(document).ready(function() {
 				    <td>
 				     <table>
 				      <tr>
-				       <td><input type="text" name="review_score_checkin" value="0" id="che"  size='1' readonly><td>
+				       <td><input type="text" name="review_score_checkin" value="5" id="che"  size='1' readonly><td>
 				       <td>
 				        <a class="mousePointer" onclick="cheUp()">▲</a><br>
 				       	<a class="mousePointer" onclick="cheDown()">▼</a>
@@ -621,7 +631,7 @@ $(document).ready(function() {
 				    <td>
 				     <table>
 				      <tr>
-				       <td><input type="text" name="review_score_communication" value="0" id="com"  size='1' readonly><td>
+				       <td><input type="text" name="review_score_communication" value="5" id="com"  size='1' readonly><td>
 				       <td>
 				        <a class="mousePointer" onclick="comUp()">▲</a><br>
 				       	<a class="mousePointer" onclick="comDown()">▼</a>
@@ -633,8 +643,15 @@ $(document).ready(function() {
 				  </table>
 				
           		<textarea id="review_text" name="room_review_text" rows="5" cols="100" placeholder="200자 이내로 써주세요"></textarea>
-          		<button type="submit" id="btnReview">작성완료</button>
-          		
+          		<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-9">
+						</div>
+						<div class="col-md-3">
+							<button type="submit" id="btnReview" class="btn btn-primary py-3 px-5"><span style="font-size: 18px;">작성완료</span></button>
+						</div>
+					</div>
+				</div>
           		</form>
           	</div>
           	</c:if>
@@ -691,9 +708,7 @@ $(document).ready(function() {
         <div class="col-lg-4 sidebar ftco-animate">
         	<div id="sidebox" style="position: absolute;">
 	         	<div class="sidebar-box subs-wrap">
-	         		<c:if test="${not empty userVo}">
-	         			<input type="button" id="btn_like" value="찜 하기" class="mt-2 btn btn-white" style="font-weight: bold; font-size: 20px;">
-	         		</c:if>
+	         		
 	         		<label for="startDate" style="font-size: 18px; font-family: 맑은 고딕;">예약 가능한 날을 확인해 보세요</label>
 	         		<div class="row">
 						<input type="text" value="Check-In" class="form-control check" style="font-size:20px; margin: 15px;" id= "startDate">
@@ -727,7 +742,6 @@ $(document).ready(function() {
         </div> 
       </div>
     </section>
-<!-- 자유롭게 부분 -->
 
 <!-- end section -->
 <div id="footHeight">
