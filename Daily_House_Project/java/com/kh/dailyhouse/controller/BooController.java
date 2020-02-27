@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.dailyhouse.domain.AdminReservResultDto;
+import com.kh.dailyhouse.domain.MessageVo;
 import com.kh.dailyhouse.domain.PointDto;
 import com.kh.dailyhouse.domain.ReservationVo;
 import com.kh.dailyhouse.domain.ReviewPagingDto;
@@ -126,10 +127,22 @@ public class BooController {
 	}
 	
 	//쪽지 보내기
-	@RequestMapping(value="/", method = RequestMethod.GET)
-	public String sendNote() throws Exception {
+	@RequestMapping(value="/sendMessage", method = RequestMethod.POST)
+	public String sendMessage(Model model, MessageVo messageVo) throws Exception {
+		String receiver = messageVo.getReceiver();
+		String sender = messageVo.getSender();
 		
-		return "";
+		if (sender.equals("") || sender == null ) {
+			return "redirect:/si/loginHost";
+		}
+		
+		UserVo receiverInfo = booRoomDetailService.getReceiverInfo(receiver);
+		
+		model.addAttribute("receiver", receiver);
+		model.addAttribute("sender", sender);
+		model.addAttribute("receiverInfo", receiverInfo);
+		
+		return "/message/send_message";
 	}
 	
 }
