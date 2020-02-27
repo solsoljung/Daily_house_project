@@ -15,8 +15,29 @@
 <%@ include file = "../views/casahotel/section/casahotel_Main_section.jsp" %>
 <%@ include file = "../views/casahotel/section/casahotel_CheckAvailabilty_section.jsp" %>
 
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script >
+$(function() {
+	$("#requestBtn").on("click", function() {
+		$.ajax("/")
+		.done(function() {
+			alert("요청 성공");
+		})
+		.fail(function() {
+			alert("요청 실패");
+		})
+		.always(function() {
+			alert("요청 완료");
+		});
+	});
+});
+</script>
+
 <section class="section bg-light">
  <div class="container">
+ 
+ <button id="requestBtn">에이잭스 버튼!!</button>
+ 
         <div class="row justify-content-center text-center mb-5">
           <div class="col-md-8">
             <h2 class="heading" data-aos="fade-up">Daily House 소개</h2>
