@@ -21,4 +21,24 @@ public class CyBoardServiceImpl implements CyBoardService {
 		return boardDao.getBoardList();
 	}
 
+	@Override
+	public BoardVo getBoardDetail(int board_num) throws Exception {
+		return boardDao.getBoardDetail(board_num);
+	}
+
+	@Override
+	public void insertBoard(BoardVo boardVo) throws Exception {
+		boardDao.insertBoard(boardVo);
+	}
+
+	@Override
+	public void updateBoard(BoardVo boardVo) throws Exception {
+		boardDao.updateBoard(boardVo);
+	}
+
+	@Override
+	public void deleteBoard(int board_num) throws Exception {
+		boardDao.deleteBoard(board_num);
+	}
+
 }

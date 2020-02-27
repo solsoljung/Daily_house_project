@@ -32,10 +32,24 @@ $(function(){
 	// 현재 클릭된 메뉴를 활성화
 	$(".nav-item:eq(0)").attr("class", "nav-item");
 	$(".nav-item:eq(4)").attr("class", "nav-item active");
+
+	// 글목록 버튼 클릭
+	$("#btnList").click(function(){
+		location.href = "/cy/help";
+	});
 	
-	// 글작성 버튼 클릭
-	$("#btnWrite").click(function(){
+	// 글작성 완료버튼 클릭
+	$("#btnConfirm").click(function(e){
+		e.preventDefault();
 		
+		$("#board_form").attr("action", "/cy/helpWritePro");
+		$("#board_form").submit();
+	});
+	
+	// select board_notice_check
+	$("#board_notice_check").change(function() {
+		$("input[name=board_notice]").val($(this).val());
+		console.log($("input[name=board_notice]").val());
 	});
 	
 });
@@ -47,48 +61,49 @@ $(function(){
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8"><br><br>
-			<div class="row">
-				<div class="col-md-8">
-					<label class="lblTitle2 title">데일리하우스 도움말 센터에 오신 것을 환영합니다.</label>
-				</div>
-				<div class="col-md-4" align="right">
-				</div>
-			</div><br><br>
-			
+			<div style="font-size: 30px">도움말을 작성해보세요!</div><br><br>
 	<!-- table START -->
-	<div class="row" align="center">
-		<table class="table" id="tbl_board">
-			<thead align="center">
-				<tr align="center">
-					<th> </th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-					<th>조회수</th>
-				</tr>
-			</thead>
-				
-			<tbody align="center">
-				<c:forEach items="${list}" var="BoardVo">
-				<tr align="center">
-					<c:choose>
-						<c:when test="${BoardVo.board_notice eq 'Y'}">
-							<td>공지</td>
-						</c:when>
-						<c:otherwise>
-							<td>${BoardVo.board_num}</td>
-						</c:otherwise>
-					</c:choose>
-					<td><a href="#" class="board_title_a" data-board-num="${BoardVo.board_num}">${BoardVo.board_title}</a></td>
-					<td>${BoardVo.user_name}(${BoardVo.user_email})</td>
-					<td>${BoardVo.board_reg_date}</td>
-					<td>${BoardVo.board_read_count}</td>
-				</tr>
-				</c:forEach>
-			</tbody>	
+	<div class="row" align="center"  style="height: 100%; width: 100%">
+	<form method="post" id="board_form" style="height: 100%; width: 100%">
+	<input type="hidden" name="board_notice" value="N"/>
+		<table class="table" id="tbl_board" style="height: 100%; width: 100%" >
+			<tr>
+				<th>* 제목</th>
+				<td><input type="text" style="width:100%;" name="board_title"/></td>
+			</tr>
+			<tr>
+				<th>* 내용</th>
+				<td><textarea rows="10" cols="50" name="board_content" style="width:100%;" maxlength="350"></textarea></td>
+			</tr>
+			<tr>
+				<th>공지 여부</th>
+				<td><select class="browser-default custom-select" id="board_notice_check">
+					   <option value="" class="notice" disabled="disabled" selected="selected">하나를 선택하세요. 선택하지 않을 경우 공지로 지정되지 않습니다.</option>
+					   <option value="Y" class="notice">공지로 지정</option>
+					   <option value="N" class="notice" >공지로 지정하지 않음</option>
+				     </select></td>
+			</tr>
 		</table>
+	</form>
 	</div>
 	<!-- table END -->
+	
+	<!-- Button -->
+	<br>
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-2"></div>
+		<div class="col-md-2"></div>
+		<div class="col-md-2"></div>
+		<div class="col-md-2" align="right">
+			<button type="button" class="btn btn-primary py-3 px-5" id="btnConfirm" style="font-size:15px;" >완료</button>
+		</div>
+		<div class="col-md-2" align="right">
+			<button type="button" class="btn btn-primary py-3 px-5" id="btnList" style="font-size:15px;" >목록</button>
+		</div>
+	</div>
+	
+	
 	</div>
 			
 	<div class="col-md-2"></div>
