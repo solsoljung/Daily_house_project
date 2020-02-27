@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.dailyhouse.domain.LikeVo;
 import com.kh.dailyhouse.domain.ReservationVo;
+import com.kh.dailyhouse.domain.RoomVo;
 import com.kh.dailyhouse.domain.UserVo;
 import com.kh.dailyhouse.domain.TestDto;
 import com.kh.dailyhouse.service.YOLikeListService;
