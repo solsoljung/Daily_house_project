@@ -23,4 +23,28 @@ public class CyBoardDaoImpl implements CyBoardDao {
 		return sqlSession.selectList(NAMESPACE + ".getBoardList");
 	}
 
+	// 글 추가하기
+	@Override
+	public void insertBoard(BoardVo boardVo) throws Exception {
+		sqlSession.insert(NAMESPACE + ".insertBoard", boardVo);
+	}
+
+	// 글 수정하기
+	@Override
+	public void updateBoard(BoardVo boardVo) throws Exception {
+		sqlSession.update(NAMESPACE + ".updateBoard", boardVo);
+	}
+
+	// 글 삭제하기
+	@Override
+	public void deleteBoard(int board_num) throws Exception {
+		sqlSession.delete(NAMESPACE + ".deleteBoard", board_num);
+	}
+
+	// 게시글 한 개 가져오기
+	@Override
+	public BoardVo getBoardDetail(int board_num) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getBoardDetail", board_num);
+	}
+
 }

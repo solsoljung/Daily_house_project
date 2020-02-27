@@ -35,7 +35,15 @@ $(function(){
 	
 	// 글작성 버튼 클릭
 	$("#btnWrite").click(function(){
-		
+		location.href = "/cy/helpWrite";
+	});
+	
+	// board_title_a
+	$(".board_title_a").on("click", function(){
+		var that = $(this);
+		var board_num = that.attr("data-board-num");
+		console.log("board_num: " + board_num);
+		location.href = "/cy/helpDetail?board_num=" + board_num;
 	});
 	
 });
@@ -73,7 +81,9 @@ $(function(){
 				
 			<tbody align="center">
 				<c:forEach items="${list}" var="BoardVo">
-				<tr align="center">
+				<tr align="center" 
+					<c:if test="${BoardVo.board_notice eq 'Y'}"> style="font-weight: bold;" </c:if>
+				>
 					<c:choose>
 						<c:when test="${BoardVo.board_notice eq 'Y'}">
 							<td>공지</td>

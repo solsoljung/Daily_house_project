@@ -65,23 +65,110 @@ public class CyController {
 		return userVo.getUser_email();
 	}
 	
-	// help
+	// help 목록보기
 	@RequestMapping(value = "/help", method = {RequestMethod.GET, RequestMethod.POST})
 	public String help(HttpSession session, Model model, RedirectAttributes rttr) throws Exception{
 		UserVo userVo = (UserVo)session.getAttribute("userVo");
-		// 로그인 안 했을 경우 return
-//		if(userVo == null) {	
-//			rttr.addFlashAttribute("msg", "notAdmin");
-//			return "redirect:/si/loginHost";
-//		}
-		
 		model.addAttribute("userVo", userVo);
 		
 		List<BoardVo> list = boardService.getBoardList();
 		model.addAttribute("list", list);
 		
-		
 		return "/help/help_list";
+	}
+	
+	// help 글 상세보기
+	@RequestMapping(value = "/helpDetail", method = {RequestMethod.GET, RequestMethod.POST})
+	public String helpDetail(HttpSession session, Model model, RedirectAttributes rttr,  @RequestParam("board_num") int board_num) throws Exception{
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		model.addAttribute("userVo", userVo);
+		
+		BoardVo boardVo = boardService.getBoardDetail(board_num);
+		model.addAttribute("boardVo", boardVo);
+		
+		return "/help/help_detail";
+	}
+	
+	// help 글 수정하기 pro
+	@RequestMapping(value = "/helpUpdatePro", method = RequestMethod.POST)
+	public String helpUpdatePro(HttpSession session, Model model, RedirectAttributes rttr, BoardVo boardVo) throws Exception{
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		// 로그인 안 했을 경우 return
+		if(userVo == null) {	
+			rttr.addFlashAttribute("msg", "notAdmin");
+			return "redirect:/si/loginHost";
+		}
+		// admin이 아닐 경우 return
+		if(!userVo.getUser_email().equals(ADMIN_EMAIL)) {
+			rttr.addFlashAttribute("msg", "notAdmin");
+			return "redirect:/si/loginHost";
+		}
+		
+		boardVo.setUser_email(ADMIN_EMAIL);
+		
+		System.out.println("update pro: " + boardVo);
+		boardService.updateBoard(boardVo);
+		
+		return "redirect:/cy/helpDetail?board_num=" + boardVo.getBoard_num();
+	}
+	
+	// help 글 삭제하기
+	@RequestMapping(value = "/helpDelete", method = RequestMethod.GET)
+	public String helpDelete(HttpSession session, Model model, RedirectAttributes rttr,  @RequestParam("board_num") int board_num) throws Exception{
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		// 로그인 안 했을 경우 return
+		if(userVo == null) {	
+			rttr.addFlashAttribute("msg", "notAdmin");
+			return "redirect:/si/loginHost";
+		}
+		// admin이 아닐 경우 return
+		if(!userVo.getUser_email().equals(ADMIN_EMAIL)) {
+			rttr.addFlashAttribute("msg", "notAdmin");
+			return "redirect:/si/loginHost";
+		}
+		model.addAttribute("userVo", userVo);
+		
+		boardService.deleteBoard(board_num);
+		
+		return "redirect:/cy/help";
+	}
+	
+	// help 글 작성 폼
+	@RequestMapping(value = "/helpWrite", method = RequestMethod.GET)
+	public String helpWrite(HttpSession session, Model model, RedirectAttributes rttr) throws Exception{
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		// 로그인 안 했을 경우 return
+		if(userVo == null) {	
+			rttr.addFlashAttribute("msg", "notAdmin");
+			return "redirect:/si/loginHost";
+		}
+		// admin이 아닐 경우 return
+		if(!userVo.getUser_email().equals(ADMIN_EMAIL)) {
+			rttr.addFlashAttribute("msg", "notAdmin");
+			return "redirect:/si/loginHost";
+		}
+		return "/help/help_write";
+	}
+	
+	// help 글 작성 pro
+	@RequestMapping(value = "/helpWritePro", method = RequestMethod.POST)
+	public String helpWritePro(HttpSession session, Model model, RedirectAttributes rttr, BoardVo boardVo) throws Exception{
+		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		// 로그인 안 했을 경우 return
+		if(userVo == null) {	
+			rttr.addFlashAttribute("msg", "notAdmin");
+			return "redirect:/si/loginHost";
+		}
+		// admin이 아닐 경우 return
+		if(!userVo.getUser_email().equals(ADMIN_EMAIL)) {
+			rttr.addFlashAttribute("msg", "notAdmin");
+			return "redirect:/si/loginHost";
+		}
+		
+		boardVo.setUser_email(ADMIN_EMAIL);
+		boardService.insertBoard(boardVo);
+		
+		return "redirect:/cy/help";
 	}
 	
 	// 관리자 room_admin_check가 N인 방들 보기
