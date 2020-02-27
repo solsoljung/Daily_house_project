@@ -16,13 +16,6 @@
 	.lblTitle1{ font-size: 25px; font-weight: bold;}
 	.lblTitle2{ font-size: 20px;}
 	.lblTitle3{ font-size: 15px; font-weight: bold;}
-	
-	#fileDrop {
-	width: 100%;
-	height: 100px;
-	border: 1px dashed #fb929e;
-	background-color: #F2F2F2;
-	margin: auto;
 }
 </style>
 
@@ -61,7 +54,7 @@ $(function(){
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8"><br><br>
-			<div style="font-size: 30px">도움말을 작성해보세요!</div><br><br>
+			<div><label class="lblTitle1">도움말을 작성해보세요!</label></div><br><br>
 	<!-- table START -->
 	<div class="row" align="center"  style="height: 100%; width: 100%">
 	<form method="post" id="board_form" style="height: 100%; width: 100%">

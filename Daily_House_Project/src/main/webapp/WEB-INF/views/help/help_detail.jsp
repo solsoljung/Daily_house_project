@@ -16,13 +16,6 @@
 	.lblTitle1{ font-size: 25px; font-weight: bold;}
 	.lblTitle2{ font-size: 20px;}
 	.lblTitle3{ font-size: 15px; font-weight: bold;}
-	
-	#fileDrop {
-	width: 100%;
-	height: 100px;
-	border: 1px dashed #fb929e;
-	background-color: #F2F2F2;
-	margin: auto;
 }
 </style>
 

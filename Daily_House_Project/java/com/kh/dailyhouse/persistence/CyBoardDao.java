@@ -21,4 +21,5 @@ public interface CyBoardDao {
 	public void deleteBoard(int board_num) throws Exception;
 	
 	// 조회수 증가
+	public void updateReadCount(int board_num) throws Exception;
 }
