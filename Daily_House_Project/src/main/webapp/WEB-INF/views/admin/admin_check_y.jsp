@@ -33,8 +33,18 @@ $(function(){
 	$(".room_title_a").on("click", function(e){
 		var that = $(this);
 		var room_num = that.attr("data-room-num");
+		var page = $("input[name=page]").val();
 		console.log("room_num: " + room_num);
+// 		$("#frmPage").attr("action", "/cy/AdminRoomDetail");
 		location.href = "/cy/AdminRoomDetail?room_num=" + room_num;
+	});
+	
+	//페이징
+	$(".classPage").click(function(e) {
+		e.preventDefault(); 
+		var page = $(this).attr("data-page");
+		$("input[name=page]").val(page);
+		$("#frmPage").submit();
 	});
 	
 	// 승인클릭시 숙소를 미승인으로 변경
@@ -63,6 +73,11 @@ $(function(){
 </script>
 
 <br><br><br><br>
+
+<form id="frmPage" action="/cy/AdminRoomListY" method="get">
+	<input type="hidden" name="room_num" />
+	<input type="hidden" name="page" value="${cyPagingDto.page}"/>
+</form>
 
 <div class="container-fluid">
 	<div class="row">
@@ -114,6 +129,44 @@ $(function(){
 		</div>
 	</c:if>
 	<!-- table END -->
+	
+	
+	<!-- 페이징 -->
+<div class="row mt-5">
+	<div class="col text-center">
+		 <div class="block-27">
+				<ul>
+					<c:if test="${cyPagingDto.hasPrev == true}">
+					<li>
+						<a class="classPage" data-page="${cyPagingDto.startPage - 1}" style="cursor:pointer">&lt;</a>
+					</li>
+					</c:if>
+					<c:forEach begin="${cyPagingDto.startPage}" end="${cyPagingDto.endPage}" var="v">
+						<li 
+							<c:choose>
+								<c:when test="${cyPagingDto.page == v}">
+									class="active"
+								</c:when>
+								<c:otherwise>
+									class=""
+								</c:otherwise>
+							</c:choose>
+						>
+							<a class="classPage" data-page="${v}" style="cursor:pointer">${v}</a>
+						</li>
+					</c:forEach>
+					<c:if test="${cyPagingDto.hasNext == true}">
+						<li>
+							<a class="classPage" data-page="${cyPagingDto.endPage + 1}" style="cursor:pointer">&gt;</a>
+						</li>
+					</c:if>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- 페이징 끝 -->
+	
+	
 	</div>
 			
 	<div class="col-md-2"></div>
