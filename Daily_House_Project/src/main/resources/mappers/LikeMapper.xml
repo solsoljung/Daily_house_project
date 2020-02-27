@@ -4,11 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.kh.mappers.LikeMapper">
-	<select id="getLikeList" resultType="LikeDto">
-		select l.like_num, r.room_num, r.room_title, r.room_price
-		from tbl_room r, tbl_like l
-		where r.room_num = l.room_num
-		and l.user_email = #{user_email}
+	<select id="getLikeList" resultType="LikeDto">	
+	select * from (select l.like_num, r.room_num, r.room_title, r.room_price, p.pic_uri, row_number() OVER(PARTITION BY r.room_num ORDER BY p.pic_uri DESC) as rn
+	from tbl_room r, tbl_like l, tbl_room_picture p
+	where r.room_num = l.room_num and r.room_num = p.room_num
+	and l.user_email = #{user_email})
+	where rn = 1
 	</select>
 	
 	<delete id="deleteLike">

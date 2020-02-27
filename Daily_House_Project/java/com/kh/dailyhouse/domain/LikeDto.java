@@ -6,6 +6,7 @@ public class LikeDto {
 	private String user_email;
 	private String room_title;
 	private int room_price;
+	private String pic_uri;
 	
 	
 	public int getLike_num() {
@@ -38,11 +39,17 @@ public class LikeDto {
 	public void setRoom_price(int room_price) {
 		this.room_price = room_price;
 	}
-	
-	
+	public String getPic_uri() {
+		return pic_uri;
+	}
+	public void setPic_uri(String pic_uri) {
+		this.pic_uri = pic_uri;
+	}
 	@Override
 	public String toString() {
 		return "LikeDto [like_num=" + like_num + ", room_num=" + room_num + ", user_email=" + user_email
-				+ ", room_title=" + room_title + ", room_price=" + room_price + "]";
+				+ ", room_title=" + room_title + ", room_price=" + room_price + ", pic_uri=" + pic_uri + "]";
 	}
+	
+	
 }

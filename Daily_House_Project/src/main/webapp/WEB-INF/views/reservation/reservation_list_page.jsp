@@ -13,6 +13,7 @@
 <!-- reservation page section -->
 <script>
 $(document).ready(function() {
+	// 예약 내역 삭제 버튼
 	$(".cancelBtn").click(function(e) {
 		/* if (confirm("정말로 취소하시겠습니까?") == true){
 		e.preventDefault();
