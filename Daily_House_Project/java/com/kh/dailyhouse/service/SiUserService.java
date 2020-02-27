@@ -21,6 +21,8 @@ public interface SiUserService {
 	public List<HomeReviewDto> getHomeReview() throws Exception;
 	// 홈에 넣을 집들 얻어오기
 	public List<HomeHomesDto> getHomeHomes() throws Exception;
+	// 홈에 넣을 집들 더 얻어오기
+	public List<HomeHomesDto> getMoreHomeHomes(int moreNum1,int moreNum2) throws Exception;
 	// 포인트 이용 내역 테이블에 저장
 	public void setPointList(UserVo userVo) throws Exception;
 }

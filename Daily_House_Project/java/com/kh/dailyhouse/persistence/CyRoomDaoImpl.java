@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dailyhouse.domain.CyPagingDto;
 import com.kh.dailyhouse.domain.RoomDetailDto;
 import com.kh.dailyhouse.domain.RoomVo;
 
@@ -27,8 +28,8 @@ public class CyRoomDaoImpl implements CyRoomDao {
 	}
 
 	@Override
-	public List<RoomDetailDto> getRoomAdminCheckYList() throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".getRoomAdminCheckYList");
+	public List<RoomDetailDto> getRoomAdminCheckYList(CyPagingDto cyPagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".getRoomAdminCheckYList", cyPagingDto);
 	}
 
 	@Override
@@ -118,6 +119,11 @@ public class CyRoomDaoImpl implements CyRoomDao {
 	@Override
 	public void deleteAttachByRoomNum(int room_num) throws Exception {
 		sqlSession.delete(NAMESPACE + ".deleteAttachByRoomNum", room_num);
+	}
+
+	@Override
+	public int getRoomAdminCheckYCount() throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getRoomAdminCheckYCount");
 	}
 
 
