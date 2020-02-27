@@ -9,8 +9,40 @@
 	<select id="getBoardList" resultType="BoardVo">
 		select * from tbl_board b, tbl_user u
 		where b.user_email = u.user_email
-		order by b.board_num desc
+		order by b.board_notice desc, b.board_num desc
 	</select>
 	
+	<!-- 글 작성하기 -->
+	<insert id="insertBoard" >
+		insert into tbl_board(board_num, user_email, board_title, board_content, board_notice) 
+		values(seq_board_num.nextval, #{user_email}, #{board_title}, #{board_content}, #{board_notice})
+	</insert>
+
+	<!-- 글 수정하기 -->
+	<update id="updateBoard">
+		update tbl_board set
+							 board_title = #{board_title}, 
+							 board_content = #{board_content},
+							 board_notice = #{board_notice}
+		where board_num = #{board_num}
+							 
+	</update>
+	
+	<!-- 글 삭제하기 -->
+	<delete id="deleteBoard">
+		delete tbl_board where board_num = #{board_num}
+	</delete>
+
+	<!-- 글 상세보기 -->
+	<select id="getBoardDetail" resultType="BoardVo">
+		select * from tbl_board where board_num = #{board_num}
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="updateReadCount">
+		update tbl_board 
+		set board_read_count = board_read_count + 1
+		where board_num = #{board_num}
+	</update>
   
 </mapper>

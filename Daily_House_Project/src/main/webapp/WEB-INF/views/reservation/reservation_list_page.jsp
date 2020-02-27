@@ -13,6 +13,7 @@
 <!-- reservation page section -->
 <script>
 $(document).ready(function() {
+	// 예약 내역 삭제 버튼
 	$(".cancelBtn").click(function(e) {
 		
 		var reserv_num = $(this).parent().parent().eq(0).children().eq(0).attr("data-num");

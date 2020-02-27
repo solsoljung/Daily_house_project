@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.kh.dailyhouse.domain.LikeVo;
+import com.kh.dailyhouse.domain.RoomVo;
 import com.kh.dailyhouse.persistence.YOLikeListDao;
 
 @Service

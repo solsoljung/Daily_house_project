@@ -17,12 +17,9 @@
 	.lblTitle2{ font-size: 20px;}
 	.lblTitle3{ font-size: 15px; font-weight: bold;}
 	
-	#fileDrop {
-	width: 100%;
-	height: 100px;
-	border: 1px dashed #fb929e;
-	background-color: #F2F2F2;
-	margin: auto;
+	a{ color: black; }
+	
+	.room_title_a{ font-weight: bold; }
 }
 </style>
 
@@ -81,17 +78,17 @@ $(function(){
 				<div class="col-md-8">
 				<c:choose>
 					<c:when test="${empty list}">
-						<label class="lblTitle2 title">* 미승인 숙소가 없습니다.</label>
+						<label class="lblTitle1 title">* 미승인 숙소가 없습니다.</label>
 					</c:when>
 					<c:otherwise>
-						<label class="lblTitle2 title">* 미승인 숙소입니다.</label>
+						<label class="lblTitle1 title">* 미승인 숙소입니다.</label>
 					</c:otherwise>
 				</c:choose>
 					
 				</div>
 				<div class="col-md-4" align="right">
 				</div>
-			</div><br><br>
+			</div><br>
 			
 	<!-- table START -->
 	<c:if test="${not empty list}">
@@ -129,6 +126,8 @@ $(function(){
 	<div class="col-md-2"></div>
 	</div>
 </div><br><br><br>
+
+<%@ include file = "../../views/casahotel/casahotel_footer.jsp" %>			
 
 <%@ include file = "../../views/casahotel/casahotel_script2.jsp" %>			
 <%@ include file = "../../views/islagrande/islagrande_script2.jsp" %>	

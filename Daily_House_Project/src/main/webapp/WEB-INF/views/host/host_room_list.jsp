@@ -17,12 +17,9 @@
 	.lblTitle2{ font-size: 20px;}
 	.lblTitle3{ font-size: 15px; font-weight: bold;}
 	
-	#fileDrop {
-	width: 100%;
-	height: 100px;
-	border: 1px dashed #fb929e;
-	background-color: #F2F2F2;
-	margin: auto;
+	a{ color: black; }
+	
+	.room_title_a{ font-weight: bold; }
 }
 </style>
 
@@ -109,6 +106,8 @@ $(function(){
 	</div>
 </div><br><br><br>
 <!-- host_register_page1 END -->
+
+<%@ include file = "../../views/casahotel/casahotel_footer.jsp" %>			
 
 <%@ include file = "../../views/casahotel/casahotel_script2.jsp" %>			
 <%@ include file = "../../views/islagrande/islagrande_script2.jsp" %>	

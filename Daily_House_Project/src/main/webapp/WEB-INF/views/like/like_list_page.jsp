@@ -101,13 +101,14 @@ $(document).ready(function() {
 
 <div class="container">
 <div class="row">
+${likeDto}
 	<c:forEach items="${likeList}" var="LikeDto">
 	<div class="col-md-3">	
 	<div class="row mb-5">
 	</div>
 		<div class="room-wrap ftco-animate" id="likeList">
 				${likeDto.room_num}
-				<a href="/boo/detail?room_num=${LikeDto.room_num}" class="img" style="background-image: url(/islagrande/images/room-1.jpg);">
+				<a href="/boo/detail?room_num=${LikeDto.room_num}" class="img" style="background-image: url(/si/displayFile?fileName=/${LikeDto.pic_uri});">
 					<span class="heartDiv" data-like_num="${LikeDto.like_num}">♥</span>
 				</a>
 				<div class="text pt-4 pl-lg-5">
