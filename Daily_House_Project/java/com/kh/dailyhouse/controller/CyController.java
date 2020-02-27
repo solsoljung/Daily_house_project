@@ -279,6 +279,7 @@ public class CyController {
 			return "redirect:/si/loginHost";
 		}
 		RoomDetailDto roomDetailDto = roomService.getHostRoomDetail(room_num);
+		
 		model.addAttribute("cyPagingDto", cyPagingDto);
 		model.addAttribute("roomDetailDto", roomDetailDto);
 		model.addAttribute("roomTypeList", roomTypeService.getRoomTypeList());
