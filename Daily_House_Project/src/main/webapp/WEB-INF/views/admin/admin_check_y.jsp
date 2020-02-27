@@ -31,9 +31,12 @@ $(function(){
 	
 	// room_title_a
 	$(".room_title_a").on("click", function(e){
+		e.preventDefault(); 
+		
 		var that = $(this);
 		var room_num = that.attr("data-room-num");
 		var page = $("input[name=page]").val();
+		
 		console.log("room_num: " + room_num);
 // 		$("#frmPage").attr("action", "/cy/AdminRoomDetail");
 		location.href = "/cy/AdminRoomDetail?room_num=" + room_num;
