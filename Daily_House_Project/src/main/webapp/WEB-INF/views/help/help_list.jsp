@@ -49,7 +49,7 @@ $(function(){
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
-		<div class="col-md-8"><br><br>
+		<div class="col-md-8"><br><br><br><br>
 			<div class="row">
 				<div class="col-md-8">
 					<label class="lblTitle1">데일리하우스 도움말 센터에 오신 것을 환영합니다. </label>
@@ -102,6 +102,8 @@ $(function(){
 	<div class="col-md-2"></div>
 	</div>
 </div><br><br><br>
+
+<%@ include file = "../../views/casahotel/casahotel_footer.jsp" %>	
 
 <%@ include file = "../../views/casahotel/casahotel_script2.jsp" %>			
 <%@ include file = "../../views/islagrande/islagrande_script2.jsp" %>	
