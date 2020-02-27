@@ -19,6 +19,4 @@ public interface CyBoardService {
 		
 	// 게시글 삭제
 	public void deleteBoard(int board_num) throws Exception;
-		
-	// 조회수 증가
 }

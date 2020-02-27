@@ -17,12 +17,7 @@
 	.lblTitle2{ font-size: 20px;}
 	.lblTitle3{ font-size: 15px; font-weight: bold;}
 	
-	#fileDrop {
-	width: 100%;
-	height: 100px;
-	border: 1px dashed #fb929e;
-	background-color: #F2F2F2;
-	margin: auto;
+	a{ color: black; }
 }
 </style>
 
@@ -61,12 +56,12 @@ $(function(){
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8"><br><br>
-			<div style="font-size: 30px">도움말을 작성해보세요!</div><br><br>
+			<div><label class="lblTitle1">도움말을 작성해보세요!</label></div><br><br>
 	<!-- table START -->
-	<div class="row" align="center"  style="height: 100%; width: 100%">
-	<form method="post" id="board_form" style="height: 100%; width: 100%">
+	<div class="row" align="center"  style=" width: 100%">
+	<form method="post" id="board_form" style=" width: 100%">
 	<input type="hidden" name="board_notice" value="N"/>
-		<table class="table" id="tbl_board" style="height: 100%; width: 100%" >
+		<table class="table" id="tbl_board" style=" width: 100%" >
 			<tr>
 				<th>* 제목</th>
 				<td><input type="text" style="width:100%;" name="board_title"/></td>
@@ -84,13 +79,10 @@ $(function(){
 				     </select></td>
 			</tr>
 		</table>
-	</form>
-	</div>
-	<!-- table END -->
-	
-	<!-- Button -->
-	<br>
-	<div class="row">
+		
+		<br>
+		
+		<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-2"></div>
 		<div class="col-md-2"></div>
@@ -102,13 +94,19 @@ $(function(){
 			<button type="button" class="btn btn-primary py-3 px-5" id="btnList" style="font-size:15px;" >목록</button>
 		</div>
 	</div>
+	</form>
+	</div>
+	<!-- table END -->
 	
+	<!-- Button -->
 	
 	</div>
 			
 	<div class="col-md-2"></div>
 	</div>
 </div><br><br><br>
+
+<%@ include file = "../../views/casahotel/casahotel_footer.jsp" %>			
 
 <%@ include file = "../../views/casahotel/casahotel_script2.jsp" %>			
 <%@ include file = "../../views/islagrande/islagrande_script2.jsp" %>	

@@ -47,4 +47,9 @@ public class CyBoardDaoImpl implements CyBoardDao {
 		return sqlSession.selectOne(NAMESPACE + ".getBoardDetail", board_num);
 	}
 
+	@Override
+	public void updateReadCount(int board_num) throws Exception {
+		sqlSession.update(NAMESPACE + ".updateReadCount", board_num);
+	}
+
 }

@@ -2,6 +2,7 @@ package com.kh.dailyhouse.service;
 
 import java.util.List;
 
+import com.kh.dailyhouse.domain.CyPagingDto;
 import com.kh.dailyhouse.domain.HostVo;
 import com.kh.dailyhouse.domain.RoomDetailDto;
 import com.kh.dailyhouse.domain.RoomVo;
@@ -12,7 +13,10 @@ public interface CyRoomService {
 	public List<RoomDetailDto> getRoomAdminCheckNList() throws Exception;
 		
 	// 관리자용 숙소 room_admin_check가 Y인 값 리스트 가져오기
-	public List<RoomDetailDto> getRoomAdminCheckYList() throws Exception;
+	public List<RoomDetailDto> getRoomAdminCheckYList(CyPagingDto cyPagingDto) throws Exception;
+	
+	// Y 페이징용 전체 갯수
+	public int getRoomAdminCheckYCount() throws Exception;
 		
 	// 관리자용 숙소 room_admin_check값을 Y로 업데이트
 	public void updateRoomAdminCheckY(int room_num) throws Exception;

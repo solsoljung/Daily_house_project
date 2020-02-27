@@ -17,12 +17,9 @@
 	.lblTitle2{ font-size: 20px;}
 	.lblTitle3{ font-size: 15px; font-weight: bold;}
 	
-	#fileDrop {
-	width: 100%;
-	height: 100px;
-	border: 1px dashed #fb929e;
-	background-color: #F2F2F2;
-	margin: auto;
+	a{ color: black; }
+	
+	.room_title_a{ font-weight: bold; }
 }
 </style>
 
@@ -36,8 +33,18 @@ $(function(){
 	$(".room_title_a").on("click", function(e){
 		var that = $(this);
 		var room_num = that.attr("data-room-num");
+		var page = $("input[name=page]").val();
 		console.log("room_num: " + room_num);
+// 		$("#frmPage").attr("action", "/cy/AdminRoomDetail");
 		location.href = "/cy/AdminRoomDetail?room_num=" + room_num;
+	});
+	
+	//페이징
+	$(".classPage").click(function(e) {
+		e.preventDefault(); 
+		var page = $(this).attr("data-page");
+		$("input[name=page]").val(page);
+		$("#frmPage").submit();
 	});
 	
 	// 승인클릭시 숙소를 미승인으로 변경
@@ -67,6 +74,11 @@ $(function(){
 
 <br><br><br><br>
 
+<form id="frmPage" action="/cy/AdminRoomListY" method="get">
+	<input type="hidden" name="room_num" />
+	<input type="hidden" name="page" value="${cyPagingDto.page}"/>
+</form>
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
@@ -75,16 +87,16 @@ $(function(){
 				<div class="col-md-8">
 				<c:choose>
 					<c:when test="${empty list}">
-						<label class="lblTitle2">* 승인 숙소가 없습니다.</label>
+						<label class="lblTitle1">* 승인 숙소가 없습니다.</label>
 					</c:when>
 					<c:otherwise>
-						<label class="lblTitle2">* 승인 숙소입니다.</label>
+						<label class="lblTitle1">* 승인 숙소입니다.</label>
 					</c:otherwise>
 				</c:choose>
 				</div>
 				<div class="col-md-4" align="right">
 				</div>
-			</div><br><br>
+			</div><br>
 			
 	<!-- table START -->
 	<c:if test="${not empty list}">
@@ -117,11 +129,51 @@ $(function(){
 		</div>
 	</c:if>
 	<!-- table END -->
+	
+	
+	<!-- 페이징 -->
+<div class="row mt-5">
+	<div class="col text-center">
+		 <div class="block-27">
+				<ul>
+					<c:if test="${cyPagingDto.hasPrev == true}">
+					<li>
+						<a class="classPage" data-page="${cyPagingDto.startPage - 1}" style="cursor:pointer">&lt;</a>
+					</li>
+					</c:if>
+					<c:forEach begin="${cyPagingDto.startPage}" end="${cyPagingDto.endPage}" var="v">
+						<li 
+							<c:choose>
+								<c:when test="${cyPagingDto.page == v}">
+									class="active"
+								</c:when>
+								<c:otherwise>
+									class=""
+								</c:otherwise>
+							</c:choose>
+						>
+							<a class="classPage" data-page="${v}" style="cursor:pointer">${v}</a>
+						</li>
+					</c:forEach>
+					<c:if test="${cyPagingDto.hasNext == true}">
+						<li>
+							<a class="classPage" data-page="${cyPagingDto.endPage + 1}" style="cursor:pointer">&gt;</a>
+						</li>
+					</c:if>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- 페이징 끝 -->
+	
+	
 	</div>
 			
 	<div class="col-md-2"></div>
 	</div>
 </div><br><br><br>
+
+<%@ include file = "../../views/casahotel/casahotel_footer.jsp" %>			
 
 <%@ include file = "../../views/casahotel/casahotel_script2.jsp" %>			
 <%@ include file = "../../views/islagrande/islagrande_script2.jsp" %>	

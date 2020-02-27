@@ -18,12 +18,6 @@
 	.lblTitle2{ font-size: 20px;}
 	.lblTitle3{ font-size: 15px; font-weight: bold;}
 	
-	#fileDrop {
-	width: 100%;
-	height: 200px;
-	border: 1px dashed #fb929e;
-	background-color: #F2F2F2;
-	margin: auto;
 </style>
 
 <script src="/js/myscript.js"></script>
@@ -66,7 +60,8 @@ $(function(){
 		if(now_admin_check == 'N'){
 			location.href = "/cy/AdminRoomListN";
 		}else if(now_admin_check == 'Y'){
-			location.href = "/cy/AdminRoomListY";
+			$("#frmPage").submit();
+// 			location.href = "/cy/AdminRoomListY";
 		}
 	});
 	
@@ -116,6 +111,14 @@ $(function(){
 });
 </script>
 
+
+<form id="frmPage" action="/cy/AdminRoomListY" method="get">
+	<input type="hidden" name="room_num" value="${roomDetailDto.room_num}"/>
+	<input type="hidden" name="page" value="${cyPagingDto.page}"/>
+</form>
+${cyPagingDto.page}
+<br>
+${roomDetailDto.room_num}
 <br><br><br><br>
 
 <%-- roomDetailDto: ${roomDetailDto} --%>

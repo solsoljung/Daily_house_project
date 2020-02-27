@@ -17,12 +17,7 @@
 	.lblTitle2{ font-size: 20px;}
 	.lblTitle3{ font-size: 15px; font-weight: bold;}
 	
-	#fileDrop {
-	width: 100%;
-	height: 100px;
-	border: 1px dashed #fb929e;
-	background-color: #F2F2F2;
-	margin: auto;
+	a{ color: black; }
 }
 </style>
 
@@ -54,10 +49,10 @@ $(function(){
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
-		<div class="col-md-8"><br><br>
+		<div class="col-md-8"><br><br><br><br>
 			<div class="row">
 				<div class="col-md-8">
-					<label class="lblTitle2 title">데일리하우스 도움말 센터에 오신 것을 환영합니다.</label>
+					<label class="lblTitle1">데일리하우스 도움말 센터에 오신 것을 환영합니다. </label>
 				</div>
 				<div class="col-md-4" align="right">
 					<c:if test="${userVo.user_email eq 'admin@naver.com'}">
@@ -93,7 +88,7 @@ $(function(){
 						</c:otherwise>
 					</c:choose>
 					<td><a href="#" class="board_title_a" data-board-num="${BoardVo.board_num}">${BoardVo.board_title}</a></td>
-					<td>${BoardVo.user_name}(${BoardVo.user_email})</td>
+					<td>${BoardVo.user_name}</td>
 					<td>${BoardVo.board_reg_date}</td>
 					<td>${BoardVo.board_read_count}</td>
 				</tr>
@@ -107,6 +102,8 @@ $(function(){
 	<div class="col-md-2"></div>
 	</div>
 </div><br><br><br>
+
+<%@ include file = "../../views/casahotel/casahotel_footer.jsp" %>	
 
 <%@ include file = "../../views/casahotel/casahotel_script2.jsp" %>			
 <%@ include file = "../../views/islagrande/islagrande_script2.jsp" %>	

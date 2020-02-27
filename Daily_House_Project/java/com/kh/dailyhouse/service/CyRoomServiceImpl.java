@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.dailyhouse.domain.CyPagingDto;
 import com.kh.dailyhouse.domain.HostVo;
 import com.kh.dailyhouse.domain.RoomDetailDto;
 import com.kh.dailyhouse.domain.RoomVo;
@@ -42,8 +43,8 @@ public class CyRoomServiceImpl implements CyRoomService {
 	}
 
 	@Override
-	public List<RoomDetailDto> getRoomAdminCheckYList() throws Exception {
-		return roomDao.getRoomAdminCheckYList();
+	public List<RoomDetailDto> getRoomAdminCheckYList(CyPagingDto cyPagingDto) throws Exception {
+		return roomDao.getRoomAdminCheckYList(cyPagingDto);
 	}
 
 	@Override
@@ -146,6 +147,11 @@ public class CyRoomServiceImpl implements CyRoomService {
 	@Override
 	public void deleteAttach(String pic_uri) throws Exception {
 		roomDao.deleteAttach(pic_uri);
+	}
+
+	@Override
+	public int getRoomAdminCheckYCount() throws Exception {
+		return roomDao.getRoomAdminCheckYCount();
 	}
 
 	

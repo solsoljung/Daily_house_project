@@ -101,17 +101,18 @@ $(document).ready(function() {
 
 <div class="container">
 <div class="row">
+${likeDto}
 	<c:forEach items="${likeList}" var="LikeDto">
 	<div class="col-md-3">	
 	<div class="row mb-5">
 	</div>
 		<div class="room-wrap ftco-animate" id="likeList">
 				${likeDto.room_num}
-				<a href="/boo/detail?room_num=${LikeDto.room_num}" class="img" style="background-image: url(/islagrande/images/room-1.jpg);">
+				<a href="/boo/detail?room_num=${LikeDto.room_num}" class="img" style="background-image: url(/si/displayFile?fileName=/${LikeDto.pic_uri});">
 					<span class="heartDiv" data-like_num="${LikeDto.like_num}">♥</span>
 				</a>
 				<div class="text pt-4 pl-lg-5">
-				<h2><span data-num="${LikeDto.room_num}" class="room_title">${LikeDto.room_title}</span></h2>
+				<h2><span data-num="${LikeDto.room_num}" class="room_title" style="cursor:pointer; font-family:Arial;">${LikeDto.room_title}</span></h2>
 				<p class="d-flex price-details align-items-center pt-3">
 					<span class="price">￦${LikeDto.room_price}<small>&nbsp;/&nbsp;&nbsp;&nbsp;1박</small></span>
 				</p>

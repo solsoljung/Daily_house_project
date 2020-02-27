@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kh.mappers.MessageMapper">
+	
+	<!-- 홈 화면에서 메세지 갯수 받아오기 -->
+	<select id="getReceiveMessageCount" resultType="int">
+		select count(*) from tbl_message where receiver = #{user_email} and open_date is null
+	</select>
+	
+	<select id="getMessageList" resultType="MessageVo">
+		select * from tbl_message where receiver = #{user_email} order by open_date nulls first, send_date desc
+	</select>
+	
+	<update id="openDateUpdate">
+		update tbl_message set open_date = sysdate where message_num = #{message_num}
+	</update>
+  
+</mapper>

@@ -8,11 +8,14 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.dailyhouse.domain.LikeVo;
+import com.kh.dailyhouse.domain.RoomVo;
 
 @Repository
 public class YOLikeListDaoImpl implements YOLikeListDao {
 	
 	private static final String NAMESPACE = "com.kh.mappers.LikeMapper";
+	
+	private static final String NAMESPACE2 = "com.kh.mappers.RoomMapper";
 	
 	@Inject
 	public SqlSession sqlSession;

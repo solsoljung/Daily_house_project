@@ -28,6 +28,7 @@
 							 
 	</update>
 	
+	<!-- 글 삭제하기 -->
 	<delete id="deleteBoard">
 		delete tbl_board where board_num = #{board_num}
 	</delete>
@@ -36,5 +37,12 @@
 	<select id="getBoardDetail" resultType="BoardVo">
 		select * from tbl_board where board_num = #{board_num}
 	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="updateReadCount">
+		update tbl_board 
+		set board_read_count = board_read_count + 1
+		where board_num = #{board_num}
+	</update>
   
 </mapper>

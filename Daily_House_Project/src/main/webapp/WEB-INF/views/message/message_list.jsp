@@ -13,34 +13,29 @@
 <!-- reservation page section -->
 <script>
 $(document).ready(function() {
-	// 예약 내역 삭제 버튼
-	$(".cancelBtn").click(function(e) {
+	$(".card-link").click(function(e){
+		var that = $(this).children("span");
+		var message_num = $(this).attr("data-num");
+		console.log(message_num);
 		
-		var reserv_num = $(this).parent().parent().eq(0).children().eq(0).attr("data-num");
-		location.href = "/yo/reserv_cancle_page/" + reserv_num;
-	}); // 내역 삭제 버튼
-	
-	function reservationList() {
-		$("#reservationList").empty();
-		var url = "/yo/reservation_list";
-		$.getJSON(url, function(rData) {
-			console.log(rData);
-			var strHtml = "";
-			$(rData).each(function() {
-				strHtml += "<tr>";
-				strHtml += "<td>" + this.reserv_num +"</td>";
-				strHtml += "<td>" + this.room_num +"</td>";
-				strHtml += "<td>" + this.user_email +"</td>";
-				strHtml += "<td>" + this.room_reserv_start_date +"</td>";
-				strHtml += "<td>" + this.room_reserv_end_date +"</td>";
-				strHtml += "<td>" + this.reserv_price +"</td>";
-				strHtml += "<td><button type='button' class='cancelBtn'";
-				strHtml += " data-reserv_num='" + this.reserv_num + "'>삭제</button></td>";
-				strHtml += "</tr>";
-			});
-			$("#reservationList").append(strHtml);
-		});
-	}
+		var url = "/sol/openDateUpdate/" + message_num;
+		
+		$.ajax({
+			"type" : "put",
+			"url" : url,
+			"headers" : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "put"
+			},
+			"success" : function(rData) {
+				console.log(rData);
+				if(rData == "success"){
+					console.log("성공입나더ㅏ");
+					that.fadeOut('1000');
+				}
+			}
+		}); // $.ajax()
+	});
 });
 </script>
 <section class="site-hero inner-page overlay" style="background-image: url(/casahotel/img/slider-3.jpg)" data-stellar-background-ratio="0.5">
@@ -87,49 +82,38 @@ $(document).ready(function() {
 	</div>
 </section>
 <section>
-userVo: ${userVo}<br>
-testDto: ${testDto}<br>
+<%-- ${messageList} --%>
+<!-- 여기여기 -->
 <div class="container-fluid">
 	<div class="row">
-	<div class="col-md-2">
-	</div>
-		<div class="col-md-8">
-			<table class="table">
-				<thead>
-					<tr>
-						<th>예약 번호</th>
-						<th>방 번호</th>
-						<th>예약 이메일</th>
-						<th>입실 날짜</th>
-						<th>퇴실 날짜</th>
-						<th>결제 금액</th>
-					</tr>
-				</thead>
-				<tbody>
-				<jsp:useBean id="toDay" class="java.util.Date"></jsp:useBean>
-				<fmt:formatDate value="${toDay}" pattern="yyyy-MM-dd" var="toDay"/>
-				<c:forEach items="${list}" var="reservationVo">
-						<tr id="reservationList">
-							<td data-num="${reservationVo.reserv_num}">${reservationVo.reserv_num}</td>
-							<td>${reservationVo.room_num}</td>
-							<td>${reservationVo.user_email}</td>
-							<td>${reservationVo.room_reserv_start_date}</td>
-							<td>${reservationVo.room_reserv_end_date}</td>
-							<td>${reservationVo.reserv_price}</td>
-							<c:if test="${toDay < reservationVo.room_reserv_start_date}">
-								<td>
-									<input type="button" class="cancelBtn" data-reserv_num="${reservationVo.reserv_num}" value="예약취소">
-								</td>
-							</c:if>
-						</tr>
-				</c:forEach>
-				</tbody>
-			</table>
-		</div>
-		<div class="col-md-2">
+		<div class="col-md-12">
+			<div id="card-174818">
+			<c:forEach items="${messageList}" var="vo">
+				<div class="card">
+					<div class="card-header">
+						 <a class="card-link" data-toggle="collapse" data-parent="#card-174818" data-num="${vo.message_num}" href="#card-element-${vo.message_num}">
+						 ${vo.sender} 님에게서 온 메세지 입니다.
+						 
+						 <c:if test="${empty vo.open_date}">
+						 <span class="badge badge-info badge-pill" id="message" style="cursor:pointer">N</span>
+						 </c:if>
+						 </a>
+					</div>
+					<div id="card-element-${vo.message_num}" class="collapse">
+						<div class="card-body">
+							보낸 사람 : ${vo.sender}<br>
+							내용&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ${vo.message_text}<br>
+							보낸 날짜 : ${vo.send_date}<br>
+							읽은 날짜 : ${vo.open_date}<br>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+			</div>
 		</div>
 	</div>
 </div>
+<!-- 여기여기 -->
 </section>
 <section>
 	<div class="container">
