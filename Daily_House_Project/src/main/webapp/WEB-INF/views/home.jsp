@@ -17,27 +17,41 @@
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script >
-$(function() {
-	$("#requestBtn").on("click", function() {
-		$.ajax("/")
-		.done(function() {
-			alert("요청 성공");
-		})
-		.fail(function() {
-			alert("요청 실패");
-		})
-		.always(function() {
-			alert("요청 완료");
+$(document).ready(function() {
+	list = new Array();
+	var moreNum1 = 3;
+	var moreNum2 = 7;
+	$("#btnMore").click(function(e) {
+		$.get("/more", {"moreNum1" : moreNum1,
+						"moreNum2" : moreNum2
+			}, function(data) {
+			list = data;
+			var html = "";
+			$.each(list, function(index) {
+				
+				html += "<div class='site-block-half d-flex bg-white' data-aos='fade-up' data-aos-delay='100'>";
+	 			html += "<a href='/boo/detail?room_num="+this.room_num+"' class='image d-block bg-image' style='background-image: url(/si/displayFile?fileName=/"+this.pic_uri+"')></a>";
+	 			html += "<div class='text'>";
+	 			html += "<span class='d-block'><span class='display-4 text-primary'>"+this.room_price + "원</span>1박</span>";
+	 			html += "<p class='lead' style='font-size: 30px'>" + this.room_title+"</p>";
+	 			html += "<p class='lead'>" + this.room_explain + "</p>";
+	 			html += "<span><a href='/boo/detail?room_num="+this.room_num+"' class='btn btn-primary text-white py-2 px-5' style='font-size: 12px'>지금 예약</a></span>";
+	 			html += "</div>";
+	 			html += "</div>";
+			});
+			$("#result").append(html);
+			moreNum1 += 5;
+			moreNum2 += 5;
 		});
 	});
 });
 </script>
 
+
+<br>
+
 <section class="section bg-light">
  <div class="container">
- 
- <button id="requestBtn">에이잭스 버튼!!</button>
- 
         <div class="row justify-content-center text-center mb-5">
           <div class="col-md-8">
             <h2 class="heading" data-aos="fade-up">Daily House 소개</h2>
@@ -60,7 +74,7 @@ $(function() {
             
       	<c:forEach items="${listHome}" var="HomeHomesDto">
         <div class="site-block-half d-flex bg-white" data-aos="fade-up" data-aos-delay="100">
-          <a href="#" class="image d-block bg-image" style="background-image: url(/si/displayFile?fileName=/${HomeHomesDto.pic_uri})"></a>
+          <a href="/boo/detail?room_num=${HomeHomesDto.room_num}" class="image d-block bg-image" style="background-image: url(/si/displayFile?fileName=/${HomeHomesDto.pic_uri})"></a>
           <div class="text">
             <span class="d-block"><span class="display-4 text-primary">${HomeHomesDto.room_price}원</span> / 1박 </span>
             <p class="lead" style="font-size: 30px">${HomeHomesDto.room_title}</p>
@@ -70,20 +84,11 @@ $(function() {
         </div>
         </c:forEach>
         
-<!--         <div class="site-block-half d-flex bg-white" data-aos="fade-up" data-aos-delay="200"> -->
-<!--           <a href="#" class="image d-block bg-image order-2" style="background-image: url('/casahotel/img/img_2.jpg');"></a> -->
-<!--           <div class="text order-1"> -->
-<!--           <span class="d-block"><span class="display-4 text-primary">숫자가격</span> / 1박 </span> -->
-<!--             <br> -->
-<!--             <p class="lead" style="font-size: 30px">제목</p> -->
-<!--             <p class="lead">가격</p> -->
-<!--             <p>내용</p> -->
-<!--             <p><a href="#" class="btn btn-primary text-white">지금 예약</a></p> -->
-<!--           </div> -->
-<!--         </div> -->
-
+            <div id="result">
+			</div>
+			
         <div class="row justify-content-center text-center mt-5" data-aos="fade-up" data-aos-delay="300">
-          <a href="/sol/room"><button class="btn btn-primary text-white py-3 px-5" style="font-size: 17px">방 더보기</button></a>
+          <button id="btnMore" class="btn btn-primary text-white py-3 px-5" style="font-size: 17px">방 더보기</button>
         </div>
       </div>
     </section>
