@@ -430,6 +430,11 @@ $(document).ready(function() {
         <div class="row">
 <!-- 내용 센터쪽 -->
           <div class="col-lg-8 ftco-animate">
+<!--           test -->
+
+
+<!--           test -->
+          
 <!--          	 방의 기본정보 -->
          	<table>
          		<tr>
@@ -438,15 +443,39 @@ $(document).ready(function() {
          			<table style="width: 100%;">
          				<tr>
          					<th>
-         						<c:choose>
-			   						<c:when test="${roomDto.user_pic == null}">
-			   							<img src="/images/profile/user.jpg" height="50">
-			   						</c:when>
-			   						<c:otherwise>
-			               				<img src="/si/displayFile?fileName=/${roomDto.user_pic}" height="50">  
-			   						</c:otherwise>
-			   					</c:choose>
-			         			<p>${roomDto.user_name}</p>
+         						<nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin: 0px; padding: 0px;">
+									<ul class="navbar-nav ml-md-auto">
+										<li class="nav-item dropdown">
+											 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
+											 	<c:choose>
+							   						<c:when test="${roomDto.user_pic == null}">
+							   							<img src="/images/profile/user.jpg" height="50">
+							   						</c:when>
+							   						<c:otherwise>
+							               				<img src="/si/displayFile?fileName=/${roomDto.user_pic}" height="50">  
+							   						</c:otherwise>
+							   					</c:choose>
+											 </a>
+											 
+											<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+												
+												<a class="dropdown-item" 
+													<c:choose>
+														<c:when test="${not empty userVo}">
+															href= "/boo/"
+														</c:when>
+														<c:otherwise>
+															href= "/si/loginHost"
+														</c:otherwise>
+													</c:choose>
+												style="font-size: 15px;">쪽지 보내기</a> 
+												
+											</div>
+										</li>
+									</ul>
+								</nav>
+								
+			         			
          					</th>
          					<th>
          						<c:if test="${not empty userVo}">
@@ -455,6 +484,7 @@ $(document).ready(function() {
          					</th>
          				</tr>
          			</table>
+         				<p class="text-center">${roomDto.user_name}</p>
          			</th>
          		</tr>
          		<tr>

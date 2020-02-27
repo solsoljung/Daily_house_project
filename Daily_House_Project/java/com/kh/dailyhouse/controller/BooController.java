@@ -125,4 +125,11 @@ public class BooController {
 		return "redirect:/boo/adminReservList";
 	}
 	
+	//쪽지 보내기
+	@RequestMapping(value="/", method = RequestMethod.GET)
+	public String sendNote() throws Exception {
+		
+		return "";
+	}
+	
 }
