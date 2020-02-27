@@ -16,6 +16,8 @@
 	.lblTitle1{ font-size: 25px; font-weight: bold;}
 	.lblTitle2{ font-size: 20px;}
 	.lblTitle3{ font-size: 15px; font-weight: bold;}
+	
+	a{ color: black; }
 }
 </style>
 
