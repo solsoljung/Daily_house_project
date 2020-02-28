@@ -46,8 +46,7 @@
 		update tbl_room set room_admin_check = #{room_admin_check}
 		where room_num = #{room_num}
 	</update>
-	
-	
+
 
 	<!-- 첨부 파일 경로(위치+파일명) 추가 -->
 	<insert id="attach">
@@ -90,7 +89,21 @@
 
 	<!-- 호스트가 등록한 숙소 목록 보기 -->
 	<select id="getHostRoomList" resultType="RoomDetailDto">
-		select * from tbl_room r, tbl_room_type t 
+		select * from
+        (select rownum rnum, j.* from
+        (select r.room_num, r.room_type_num, r.user_email, r.room_location, r.room_score, r.room_price,
+                r.room_explain, r.room_people, r.room_bed, r.room_bathroom, r.room_title,
+                r.room_option_code, r.room_status, r.room_admin_check, t.room_type_explain
+        from tbl_room r, tbl_room_type t 
+		where r.user_email = #{user_email}
+		and r.room_type_num = t.room_type_num
+		order by r.room_status asc, r.room_num desc) j)
+		where rnum &gt;= #{cyPagingDto.startRow} and rnum &lt;= #{cyPagingDto.endRow}
+	</select>
+	
+	<!-- 호스트가 등록한 숙소 갯수 세기 -->
+	<select id="getHostRoomListCount" resultType="int">
+		select count(*) from tbl_room r, tbl_room_type t 
 		where  user_email = #{user_email}
 		and r.room_type_num = t.room_type_num
 		order by r.room_status asc, r.room_num desc

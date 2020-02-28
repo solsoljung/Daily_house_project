@@ -298,7 +298,7 @@ public class CyController {
 	
 	// 호스트의 방 리스트 보기
 	@RequestMapping(value = "/HostRoomList", method = {RequestMethod.GET, RequestMethod.POST})
-	public String HostRoomList(HttpSession session, Model model, RedirectAttributes rttr) throws Exception{
+	public String HostRoomList(HttpSession session, Model model, RedirectAttributes rttr,  CyPagingDto cyPagingDto) throws Exception{
 		String checkResult = isHostCheck(session, rttr);
 		if(checkResult == null) {
 			return "redirect:/si/loginHost";
@@ -308,9 +308,18 @@ public class CyController {
 		HostVo hostVo = roomService.getHostInfo(host_eamil);
 		model.addAttribute("hostVo", hostVo);
 		
+		// 페이징
+		if(1<= cyPagingDto.getPage() && cyPagingDto.getPage() <= 10) {
+				cyPagingDto.setHasPrev(false);
+		}
+		int totalCount = roomService.getHostRoomListCount(host_eamil);
+		cyPagingDto.setTotalCount(totalCount);
+		
 		// 호스트 정보로 방 리스트 조회 후 저장
-		List<RoomDetailDto> list = roomService.getHostRoomList(host_eamil);
+		List<RoomDetailDto> list = roomService.getHostRoomList(host_eamil, cyPagingDto);
 		model.addAttribute("list", list);
+		
+		model.addAttribute("cyPagingDto", cyPagingDto);
 		
 		return "/host/host_room_list";
 	}
