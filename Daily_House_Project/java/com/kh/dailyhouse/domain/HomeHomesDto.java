@@ -41,8 +41,7 @@ public class HomeHomesDto {
 	}
 	@Override
 	public String toString() {
-		return "HomeReviewDto [pic_uri=" + pic_uri + ", room_price=" + room_price + ", room_title=" + room_title
+		return "HomeHomesDto [pic_uri=" + pic_uri + ", room_price=" + room_price + ", room_title=" + room_title
 				+ ", room_explain=" + room_explain + ", room_num=" + room_num + "]";
 	}
-
 }

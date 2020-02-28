@@ -7,6 +7,7 @@ import com.kh.dailyhouse.domain.RoomDto;
 import com.kh.dailyhouse.domain.RoomPictureVo;
 import com.kh.dailyhouse.domain.RoomReviewDto;
 import com.kh.dailyhouse.domain.RoomReviewVo;
+import com.kh.dailyhouse.domain.UserVo;
 
 public interface BooRoomDetailDao {
 	//roomDetail 정보 얻기
@@ -47,4 +48,7 @@ public interface BooRoomDetailDao {
 	
 	//리뷰 작성후 유저에게 포인트 주기
 	public void setUserPoint(RoomReviewVo roomReviewVo) throws Exception;
+	
+	//쪽지 받는 사람 정보
+	public UserVo getReceiverInfo(String user_email) throws Exception;
 }

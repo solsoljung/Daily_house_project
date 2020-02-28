@@ -5,7 +5,7 @@
 <!-- 데이터피커X -->					
 <%@ include file = "../../views/title2.jsp"%> <!-- <head> -->					
 					
-<%@ include file = "../../views/casahotel/casahotel_link2.jsp" %>					
+<%@ include file = "../../views/casahotel/casahotel_link2.jsp" %>
 <%@ include file = "../../views/islagrande/islagrande_link.jsp" %>
 <style>
 .page_link {

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.dailyhouse.domain.BoardVo;
+import com.kh.dailyhouse.domain.CyPagingDto;
 import com.kh.dailyhouse.domain.HostVo;
 import com.kh.dailyhouse.domain.RoomDetailDto;
 import com.kh.dailyhouse.domain.RoomVo;
@@ -194,7 +195,7 @@ public class CyController {
 	
 	// 관리자 room_admin_check가 Y인 방들 보기
 	@RequestMapping(value = "/AdminRoomListY", method = {RequestMethod.GET, RequestMethod.POST})
-	public String AdminRoomListY(HttpSession session, Model model, RedirectAttributes rttr) throws Exception{
+	public String AdminRoomListY(HttpSession session, Model model, RedirectAttributes rttr, CyPagingDto cyPagingDto) throws Exception{
 		UserVo userVo = (UserVo)session.getAttribute("userVo");
 		// 로그인 안 했을 경우 return
 		if(userVo == null) {	
@@ -206,9 +207,21 @@ public class CyController {
 			rttr.addFlashAttribute("msg", "notAdmin");
 			return "redirect:/si/loginHost";
 		}
+		
+		// 페이징
+		if(1<= cyPagingDto.getPage() && cyPagingDto.getPage() <= 10) {
+			cyPagingDto.setHasPrev(false);
+		}
+		int totalCount = roomService.getRoomAdminCheckYCount();
+		cyPagingDto.setTotalCount(totalCount);
+		
 		// 관리자 check Y인 숙소 리스트 
-		List<RoomDetailDto> list = roomService.getRoomAdminCheckYList();
+		List<RoomDetailDto> list = roomService.getRoomAdminCheckYList(cyPagingDto);
+		
+//		System.out.println("cyPagingDto: " + cyPagingDto);
+		
 		model.addAttribute("list", list);
+		model.addAttribute("cyPagingDto", cyPagingDto);
 		
 		return "/admin/admin_check_y";
 	}
@@ -253,7 +266,7 @@ public class CyController {
 	// 관리자용 호스트가 등록한 방 1개 상세보기
 	@RequestMapping(value = "/AdminRoomDetail",  method = {RequestMethod.GET, RequestMethod.POST})
 	public String AdminRoomDetail(HttpSession session, Model model, @RequestParam("room_num") int room_num
-			 					,RedirectAttributes rttr) throws Exception{
+			 					,RedirectAttributes rttr,  CyPagingDto cyPagingDto) throws Exception{
 		UserVo userVo = (UserVo)session.getAttribute("userVo");
 		// 로그인 안 했을 경우 return
 		if(userVo == null) {
@@ -266,6 +279,8 @@ public class CyController {
 			return "redirect:/si/loginHost";
 		}
 		RoomDetailDto roomDetailDto = roomService.getHostRoomDetail(room_num);
+		
+		model.addAttribute("cyPagingDto", cyPagingDto);
 		model.addAttribute("roomDetailDto", roomDetailDto);
 		model.addAttribute("roomTypeList", roomTypeService.getRoomTypeList());
 		model.addAttribute("roomOptionList", roomOptionService.getRoomOptionList());

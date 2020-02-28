@@ -1,6 +1,8 @@
 package com.kh.dailyhouse.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -56,11 +58,20 @@ public class SiUserDaoImpl implements SiUserDao {
 		List<HomeHomesDto> HomeList = sqlSession.selectList(NAMESPACE+".getHomeHomes");
 		return HomeList;
 	}
+	
+	@Override
+	public List<HomeHomesDto> getMoreHomeHomes(int moreNum1, int moreNum2) throws Exception {
+		Map<String, Object> moreNum = new HashMap<>();
+		moreNum.put("moreNum1", moreNum1);
+		moreNum.put("moreNum2", moreNum2);
+		List<HomeHomesDto> HomeList = sqlSession.selectList(NAMESPACE+".getMoreHomeHomes", moreNum);
+		return HomeList;
+	}
+	
 	@Override
 	public void setPointList(UserVo userVo) throws Exception {
 		String user_email = userVo.getUser_email();
 		sqlSession.insert(NAMESPACE+".setPointList", user_email);
 		
 	}
-	
 }
