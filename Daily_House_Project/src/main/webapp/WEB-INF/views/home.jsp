@@ -33,8 +33,8 @@ $(document).ready(function() {
 	 			html += "<div class='text'>";
 	 			html += "<span class='d-block'><span class='display-4 text-primary'>"+this.room_price + "원</span>1박</span>";
 	 			html += "<p class='lead' style='font-size: 30px'>" + this.room_title+"</p>";
-	 			html += "<p class='lead'>" + this.room_explain + "</p>";
-	 			html += "<span><a href='/boo/detail?room_num="+this.room_num+"' class='btn btn-primary text-white py-2 px-5' style='font-size: 12px'>지금 예약</a></span>";
+	 			html += "<p class='lead' style='font-size: 20px'>" + this.room_explain + "</p>";
+	 			html += "<span><a href='/boo/detail?room_num="+this.room_num+"' class='btn btn-primary text-white py-3 px-5' style='font-size: 15px'>지금 예약</a></span>";
 	 			html += "</div>";
 	 			html += "</div>";
 			});
@@ -77,7 +77,7 @@ $(document).ready(function() {
             <span class="d-block"><span class="display-4 text-primary">${HomeHomesDto.room_price}원</span> / 1박 </span>
             <p class="lead" style="font-size: 30px">${HomeHomesDto.room_title}</p>
             <p class="lead" style="font-size:20px;">${HomeHomesDto.room_explain}</p>
-            <span><a href="/boo/detail?room_num=${HomeHomesDto.room_num}" class="btn btn-primary text-white py-2 px-5" style="font-size: 12px">지금 예약</a></span>
+            <span><a href="/boo/detail?room_num=${HomeHomesDto.room_num}" class="btn btn-primary text-white py-3 px-5" style="font-size: 15px">지금 예약</a></span>
           </div>
         </div>
         </c:forEach>
