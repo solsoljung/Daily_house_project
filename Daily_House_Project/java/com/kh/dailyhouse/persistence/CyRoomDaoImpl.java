@@ -50,8 +50,11 @@ public class CyRoomDaoImpl implements CyRoomDao {
 	
 	// 호스트가 등록한 숙소 리스트 불러오기
 	@Override
-	public List<RoomDetailDto> getHostRoomList(String user_email) throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".getHostRoomList", user_email);
+	public List<RoomDetailDto> getHostRoomList(String user_email, CyPagingDto cyPagingDto) throws Exception {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("user_email", user_email);
+		paramMap.put("cyPagingDto", cyPagingDto);
+		return sqlSession.selectList(NAMESPACE + ".getHostRoomList", paramMap);
 	}
 	
 	// 호스트가 등록한 숙소 1개 상세보기
@@ -129,6 +132,11 @@ public class CyRoomDaoImpl implements CyRoomDao {
 	@Override
 	public int getRoomAdminCheckNCount() throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".getRoomAdminCheckNCount");
+	}
+
+	@Override
+	public int getHostRoomListCount(String user_email) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getHostRoomListCount", user_email);
 	}
 
 

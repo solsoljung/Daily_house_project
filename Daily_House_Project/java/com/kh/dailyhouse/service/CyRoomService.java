@@ -38,8 +38,11 @@ public interface CyRoomService {
 	public int isHost(String user_email) throws Exception;
 	
 	
+	// 숙소 갯수
+	public int getHostRoomListCount(String user_email) throws Exception;
+	
 	// 숙소 검색하기
-	public List<RoomDetailDto> getHostRoomList(String user_email) throws Exception;
+	public List<RoomDetailDto> getHostRoomList(String user_email, CyPagingDto cyPagingDto) throws Exception;
 	
 	// 숙소 1개 검색
 	public RoomDetailDto getHostRoomDetail(int room_num) throws Exception;

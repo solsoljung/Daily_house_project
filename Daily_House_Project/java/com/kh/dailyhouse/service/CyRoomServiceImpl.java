@@ -67,8 +67,8 @@ public class CyRoomServiceImpl implements CyRoomService {
 	
 	// 호스트가 등록한 숙소 리스트 불러오기
 	@Override
-	public List<RoomDetailDto> getHostRoomList(String user_email) throws Exception {
-		return roomDao.getHostRoomList(user_email);
+	public List<RoomDetailDto> getHostRoomList(String user_email, CyPagingDto cyPagingDto) throws Exception {
+		return roomDao.getHostRoomList(user_email, cyPagingDto);
 	}
 	
 	// 호스트 숙소 1개 상세보기
@@ -157,6 +157,11 @@ public class CyRoomServiceImpl implements CyRoomService {
 	@Override
 	public int getRoomAdminCheckNCount() throws Exception {
 		return roomDao.getRoomAdminCheckNCount();
+	}
+
+	@Override
+	public int getHostRoomListCount(String user_email) throws Exception {
+		return roomDao.getHostRoomListCount(user_email);
 	}
 
 }

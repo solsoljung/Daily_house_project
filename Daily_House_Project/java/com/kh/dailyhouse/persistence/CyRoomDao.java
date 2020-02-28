@@ -30,8 +30,11 @@ public interface CyRoomDao {
 	public void updateRoomAdminCheckChange(RoomDetailDto roomDetailDto) throws Exception;
 	
 	
+	// 숙소 갯수
+	public int getHostRoomListCount(String user_email) throws Exception;
+	
 	// 숙소 리스트 가져오기
-	public List<RoomDetailDto> getHostRoomList(String user_email) throws Exception;
+	public List<RoomDetailDto> getHostRoomList(String user_email, CyPagingDto cyPagingDto) throws Exception;
 	
 	// 숙소 1개 가져오기
 	public RoomDetailDto getHostRoomDetail(int room_num) throws Exception;
