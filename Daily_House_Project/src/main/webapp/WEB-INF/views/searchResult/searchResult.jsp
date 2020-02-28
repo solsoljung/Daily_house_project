@@ -532,7 +532,9 @@ ${priceDto} --%>
 
 <br>
 <c:if test="${not empty searchVo.keyword}">
-	<h6 class="sol-font">${searchVo.totalCount}개의 방이 검색 되었습니다.</h6>
+<br>
+<br>
+	<h6 class="sol-font" style="font-size:30px;color:black;">${searchVo.totalCount}개의 방이 검색 되었습니다.</h6>
 </c:if>
 <br>
 <!-- 방 리스트 -->
