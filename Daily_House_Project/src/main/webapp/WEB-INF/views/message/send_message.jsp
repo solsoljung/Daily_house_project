@@ -16,23 +16,24 @@
   <div class="container">
     <div class="row">
       <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
-        <form action="#" method="post" class="bg-white p-md-5 p-4 mb-5 border">
+        <form action="/boo/sendMessagePro" method="post" class="bg-white p-md-5 p-4 mb-5 border">
+        	<input type="hidden" name="room_num" value="${messageDto.room_num}">
           <div class="row">
             <div class="col-md-12 form-group">
               <label for="email">받는 사람</label>
-              <input type="email" id="email" class="form-control " value="${receiver}" readonly="readonly">
+              <input type="email" id="receiver"  name="receiver" class="form-control " value="${messageDto.receiver}" readonly="readonly">
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 form-group">
               <label for="email">보내는 사람</label>
-              <input type="email" id="email" class="form-control " value="${sender}" readonly="readonly">
+              <input type="email" id="sender" name="sender" class="form-control " value="${messageDto.sender}" readonly="readonly">
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 form-group">
               <label for="message">Write Message</label>
-              <textarea name="message" id="message" class="form-control " cols="30" rows="8"></textarea>
+              <textarea id="message_text" name="message_text" class="form-control " cols="30" rows="8"></textarea>
             </div>
           </div>
           <div class="row">
@@ -45,8 +46,21 @@
       <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
         <div class="row">
           <div class="col-md-10 ml-auto contact-info">
+          	<p><span>호스트에게 쪽지 보내기</span></p>
+          	<p>
+          		<span>
+          			<c:choose>
+   						<c:when test="${receiverInfo.user_pic == null}">
+   							<img src="/images/profile/user.jpg" height="100">
+   						</c:when>
+   						<c:otherwise>
+               				<img src="/si/displayFile?fileName=/${receiverInfo.user_pic}" height="100">  
+   						</c:otherwise>
+   					</c:choose>
+          		</span>
+          	</p>
             <p><span class="d-block">이름:</span> <span> ${receiverInfo.user_name}</span></p>
-            <p><span class="d-block">Phone:</span> <span> ${receiverInfo.user_phone }</span></p>
+            <p><span class="d-block">문의 전화:</span> <span> ${receiverInfo.user_phone }</span></p>
           </div>
         </div>
       </div>

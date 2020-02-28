@@ -387,6 +387,7 @@ $(document).ready(function() {
 <form id="frmMessage" action="/boo/sendMessage" method="post">
 	<input type="hidden" name="receiver" id="receiver">
 	<input type="hidden" name="sender" id="sender">
+	<input type="hidden" name="room_num" value="${roomDto.room_num}">
 </form>
 <!-- section -->
 <!-- 이미지 뷰 -->
