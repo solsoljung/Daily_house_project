@@ -27,6 +27,24 @@ $(function() {
 	$(".nav-item:eq(0)").attr("class", "nav-item");
 	$(".nav-item:eq(2)").attr("class", "nav-item active");
 	
+	//체크 아웃 된사람들의 리스트
+	var checkOutUserList = "${checkOutUserList}";
+	var List = checkOutUserList.substring(1, checkOutUserList.length - 1);
+	
+	var arrList = List.split(",");
+	console.log("arrList : ",arrList);
+	
+	var user_email = "${userVo.user_email}";
+	console.log("user_email : ",user_email);
+	
+	for (var v = 0; v < arrList.length; v++) {
+		if (arrList[v].trim() == user_email) {
+			console.log("success");
+			$("#rev_write").show();
+			break;
+		}
+	}
+	
 	//쪽지 보내기
 	$("#send_message").click(function() {
 		
@@ -618,7 +636,7 @@ $(document).ready(function() {
           	</div>
 <!-- 후기 작성란 구역 -->
 			<c:if test="${not empty userVo}">
-          	<div>
+          	<div id="rev_write" style="display: none;">
           		<form action="/boo/review" method="post">
           		<input type="hidden" name="room_num" value="${roomDto.room_num}">
           		<input type="hidden" name="user_email" value="${userVo.user_email}">
@@ -688,6 +706,7 @@ $(document).ready(function() {
 				</div>
           		</form>
           	</div>
+          	
           	</c:if>
           	<hr>
 <!-- 지도 api -->

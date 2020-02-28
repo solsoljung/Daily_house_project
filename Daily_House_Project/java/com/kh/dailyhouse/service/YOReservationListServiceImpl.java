@@ -28,40 +28,20 @@ public class YOReservationListServiceImpl implements YOReservationListService {
 	}
 
 	// 예약 결제하기
-	// 결제시 사용자 포인트 차감, 포인트 테이블에 해당 사용자의 사용내역 기록(R1)
-	// 결제한 회원에게 결제한 금액의 0.05프로를 포인트로 부여, 포인트 테이블에 적립내역 기록(R5)
-	// 호스트에게 포인트 부여, 포인트 테이블에 호스트 포인트 적립내역 기록(R7)
 	@Transactional
 	@Override
 	public void insertReservation(TestDto testDto) throws Exception {
-		//, UserPointDto userPointDto, PointVo pointVo
-		// 결제시 사용자 포인트 차감, 포인트 테이블에 해당 사용자의 사용내역 기록(R1)
-		/*dao.user_update_reserv_point(userPointDto); 완료
-		pointVo.setPoint_code(MyConstants.USER_PAYMENT); // R1
-		dao.insertPoint(pointVo);
-		
-		// 결제한 회원에게 결제한 금액의 0.05프로를 포인트로 부여, 포인트 테이블에 적립내역 기록(R5)
-		dao.user_update_reserv_point(userPointDto);
-		pointVo.setPoint_code(MyConstants.USER_RESERVATION_POINT); // R5
-		dao.insertPoint(pointVo);
-		
-		// 호스트에게 포인트 부여, 포인트 테이블에 호스트 포인트 적립내역 기록(R7)
-		dao.host_update_reserv_point(userPointDto);
-		pointVo.setPoint_code(MyConstants.HOST_PAYMENT_REVENUE); // R7
-		dao.insertPoint(pointVo);*/
-		//포인트 차감(결제)
-		//포인트 테이블에 추가(결제)
-		
 		// 예약
 		dao.insertReservation(testDto);
+		System.out.println("ReservationService에서 온 메세지: "+testDto);
 		
 		//포인트 결제 내역 추가
-		testDto.setPoint_code(MyConstants.USER_PAYMENT); // R1
-		dao.insertPointHost(testDto);
-		
-		//결제
 		int reserv_price = -testDto.getReserv_price();
 		testDto.setReserv_price(reserv_price);
+		testDto.setPoint_code(MyConstants.USER_PAYMENT); // R1
+		dao.insertPointUser(testDto);
+		
+		//결제
 		dao.user_update_reserv_point(testDto);
 	}
 

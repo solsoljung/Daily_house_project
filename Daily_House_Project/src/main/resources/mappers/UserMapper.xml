@@ -64,7 +64,9 @@
 	                                 from tbl_room_picture
 	                                 )       
 	                           where rn = 1) r,
-	                    (select * from tbl_room) rp
+	                    (select * from tbl_room
+	                     where room_admin_check = 'Y')
+	                     rp
 	                where r.room_num2 = rp.room_num
 	                order by room_num desc) a)
 	where rnum &gt;=#{moreNum1} and rnum &lt;= #{moreNum2}

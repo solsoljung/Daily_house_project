@@ -80,8 +80,6 @@ $(function() {
         </div>
       </a>
 </section>
-userVo: ${userVo}<br>
-testDto: ${testDto}<br>
   <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">

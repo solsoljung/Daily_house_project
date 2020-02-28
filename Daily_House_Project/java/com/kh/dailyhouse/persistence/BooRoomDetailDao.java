@@ -55,4 +55,7 @@ public interface BooRoomDetailDao {
 	
 	//쪽지 보내기
 	public void sendMessagePro(MessageDto messageDto) throws Exception;
+	
+	//체크아웃 한사람만 후기 쓸수 있게 하기
+	public List<String> checkOutSearch(int room_num) throws Exception;
 }
