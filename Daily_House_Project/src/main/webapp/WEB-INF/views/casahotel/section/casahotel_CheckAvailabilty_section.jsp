@@ -165,7 +165,7 @@ $(document).ready(function(){
 	});
 });
 </script>
-    <section class="section bg-light"  id="next">
+    <section class="section"  id="next">
     <form id="frmPage" action="/sol/room" method="post">
 	<input type="hidden" name="room_num" />
 	<input type="hidden" name="keyword" value="${searchVo.keyword}"/>

@@ -7,7 +7,14 @@
 
 	<!-- 관리자 미승인 방 리스트 보기 -->
 	<select id="getRoomAdminCheckNList" resultType="RoomDetailDto">
-		select * from tbl_room where room_admin_check = 'N' order by room_num desc
+		select * from(select rownum rnum, r.* from (select * from tbl_room where room_admin_check = 'N' and room_num != 0 
+		order by room_num desc) r)
+		where rnum &gt;= #{startRow} and rnum &lt;= #{endRow}
+	</select>
+	
+	<!-- 관리자 미승인 방 갯수 세기 -->
+	<select id="getRoomAdminCheckNCount" resultType="int">
+		select count(*) from tbl_room where room_admin_check = 'N' and room_num != 0
 	</select>
 	
 	<!-- 관리자 승인 방 갯수 세기 -->
@@ -161,10 +168,11 @@
 		where r.room_location like '%' || #{keyword} || '%'
 		<if test="room_reserv_start_date != null">
 			and r.room_num not in (
-				select v.room_num from tbl_reservation v where
+				select v.room_num from tbl_reservation v where (
 				(room_reserv_start_date &gt; #{room_reserv_start_date} and room_reserv_end_date &lt;= #{room_reserv_end_date}) or
 				(room_reserv_start_date &gt; #{room_reserv_start_date} and room_reserv_start_date &lt;= #{room_reserv_end_date}) or
-				(room_reserv_end_date &gt; #{room_reserv_start_date} and room_reserv_end_date &lt;= #{room_reserv_end_date})
+				(room_reserv_end_date &gt; #{room_reserv_start_date} and room_reserv_end_date &lt;= #{room_reserv_end_date}))
+				and reserv_state = 'Y'
 			)
 		</if>
 			<!-- 인원, 가격 -->
