@@ -25,6 +25,7 @@ import com.kh.dailyhouse.domain.RoomVo;
 import com.kh.dailyhouse.domain.SearchKeywordDto;
 import com.kh.dailyhouse.domain.SearchVo;
 import com.kh.dailyhouse.domain.UserVo;
+import com.kh.dailyhouse.service.BooRoomDetailService;
 import com.kh.dailyhouse.service.SolMessageService;
 import com.kh.dailyhouse.service.SolRoomService;
 
@@ -37,6 +38,9 @@ public class SolController {
 	
 	@Inject
 	private SolMessageService messageService;
+	
+	@Inject
+	private BooRoomDetailService booRoomDetailService;
 	
 	@RequestMapping(value = "/keywordList/{search_keyword}", method = RequestMethod.GET)
 	@ResponseBody
@@ -154,5 +158,18 @@ public class SolController {
 		
 		return "success";
 	}
-
+	
+	//메세지 페이지로 이동
+	@RequestMapping(value = "/reply", method = RequestMethod.POST)
+	public String sendReply(MessageVo messageVo, Model model) throws Exception {
+		String receiver = messageVo.getReceiver();
+		String sender = messageVo.getSender();
+		
+		System.out.println("messageVo: "+ messageVo);
+		
+		//여기하고 있ㅅ었상ㅁ!!
+		
+		return null;
+	}
+	
 }

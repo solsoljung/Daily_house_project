@@ -65,11 +65,13 @@ public class SIController {
 	public String register_succes() throws Exception{
 		return "redirect:/";
 	}
+	
 	// 로그인으로 가는 컨트롤러
 	@RequestMapping(value = "/loginHost", method = RequestMethod.GET)
 	public String loginHost() throws Exception {
 		return "/login/login";
 	}
+	
 	// 로그인 처리
 	@RequestMapping(value = "/login_run", method = RequestMethod.POST)
 	public String login_run(HttpSession session, RedirectAttributes rttr, UserVo userVo) throws Exception{

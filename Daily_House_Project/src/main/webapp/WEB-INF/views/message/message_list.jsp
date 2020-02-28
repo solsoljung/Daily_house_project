@@ -36,6 +36,14 @@ $(document).ready(function() {
 			}
 		}); // $.ajax()
 	});
+	
+	$(".btnReply").click(function(){
+		var sender = $(this).attr("data-sender");
+		var receiver = $(this).attr("data-receiver");
+		$("input[name=sender]").val(sender);
+		$("input[name=receiver]").val(receiver);
+		$("#frmReply").submit();
+	});
 });
 </script>
 <section class="site-hero inner-page overlay" style="background-image: url(/casahotel/img/slider-3.jpg)" data-stellar-background-ratio="0.5">
@@ -82,11 +90,26 @@ $(document).ready(function() {
 	</div>
 </section>
 <section>
-<%-- ${messageList} --%>
+${messageList}
 <!-- 여기여기 -->
+<c:if test="${empty messageList}">
+<br>
+<br>
+<br>
+<h4 align="center" style="font-family:Arial;">메세지가 없습니다.</h4>
+<br>
+<br>
+<br>
+</c:if>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-12">
+	<form id="frmReply" action="/sol/reply" method="post">
+		<input type="hidden" name="receiver">
+		<input type="hidden" name="sender">
+	</form>
+	<div class="col-md-2">
+	</div>
+		<div class="col-md-8">
 			<div id="card-174818">
 			<c:forEach items="${messageList}" var="vo">
 				<div class="card">
@@ -105,12 +128,15 @@ $(document).ready(function() {
 							내용&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ${vo.message_text}<br>
 							보낸 날짜 : ${vo.send_date}<br>
 							읽은 날짜 : ${vo.open_date}<br>
+					<input type="button" class="btn btn-primary btnReply" data-sender="${vo.sender}" data-receiver="${vo.receiver}" value="답장">
 						</div>
 					</div>
 				</div>
 			</c:forEach>
 			</div>
 		</div>
+		<div class="col-md-2">
+	</div>
 	</div>
 </div>
 <!-- 여기여기 -->
