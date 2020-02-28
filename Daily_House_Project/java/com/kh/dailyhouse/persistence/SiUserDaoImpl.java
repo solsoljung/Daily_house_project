@@ -74,4 +74,9 @@ public class SiUserDaoImpl implements SiUserDao {
 		sqlSession.insert(NAMESPACE+".setPointList", user_email);
 		
 	}
+
+	@Override
+	public UserVo getUserData(String user_email) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+".getUserData", user_email);
+	}
 }
