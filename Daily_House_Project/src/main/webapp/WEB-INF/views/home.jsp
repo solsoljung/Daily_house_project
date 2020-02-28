@@ -64,7 +64,7 @@ $(document).ready(function() {
           <div class="col-md-7 heading-section ftco-animate text-center">
           	<span class="subheading">T O D A Y</span>
             <p class="lead" style="font-size: 30px">최근 숙박 업소</p>
-            <p>Daily House는 많은 숙박업소를 보여드립니다.</p>
+            <p style="font-size:20px;">Daily House는 많은 숙박업소를 보여드립니다.</p>
           </div>
         </div>
       </div>
@@ -76,7 +76,7 @@ $(document).ready(function() {
           <div class="text">
             <span class="d-block"><span class="display-4 text-primary">${HomeHomesDto.room_price}원</span> / 1박 </span>
             <p class="lead" style="font-size: 30px">${HomeHomesDto.room_title}</p>
-            <p class="lead">${HomeHomesDto.room_explain}</p>
+            <p class="lead" style="font-size:20px;">${HomeHomesDto.room_explain}</p>
             <span><a href="/boo/detail?room_num=${HomeHomesDto.room_num}" class="btn btn-primary text-white py-2 px-5" style="font-size: 12px">지금 예약</a></span>
           </div>
         </div>

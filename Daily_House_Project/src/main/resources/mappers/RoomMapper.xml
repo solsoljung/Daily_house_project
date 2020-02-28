@@ -188,7 +188,7 @@
     		</foreach>
     	</if>
     		<!-- 공개 여부 -->
-    		 and room_status = 'Y' 
+    		 and room_status = 'Y' and room_admin_check = 'Y'
 	</sql>
 	
 	<!-- 방 type -->
