@@ -18,19 +18,6 @@
 <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
 <script >
 $(function() {
-	$("#requestBtn").on("click", function() {
-		$.ajax("/")
-		.done(function() {
-			alert("요청 성공");
-		})
-		.fail(function() {
-			alert("요청 실패");
-		})
-		.always(function() {
-			alert("요청 완료");
-		});
-	});
-	
 
 });
 </script>
@@ -38,7 +25,6 @@ $(function() {
 <section class="section bg-light">
  <div class="container">
  
- <button id="requestBtn">에이잭스 버튼!!</button>
  
         <div class="row justify-content-center text-center mb-5">
           <div class="col-md-8">
