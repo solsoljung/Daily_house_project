@@ -50,6 +50,7 @@ public class BooController {
 		RoomPictureVo OneAreaPic = (RoomPictureVo)paramMap.get("OneAreaPic");
 		List<RoomPictureVo> TwoAreaPic = (List<RoomPictureVo>)paramMap.get("TwoAreaPic");
 		List<RoomPictureVo> ThreeAreaPic = (List<RoomPictureVo>)paramMap.get("ThreeAreaPic");
+		List<String> checkOutUserList = (List<String>)paramMap.get("checkOutUserList");
 		
 		List<RoomReviewDto> reviewList = (List<RoomReviewDto>)paramMap.get("ReviewList");
 		String type = (String)paramMap.get("type");
@@ -62,6 +63,7 @@ public class BooController {
 		model.addAttribute("OneAreaPic", OneAreaPic);
 		model.addAttribute("TwoAreaPic", TwoAreaPic);
 		model.addAttribute("ThreeAreaPic", ThreeAreaPic);
+		model.addAttribute("checkOutUserList", checkOutUserList);
 		
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("reviewPagingDto", reviewPagingDto);

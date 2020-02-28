@@ -140,4 +140,11 @@ public class BooRoomDetailDaoImpl implements BooRoomDetailDao {
 		
 	}
 	
+	//체크아웃 한사람만 후기 쓸수 있게 하기
+	@Override
+	public List<String> checkOutSearch(int room_num) throws Exception {
+		List<String> list = sqlSession.selectList(NAMESPACE+".checkOutSearch", room_num);
+		return list;
+	}
+	
 }
