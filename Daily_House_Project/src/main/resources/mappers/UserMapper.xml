@@ -14,6 +14,11 @@
 		select * from tbl_user
 		where user_email = #{user_email} and user_pw = #{user_pw}
 	</select>
+<!-- 	회원정보 얻기 -->
+	<select id="getUserData" resultType="UserVo">
+		select * from tbl_user
+		where user_email = #{user_email}
+	</select>
 <!-- 	회원정보 수정 -->
 	<update id="userUpdate">
 		update tbl_user set

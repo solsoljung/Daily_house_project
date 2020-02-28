@@ -64,4 +64,9 @@ public class SiUserServiceImpl implements SiUserService {
 		siUserDao.setPointList(userVo);
 	}
 
+	@Override
+	public UserVo getUserData(String user_email) throws Exception {
+		return siUserDao.getUserData(user_email);
+	}
+
 }
