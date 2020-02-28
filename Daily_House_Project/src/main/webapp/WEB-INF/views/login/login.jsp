@@ -53,7 +53,6 @@ $(document).ready(function() {
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="email">Email</label>
                   <input type="email" id="email" name="user_email" 
-                     value="test@naver.com"
                   class="form-control" placeholder="Email" required="required">
                 </div>
               </div>
@@ -61,7 +60,6 @@ $(document).ready(function() {
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="password">Password</label>
                   <input type="password" id="pw" name="user_pw" class="form-control" 
-                     value="1"
                   placeholder="Password" required="required">
                 </div>
               </div>

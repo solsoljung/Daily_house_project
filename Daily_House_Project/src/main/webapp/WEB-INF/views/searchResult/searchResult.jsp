@@ -46,37 +46,44 @@ $(document).ready(function(){
 	
 	//검색어 리스트
 	$("#searchTarget").keyup(function(e){
+		
+		//아래방향키를 눌렀을 때 active class를 추가
 		if(e.keyCode == 40){
-			//이상하게 첫번째에 누르면 왜 이상한게 실행되지
-			console.log("아래");
 			if(which > 0){
 				console.log("remove");
 				$("#list").children().removeClass("active");
 			}
 			$("#list").children().eq(which).addClass("active");
 			which++;
-			console.log(which);
+			
+		//위방향키를 눌렀을 때 active class를 추가
 		} else if(e.keyCode == 38){
 			which--;
-			console.log("위");
-			console.log(which);
 			$("#list").children().removeClass("active");
 			$("#list").children().eq(which -1).addClass("active");
+			
+		//엔터를 눌렀을 때 검색창에 해당 검색어를 추가
 		} else if(e.keyCode == 13){
-			console.log("enter");
-			var keyword = $("#list").children().eq(which - 1).text();
-			console.log(keyword);
-			$(this).val(keyword);
-			$("input[name=keyword]").val(keyword);
-			$("#frmPage").submit();
-			//여기
+			if(which == 0){
+				console.log("아무것도 참조하징 않은 검색");
+				var keyword = $(this).val();
+				console.log(keyword);
+				$("input[name=keyword]").val(keyword);
+				$("#frmPage").submit();
+			} else {
+				console.log("참조한 검색");
+				var keyword = $("#list").children().eq(which - 1).text();
+				$(this).val(keyword);
+				$("input[name=keyword]").val(keyword);
+				$("#frmPage").submit();
+			}
+			
+		//아래, 위, 엔터가 아닐때는 ajax로 검색해 밑에 달아준다.
 		} else if(e.keyCode != 40 && e.keyCode != 38 && e.keyCode != 13){
 			which = 0;
-			console.log("무엇도 아님");
+			console.log(which);
 			var search_keyword = $(this).val();
-			console.log(search_keyword);
 			var enkeyword = encodeURI(search_keyword);
-			console.log(enkeyword);
 			var url = "/sol/keywordList/" + encodeURI(search_keyword);
 			$.ajax({
 				"type" : "get",
@@ -109,7 +116,7 @@ $(document).ready(function(){
 		$("#frmPage").submit();
 	});
 
-	//상세 페이지로 이동
+	//상세 페이지로 이동 > 제목과 지금 예약하기 눌렀을 때
 	$(".room-title").click(function(e) {
 		e.preventDefault();
 		var room_num = $(this).parent().parent().children().eq(0).children().attr("data-num");
@@ -118,7 +125,7 @@ $(document).ready(function(){
 		$("#frmPage").submit();
 	});
 
-	//상세 페이지로 이동
+	//상세 페이지로 이동 > 이미지를 눌렀을 때
 	$(".room-image").click(function(e) {
 		e.preventDefault();
 		var room_num = $(this).attr("data-num");
@@ -177,7 +184,6 @@ $(document).ready(function(){
 		console.log(joinTypeName);
 		$("input[name=joinType]").val(joinType);
 		$("input[name=joinTypeName]").val(joinTypeName);
-		//console.log($("input:checkbox[name=typeChb]:checked").next().text());
 		$("#frmPage").submit();
   	});
 	
@@ -329,7 +335,6 @@ $(document).ready(function(){
 	$(".plus").click(function(e){	
 		e.stopPropagation();
 		var num = $(this).prev().text();	
-		//console.log(num);
 		var plusNum = parseInt(num) + 1;			
 					
 		if(plusNum >= 20) {			
@@ -432,7 +437,6 @@ ${priceDto} --%>
 			<li class="nav-item" style="list-style:none;padding-left:0px;"><label style="font-weight:200;">인원 수</label></li>
 			<li class="nav-item" style="list-style:none;padding-left:0px;width:240px;" id="target">
 			<a class="minus" style="cursor:pointer">-</a>
-			<!-- <input type="number" id="numBox" min="1" max="20" value="1" readonly style="font-weight:200;width:50px;height:40px;margin-left:10px;margin-right:10px;text-align:center;"/> -->
 			<label id="numBox" style="font-weight:200;width:50px;height:40px;margin-left:10px;margin-right:10px;text-align:center;">${searchVo.room_people}</label>
 			<a class="plus" style="cursor:pointer">+</a></li>
 		</ul>
@@ -528,7 +532,9 @@ ${priceDto} --%>
 
 <br>
 <c:if test="${not empty searchVo.keyword}">
-	<h6 class="sol-font">${searchVo.totalCount}개의 방이 검색 되었습니다.</h6>
+<br>
+<br>
+	<h6 class="sol-font" style="font-size:30px;color:black;">${searchVo.totalCount}개의 방이 검색 되었습니다.</h6>
 </c:if>
 <br>
 <!-- 방 리스트 -->
@@ -549,7 +555,6 @@ ${priceDto} --%>
         					</c:choose>
         				</p>
         				<p class="d-flex price-details align-items-center pt-3">
-        					<!-- <span>Starting From</span> -->
         			 		<span class="price">￦${vo.room_price}<small>&nbsp;/&nbsp;&nbsp;&nbsp;1박</small></span>
         				</p>
         				<p><a data-num="${vo.room_num}" class="room-title btn-customize" style="cursor:pointer;">지금 예약하기</a></p>

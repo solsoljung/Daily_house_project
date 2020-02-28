@@ -10,7 +10,14 @@
 					
 <%@ include file = "../../views/islagrande/islagrande_menubar.jsp" %> <!-- </head> <body> -->					
 <!-- 데이터피커X -->					
-
+<script>
+$(document).ready(function(){
+	
+	// 현재 클릭된 메뉴를 활성화
+	$(".nav-item:eq(0)").attr("class", "nav-item");
+	$(".nav-item:eq(3)").attr("class", "nav-item active");
+});
+</script>
 
 
 <!-- section -->

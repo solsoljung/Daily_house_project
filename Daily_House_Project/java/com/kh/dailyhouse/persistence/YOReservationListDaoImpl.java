@@ -78,6 +78,7 @@ public  class YOReservationListDaoImpl implements YOReservationListDao {
 
 	@Override
 	public void insertPointHost(TestDto testDto) throws Exception {
+		System.out.println("testDto:" + testDto);
 		sqlSession.insert(NAMESPACE + ".insertPointHost", testDto);
 		
 	}

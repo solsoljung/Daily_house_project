@@ -33,6 +33,12 @@ $(function(){
 		location.href = "/cy/helpWrite";
 	});
 	
+	//페이징
+	$(".classPage").click(function(e) {
+		e.preventDefault(); 
+		location.href = "/cy/help";
+	});
+	
 	// board_title_a
 	$(".board_title_a").on("click", function(){
 		var that = $(this);
@@ -96,6 +102,49 @@ $(function(){
 			</tbody>	
 		</table>
 	</div>
+	
+	
+	
+	
+	
+<!-- 페이징 -->
+<div class="row mt-5">
+	<div class="col text-center">
+		 <div class="block-27">
+				<ul>
+					<c:if test="${cyPagingDto.hasPrev == true}">
+					<li>
+						<a class="classPage" data-page="${cyPagingDto.startPage - 1}" style="cursor:pointer">&lt;</a>
+					</li>
+					</c:if>
+					<c:forEach begin="1" end="1" var="v">
+						<li 
+							<c:choose>
+								<c:when test="${1 == v}">
+									class="active"
+								</c:when>
+								<c:otherwise>
+									class=""
+								</c:otherwise>
+							</c:choose>
+						>
+							<a class="classPage" data-page="${v}" style="cursor:pointer">${v}</a>
+						</li>
+					</c:forEach>
+					<c:if test="${cyPagingDto.hasNext == true}">
+						<li>
+							<a class="classPage" data-page="${cyPagingDto.endPage + 1}" style="cursor:pointer">&gt;</a>
+						</li>
+					</c:if>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- 페이징 끝 -->	
+	
+	
+	
+	
 	<!-- table END -->
 	</div>
 			
