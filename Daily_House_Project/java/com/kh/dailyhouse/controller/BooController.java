@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.dailyhouse.domain.AdminReservResultDto;
+import com.kh.dailyhouse.domain.MessageDto;
+import com.kh.dailyhouse.domain.MessageVo;
 import com.kh.dailyhouse.domain.PointDto;
 import com.kh.dailyhouse.domain.ReservationVo;
 import com.kh.dailyhouse.domain.ReviewPagingDto;
@@ -125,4 +127,30 @@ public class BooController {
 		return "redirect:/boo/adminReservList";
 	}
 	
+	//쪽지 보내기 페이지
+	@RequestMapping(value="/sendMessage", method = RequestMethod.POST)
+	public String sendMessage(Model model, MessageDto messageDto) throws Exception {
+		String receiver = messageDto.getReceiver();
+		String sender = messageDto.getSender();
+		
+		if (sender.equals("") || sender == null ) {
+			return "redirect:/si/loginHost";
+		}
+		
+		UserVo receiverInfo = booRoomDetailService.getReceiverInfo(receiver);
+		
+		model.addAttribute("messageDto", messageDto);
+		model.addAttribute("receiverInfo", receiverInfo);
+		
+		return "/message/send_message";
+	}
+	
+	//쪽지 보내기 처리
+	@RequestMapping(value="/sendMessagePro", method = RequestMethod.POST)
+	public String sendMessagePro(MessageDto messageDto) throws Exception {
+		int room_num = messageDto.getRoom_num();
+		booRoomDetailService.sendMessagePro(messageDto);
+		
+		return "redirect:/boo/detail?room_num="+room_num;
+	}
 }

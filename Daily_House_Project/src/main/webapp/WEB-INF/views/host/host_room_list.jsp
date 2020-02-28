@@ -53,8 +53,8 @@ $(function(){
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-2"></div>
-		<div class="col-md-8"><br><br>
+		<div class="col-md-1"></div>
+		<div class="col-md-10"><br><br>
 			<div class="row">
 				<div class="col-md-8">
 					<label class="lblTitle1">${hostVo.user_name}님이 등록한 숙소들입니다.</label>
@@ -88,8 +88,8 @@ $(function(){
 					<td>${RoomDetailDto.room_type_explain}</td>
 					<td>${RoomDetailDto.room_price}</td>
 					<c:choose>
-						<c:when test="${RoomDetailDto.room_status eq 'Y'}"><td>공개</td></c:when>
-						<c:otherwise><td>비공개</td></c:otherwise>
+						<c:when test="${RoomDetailDto.room_status eq 'Y'}"><td>O</td></c:when>
+						<c:otherwise><td>X</td></c:otherwise>
 					</c:choose>
 <!-- 					<td align="center"><a href="#" class="remove_img" > -->
 <!-- 						<img alt="remove" src="../../islagrande/images/remove.png" width="30" height="30" /> -->
@@ -102,7 +102,7 @@ $(function(){
 	<!-- table END -->		
 	</div>
 			
-	<div class="col-md-2"></div>
+	<div class="col-md-1"></div>
 	</div>
 </div><br><br><br>
 <!-- host_register_page1 END -->

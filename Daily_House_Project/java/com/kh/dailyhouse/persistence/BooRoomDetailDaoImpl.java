@@ -9,11 +9,13 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dailyhouse.domain.MessageDto;
 import com.kh.dailyhouse.domain.ReviewPagingDto;
 import com.kh.dailyhouse.domain.RoomDto;
 import com.kh.dailyhouse.domain.RoomPictureVo;
 import com.kh.dailyhouse.domain.RoomReviewDto;
 import com.kh.dailyhouse.domain.RoomReviewVo;
+import com.kh.dailyhouse.domain.UserVo;
 
 @Repository
 public class BooRoomDetailDaoImpl implements BooRoomDetailDao {
@@ -122,6 +124,20 @@ public class BooRoomDetailDaoImpl implements BooRoomDetailDao {
 	public void setUserPoint(RoomReviewVo roomReviewVo) throws Exception {
 		String user_email = roomReviewVo.getUser_email();
 		sqlSession.update(NAMESPACE+".setUserPoint", user_email);
+	}
+	
+	//쪽지 받는 사람 정보
+	@Override
+	public UserVo getReceiverInfo(String user_email) throws Exception {
+		UserVo userVo = sqlSession.selectOne(NAMESPACE+".getReceiver", user_email);
+		return userVo;
+	}
+	
+	//쪽지 보내기
+	@Override
+	public void sendMessagePro(MessageDto messageDto) throws Exception {
+		sqlSession.insert(NAMESPACE+".sendMessagePro", messageDto);
+		
 	}
 	
 }

@@ -23,8 +23,8 @@ public class CyRoomDaoImpl implements CyRoomDao {
 	
 	
 	@Override
-	public List<RoomDetailDto> getRoomAdminCheckNList() throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".getRoomAdminCheckNList");
+	public List<RoomDetailDto> getRoomAdminCheckNList(CyPagingDto cyPagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".getRoomAdminCheckNList", cyPagingDto);
 	}
 
 	@Override
@@ -124,6 +124,11 @@ public class CyRoomDaoImpl implements CyRoomDao {
 	@Override
 	public int getRoomAdminCheckYCount() throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".getRoomAdminCheckYCount");
+	}
+
+	@Override
+	public int getRoomAdminCheckNCount() throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getRoomAdminCheckNCount");
 	}
 
 

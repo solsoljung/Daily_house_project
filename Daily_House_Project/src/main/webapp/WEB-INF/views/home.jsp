@@ -15,10 +15,7 @@
 <%@ include file = "../views/casahotel/section/casahotel_Main_section.jsp" %>
 <%@ include file = "../views/casahotel/section/casahotel_CheckAvailabilty_section.jsp" %>
 
-
-
-<!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
-<script >
+<script>
 $(document).ready(function() {
 	list = new Array();
 	var moreNum1 = 3;
@@ -51,10 +48,7 @@ $(document).ready(function() {
 });
 </script>
 
-
-<br>
-
-<section class="section bg-light">
+<section class="section">
  <div class="container">
         <div class="row justify-content-center text-center mb-5">
           <div class="col-md-8">

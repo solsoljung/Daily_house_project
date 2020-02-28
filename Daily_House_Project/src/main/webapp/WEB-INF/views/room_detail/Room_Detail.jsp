@@ -27,6 +27,16 @@ $(function() {
 	$(".nav-item:eq(0)").attr("class", "nav-item");
 	$(".nav-item:eq(2)").attr("class", "nav-item active");
 	
+	//쪽지 보내기
+	$("#send_message").click(function() {
+		
+		$("#receiver").val("${roomDto.user_email}");
+		$("#sender").val("${userVo.user_email}");
+		
+		$("#frmMessage").submit();
+	});
+	
+	//체크 인, 아웃
 	function isCheckInOut() {
 		var checks = $(".check");
 		for (var i = 0; i < checks.length; i++) {
@@ -373,6 +383,12 @@ $(document).ready(function() {
 	<input type="hidden" name="room_num" value="${roomDto.room_num}">
 	<input type="hidden" name="page" value="${reviewPagingDto.page}">
 </form>
+
+<form id="frmMessage" action="/boo/sendMessage" method="post">
+	<input type="hidden" name="receiver" id="receiver">
+	<input type="hidden" name="sender" id="sender">
+	<input type="hidden" name="room_num" value="${roomDto.room_num}">
+</form>
 <!-- section -->
 <!-- 이미지 뷰 -->
 <div id="mainImg">
@@ -430,6 +446,11 @@ $(document).ready(function() {
         <div class="row">
 <!-- 내용 센터쪽 -->
           <div class="col-lg-8 ftco-animate">
+<!--           test -->
+
+
+<!--           test -->
+          
 <!--          	 방의 기본정보 -->
          	<table>
          		<tr>
@@ -438,15 +459,27 @@ $(document).ready(function() {
          			<table style="width: 100%;">
          				<tr>
          					<th>
-         						<c:choose>
-			   						<c:when test="${roomDto.user_pic == null}">
-			   							<img src="/images/profile/user.jpg" height="50">
-			   						</c:when>
-			   						<c:otherwise>
-			               				<img src="/si/displayFile?fileName=/${roomDto.user_pic}" height="50">  
-			   						</c:otherwise>
-			   					</c:choose>
-			         			<p>${roomDto.user_name}</p>
+         						<nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin: 0px; padding: 0px;">
+									<ul class="navbar-nav ml-md-auto">
+										<li class="nav-item dropdown">
+											 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
+											 	<c:choose>
+							   						<c:when test="${roomDto.user_pic == null}">
+							   							<img src="/images/profile/user.jpg" height="50">
+							   						</c:when>
+							   						<c:otherwise>
+							               				<img src="/si/displayFile?fileName=/${roomDto.user_pic}" height="50">  
+							   						</c:otherwise>
+							   					</c:choose>
+											 </a>
+											 <c:if test="${roomDto.user_email != userVo.user_email}">
+												<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+													<span id="send_message" class="dropdown-item mousePointer" style="font-size: 15px;">쪽지 보내기</span> 
+												</div>
+											 </c:if>
+										</li>
+									</ul>
+								</nav>
          					</th>
          					<th>
          						<c:if test="${not empty userVo}">
@@ -455,6 +488,7 @@ $(document).ready(function() {
          					</th>
          				</tr>
          			</table>
+         				<p class="text-center">${roomDto.user_name}</p>
          			</th>
          		</tr>
          		<tr>

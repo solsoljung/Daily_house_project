@@ -102,4 +102,15 @@
 		where user_email = #{user_email}
 	</update>
 	
+<!-- 	쪽지 받는 사람 정보 -->
+	<select id="getReceiver" resultType="UserVo">
+		select * from tbl_user
+		where user_email = #{user_email}
+	</select>
+	
+<!-- 	쪽지 보내기 -->
+	<insert id="sendMessagePro">
+		insert into tbl_message (message_num, receiver, sender, message_text)
+		values (seq_message.nextval, #{receiver}, #{sender}, #{message_text})
+	</insert>
 </mapper>

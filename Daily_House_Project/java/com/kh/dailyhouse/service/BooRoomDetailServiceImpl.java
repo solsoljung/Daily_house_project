@@ -10,11 +10,13 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.kh.dailyhouse.domain.MessageDto;
 import com.kh.dailyhouse.domain.ReviewPagingDto;
 import com.kh.dailyhouse.domain.RoomDto;
 import com.kh.dailyhouse.domain.RoomPictureVo;
 import com.kh.dailyhouse.domain.RoomReviewDto;
 import com.kh.dailyhouse.domain.RoomReviewVo;
+import com.kh.dailyhouse.domain.UserVo;
 import com.kh.dailyhouse.persistence.BooRoomDetailDao;
 
 @Service
@@ -100,6 +102,19 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 		booRoomDetailDao.setReview(roomReviewVo);
 		booRoomDetailDao.setPointList(roomReviewVo);
 		booRoomDetailDao.setUserPoint(roomReviewVo);
+	}
+	
+	//쪽지 받는 사람 정보
+	@Override
+	public UserVo getReceiverInfo(String user_email) throws Exception {
+		UserVo userVo = booRoomDetailDao.getReceiverInfo(user_email);
+		return userVo;
+	}
+	
+	//쪽지 보내기
+	@Override
+	public void sendMessagePro(MessageDto messageDto) throws Exception {
+		booRoomDetailDao.sendMessagePro(messageDto);
 	}
 	
 }

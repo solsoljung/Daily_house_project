@@ -9,10 +9,13 @@ import com.kh.dailyhouse.domain.RoomVo;
 public interface CyRoomDao {
 	
 	// 관리자용 숙소 room_admin_check가 N인 값 리스트 가져오기
-	public List<RoomDetailDto> getRoomAdminCheckNList() throws Exception;
+	public List<RoomDetailDto> getRoomAdminCheckNList(CyPagingDto cyPagingDto) throws Exception;
 	
 	// 관리자용 숙소 room_admin_check가 Y인 값 리스트 가져오기
 	public List<RoomDetailDto> getRoomAdminCheckYList(CyPagingDto cyPagingDto) throws Exception;
+	
+	// N 페이징용 전체 갯수
+	public int getRoomAdminCheckNCount() throws Exception;
 	
 	// Y 페이징용 전체 갯수
 	public int getRoomAdminCheckYCount() throws Exception;

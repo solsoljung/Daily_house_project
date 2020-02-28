@@ -43,7 +43,7 @@ $(function() {
 
 <section class="ftco-section ftco-room">
 	<div class="container">
-		<h1 style="font-family: 맑은 고딕;">포인트 이용 내역</h1>
+		<h1 style="font-family: 맑은 고딕;">관리자 예약 관리</h1>
 		<div class="row bg-white p-md-5 p-4 mb-5 border">
 			<c:choose>
 				<c:when test="${userVo.user_email == 'admin@naver.com'}">
@@ -71,7 +71,7 @@ $(function() {
 									</c:if>
 									<c:if test="${adminReservaionList.reserv_state == 'N'}">
 										예약 취소
-										<input type="button" value="확인" class="btn_reserv_pay" 
+										<input type="button" value="승인" class="btn_reserv_pay btn btn-primary" 
 											   data-reserv_num="${ adminReservaionList.reserv_num}"
 											   data-reserv_price="${adminReservaionList.reserv_price}"
 											   data-user_email="${adminReservaionList.user_email}"
