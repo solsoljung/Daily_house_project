@@ -59,6 +59,9 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 		//3구역 사진 정보 얻기
 		List<RoomPictureVo> ThreeAreaPic = booRoomDetailDao.getThreeAreapic(room_num);
 		
+		//체크 아웃 한사람만 후기 쓸수 있게 하기
+		List<String> checkOutUserList = booRoomDetailDao.checkOutSearch(room_num);
+		
 		//방 옵션 코드 받기
 		String optionCode = "";
 		if (dto.getRoom_option_code() != null) {
@@ -76,6 +79,7 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 		paramMap.put("ThreeAreaPic", ThreeAreaPic);
 		paramMap.put("ReviewList", reviewList);
 		paramMap.put("type", type);
+		paramMap.put("checkOutUserList", checkOutUserList);
 		
 		if (!(optionCode.equals("")) || optionCode != null) {
 			StringTokenizer tokenizer = new StringTokenizer(optionCode,",");
