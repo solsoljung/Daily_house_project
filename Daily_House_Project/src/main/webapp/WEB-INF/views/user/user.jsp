@@ -27,8 +27,8 @@ $(function(){
 			$("#input_img").trigger("click");
 	});
 	
-	var sel_file;
 	// 미리보기!
+	var sel_file;
 	$("#input_img").on("change", handleImgFileSelect);
 	
 	
@@ -137,6 +137,7 @@ function handleImgFileSelect(e) {
               <div class="row">
                 <div class="col-md-12 form-group">
                   <label class="text-black font-weight-bold" for="picture" id="picture" style="color: #ff0000;">Profile</label>
+                  <br>
                   <c:choose>
 				   	<c:when test="${null == userVo.user_pic}">
                  	 <img src="/images/profile/user.jpg" height="180">
@@ -147,6 +148,7 @@ function handleImgFileSelect(e) {
 		             </div>
 					</c:otherwise>
 				  </c:choose>
+                  <br>
                   <br>
                   <input type="file" id="input_img" name="file" class="btn btn-primary text-white" style="display: none;">
                   <button type="button" class="btn btn-primary text-white py-2 px-5" id="fileButton" style="display: none;" >프로필 사진수정</button>
