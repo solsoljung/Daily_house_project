@@ -10,6 +10,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.kh.dailyhouse.domain.MessageDto;
 import com.kh.dailyhouse.domain.ReviewPagingDto;
 import com.kh.dailyhouse.domain.RoomDto;
 import com.kh.dailyhouse.domain.RoomPictureVo;
@@ -108,6 +109,12 @@ public class BooRoomDetailServiceImpl implements BooRoomDetailService {
 	public UserVo getReceiverInfo(String user_email) throws Exception {
 		UserVo userVo = booRoomDetailDao.getReceiverInfo(user_email);
 		return userVo;
+	}
+	
+	//쪽지 보내기
+	@Override
+	public void sendMessagePro(MessageDto messageDto) throws Exception {
+		booRoomDetailDao.sendMessagePro(messageDto);
 	}
 	
 }

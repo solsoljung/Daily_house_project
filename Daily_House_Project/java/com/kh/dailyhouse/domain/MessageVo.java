@@ -10,6 +10,7 @@ public class MessageVo {
 	private String message_text;
 	private Timestamp open_date;
 	private Timestamp send_date;
+	
 	public int getMessage_num() {
 		return message_num;
 	}

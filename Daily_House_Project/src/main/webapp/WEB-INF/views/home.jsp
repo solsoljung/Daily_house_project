@@ -108,10 +108,10 @@ $(document).ready(function() {
                 <div class="testimony-wrap p-4 pb-5 text-center">
                 <c:choose>
 				   	<c:when test="${null == HomeReviewDto.user_pic}">
-				   	<div class="user-img mb-5" style="background-image: url(/images/profile/user.jpg)"></div>
+				   	<div class="user-img mb-5" style="background-image: url(/images/profile/user.jpg)">
 				   	</c:when>
 				   	<c:otherwise>
-				   	<div class="user-img mb-5" style="background-image: url(/si/displayFile?fileName=/${HomeReviewDto.user_pic})"></div>
+				   	<div class="user-img mb-5" style="background-image: url(/si/displayFile?fileName=/${HomeReviewDto.user_pic})">
 				   	</c:otherwise>
 				</c:choose>
                     <span class="quote d-flex align-items-center justify-content-center">
@@ -125,11 +125,11 @@ $(document).ready(function() {
                     <span class="position">${HomeReviewDto.room_title}</span>
                   </div>
                 </div>
+              </div>
             </c:forEach>
               </div>
             </div>
           </div>
-        </div>
     </section>
 
 <!-- end section -->
