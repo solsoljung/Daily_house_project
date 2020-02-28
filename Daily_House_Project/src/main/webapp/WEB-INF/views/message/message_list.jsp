@@ -44,13 +44,13 @@ $(document).ready(function() {
           <div class="col-md-10 text-center" data-aos="fade-up">
             <h1>
             	<span class="heading">
-            		Reservation List
+            		나의 메세지
             	</span>
             </h1>
             <h2>
-            	<span style="font-size: 1em; color: white; font-family: 고딕;">
+            	<!-- <span style="font-size: 1em; color: white; font-family: 고딕;">
             		예약 및 결제내역
-            	</span>
+            	</span> -->
             </h2>
           </div>
         </div>
