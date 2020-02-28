@@ -65,6 +65,36 @@ $(function(){
 		}
 	});
 	
+	
+	// room_option_code
+	var room_option_code = "${roomDetailDto.room_option_code}";
+	
+	split();
+	function split() {			
+		var res = room_option_code.split(",");	
+// 		console.log("==============================res==============================");
+// 		console.log(res);
+		
+		var data_options = [];
+		$(".chb").each(function(){
+			data_options.push($(this).attr("data-option"));
+		});
+// 		console.log("==========================data_options==========================");
+// 		console.log(data_options);
+		
+		for(var i=0; i<res.length; i++){
+// 			console.log("i"+i+ ": " + res[i]);
+			for(var v=0; v<data_options.length; v++){
+// 				console.log("v"+v+ ": " + data_options[v]);
+				if(res[i] == data_options[v]){
+					$(".chb").eq(v).prop("checked", true);
+				}
+			}
+		}
+	};	//function split()	
+	
+	
+	
 	var listNum = "";
 	
 	// 첨부파일 START ===================================================================================
