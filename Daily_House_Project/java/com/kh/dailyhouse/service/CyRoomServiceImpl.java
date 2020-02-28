@@ -38,8 +38,8 @@ public class CyRoomServiceImpl implements CyRoomService {
 	
 	// 관리자 START
 	@Override
-	public List<RoomDetailDto> getRoomAdminCheckNList() throws Exception {
-		return roomDao.getRoomAdminCheckNList();
+	public List<RoomDetailDto> getRoomAdminCheckNList(CyPagingDto cyPagingDto) throws Exception {
+		return roomDao.getRoomAdminCheckNList(cyPagingDto);
 	}
 
 	@Override
@@ -153,10 +153,10 @@ public class CyRoomServiceImpl implements CyRoomService {
 	public int getRoomAdminCheckYCount() throws Exception {
 		return roomDao.getRoomAdminCheckYCount();
 	}
-
 	
-
-	
-	
+	@Override
+	public int getRoomAdminCheckNCount() throws Exception {
+		return roomDao.getRoomAdminCheckNCount();
+	}
 
 }

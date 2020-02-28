@@ -174,7 +174,7 @@ public class CyController {
 	
 	// 관리자 room_admin_check가 N인 방들 보기
 	@RequestMapping(value = "/AdminRoomListN", method = {RequestMethod.GET, RequestMethod.POST})
-	public String AdminRoomListN(HttpSession session, Model model, RedirectAttributes rttr) throws Exception{
+	public String AdminRoomListN(HttpSession session, Model model, RedirectAttributes rttr, CyPagingDto cyPagingDto) throws Exception{
 		UserVo userVo = (UserVo)session.getAttribute("userVo");
 		// 로그인 안 했을 경우 return
 		if(userVo == null) {	
@@ -186,8 +186,16 @@ public class CyController {
 			rttr.addFlashAttribute("msg", "notAdmin");
 			return "redirect:/si/loginHost";
 		}
+		
+		// 페이징
+		if(1<= cyPagingDto.getPage() && cyPagingDto.getPage() <= 10) {
+			cyPagingDto.setHasPrev(false);
+		}
+		int totalCount = roomService.getRoomAdminCheckNCount();
+		cyPagingDto.setTotalCount(totalCount);
+		
 		// 관리자 check N인 숙소 리스트 
-		List<RoomDetailDto> list = roomService.getRoomAdminCheckNList();
+		List<RoomDetailDto> list = roomService.getRoomAdminCheckNList(cyPagingDto);
 		model.addAttribute("list", list);
 		
 		return "/admin/admin_check_n";
