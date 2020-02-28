@@ -66,6 +66,11 @@ $(function(){
 	});
 	
 	
+	// room_location을 저장할 공간
+	var room_location_full = "${roomDetailDto.room_location}" + " " + "${roomDetailDto.room_location_detail}";
+	$("#roadFullAddr").val(room_location_full);
+	
+	
 	// room_option_code
 	var room_option_code = "${roomDetailDto.room_option_code}";
 	
@@ -146,9 +151,6 @@ $(function(){
 	<input type="hidden" name="room_num" value="${roomDetailDto.room_num}"/>
 	<input type="hidden" name="page" value="${cyPagingDto.page}"/>
 </form>
-${cyPagingDto.page}
-<br>
-${roomDetailDto.room_num}
 <br><br><br><br>
 
 <%-- roomDetailDto: ${roomDetailDto} --%>
