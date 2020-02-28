@@ -48,9 +48,6 @@ $(document).ready(function() {
 });
 </script>
 
-
-<br>
-
 <section class="section bg-light">
  <div class="container">
         <div class="row justify-content-center text-center mb-5">
