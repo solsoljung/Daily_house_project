@@ -20,6 +20,10 @@
 <script>
 $(document).ready(function() {
 	
+	// 현재 클릭된 메뉴를 활성화
+	$(".nav-item:eq(0)").attr("class", "nav-item");
+	$(".nav-item:eq(1)").attr("class", "nav-item active");
+	
 	// 좋아요 해제하기(삭제) ajax 이용
 	$(".heartDiv").click(function(e) {
 		e.preventDefault();

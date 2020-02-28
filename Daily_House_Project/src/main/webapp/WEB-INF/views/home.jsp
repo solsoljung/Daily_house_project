@@ -17,6 +17,7 @@
 
 <script>
 $(document).ready(function() {
+	
 	list = new Array();
 	var moreNum1 = 3;
 	var moreNum2 = 7;

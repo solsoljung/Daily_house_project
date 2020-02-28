@@ -113,4 +113,11 @@
 		insert into tbl_message (message_num, receiver, sender, message_text)
 		values (seq_message.nextval, #{receiver}, #{sender}, #{message_text})
 	</insert>
+	
+<!-- 	체크아웃 한사람만 후기 쓸수 있게 하기 -->
+	<select id="checkOutSearch" resultType="String">
+		select user_email from tbl_reservation
+		where reserv_ing = 'N' and room_num= #{room_num}
+	</select>
+	
 </mapper>

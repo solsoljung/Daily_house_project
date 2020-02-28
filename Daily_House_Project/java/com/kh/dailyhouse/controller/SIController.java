@@ -84,6 +84,8 @@ public class SIController {
 			return "redirect:/si/loginHost";
 		}
 		
+		String user_email = userVo1.getUser_email();
+		
 		String redirectUri = "/";
 		
 		String goUri = (String)session.getAttribute("goUri");
@@ -92,6 +94,7 @@ public class SIController {
 			redirectUri = goUri;
 		}
 		
+		session.setAttribute("user_email", user_email);
 		session.setAttribute("userVo", userVo1);
 		rttr.addFlashAttribute("msg", "success");
 		return "redirect:" + redirectUri;
@@ -104,7 +107,11 @@ public class SIController {
 	}
 	// 내정보 가는 컨트롤러
 	@RequestMapping(value = "/userInformation", method = RequestMethod.GET)
-	public String userInformation() throws Exception {
+	public String userInformation(HttpSession session) throws Exception {
+		String user_email =(String)session.getAttribute("user_email");
+		UserVo userVo = siUserService.getUserData(user_email);
+		System.out.println("userVo입니다아아아아아아"+userVo);
+		session.setAttribute("userVo", userVo);
 		return "/user/user";
 	}
 	// 내정보 수정 처리
