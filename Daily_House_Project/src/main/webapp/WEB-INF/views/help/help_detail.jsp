@@ -156,6 +156,7 @@ ${boardVo.board_content}</textarea></td>
 		</div>
 		</div>
 		
+		<div id="divBr"></div>
 		
 	</form>
 	</div>
@@ -167,7 +168,7 @@ ${boardVo.board_content}</textarea></td>
 	</div>
 </div><br><br><br>
 
-<%@ include file = "../../views/casahotel/casahotel_footer.jsp" %>			
+<%-- <%@ include file = "../../views/casahotel/casahotel_footer.jsp" %>			 --%>
 
 <%@ include file = "../../views/casahotel/casahotel_script2.jsp" %>			
 <%@ include file = "../../views/islagrande/islagrande_script2.jsp" %>	

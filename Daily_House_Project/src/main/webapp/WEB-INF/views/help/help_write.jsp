@@ -104,6 +104,7 @@ $(function(){
 			
 	<div class="col-md-2"></div>
 	</div>
+	
 </div><br><br><br>
 
 <%@ include file = "../../views/casahotel/casahotel_footer.jsp" %>			
