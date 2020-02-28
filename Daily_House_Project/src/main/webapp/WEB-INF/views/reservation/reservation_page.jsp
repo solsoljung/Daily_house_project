@@ -157,8 +157,7 @@ $(function() {
         </div>
       </a>
 </section>
-userVo: ${userVo}<br>
-testDTo: ${testDto}
+
    <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">

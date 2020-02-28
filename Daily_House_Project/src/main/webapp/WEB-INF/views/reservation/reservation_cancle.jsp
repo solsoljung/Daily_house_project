@@ -43,7 +43,6 @@ $(function() {
         </div>
       </a>
 </section>
-${dto}
    <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">
