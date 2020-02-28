@@ -101,7 +101,29 @@ $(document).ready(function() {
 
 <div class="container">
 <div class="row">
-${likeDto}
+<c:if test="${empty likeList}">
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4">
+			<br>
+			<br>
+			<br>
+				<h2>
+					<span style="font-family:Arial;">
+					찜목록이 비어있습니다.
+					</span>
+				</h2>	
+			<br>
+			<br>
+			<br>
+		</div>
+		<div class="col-md-4">
+		</div>
+	</div>
+</div>
+</c:if>
 	<c:forEach items="${likeList}" var="LikeDto">
 	<div class="col-md-3">	
 	<div class="row mb-5">
