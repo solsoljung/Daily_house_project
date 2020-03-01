@@ -10,12 +10,25 @@
 		select count(*) from tbl_message where receiver = #{user_email} and open_date is null
 	</select>
 	
+	<!-- 받은 메세지 목록 -->
 	<select id="getMessageList" resultType="MessageVo">
 		select * from tbl_message where receiver = #{user_email} order by open_date nulls first, send_date desc
 	</select>
 	
+	<!-- 보낸 메세지 목록 -->
+	<select id="getSendMessageList" resultType="MessageVo">
+		select * from tbl_message where sender = #{user_email} order by send_date desc
+	</select>
+	
+	<!-- 메세지 읽은 시간 업데이트 -->
 	<update id="openDateUpdate">
 		update tbl_message set open_date = sysdate where message_num = #{message_num}
 	</update>
+	
+	<!-- 답장 보내기 -->
+	<insert id="sendReply">
+		insert into tbl_message (message_num, receiver, sender, message_text)
+		values (seq_message.nextval, #{receiver}, #{sender}, #{message_text})
+	</insert>
   
 </mapper>

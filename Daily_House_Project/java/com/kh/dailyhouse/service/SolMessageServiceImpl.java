@@ -33,4 +33,15 @@ public class SolMessageServiceImpl implements SolMessageService {
 		
 	}
 
+	@Override
+	public void sendReply(MessageVo messageVo) throws Exception {
+		messageDao.sendReply(messageVo);
+		
+	}
+
+	@Override
+	public List<MessageVo> getSendMessageList(String user_email) throws Exception {
+		return messageDao.getSendMessageList(user_email);
+	}
+
 }
