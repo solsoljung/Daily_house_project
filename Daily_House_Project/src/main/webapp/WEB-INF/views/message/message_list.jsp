@@ -15,8 +15,10 @@
 $(document).ready(function() {
 	$(".readMessage").click(function(e){
 		var that = $(this).children("span");
+		var that2 = $(this).parent().next().children().children("span").eq(3);
 		var message_num = $(this).attr("data-num");
-		console.log(message_num);
+		//console.log(message_num);
+		console.log(that2);
 		
 		var url = "/sol/openDateUpdate/" + message_num;
 		
@@ -29,10 +31,9 @@ $(document).ready(function() {
 			},
 			"success" : function(rData) {
 				console.log(rData);
-				if(rData == "success"){
-					console.log("성공입나더ㅏ");
-					that.fadeOut('1000');
-				}
+				console.log("성공입나더ㅏ");
+				that.fadeOut('1000');
+				that2.text(rData);
 			}
 		}); // $.ajax()
 	});
@@ -141,10 +142,10 @@ $(document).ready(function() {
 					</div>
 					<div id="card-element-${vo.message_num}" class="collapse">
 						<div class="card-body">
-							보낸 사람 : ${vo.sender}<br>
-							내용&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ${vo.message_text}<br>
-							보낸 날짜 : ${vo.send_date}<br>
-							읽은 날짜 : ${vo.open_date}<br>
+							보낸 사람 : <span>${vo.sender}</span><br>
+							내용&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span>${vo.message_text}</span><br>
+							보낸 날짜 : <span>${vo.send_date}</span><br>
+							읽은 날짜 : <span>${vo.open_date}</span><br>
 							<div align="right">
 								<input type="button" class="btn btn-primary btnReply"" data-sender="${vo.sender}" data-receiver="${vo.receiver}" value="답장">
 							</div>
@@ -171,10 +172,10 @@ $(document).ready(function() {
 					</div>
 					<div id="card-element-${sendVo.message_num}" class="collapse">
 						<div class="card-body">
-							보낸 사람 : ${sendVo.sender}<br>
-							내용&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ${sendVo.message_text}<br>
-							보낸 날짜 : ${sendVo.send_date}<br>
-							읽은 날짜 : ${sendVo.open_date}<br>
+							<span>보낸 사람 : ${sendVo.sender}</span><br>
+							<span>내용&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ${sendVo.message_text}</span><br>
+							<span>보낸 날짜 : ${sendVo.send_date}</span><br>
+							<span>읽은 날짜 : ${sendVo.open_date}</span><br>
 						</div>
 					</div>
 				</div>

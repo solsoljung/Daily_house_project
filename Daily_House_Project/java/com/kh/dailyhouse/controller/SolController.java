@@ -166,8 +166,10 @@ public class SolController {
 	public String openDateUpdate(@PathVariable("message_num") int message_num) throws Exception {
 		System.out.println("controller의 메세지 번호: "+message_num);
 		messageService.openDateUpdate(message_num);
-		
-		return "success";
+		MessageVo vo = messageService.getMessageVo(message_num);
+		Timestamp openDate = vo.getOpen_date();
+		String strOpenDateStr = openDate.toString();
+		return strOpenDateStr;
 	}
 	
 	//답장 페이지로 이동
