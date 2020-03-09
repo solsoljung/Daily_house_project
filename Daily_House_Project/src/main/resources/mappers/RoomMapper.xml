@@ -130,7 +130,8 @@
                     room_bed = #{room_bed},
                     room_bathroom = #{room_bathroom},
                     room_option_code = #{room_option_code},
-                    room_status = #{room_status}
+                    room_status = #{room_status},
+                    room_admin_check = 'N' 
                 where room_num = #{room_num}
 	</update>
 

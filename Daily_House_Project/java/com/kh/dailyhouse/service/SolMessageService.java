@@ -16,4 +16,6 @@ public interface SolMessageService {
 	public void sendReply(MessageVo messageVo) throws Exception;
 	//보낸 메세지 목록 얻어오기
 	public List<MessageVo> getSendMessageList(String user_email) throws Exception;
+	//메세지 정보 하나 받아오기
+	public MessageVo getMessageVo(int message_num) throws Exception;
 }

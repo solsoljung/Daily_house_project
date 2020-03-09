@@ -30,5 +30,10 @@
 		insert into tbl_message (message_num, receiver, sender, message_text)
 		values (seq_message.nextval, #{receiver}, #{sender}, #{message_text})
 	</insert>
+	
+	<!-- 메세지 정보 하나 받아오기 -->
+	<select id="getMessageVo" resultType="MessageVo">
+		select * from tbl_message where message_num = #{message_num}
+	</select>
   
 </mapper>
