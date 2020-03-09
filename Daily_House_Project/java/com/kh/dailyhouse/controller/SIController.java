@@ -56,8 +56,11 @@ public class SIController {
 	public String register_run(UserVo userVo) throws Exception{
 		// 요청정보 얻어서
 		// DB 에 넣기 - Service - Dao - Mybatis - Oracle
+		System.out.println("userVo : "+userVo);
+		
 		siUserService.setUserData(userVo);
 		siUserService.setPointList(userVo);
+		
 		return "/register/registerSuccess";
 	}
 	// 회원가입 완료창

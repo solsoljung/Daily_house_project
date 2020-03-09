@@ -132,6 +132,8 @@ $(function(){
 <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">
+          <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+          </div>
           <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
             <form action="/si/register_run" method="post" role="form" class="bg-white p-md-5 p-4 mb-5 border" id="joinForm">
             	<input type="hidden" name="user_pic" value="user.jpg">
@@ -177,16 +179,17 @@ $(function(){
 	          </div>
             </form>
           </div>
-          
-          <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
-            <div class="row">
-              <div class="col-md-10 ml-auto contact-info">
-                <p><span class="d-block">Address:</span> <span> 446-77 울산광역시 남구 삼산로35번길 19 (신정동)</span></p>
-                <p><span class="d-block">Phone:</span> <span> (+02) 052 - 000 - 0000</span></p>
-                <p><span class="d-block">Email:</span> <span> ooooo@oooo.ooo</span></p>
-              </div>
-            </div>
+           <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
           </div>
+<!--           <div class="col-md-5" data-aos="fade-up" data-aos-delay="200"> -->
+<!--             <div class="row"> -->
+<!--               <div class="col-md-10 ml-auto contact-info"> -->
+<!--                 <p><span class="d-block">Address:</span> <span> 446-77 울산광역시 남구 삼산로35번길 19 (신정동)</span></p> -->
+<!--                 <p><span class="d-block">Phone:</span> <span> (+02) 052 - 000 - 0000</span></p> -->
+<!--                 <p><span class="d-block">Email:</span> <span> ooooo@oooo.ooo</span></p> -->
+<!--               </div> -->
+<!--             </div> -->
+<!--           </div> -->
         </div>
       </div>
     </section>
