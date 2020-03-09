@@ -9,7 +9,7 @@ public class AdminReservResultDto {
 	
 	public AdminReservResultDto() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public AdminReservResultDto(int reserv_num, int reserv_price, int reserv_mile, String user_email, int room_num) {

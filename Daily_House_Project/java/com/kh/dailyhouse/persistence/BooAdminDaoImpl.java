@@ -45,6 +45,9 @@ public class BooAdminDaoImpl implements BooAdminDao {
 	//포인트 이용 내역에 작성 (마일리지 회수부분)
 	@Override
 	public void setPointListMile(AdminReservResultDto adminReservResultDto) throws Exception {
+		int Reserv_mile = adminReservResultDto.getReserv_mile()*(-1);
+		adminReservResultDto.setReserv_mile(Reserv_mile);
+		
 		sqlSession.insert(NAMESPACE+".setPointListMile", adminReservResultDto);
 	}
 	
