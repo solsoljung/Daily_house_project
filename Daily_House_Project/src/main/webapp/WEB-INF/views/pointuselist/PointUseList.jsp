@@ -71,22 +71,7 @@ $(function() {
 										 				</c:otherwise>
 										 			</c:choose>
 										 		>
-										 			Point:
-										 			<c:choose>
-										 				<c:when test="${PointDto.point_code == 'R8'}">
-										 					-
-										 				</c:when>
-										 				<c:when test="${PointDto.point_code == 'R6'}">
-										 					-
-										 				</c:when>
-										 				<c:when test="${PointDto.point_code == 'R1'}">
-										 					-
-										 				</c:when>
-										 				<c:otherwise>
-										 					+
-										 				</c:otherwise>
-										 			</c:choose>
-										 			${PointDto.point_score}
+										 			Point:${PointDto.point_score}
 										 		</td>
 										 		<td style="width: 25%; color:black;">
 										 			${PointDto.point_code_explain}

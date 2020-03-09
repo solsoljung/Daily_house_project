@@ -9,6 +9,7 @@
 	<select id="getAdminReservationList" resultType="ReservationVo">
 		select * from tbl_reservation
 		where reserv_ing = 'Y'
+		order by reserv_num desc
 	</select>
 	
 <!-- 	R로 바꿔주기 -->
