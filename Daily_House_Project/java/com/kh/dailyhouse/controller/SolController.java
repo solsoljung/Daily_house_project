@@ -164,7 +164,7 @@ public class SolController {
 	public String sendReply(MessageVo messageVo, Model model) throws Exception {
 		String receiver = messageVo.getReceiver();
 		String sender = messageVo.getSender();
-		
+			
 		System.out.println("messageVo: "+ messageVo);
 		
 		//여기하고 있ㅅ었상ㅁ!!
