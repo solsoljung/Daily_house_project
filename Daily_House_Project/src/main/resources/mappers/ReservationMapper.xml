@@ -43,7 +43,7 @@
 	<!-- 예약 목록 보기 테스트-->
 	<select id="getReservationList" resultType="ReservationVo">
 		select * from tbl_reservation
-		where user_email = #{user_email} and reserv_state = 'Y' order by reserv_num desc
+		where user_email = #{user_email} order by reserv_num desc
 	</select>
 	
 	<!-- 시퀀스 값 얻기 -->

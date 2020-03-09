@@ -142,11 +142,11 @@ $(function() {
             		Reservation
             	</span>
             </h1>
-            <h2>
+           <!-- <h2>
             	<span style="font-size: 1em; color: white; font-family: 고딕;">
-            		숙박예약
+            		예약
             	</span>
-            </h2>
+            </h2> -->
           </div>
         </div>
       </div>

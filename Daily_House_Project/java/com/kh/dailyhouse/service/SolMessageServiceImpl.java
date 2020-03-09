@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.dailyhouse.domain.MessageVo;
 import com.kh.dailyhouse.persistence.SolMessageDao;
+import com.sun.xml.internal.ws.encoding.xml.XMLMessage.MessageDataSource;
 
 @Service
 public class SolMessageServiceImpl implements SolMessageService {
@@ -42,6 +43,12 @@ public class SolMessageServiceImpl implements SolMessageService {
 	@Override
 	public List<MessageVo> getSendMessageList(String user_email) throws Exception {
 		return messageDao.getSendMessageList(user_email);
+	}
+
+	@Override
+	public MessageVo getMessageVo(int message_num) throws Exception {
+
+		return messageDao.getMessageVo(message_num);
 	}
 
 }
