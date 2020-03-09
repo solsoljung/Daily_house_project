@@ -92,15 +92,7 @@ $(document).ready(function() {
 <section>
 <%-- ${messageList} --%>
 <!-- 여기여기 -->
-<c:if test="${empty messageList}">
-<br>
-<br>
-<br>
-<h4 align="center" style="font-family:Arial;">메세지가 없습니다.</h4>
-<br>
-<br>
-<br>
-</c:if>
+
 <div class="container-fluid">
 	<div class="row">
 	<form id="frmReply" action="/sol/reply" method="post">
@@ -127,6 +119,15 @@ $(document).ready(function() {
 				</ul>
 				<div class="tab-content">
 <!-- tab 첫번째의 내용 -->
+<c:if test="${empty messageList}">
+<br>
+<br>
+<br>
+<h4 align="center" style="font-family:Arial;">메세지가 없습니다.</h4>
+<br>
+<br>
+<br>
+</c:if>
 					<div class="tab-pane card-174818 active" id="tab1">
 						<c:forEach items="${messageList}" var="vo">
 				<div class="card">
