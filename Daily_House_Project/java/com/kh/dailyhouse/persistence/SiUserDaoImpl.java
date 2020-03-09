@@ -71,6 +71,7 @@ public class SiUserDaoImpl implements SiUserDao {
 	@Override
 	public void setPointList(UserVo userVo) throws Exception {
 		String user_email = userVo.getUser_email();
+		System.out.println("user_email : "+user_email);
 		sqlSession.insert(NAMESPACE+".setPointList", user_email);
 		
 	}
