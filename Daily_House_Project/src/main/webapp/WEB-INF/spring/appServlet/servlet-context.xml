@@ -23,9 +23,9 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<!-- 업로드 경로 String uploadPath = new String("") C://localhost/upload/team3 -->
+	<!-- 업로드 경로 String uploadPath = new String("") C://localhost/upload/team3 C:\upload\team3 -->
 	<beans:bean id="uploadPath" class="java.lang.String">
-		<beans:constructor-arg value="C:\upload\team3"/>
+		<beans:constructor-arg value="//192.168.0.34/upload/team3"/>
 	</beans:bean>
 	
 	<beans:bean id="multipartResolver"
