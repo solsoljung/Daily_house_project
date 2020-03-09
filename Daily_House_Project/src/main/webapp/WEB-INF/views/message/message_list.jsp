@@ -120,16 +120,17 @@ $(document).ready(function() {
 				</ul>
 				<div class="tab-content">
 <!-- tab 첫번째의 내용 -->
+
+					<div class="tab-pane card-174818 active" id="tab1">
 <c:if test="${empty messageList}">
 <br>
 <br>
 <br>
-<h4 align="center" style="font-family:Arial;">메세지가 없습니다.</h4>
+<h4 align="center" style="font-family:Arial;">받은 메세지가 없습니다.</h4>
 <br>
 <br>
 <br>
 </c:if>
-					<div class="tab-pane card-174818 active" id="tab1">
 						<c:forEach items="${messageList}" var="vo">
 				<div class="card">
 					<div class="card-header">
@@ -148,7 +149,7 @@ $(document).ready(function() {
 							보낸 날짜 : <span>${vo.send_date}</span><br>
 							읽은 날짜 : <span>${vo.open_date}</span><br>
 							<div align="right">
-								<input type="button" class="btn btn-primary btnReply"" data-sender="${vo.sender}" data-receiver="${vo.receiver}" value="답장">
+								<input type="button" class="btn btn-primary btnReply" data-sender="${vo.sender}" data-receiver="${vo.receiver}" value="답장">
 							</div>
 						</div>
 					</div>
@@ -160,6 +161,15 @@ $(document).ready(function() {
 
 <!-- tab 두번째의 내용 -->
 					<div class="tab-pane card-174818" id="tab2">
+<c:if test="${empty sendMessageList}">
+<br>
+<br>
+<br>
+<h4 align="center" style="font-family:Arial;">보낸 메세지가 없습니다.</h4>
+<br>
+<br>
+<br>
+</c:if>
 						<c:forEach items="${sendMessageList}" var="sendVo">
 				<div class="card">
 					<div class="card-header">

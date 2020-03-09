@@ -177,8 +177,8 @@ public class SolController {
 	public String sendReply(MessageVo messageVo, Model model) throws Exception {
 		String sender = messageVo.getSender();
 		String receiver = messageVo.getReceiver();
-		
 		messageVo.setSender(receiver);
+		messageVo.setReceiver(sender);
 		System.out.println("messageVo: "+ messageVo);
 
 		if (sender.equals("") || sender == null ) {

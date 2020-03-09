@@ -46,7 +46,7 @@
       <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
         <div class="row">
           <div class="col-md-10 ml-auto contact-info">
-          	<p><span>호스트에게 쪽지 보내기</span></p>
+          	<p><span>메세지 보내기</span></p>
           	<p>
           		<span>
           			<c:choose>
