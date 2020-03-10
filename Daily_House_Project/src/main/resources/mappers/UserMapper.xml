@@ -4,21 +4,25 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.kh.mappers.UserMapper">
+
 	<!-- 유저 정보 저장 -->
 	<insert id="setUserData">
 		insert into tbl_user (user_email, user_pw, user_name, user_phone)
 		values (#{user_email}, #{user_pw}, #{user_name}, #{user_phone})
 	</insert>
+	
 <!-- 	회원정보(아이디 비밀번호) 얻기 -->
 	<select id="login_run" resultType="UserVo">
 		select * from tbl_user
 		where user_email = #{user_email} and user_pw = #{user_pw}
 	</select>
+	
 <!-- 	회원정보 얻기 -->
 	<select id="getUserData" resultType="UserVo">
 		select * from tbl_user
 		where user_email = #{user_email}
 	</select>
+
 <!-- 	회원정보 수정 -->
 	<update id="userUpdate">
 		update tbl_user set
@@ -76,10 +80,10 @@
 	                order by room_num desc) a)
 	where rnum &gt;=#{moreNum1} and rnum &lt;= #{moreNum2}
 	</select>
-		
+	
 	<insert id="setPointList">
-		insert into tbl_point (point_num, user_email, point_code, point_score)
-		values (seq_point_num.nextval, #{user_email}, 'R4', 1000000)
+		insert into tbl_point (point_num, user_email, point_code, point_score, room_num)
+		values (seq_point_num.nextval, 'qngus0124@gmail.com', 'R4', 1000000, 0)
 	</insert>
 	
 </mapper>

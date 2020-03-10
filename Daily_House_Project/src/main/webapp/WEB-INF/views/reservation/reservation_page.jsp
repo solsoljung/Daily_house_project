@@ -85,7 +85,7 @@ $(function() {
 		var num = $(this).prev().val();			
 		var plusNum = parseInt(num) + 1;			
 					
-		if(plusNum >= 20) {			
+		if(plusNum >= "${testDto.room_people + 1}") {			
 			$(this).prev().val(num);		
 		} else {			
 			$(this).prev().val(plusNum);		
@@ -142,11 +142,11 @@ $(function() {
             		Reservation
             	</span>
             </h1>
-            <h2>
+           <!-- <h2>
             	<span style="font-size: 1em; color: white; font-family: 고딕;">
-            		숙박예약
+            		예약
             	</span>
-            </h2>
+            </h2> -->
           </div>
         </div>
       </div>
@@ -157,7 +157,7 @@ $(function() {
         </div>
       </a>
 </section>
-
+<%-- ${testDto} --%>
    <section class="section contact-section" id="next">
       <div class="container">
         <div class="row">
@@ -207,7 +207,7 @@ $(function() {
 					<ul>					
 						<li>				
 							<a class="minus">-</a>
-							<input type="number" data-num="1" class="numBox" min="1" max="20" value="1" readonly="readonly" style="text-align:center;text-size:20px;"/>
+							<input type="number" data-num="1" class="numBox" min="1" max="${testDto.room_people}" value="1" readonly="readonly" style="text-align:center;text-size:20px;"/>
 							<a class="plus">+</a>			
 						</li>				
 					</ul>	          

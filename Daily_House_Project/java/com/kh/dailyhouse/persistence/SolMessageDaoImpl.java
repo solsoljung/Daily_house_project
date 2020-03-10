@@ -34,4 +34,22 @@ public class SolMessageDaoImpl implements SolMessageDao {
 		sqlSession.update(NAMESPACE + ".openDateUpdate", message_num);
 		
 	}
+
+	@Override
+	public void sendReply(MessageVo messageVo) throws Exception {
+		sqlSession.insert(NAMESPACE + ".sendReply", messageVo);
+		
+	}
+
+	@Override
+	public List<MessageVo> getSendMessageList(String user_email) throws Exception {
+		
+		return sqlSession.selectList(NAMESPACE + ".getSendMessageList", user_email);
+	}
+
+	@Override
+	public MessageVo getMessageVo(int message_num) throws Exception {
+		
+		return sqlSession.selectOne(NAMESPACE + ".getMessageVo", message_num);
+	}
 }

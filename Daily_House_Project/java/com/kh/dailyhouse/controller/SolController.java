@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.dailyhouse.domain.MessageDto;
 import com.kh.dailyhouse.domain.MessageVo;
 import com.kh.dailyhouse.domain.RoomLowHighPriceDto;
 import com.kh.dailyhouse.domain.RoomOptionVo;
@@ -25,6 +26,7 @@ import com.kh.dailyhouse.domain.RoomVo;
 import com.kh.dailyhouse.domain.SearchKeywordDto;
 import com.kh.dailyhouse.domain.SearchVo;
 import com.kh.dailyhouse.domain.UserVo;
+import com.kh.dailyhouse.service.BooRoomDetailService;
 import com.kh.dailyhouse.service.SolMessageService;
 import com.kh.dailyhouse.service.SolRoomService;
 
@@ -37,6 +39,9 @@ public class SolController {
 	
 	@Inject
 	private SolMessageService messageService;
+	
+	@Inject
+	private BooRoomDetailService booRoomDetailService;
 	
 	@RequestMapping(value = "/keywordList/{search_keyword}", method = RequestMethod.GET)
 	@ResponseBody
@@ -135,12 +140,22 @@ public class SolController {
 	//메세지 리스트 페이지로 이동
 	@RequestMapping(value = "/message_list", method = RequestMethod.GET)
 	public String message_list(HttpSession session, Model model) throws Exception {
-		
+
 		UserVo userVo = (UserVo)session.getAttribute("userVo");
+		
+		if (userVo == null ) {
+			return "redirect:/si/loginHost";
+		}
+		
 		String user_email = userVo.getUser_email();
 		
+		//받은 메세지 목록
 		List<MessageVo> messageList = messageService.getMessageList(user_email);
+		//보낸 메세지 목록
+		List<MessageVo> sendMessageList = messageService.getSendMessageList(user_email);
+		
 		model.addAttribute("messageList", messageList);
+		model.addAttribute("sendMessageList", sendMessageList);
 		
 		return "/message/message_list";
 	}
@@ -151,8 +166,42 @@ public class SolController {
 	public String openDateUpdate(@PathVariable("message_num") int message_num) throws Exception {
 		System.out.println("controller의 메세지 번호: "+message_num);
 		messageService.openDateUpdate(message_num);
+		MessageVo vo = messageService.getMessageVo(message_num);
+		Timestamp openDate = vo.getOpen_date();
+		String strOpenDateStr = openDate.toString();
+		return strOpenDateStr;
+	}
+	
+	//답장 페이지로 이동
+	@RequestMapping(value = "/reply", method = RequestMethod.POST)
+	public String sendReply(MessageVo messageVo, Model model) throws Exception {
+		String sender = messageVo.getSender();
+		String receiver = messageVo.getReceiver();
+		messageVo.setSender(receiver);
+		messageVo.setReceiver(sender);
+		System.out.println("messageVo: "+ messageVo);
+
+		if (sender.equals("") || sender == null ) {
+			return "redirect:/si/loginHost";
+		}
 		
-		return "success";
+		UserVo receiverInfo = booRoomDetailService.getReceiverInfo(sender);
+		
+		model.addAttribute("messageVo", messageVo);
+		model.addAttribute("receiverInfo", receiverInfo);
+		
+		return "/message/send_reply";
 	}
 
+	//답장 보내기
+	@RequestMapping(value="/sendReply", method = RequestMethod.POST)
+	public String sendMessagePro(MessageVo messageVo) throws Exception {
+		
+		System.out.println("답장을 보낼 요소들:"+messageVo);
+		
+		messageService.sendReply(messageVo);
+		
+		return "redirect:/sol/message_list";
+	}
+	
 }

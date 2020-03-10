@@ -114,10 +114,16 @@ $(document).ready(function() {
 							<td>${reservationVo.room_reserv_start_date}</td>
 							<td>${reservationVo.room_reserv_end_date}</td>
 							<td>${reservationVo.reserv_price}</td>
-							<c:if test="${toDay < reservationVo.room_reserv_start_date}">
+							<c:if test="${reservationVo.reserv_state == 'Y' && toDay < reservationVo.room_reserv_start_date}">
 								<td>
-									<input type="button" class="cancelBtn" data-reserv_num="${reservationVo.reserv_num}" value="예약취소">
+									<input type="button" class="btn btn-primary cancelBtn" data-reserv_num="${reservationVo.reserv_num}" value="예약취소">
 								</td>
+							</c:if>
+							<c:if test="${reservationVo.reserv_state == 'N'}">
+								<td style="color:#7ab8df;">예약 취소 대기 중입니다.</td>
+							</c:if>
+							<c:if test="${reservationVo.reserv_state == 'R'}">
+								<td style="color:#fb929e;">예약 취소된 방입니다.</td>
 							</c:if>
 						</tr>
 				</c:forEach>

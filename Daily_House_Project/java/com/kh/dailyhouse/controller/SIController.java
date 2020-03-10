@@ -56,8 +56,11 @@ public class SIController {
 	public String register_run(UserVo userVo) throws Exception{
 		// 요청정보 얻어서
 		// DB 에 넣기 - Service - Dao - Mybatis - Oracle
+		System.out.println("userVo : "+userVo);
+		
 		siUserService.setUserData(userVo);
 		siUserService.setPointList(userVo);
+		
 		return "/register/registerSuccess";
 	}
 	// 회원가입 완료창
@@ -65,11 +68,13 @@ public class SIController {
 	public String register_succes() throws Exception{
 		return "redirect:/";
 	}
+	
 	// 로그인으로 가는 컨트롤러
 	@RequestMapping(value = "/loginHost", method = RequestMethod.GET)
 	public String loginHost() throws Exception {
 		return "/login/login";
 	}
+	
 	// 로그인 처리
 	@RequestMapping(value = "/login_run", method = RequestMethod.POST)
 	public String login_run(HttpSession session, RedirectAttributes rttr, UserVo userVo) throws Exception{

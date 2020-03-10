@@ -12,4 +12,10 @@ public interface SolMessageService {
 	public List<MessageVo> getMessageList(String user_email) throws Exception;
 	//오픈날 업데이트
 	public void openDateUpdate(int message_num) throws Exception;
+	//답장 보내기
+	public void sendReply(MessageVo messageVo) throws Exception;
+	//보낸 메세지 목록 얻어오기
+	public List<MessageVo> getSendMessageList(String user_email) throws Exception;
+	//메세지 정보 하나 받아오기
+	public MessageVo getMessageVo(int message_num) throws Exception;
 }

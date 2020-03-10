@@ -13,10 +13,12 @@
 <!-- reservation page section -->
 <script>
 $(document).ready(function() {
-	$(".card-link").click(function(e){
+	$(".readMessage").click(function(e){
 		var that = $(this).children("span");
+		var that2 = $(this).parent().next().children().children("span").eq(3);
 		var message_num = $(this).attr("data-num");
-		console.log(message_num);
+		//console.log(message_num);
+		console.log(that2);
 		
 		var url = "/sol/openDateUpdate/" + message_num;
 		
@@ -29,12 +31,19 @@ $(document).ready(function() {
 			},
 			"success" : function(rData) {
 				console.log(rData);
-				if(rData == "success"){
-					console.log("성공입나더ㅏ");
-					that.fadeOut('1000');
-				}
+				console.log("성공입나더ㅏ");
+				that.fadeOut('1000');
+				that2.text(rData);
 			}
 		}); // $.ajax()
+	});
+	
+	$(".btnReply").click(function(){
+		var sender = $(this).attr("data-sender");
+		var receiver = $(this).attr("data-receiver");
+		$("input[name=sender]").val(sender);
+		$("input[name=receiver]").val(receiver);
+		$("#frmReply").submit();
 	});
 });
 </script>
@@ -84,14 +93,48 @@ $(document).ready(function() {
 <section>
 <%-- ${messageList} --%>
 <!-- 여기여기 -->
+
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-12">
-			<div id="card-174818">
-			<c:forEach items="${messageList}" var="vo">
+	<form id="frmReply" action="/sol/reply" method="post">
+		<input type="hidden" name="receiver">
+		<input type="hidden" name="sender">
+	</form>
+	<div class="col-md-2">
+	</div>
+	<div class="col-md-8">
+	
+	<!-- tab -->
+	<div class="tabbable" id="tabs-245124">
+				<ul class="nav nav-tabs">
+<!-- 첫번째 tab 버튼 -->
+					<li class="nav-item">
+						<a class="nav-link active show" href="#tab1" data-toggle="tab">받은 메세지</a>
+					</li>
+<!-- 첫번째 tab 버튼 끝 -->
+<!-- 두번째 tab 버튼 -->
+					<li class="nav-item">
+						<a class="nav-link" href="#tab2" data-toggle="tab">보낸 메세지</a>
+					</li>
+<!-- 두번째 tab 버튼 끝 -->
+				</ul>
+				<div class="tab-content">
+<!-- tab 첫번째의 내용 -->
+
+					<div class="tab-pane card-174818 active" id="tab1">
+<c:if test="${empty messageList}">
+<br>
+<br>
+<br>
+<h4 align="center" style="font-family:Arial;">받은 메세지가 없습니다.</h4>
+<br>
+<br>
+<br>
+</c:if>
+						<c:forEach items="${messageList}" var="vo">
 				<div class="card">
 					<div class="card-header">
-						 <a class="card-link" data-toggle="collapse" data-parent="#card-174818" data-num="${vo.message_num}" href="#card-element-${vo.message_num}">
+						 <a class="card-link readMessage" data-toggle="collapse" data-parent="#card-174818" data-num="${vo.message_num}" href="#card-element-${vo.message_num}">
 						 ${vo.sender} 님에게서 온 메세지 입니다.
 						 
 						 <c:if test="${empty vo.open_date}">
@@ -101,16 +144,61 @@ $(document).ready(function() {
 					</div>
 					<div id="card-element-${vo.message_num}" class="collapse">
 						<div class="card-body">
-							보낸 사람 : ${vo.sender}<br>
-							내용&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ${vo.message_text}<br>
-							보낸 날짜 : ${vo.send_date}<br>
-							읽은 날짜 : ${vo.open_date}<br>
+							보낸 사람 : <span>${vo.sender}</span><br>
+							내용&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span>${vo.message_text}</span><br>
+							보낸 날짜 : <span>${vo.send_date}</span><br>
+							읽은 날짜 : <span>${vo.open_date}</span><br>
+							<div align="right">
+								<input type="button" class="btn btn-primary btnReply" data-sender="${vo.sender}" data-receiver="${vo.receiver}" value="답장">
+							</div>
 						</div>
 					</div>
 				</div>
 			</c:forEach>
+					</div>
+
+<!-- tab 첫번째의 내용 끝 -->
+
+<!-- tab 두번째의 내용 -->
+					<div class="tab-pane card-174818" id="tab2">
+<c:if test="${empty sendMessageList}">
+<br>
+<br>
+<br>
+<h4 align="center" style="font-family:Arial;">보낸 메세지가 없습니다.</h4>
+<br>
+<br>
+<br>
+</c:if>
+						<c:forEach items="${sendMessageList}" var="sendVo">
+				<div class="card">
+					<div class="card-header">
+						 <a class="card-link" data-toggle="collapse" data-parent="#card-174818" data-num="${sendVo.message_num}" href="#card-element-${sendVo.message_num}">
+						 ${sendVo.receiver} 님에게 보낸 메세지 입니다.
+						 
+						 <c:if test="${empty sendVo.open_date}">
+						 <span class="badge badge-info badge-pill" id="message" style="cursor:pointer">읽지 않음</span>
+						 </c:if>
+						 </a>
+					</div>
+					<div id="card-element-${sendVo.message_num}" class="collapse">
+						<div class="card-body">
+							<span>보낸 사람 : ${sendVo.sender}</span><br>
+							<span>내용&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ${sendVo.message_text}</span><br>
+							<span>보낸 날짜 : ${sendVo.send_date}</span><br>
+							<span>읽은 날짜 : ${sendVo.open_date}</span><br>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+					</div>
+<!-- tab 두번째의 내용 끝 -->
+				</div>
 			</div>
+	<!-- tab -->
 		</div>
+		<div class="col-md-2">
+	</div>
 	</div>
 </div>
 <!-- 여기여기 -->
